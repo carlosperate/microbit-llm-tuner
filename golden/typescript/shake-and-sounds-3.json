@@ -1,0 +1,38 @@
+{
+  "slug": "shake-and-sounds-3",
+  "language": "makecode_ts",
+  "url": "https://microbit.org/projects/make-it-code-it/shake-and-sounds-3/",
+  "title": "Shake and sounds",
+  "license": "CC BY-SA 4.0",
+  "meta": {
+    "level": "Beginner",
+    "tools": [
+      "MakeCode"
+    ],
+    "features": [
+      "Accelerometer",
+      "Sound"
+    ],
+    "topics": [
+      "Input/output"
+    ]
+  },
+  "context": {
+    "summary": "Shake your micro:bit to hear a cheerful tune. This project is ideal for students new to the micro:bit as it only uses two blocks.",
+    "how_it_works": [
+      "Your micro:bit contains an accelerometer which detects movements.",
+      "When the accelerometer detects a shake gesture, the program instructs the micro:bit to play a tune.",
+      "InputsÂ allow us to put data into a computer or device. In this project, the input is the shake gesture.",
+      "AnÂ outputÂ is the processed information that is sent out from a computer. In this project, the output is the music that is played from the micro:bitâs speaker."
+    ],
+    "improve_it": []
+  },
+  "code": [
+    {
+      "block_index": 0,
+      "pub_id": "_DqYaWcWboaKE",
+      "source": "input.onGesture(Gesture.Shake, function () {\n\t\n})\n"
+    }
+  ],
+  "errors": []
+}

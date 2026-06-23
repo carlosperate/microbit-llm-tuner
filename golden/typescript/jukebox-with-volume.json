@@ -1,0 +1,51 @@
+{
+  "slug": "jukebox-with-volume",
+  "language": "makecode_ts",
+  "url": "https://microbit.org/projects/make-it-code-it/jukebox-with-volume/",
+  "title": "Jukebox with volume",
+  "license": "CC BY-SA 4.0",
+  "meta": {
+    "level": "Intermediate",
+    "tools": [
+      "MakeCode"
+    ],
+    "features": [
+      "Accelerometer",
+      "Buttons",
+      "LED display",
+      "Sound"
+    ],
+    "topics": [
+      "Composition",
+      "Hardware & software",
+      "Input/output",
+      "Sound"
+    ]
+  },
+  "context": {
+    "summary": "This project adds a volume control to a micro:bit jukebox. It plays different tunes if you press button A or B, and you can also adjust the volume by tilting your micro:bit left or right.",
+    "how_it_works": [
+      "If you're using a real micro:bit, connect it to headphones like this:",
+      "The current volume is stored in a variable called volume.",
+      "micro:bit volume numbers can go from 0 to 255, so at the start of the program we set the volume somewhere in the middle, to 128.",
+      "The accelerometer detects when you tilt your micro:bit left and right.",
+      "If you tilt it left, the volume variable is reduced by 32. (We picked 32 rather than 1 so you can hear the change when you tilt it once.)",
+      "When you tilt it right, the volume variable is increased by 32.",
+      "We use if... then blocks to stop the volume variable going below 0 or above 255 as the micro:bit's volume can't go below 0 or above 255.",
+      "A forever block keeps updating the micro:bit's actual volume from changes you make to the volume variable when you tilt it. It also updates the bar graph so you can see a visual representation of the current volume setting."
+    ],
+    "improve_it": [
+      "Program your own melodies.",
+      "Add a mute function when you press A+B buttons together.",
+      "Modify the volume control so it's controlled by other gestures like shake."
+    ]
+  },
+  "code": [
+    {
+      "block_index": 0,
+      "pub_id": "_1TwRmcCfjT3L",
+      "source": "input.onButtonPressed(Button.A, function () {\n    music._playDefaultBackground(music.builtInPlayableMelody(Melodies.Entertainer), music.PlaybackMode.InBackground)\n})\ninput.onGesture(Gesture.TiltLeft, function () {\n    volume += -32\n    if (volume < 0) {\n        volume = 0\n    }\n})\ninput.onButtonPressed(Button.B, function () {\n    music._playDefaultBackground(music.builtInPlayableMelody(Melodies.Prelude), music.PlaybackMode.InBackground)\n})\ninput.onGesture(Gesture.TiltRight, function () {\n    volume += 32\n    if (volume > 255) {\n        volume = 255\n    }\n})\nlet volume = 0\nvolume = 128\nbasic.forever(function () {\n    music.setVolume(volume)\n    led.plotBarGraph(\n    volume,\n    255\n    )\n})\n"
+    }
+  ],
+  "errors": []
+}

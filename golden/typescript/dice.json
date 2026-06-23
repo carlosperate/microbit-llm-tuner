@@ -1,0 +1,47 @@
+{
+  "slug": "dice",
+  "language": "makecode_ts",
+  "url": "https://microbit.org/projects/make-it-code-it/dice/",
+  "title": "Dice",
+  "license": "CC BY-SA 4.0",
+  "meta": {
+    "level": "Beginner",
+    "tools": [
+      "MakeCode",
+      "Python"
+    ],
+    "features": [
+      "Accelerometer",
+      "LED display"
+    ],
+    "topics": [
+      "Input/output",
+      "Number & place value",
+      "Probability",
+      "Randomisation",
+      "Sensors"
+    ]
+  },
+  "context": {
+    "summary": "Shake your micro:bit to make random numbers.",
+    "how_it_works": [
+      "Like the Get silly project this program uses the micro:bitâs accelerometer to make something happen when you shake it.",
+      "When you shake your micro:bit, the program selects a random number between 1 and 6 and shows it on the LED display.",
+      "It's really hard for computers to make truly random numbers because theyâre machines that work precisely and regularly.",
+      "Make a tally chart of how often each number comes up. Are these numbers really random? Compare it with real dice."
+    ],
+    "improve_it": [
+      "Make the number appear for a few seconds, then clear the LED display to save batteries.",
+      "Make it roll 2 dice. You can make a random number between 2 and 12, or you can make two random numbers between 1 and 6 and add them together.",
+      "Try both methods and tally how often each score occurs. Does it make a difference? Do some numbers come up more often than others?"
+    ]
+  },
+  "code": [
+    {
+      "block_index": 0,
+      "pub_id": "_hUpi4RFKjJF7",
+      "source": "input.onGesture(Gesture.Shake, function () {\n    basic.showNumber(Math.randomRange(1, 6))\n})\n"
+    }
+  ],
+  "errors": []
+}

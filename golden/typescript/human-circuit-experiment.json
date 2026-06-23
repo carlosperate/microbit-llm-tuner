@@ -1,0 +1,41 @@
+{
+  "slug": "human-circuit-experiment",
+  "language": "makecode_ts",
+  "url": "https://microbit.org/projects/make-it-code-it/human-circuit-experiment/",
+  "title": "Human circuit experiment",
+  "license": "CC BY-SA 4.0",
+  "meta": {
+    "level": "Intermediate",
+    "tools": [
+      "MakeCode"
+    ],
+    "features": [
+      "LED display",
+      "Pins",
+      "Sound"
+    ],
+    "topics": [
+      "Electricity",
+      "Iteration",
+      "Selection",
+      "Working scientifically"
+    ]
+  },
+  "context": {
+    "summary": "Complete an electrical circuit with your body, your friendsâ bodies, and your BBC micro:bit.",
+    "how_it_works": [
+      "Two crocodile clip leads are attached to the micro:bitâs ground pin and pin 1.",
+      "You hold the other ends of the leads with both hands to allow an electrical current to flow through you, or do the same with a group of friends holding hands.",
+      "When the circuit is complete, a stick figure appears on the micro:bitâs LED display and a sound plays."
+    ],
+    "improve_it": []
+  },
+  "code": [
+    {
+      "block_index": 0,
+      "pub_id": "_Ua1KqX8CmACy",
+      "source": "basic.forever(function () {\n    if (input.pinIsPressed(TouchPin.P1)) {\n        basic.showIcon(IconNames.StickFigure)\n        music.ringTone(262)\n    } else {\n        music.ringTone(0)\n        basic.clearScreen()\n    }\n})\n"
+    }
+  ],
+  "errors": []
+}

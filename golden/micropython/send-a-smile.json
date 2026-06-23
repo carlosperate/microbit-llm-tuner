@@ -1,0 +1,48 @@
+{
+  "slug": "send-a-smile",
+  "language": "micropython",
+  "url": "https://microbit.org/projects/make-it-code-it/send-a-smile/",
+  "title": "Send a smile",
+  "license": "CC BY-SA 4.0",
+  "meta": {
+    "level": "Beginner",
+    "tools": [
+      "MakeCode",
+      "Python"
+    ],
+    "features": [
+      "Buttons",
+      "LED display",
+      "Radio"
+    ],
+    "topics": [
+      "3 Health",
+      "Communication",
+      "Input/output",
+      "Radio waves"
+    ]
+  },
+  "context": {
+    "summary": "Sharing and receiving kindness is a good way to support your well-being and that of your friends. Create a program using radio to send a smile from one micro:bit to another to support a friend.",
+    "how_it_works": [
+      "This program uses the micro:bit's radio feature to share a smile. You can use it in the MakeCode simulator or flash the code on to 2 or more micro:bits.",
+      "First, it sets the radio group to 2. Groups are like channels, so any micro:bit using the same group will get the smile. You can use any group number you like from 0-255.",
+      "When you press button A, it sends a radio text message 'smile'. It also clears the screen so you can send another smile.",
+      "When it receives a radio message, it shows a smile emoji on the LED display.",
+      "The combination of radio group and the text of the radio message sent make up a protocol: a set of rules for how two devices communicate."
+    ],
+    "improve_it": [
+      "Customise the smile emoji to your own happy face.",
+      "If you're working in pairs in a class, select your own unique radio group numbers for each pair of students so you can send messages to your partner but not anyone else.",
+      "You could also do this by keeping the same radio group, but modifying the code so the text message sent is unique to your pair. Modify the code so it only shows a smile if the correct message is received.",
+      "How might you send a different emoji if you press button B?"
+    ]
+  },
+  "code": [
+    {
+      "block_index": 0,
+      "source": "from microbit import *\nimport radio\nradio.config(group=2)\nradio.on()\n\nwhile True:\n    message = radio.receive()\n    if message:\n        display.show(Image.HAPPY)\n    if button_a.is_pressed():\n        display.clear()\n        radio.send('smile')"
+    }
+  ],
+  "errors": []
+}

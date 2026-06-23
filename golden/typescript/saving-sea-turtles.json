@@ -1,0 +1,45 @@
+{
+  "slug": "saving-sea-turtles",
+  "language": "makecode_ts",
+  "url": "https://microbit.org/projects/make-it-code-it/saving-sea-turtles/",
+  "title": "Saving sea turtles",
+  "license": "CC BY-SA 4.0",
+  "meta": {
+    "level": "Beginner",
+    "tools": [
+      "MakeCode",
+      "Python"
+    ],
+    "features": [
+      "LED display",
+      "Light sensor"
+    ],
+    "topics": [
+      "14 Life below water",
+      "Input/output",
+      "Selection"
+    ]
+  },
+  "context": {
+    "summary": "Newly-hatched sea turtles use moonlight to find their way to the sea. Tall, bright lights can confuse them. Build a prototype of beach lighting for paths that guides humans safely but doesn't distract turtles.",
+    "how_it_works": [
+      "This project uses the micro:bitâs LEDs as a light sensor input. Cover the display with your hand and it should light up with the turtle picture.",
+      "It could be used at ground level to guide humans along a beach path at night, without confusing sea turtle hatchlings with tall, bright lights that they may mistake for the moon.",
+      "The program uses selection to sense if the light falling on the micro:bit falls below a certain level, if it is less than (<) 100. If it is dark, it lights up the micro:bit display, else it clears the screen so the LEDs are dark.",
+      "You may need to adjust the threshold number 100 depending on the lighting conditions where you are. If you're in a very bright place, you may need a smaller number."
+    ],
+    "improve_it": [
+      "Create your own picture to show on the LED display",
+      "Add an animation",
+      "Change the display to show arrows to make sure people walk on the correct side of the path"
+    ]
+  },
+  "code": [
+    {
+      "block_index": 0,
+      "pub_id": "_HLJ17X2WALcq",
+      "source": "basic.forever(function () {\n    if (input.lightLevel() < 100) {\n        basic.showLeds(`\n            . . . . .\n            . # # . .\n            # # # # #\n            # # # # #\n            # . . # .\n            `)\n    } else {\n        basic.clearScreen()\n    }\n})\n"
+    }
+  ],
+  "errors": []
+}

@@ -1,0 +1,46 @@
+{
+  "slug": "get-up",
+  "language": "micropython",
+  "url": "https://microbit.org/projects/make-it-code-it/get-up/",
+  "title": "Get up!",
+  "license": "CC BY-SA 4.0",
+  "meta": {
+    "level": "Beginner",
+    "tools": [
+      "MakeCode",
+      "Python"
+    ],
+    "features": [
+      "LED display",
+      "Light sensor",
+      "Sound"
+    ],
+    "topics": [
+      "Iteration",
+      "Number & place value",
+      "Selection",
+      "Sensors"
+    ]
+  },
+  "context": {
+    "summary": "Turn your micro:bit into a light-sensitive alarm to help you get up in the morning. You'll learn how to use infinite loops, and selection with comparison logic.",
+    "how_it_works": [
+      "The program uses the micro:bitâs LED display as a light sensor.",
+      "Selection ('if... else') and comparison logic (> 70) are used so that if the light level is above a certain amount, a sun icon appears and it makes a noise; else, it clears the screen.",
+      "If the light level is greater than (>) 70, a sun appears on the LED display, telling you itâs time to get up.",
+      "The program uses an infinite loop to keep sensing the light level.",
+      "You can adjust the threshold at which the sun appears. Use larger numbers to make it less sensitive to light, so the alarm only goes off when it's brighter - or smaller numbers to make it more sensitive to light."
+    ],
+    "improve_it": [
+      "Change the alarm sound.",
+      "Replace the sun icon with motivational messages that can help you to start your day."
+    ]
+  },
+  "code": [
+    {
+      "block_index": 0,
+      "source": "from microbit import *\nimport music\n\nwhile True:\n    if display.read_light_level() > 70:\n        display.show(Image(\n        \"90909:\"\n        \"09990:\"\n        \"99999:\"\n        \"09990:\"\n        \"90909\"))\n        music.play(music.DADADADUM)    \n    else:\n        display.clear()\n        "
+    }
+  ],
+  "errors": []
+}

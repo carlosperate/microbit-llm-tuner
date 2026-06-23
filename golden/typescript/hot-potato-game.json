@@ -1,0 +1,43 @@
+{
+  "slug": "hot-potato-game",
+  "language": "makecode_ts",
+  "url": "https://microbit.org/projects/make-it-code-it/hot-potato-game/",
+  "title": "Hot potato game",
+  "license": "CC BY-SA 4.0",
+  "meta": {
+    "level": "Intermediate",
+    "tools": [
+      "MakeCode",
+      "Python"
+    ],
+    "features": [
+      "Buttons",
+      "LED display",
+      "Speaker"
+    ],
+    "topics": [
+      "Input/output",
+      "Iteration",
+      "Randomisation",
+      "Variables"
+    ]
+  },
+  "context": {
+    "summary": "Turn your micro:bit into a âhot potatoâ by coding it to become a random timer. To play the game, pass the âmicro:bit potatoâ on to the next person before the timer goes off.",
+    "how_it_works": [],
+    "improve_it": [
+      "Change the duration of the timer to suit different tasks or change from random to a specific length of time.",
+      "Modify the program so a different icon or your own picture appears when you press button A.",
+      "Change the sound to a happy/positive sound to indicate when someone has âwonâ something.",
+      "Use it in different contexts, for examples, to practise spellings or times tables, or use as a class countdown."
+    ]
+  },
+  "code": [
+    {
+      "block_index": 0,
+      "pub_id": "_cKEYtihoMW54",
+      "source": "let timer = 0\ninput.onButtonPressed(Button.A, function () {\n    timer = randint(5, 15)\n    basic.showIcon(IconNames.Chessboard)\n    while (timer > 0) {\n        timer += -1\n        basic.pause(1000)\n    }\n    basic.showIcon(IconNames.No)\n    music._playDefaultBackground(music.builtInPlayableMelody(Melodies.Wawawawaa), music.PlaybackMode.InBackground)\n    music.play(music.builtinPlayableSoundEffect(soundExpression.sad), music.PlaybackMode.UntilDone)\n})\n"
+    }
+  ],
+  "errors": []
+}

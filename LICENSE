@@ -1,3 +1,12 @@
+The MIT licence below applies to this repository's own source code only.
+
+It does NOT cover the scraped dataset under `golden/`: that content belongs to
+microbit.org / the Micro:bit Educational Foundation and contributors,
+under Creative Commons licence (CC BY-SA 4.0, and/or CC BY-NC-SA 4.0)
+as listed in each file's `license` field.
+
+---
+
 MIT License
 
 Copyright (c) 2026 Carlos Pereira Atencio

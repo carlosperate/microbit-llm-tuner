@@ -1,0 +1,7 @@
+# Python / uv
+.venv/
+__pycache__/
+*.pyc
+
+# Scraper raw-response cache (regenerable; not part of the corpus)
+cache/

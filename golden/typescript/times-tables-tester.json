@@ -1,0 +1,47 @@
+{
+  "slug": "times-tables-tester",
+  "language": "makecode_ts",
+  "url": "https://microbit.org/projects/make-it-code-it/times-tables-tester/",
+  "title": "Times tables tester",
+  "license": "CC BY-SA 4.0",
+  "meta": {
+    "level": "Beginner",
+    "tools": [
+      "MakeCode",
+      "Python"
+    ],
+    "features": [
+      "Buttons",
+      "LED display"
+    ],
+    "topics": [
+      "4 Quality education",
+      "Multiplication",
+      "Randomisation",
+      "Variables"
+    ]
+  },
+  "context": {
+    "summary": "Test your knowledge of times tables with this project.",
+    "how_it_works": [
+      "The program uses two variables called âaâ and âbâ to store random numbers.",
+      "Variables store numbers or values that can change in a computer program.",
+      "Press button A to generate a random number between 1 and 12 for the variable âaâ and to show it on the LED display. Press button B to generate another random number between 1 and 12 for âbâ and to show it on the LED display.",
+      "Shake the micro:bit to find out what the product is - that's what the answer would be if the numbers were multiplied together. This part of the program works using the multiplication block from the maths menu in MakeCode.",
+      "You can use this project in a competitive two-player game, where the two random numbers are read out and each player must shout out the correct answer first to win a point."
+    ],
+    "improve_it": [
+      "Adjust the program so that it helps you to learn square numbers.",
+      "If you are playing the two-player game, create another program on a different micro:bit to keep track of the players' scores.",
+      "Use various inputs in this program to trigger different sound effects, which you can play when players give a correct or incorrect answer."
+    ]
+  },
+  "code": [
+    {
+      "block_index": 0,
+      "pub_id": "_fHxHYaPrm1gr",
+      "source": "let a = 0\nlet b = 0\ninput.onButtonPressed(Button.A, function () {\n    a = randint(1, 12)\n    basic.showNumber(a)\n})\ninput.onButtonPressed(Button.AB, function () {\n    basic.showNumber(a * b)\n})\ninput.onButtonPressed(Button.B, function () {\n    b = randint(1, 12)\n    basic.showNumber(b)\n})\n"
+    }
+  ],
+  "errors": []
+}

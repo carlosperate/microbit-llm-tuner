@@ -1,0 +1,47 @@
+{
+  "slug": "odd-and-even-numbers",
+  "language": "makecode_ts",
+  "url": "https://microbit.org/projects/make-it-code-it/odd-and-even-numbers/",
+  "title": "Odd and even numbers",
+  "license": "CC BY-SA 4.0",
+  "meta": {
+    "level": "Intermediate",
+    "tools": [
+      "MakeCode",
+      "Python"
+    ],
+    "features": [
+      "Buttons",
+      "LED display"
+    ],
+    "topics": [
+      "Algorithms",
+      "Division",
+      "Number & place value",
+      "Selection"
+    ]
+  },
+  "context": {
+    "summary": "Play a maths game with your BBC micro:bit! Program it to choose a random number from 1 to 100. You can decide if the number is odd or even, and then use your micro:bit to test if you are right.",
+    "how_it_works": [
+      "This program is based on an algorithm for working out if a number is odd or even. The algorithm says: divide the number by two and if the remainder is 0, the number is even. Otherwise the number is odd.",
+      "When you press button A, the program picks a random number between 1 and 100 and shows it on the micro:bitâs LED display. (The program picks a random number rather than the same number each time to make the game fun to play more than once.)",
+      "When you press button B, the program divides the number by 2 and works out its remainder.Â",
+      "The program then uses an âifâ¦ elseâ statement. If the remainder is 0, the word âevenâ appears on the micro:bitâs LED display. Else, it shows the word âoddâ.",
+      "When different things can happen based on different conditions in a computer program like this, it is known as selection. You'll find key terms like selection explained in our vocabulary posters and glossary."
+    ],
+    "improve_it": [
+      "Find a way to show the random number chosen more than once.",
+      "If you press button B before pressing button A, no random number will have been chosen and the LED display will show the word 'even'. Can you adapt the code so this doesn't happen? Look at the Python version of the program for an idea of how.",
+      "Adapt the program to explore other factors of numbers, for example, if 3 is a factor of 100."
+    ]
+  },
+  "code": [
+    {
+      "block_index": 0,
+      "pub_id": "_h25c1HXdwT14",
+      "source": "let number = 0\ninput.onButtonPressed(Button.A, function () {\n    number = randint(1, 100)\n    basic.showNumber(number)\n})\ninput.onButtonPressed(Button.B, function () {\n    if (number % 2 == 0) {\n        basic.showString(\"even\")\n    } else {\n        basic.showString(\"odd\")\n    }\n})\n"
+    }
+  ],
+  "errors": []
+}

@@ -1,0 +1,13 @@
+[project]
+name = "microbit-project-scraper"
+version = "0.1.0"
+description = "Deterministic scraper for microbit.org 'Make it: code it' projects, producing a byte-exact code corpus split by language (MakeCode TypeScript / MicroPython)."
+readme = "README.md"
+requires-python = ">=3.11"
+dependencies = [
+    "requests>=2.31",
+    "beautifulsoup4>=4.12",
+]
+
+[tool.uv]
+package = false

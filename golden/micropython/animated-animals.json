@@ -1,0 +1,44 @@
+{
+  "slug": "animated-animals",
+  "language": "micropython",
+  "url": "https://microbit.org/projects/make-it-code-it/animated-animals/",
+  "title": "Animated animals",
+  "license": "CC BY-SA 4.0",
+  "meta": {
+    "level": "Beginner",
+    "tools": [
+      "MakeCode",
+      "Python"
+    ],
+    "features": [
+      "LED display"
+    ],
+    "topics": [
+      "Iteration",
+      "Sequence"
+    ]
+  },
+  "context": {
+    "summary": "Animate your own pictures on the micro:bit display.",
+    "how_it_works": [
+      "This program creates an animation on the micro:bitâs LED display output by using a built-in image and one you create yourself.",
+      "First it shows the duck built-in image and then shows a modified version, which is made by moving all the dots (pixels) down one row.",
+      "It shows the two different pictures one after the other, with a half second (500 millisecond) delay, to make it look like a duck bobbing up and down on the water.",
+      "An infinite loop keeps the micro:bit showing the image sequence until you unplug the micro:bit.",
+      "Using loops in computer programmes is also known as iteration. They help you create efficient compact code without needlessly repeating the same instructions."
+    ],
+    "improve_it": [
+      "Try modifying and animating different built-in images like GIRAFFE and RABBIT.",
+      "Create your own images from scratch using graph paper or our LED planning sheet to sketch out your designs.",
+      "Make longer animated sequences to tell a story.",
+      "In Python, use different numbers to change the brightness of different pixels. 9 is the brightest, 1 is the dimmest and 0 is off."
+    ]
+  },
+  "code": [
+    {
+      "block_index": 0,
+      "source": "from microbit import *\n\nwhile True:\n    display.show(Image.DUCK)\n    sleep(500)\n    display.show(Image(\n        \"00000:\"\n        \"09900:\"\n        \"99900:\"\n        \"09999:\"\n        \"09990\"))\n    sleep(500)"
+    }
+  ],
+  "errors": []
+}

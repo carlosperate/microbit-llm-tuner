@@ -1,0 +1,54 @@
+{
+  "slug": "nightlight",
+  "language": "makecode_ts",
+  "url": "https://microbit.org/projects/make-it-code-it/nightlight/",
+  "title": "Nightlight",
+  "license": "CC BY-SA 4.0",
+  "meta": {
+    "level": "Beginner",
+    "tools": [
+      "MakeCode",
+      "Python"
+    ],
+    "features": [
+      "LED display",
+      "Light sensor"
+    ],
+    "topics": [
+      "Input/output",
+      "Iteration",
+      "Light",
+      "Selection",
+      "Sensors",
+      "Systems & control"
+    ]
+  },
+  "context": {
+    "summary": "A nightlight that lights up your BBC micro:bitâs LED display in the dark.",
+    "how_it_works": [
+      "An infinite loop in the code keeps the micro:bit checking light levels.",
+      "It uses logic to decide whether to turn the LEDs on or off. A conditional instruction (ifâ¦ thenâ¦ else) makes the decision to turn the LED lights on or off.",
+      "If the light level falls below 100, then it lights up the LEDs on the micro:bitâs display. Else (otherwise), it clears the screen to turn the LED lights off.",
+      "Test it out by covering the display or shining a light on it, and see if the LEDs light up when itâs dark.",
+      "You may need to change the 100 number depending on the light levels around you. Larger numbers will make the light come on more easily. Smaller numbers will make the light only come on when itâs very dark."
+    ],
+    "improve_it": [
+      "Change the image to show a moon or star when it gets dark.",
+      "Attach the micro:bit to your bag or clothing to use this as an additional safety light when walking or cycling â can you make it flash to stand out more?",
+      "Try this MakeCode project that makes the LED display get lighter and darker depending on the amount of light falling on the micro:bit. Where else have you seen things that react to light in this way?"
+    ]
+  },
+  "code": [
+    {
+      "block_index": 0,
+      "pub_id": "_dz7W7hWM2AdR",
+      "source": "basic.forever(function () {\n    if (input.lightLevel() < 100) {\n        basic.showLeds(`\n            # # # # #\n            # # # # #\n            # # # # #\n            # # # # #\n            # # # # #\n            `)\n    } else {\n        basic.clearScreen()\n    }\n})\n"
+    },
+    {
+      "block_index": 1,
+      "pub_id": "_HFH8X0Rt2bVH",
+      "source": "basic.showLeds(`\n    # # # # #\n    # # # # #\n    # # # # #\n    # # # # #\n    # # # # #\n    `)\nbasic.forever(function () {\n    led.setBrightness(255 - input.lightLevel())\n    basic.pause(200)\n})\n"
+    }
+  ],
+  "errors": []
+}

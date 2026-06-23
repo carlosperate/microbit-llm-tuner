@@ -1,0 +1,54 @@
+{
+  "slug": "indoor-outdoor-thermometer",
+  "language": "micropython",
+  "url": "https://microbit.org/projects/make-it-code-it/indoor-outdoor-thermometer/",
+  "title": "Indoor-outdoor thermometer",
+  "license": "CC BY-SA 4.0",
+  "meta": {
+    "level": "Intermediate",
+    "tools": [
+      "MakeCode",
+      "Python"
+    ],
+    "features": [
+      "Buttons",
+      "LED display",
+      "Radio",
+      "Temperature sensor"
+    ],
+    "topics": [
+      "Communication",
+      "Input/output",
+      "Radio waves",
+      "Temperature",
+      "Variables"
+    ]
+  },
+  "context": {
+    "summary": "Use two micro:bits so you can monitor outdoor temperatures remotely.",
+    "how_it_works": [
+      "This project uses two different programs, one for the outdoor micro:bit which senses the temperature and transmits it on radio group 23.",
+      "The outdoor micro:bit uses its temperature sensor to measure how hot or cold it is.",
+      "It uses radio to send this temperature reading to the indoor micro:bit.",
+      "When the indoor micro:bit receives a temperature reading from outside, it stores it in a variable called outdoorTemp.",
+      "When you press input button A on the indoor micro:bit, it shows its own current temperature reading on its LED display output.",
+      "When you press button B, it shows the temperature reading from outside that it has stored in the outdoorTemp variable."
+    ],
+    "improve_it": [
+      "Make the batteries last longer by having the outdoor micro:bit turn its radio off when itâs not in use and sending temperature readings less often.",
+      "Use variables to track the highest and lowest temperatures recorded.",
+      "Calibrate the readings against another thermometer to see if you need to adjust the micro:bitâs temperature."
+    ]
+  },
+  "code": [
+    {
+      "block_index": 0,
+      "source": "from microbit import *\nimport radio\nradio.config(group=23)\nradio.on()\n\nwhile True:\n    radio.send(str(temperature()))\n    sleep(5000)\n"
+    },
+    {
+      "block_index": 1,
+      "source": "from microbit import *\nimport radio\nradio.config(group=23)\nradio.on()\noutdoorTemp = '-'\n\nwhile True:\n    message = radio.receive()\n    if message:\n        outdoorTemp = message\n    if button_a.was_pressed():\n        display.scroll(str(temperature()))\n    if button_b.was_pressed():\n        display.scroll(outdoorTemp)\n        "
+    }
+  ],
+  "errors": []
+}

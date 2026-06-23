@@ -1,0 +1,42 @@
+{
+  "slug": "sound-meter",
+  "language": "makecode_ts",
+  "url": "https://microbit.org/projects/make-it-code-it/sound-meter/",
+  "title": "Sound meter",
+  "license": "CC BY-SA 4.0",
+  "meta": {
+    "level": "Beginner",
+    "tools": [
+      "MakeCode",
+      "Python"
+    ],
+    "features": [
+      "LED display",
+      "Microphone"
+    ],
+    "topics": [
+      "Data handling",
+      "Input/output"
+    ]
+  },
+  "context": {
+    "summary": "Measure how noisy it is around you using the new micro:bit's microphone sensor and a simple bar chart display.",
+    "how_it_works": [
+      "The new micro:bit's microphone measures sound levels in numbers between 0 and 255. 0 is the quietest and 255 is the loudest sound measurement it can make.",
+      "The code uses a forever loop to keep the microphone measuring sound levels and plotting a bar graph on the LED display.",
+      "The louder the sounds measured, the higher the bar graph gets."
+    ],
+    "improve_it": [
+      "Create your own ways of displaying how loud a sound is, for example showing different emojis depending on how loud it is",
+      "Make a visual noise alarm that only flashes when the sound goes over a certain level - you could use this to help keep your classroom peaceful"
+    ]
+  },
+  "code": [
+    {
+      "block_index": 0,
+      "pub_id": "_Wzy8zrW2i8th",
+      "source": "basic.forever(function () {\n    led.plotBarGraph(\n    input.soundLevel(),\n    255\n    )\n})\n"
+    }
+  ],
+  "errors": []
+}

@@ -1,0 +1,49 @@
+{
+  "slug": "fahrenheit-thermometer",
+  "language": "micropython",
+  "url": "https://microbit.org/projects/make-it-code-it/fahrenheit-thermometer/",
+  "title": "Fahrenheit thermometer",
+  "license": "CC BY-SA 4.0",
+  "meta": {
+    "level": "Intermediate",
+    "tools": [
+      "MakeCode",
+      "Python"
+    ],
+    "features": [
+      "Buttons",
+      "LED display",
+      "Temperature sensor"
+    ],
+    "topics": [
+      "Functions",
+      "Input/output",
+      "Measurement"
+    ]
+  },
+  "context": {
+    "summary": "Use a simple function to convert centigrade readings from the micro:bit's temperature sensor to Fahrenheit.",
+    "how_it_works": [
+      "The micro:bit's processor has a built-in temperature sensor input which gives readings in centigrade.",
+      "Using functions allows you easily to convert the temperature to Fahrenheit.",
+      "The convertCtoF function means you can re-use the conversion code easily, for example in a maximum-minimum thermometer.",
+      "The function is called by using convertCtoF in place of a variable or number when you press button B on your micro:bit.",
+      "We pass to the function the temperature in centigrade.",
+      "The function then takes the number passed to it, stored in a variable called C, and converts it to Fahrenheit by multiplying it by 1.8 and adding 32.",
+      "The function then returns the converted number so when you press button B the temperature is shown in Fahrenheit on the LED display output.",
+      "If you press button A, the temperature is shown in centigrade."
+    ],
+    "improve_it": [
+      "Improve the display by showing 'C' or 'F' after the temperature in centigrade or Fahrenheit.",
+      "Create your own function to add a conversion to degrees Kelvin when you press buttons A and B together.",
+      "Add Fahrenheit conversions to a maximum-minimum thermometer or an indoor outdoor thermometer."
+    ]
+  },
+  "code": [
+    {
+      "block_index": 0,
+      "source": "from microbit import *\n\ndef convertCtoF(C):\n    return C * 1.8 + 32\n\nwhile True:\n    if button_a.was_pressed():\n        display.scroll(temperature())\n    if button_b.was_pressed():\n        display.scroll(convertCtoF(temperature()))"
+    }
+  ],
+  "errors": []
+}

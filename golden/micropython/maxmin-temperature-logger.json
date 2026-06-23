@@ -1,0 +1,47 @@
+{
+  "slug": "maxmin-temperature-logger",
+  "language": "micropython",
+  "url": "https://microbit.org/projects/make-it-code-it/maxmin-temperature-logger/",
+  "title": "Max-min temperature logger",
+  "license": "CC BY-SA 4.0",
+  "meta": {
+    "level": "Advanced",
+    "tools": [
+      "Python"
+    ],
+    "features": [
+      "Buttons",
+      "LED display",
+      "Pins",
+      "Temperature sensor"
+    ],
+    "topics": [
+      "Data handling",
+      "Data types",
+      "Input/output",
+      "Variables"
+    ]
+  },
+  "context": {
+    "summary": "Turn your micro:bit into a self-contained data logger that records maximum and minimum temperature readings, and stores them so it keeps the data even if the batteries run out or you disconnect the power.",
+    "how_it_works": [
+      "currentTemp is the current temperature reading from the micro:bit's built-in temperature sensor",
+      "max is the maximum temperature. This gets assigned a new value if the current temperature is greater than (>) the current value of max.",
+      "min is the minimum temperature. This gets assigned a new value if the current temperature is less than (<) the current value of min.",
+      "int() converts text (also called a string) to a numerical (integer) variable we can use to compare with the current temperature.",
+      "str() converts a numerical variable, like a temperature reading, to a text string so it can be saved in a text file."
+    ],
+    "improve_it": [
+      "The micro:bit's temperature sensor is inside the processor and usually gives temperature readings higher than the surrounding air. Measure the difference using a normal thermometer and add an offset to the program by subtracting the difference from the temperature() reading",
+      "Convert the program to log different kinds of data, such as forces measured by the accelerometer.",
+      "Add radio functionality to also send data to another micro:bit in another location."
+    ]
+  },
+  "code": [
+    {
+      "block_index": 0,
+      "source": "from microbit import *\n\n# function to read data file:\ndef get_nv_data(name):\n    try:\n        with open(name) as f:\n            v = int(f.read())\n    except OSError:\n        v = temperature()\n        try:\n            with open(name, 'w') as f:\n                f.write(str(v))\n        except OSError:\n            display.scroll('Cannot create file %s' % name)\n\n    except ValueError:\n        display.scroll('invalid data in file %s' % name)\n        v = temperature()\n\n    return v\n\n# function to write data file:\ndef set_nv_data(name, value):\n    try:\n        with open(name, 'w') as f:\n            f.write(str(value))\n    except OSError:\n        display.scroll('Cannot write to file %s' % name)\n\nmin = get_nv_data('min.txt')\nmax = get_nv_data('max.txt')\n\nwhile True:\n    currentTemp = temperature()\n    if currentTemp < min:\n        min = currentTemp\n        set_nv_data('min.txt', min)\n    if currentTemp > max:\n        max = currentTemp\n        set_nv_data('max.txt', max)\n    if accelerometer.was_gesture('shake'):\n        display.scroll(currentTemp)\n    if button_a.was_pressed():\n        display.scroll(get_nv_data('min.txt'))\n    if button_b.was_pressed():\n        display.scroll(get_nv_data('max.txt'))\n    if pin2.is_touched():\n        display.scroll('clearing data')\n        set_nv_data('min.txt', currentTemp)\n        set_nv_data('max.txt', currentTemp)\n"
+    }
+  ],
+  "errors": []
+}

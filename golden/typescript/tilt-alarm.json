@@ -1,0 +1,48 @@
+{
+  "slug": "tilt-alarm",
+  "language": "makecode_ts",
+  "url": "https://microbit.org/projects/make-it-code-it/tilt-alarm/",
+  "title": "Tilt alarm",
+  "license": "CC BY-SA 4.0",
+  "meta": {
+    "level": "Advanced",
+    "tools": [
+      "MakeCode",
+      "Python"
+    ],
+    "features": [
+      "Accelerometer",
+      "Radio"
+    ],
+    "topics": [
+      "Communication",
+      "Forces",
+      "Functions",
+      "Sensors"
+    ]
+  },
+  "context": {
+    "summary": "Keep your precious things safe with this radio-controlled burglar alarm.",
+    "how_it_works": [
+      "When the micro:bit is shaken, the accelerometer detects movement and it shows an angry face on the LED display and plays an alarm sound.",
+      "It also sends a âthief!â radio message, so that another micro:bit can warn you if someone is moving your valuable object.",
+      "If you have two micro:bits, flash this program onto both. Put one in, or on, a valuable thing you want to protect and keep the other near you.",
+      "As we want to show the angry face and play the âBADDYâ tune on both the movement sensor micro:bit and the alarm, this program uses a function (or procedure) called alarm.",
+      "Procedures and functions are really useful for sections of code we want to use at different points in a program. It saves duplicating code and makes the program more compact and efficient."
+    ],
+    "improve_it": [
+      "What else could you protect with an alarm like this? How could it help protect trees?",
+      "Make it more sensitive using accelerometer readings or other gestures.",
+      "Split the program in two, so you have different programs on the sensor on your valuable thing and on the alarm you keep with you.",
+      "Send different messages and show different pictures for different alarm sensors on different valuable objects."
+    ]
+  },
+  "code": [
+    {
+      "block_index": 0,
+      "pub_id": "_4tuW6Mg3kRwR",
+      "source": "function alarm () {\n    basic.showIcon(IconNames.Angry)\n    music._playDefaultBackground(music.builtInPlayableMelody(Melodies.Baddy), music.PlaybackMode.InBackground)\n}\nradio.onReceivedString(function (receivedString) {\n    alarm()\n})\ninput.onGesture(Gesture.Shake, function () {\n    radio.sendString(\"thief!\")\n    alarm()\n})\nradio.setGroup(1)\n"
+    }
+  ],
+  "errors": []
+}

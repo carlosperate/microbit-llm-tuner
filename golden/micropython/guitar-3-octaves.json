@@ -1,0 +1,51 @@
+{
+  "slug": "guitar-3-octaves",
+  "language": "micropython",
+  "url": "https://microbit.org/projects/make-it-code-it/guitar-3-octaves/",
+  "title": "Guitar 3 - octaves",
+  "license": "CC BY-SA 4.0",
+  "meta": {
+    "level": "Advanced",
+    "tools": [
+      "MakeCode",
+      "Python"
+    ],
+    "features": [
+      "Pins",
+      "Sound"
+    ],
+    "topics": [
+      "Arithmetic operators",
+      "Division",
+      "Electricity",
+      "Electronics",
+      "Harmony",
+      "Multiplication",
+      "Sound",
+      "Variables"
+    ]
+  },
+  "context": {
+    "summary": "Improve your micro:bit guitar by shifting the pitch up and down octaves.",
+    "how_it_works": [
+      "Connect your micro:bit to headphones or a speaker so you can hear sound.",
+      "Connect metal foil pads to the micro:bit's pins like in the Guitar 1 and Guitar 2 projects.",
+      "Instead of using musical notation to play notes, this program stores the frequency of each note in variables called F, A, C and E.",
+      "When you touch pin 1 or pin 2 and GND it will play a broken chord, but now you can move the chord down an octave (lowering its pitch) by pressing button A, and move it up an octave (raising its pitch) by pressing button B.",
+      "The pitch (frequency) of a note doubles when you move up one octave: middle A has a frequency of 440Hz (440 vibrations per second), high A has a frequency of 880Hz. This is why making the vibrating part of guitar strings different lengths with your fingers changes the pitch of the note being played.",
+      "Buttons A and B halve and double the frequency number stored in each variable, which has the effect of lowering or raising each note played by one octave."
+    ],
+    "improve_it": [
+      "Make a guitar-shape cardboard cut-out and mount your micro:bit to it so you can perform standing up.",
+      "If you shift the octaves too high or too low the program will stop working â and you canât hear very low or very high frequency sounds. Modify the program to stop this happening.",
+      "Increase or decrease the tempo depending on which way you tilt the micro:bit."
+    ]
+  },
+  "code": [
+    {
+      "block_index": 0,
+      "source": "from microbit import *\nimport music\nF = 349\nA = 440\nC = 523\nE = 659\n\nwhile True:\n    if pin1.is_touched():\n        music.pitch(int(F), 500)\n        music.pitch(int(A), 500)\n        music.pitch(int(C), 500)\n    if pin2.is_touched():\n        music.pitch(int(A), 500)\n        music.pitch(int(C), 500)\n        music.pitch(int(E), 500)\n    if button_a.was_pressed():\n        F = F / 2\n        A = A / 2\n        C = C / 2\n        E = E / 2\n    if button_b.was_pressed():\n        F = F * 2\n        A = A * 2\n        C = C * 2\n        E = E * 2\n        "
+    }
+  ],
+  "errors": []
+}

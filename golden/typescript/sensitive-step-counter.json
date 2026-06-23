@@ -1,0 +1,53 @@
+{
+  "slug": "sensitive-step-counter",
+  "language": "makecode_ts",
+  "url": "https://microbit.org/projects/make-it-code-it/sensitive-step-counter/",
+  "title": "Sensitive step counter",
+  "license": "CC BY-SA 4.0",
+  "meta": {
+    "level": "Intermediate",
+    "tools": [
+      "MakeCode",
+      "Python"
+    ],
+    "features": [
+      "Accelerometer",
+      "LED display"
+    ],
+    "topics": [
+      "Forces",
+      "Human body",
+      "Measurement",
+      "Multiplication",
+      "Performance tools",
+      "Product design",
+      "Sensors"
+    ]
+  },
+  "context": {
+    "summary": "A step-counter you can make more accurate by tailoring it to your own walking style.",
+    "how_it_works": [
+      "The Step counter and Low energy step counter projects use the âshakeâ gesture to count steps. The 'shake' gesture uses several accelerometer sensor readings to decide if the micro:bit has been shaken.",
+      "You may find that the âshakeâ gesture isnât triggered every time you take a step, or that itâs triggered too easily, leading to inaccurate counting of steps.",
+      "To make a more accurate step counter, instead of using the âshakeâ gesture, this program uses numerical data from the accelerometer to decide whether youâve taken a step and, if you have, increase the steps variable by 1.",
+      "If the acceleration is greater than (>) 1500, the steps variable is increased by one and show the step count on the LED display output. 1500 is the threshold â the point at which a movement will trigger a step to be counted.",
+      "You may need to change the 1500 number to make the step counter more accurate â but you can decide what threshold to use, whereas with the âshakeâ gesture the threshold has been decided for you by the people who designed the micro:bit.",
+      "Modifying the threshold to work for you is called calibration.",
+      "Note that when micro:bit is not moving, the accelerometer gives a strength reading of about 1000. This is caused by the Earthâs gravity pulling down on the micro:bit."
+    ],
+    "improve_it": [
+      "Make your batteries last longer by changing the program so it only shows the number of steps when you press button A.",
+      "Modify the program so button B sets the counter back to 0.",
+      "Measure the length of your step and get micro:bit to multiply this by the number of steps to calculate the distance youâve walked.",
+      "The accelerometer can measure forces in 3 dimensions, called the X, Y and Z axes. You can modify the code to choose which axis to measure, depending on which way up you fix your micro:bit to your leg or shoe."
+    ]
+  },
+  "code": [
+    {
+      "block_index": 0,
+      "pub_id": "_bd1Jesg2YTpg",
+      "source": "let steps = 0\nbasic.showNumber(0)\nbasic.forever(function () {\n    if (input.acceleration(Dimension.Strength) > 1500) {\n        steps += 1\n        basic.showNumber(steps)\n    }\n})\n"
+    }
+  ],
+  "errors": []
+}

@@ -1,0 +1,48 @@
+{
+  "slug": "jukebox",
+  "language": "makecode_ts",
+  "url": "https://microbit.org/projects/make-it-code-it/jukebox/",
+  "title": "Jukebox",
+  "license": "CC BY-SA 4.0",
+  "meta": {
+    "level": "Beginner",
+    "tools": [
+      "MakeCode",
+      "Python"
+    ],
+    "features": [
+      "Buttons",
+      "Pins",
+      "Sound"
+    ],
+    "topics": [
+      "Composition",
+      "Hardware & software",
+      "Input/output",
+      "Sound"
+    ]
+  },
+  "context": {
+    "summary": "Make a music machine that plays different tunes at the push of a button.",
+    "how_it_works": [
+      "A jukebox is a machine that plays different songs when you put a coin in and choose which tune you want to hear by pressing buttons.",
+      "This micro:bit jukebox uses the A and B button inputs to play different built-in tunes.",
+      "If you have a micro:bit V2 with built-in speaker, you'll hear the sound straight away. You can also attach headphones to any micro:bit using crocodile clip leads:",
+      "Connect micro:bit pin 0 to the tip of your headphone plug, and GND to the longer part of the headphone plug.",
+      "When you make sound with the micro:bit, pin 0 becomes an output."
+    ],
+    "improve_it": [
+      "Change the tunes, for example try PRELUDE or ENTERTAINER. You can find a list of all the built-in tunes you can use in Python here.",
+      "Show different pictures, letters, numbers or words depending on which tune you picked.",
+      "Make it play a different tune if you shake it, press buttons A and B at the same time, or press the micro:bit's touch logo."
+    ]
+  },
+  "code": [
+    {
+      "block_index": 0,
+      "pub_id": "_guCi12DwYUKA",
+      "source": "input.onButtonPressed(Button.A, function () {\n    music._playDefaultBackground(music.builtInPlayableMelody(Melodies.Ode), music.PlaybackMode.InBackground)\n})\ninput.onButtonPressed(Button.B, function () {\n    music._playDefaultBackground(music.builtInPlayableMelody(Melodies.Blues), music.PlaybackMode.InBackground)\n})\n"
+    }
+  ],
+  "errors": []
+}

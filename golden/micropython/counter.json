@@ -1,0 +1,46 @@
+{
+  "slug": "counter",
+  "language": "micropython",
+  "url": "https://microbit.org/projects/make-it-code-it/counter/",
+  "title": "Counter",
+  "license": "CC BY-SA 4.0",
+  "meta": {
+    "level": "Beginner",
+    "tools": [
+      "MakeCode",
+      "Python"
+    ],
+    "features": [
+      "Buttons",
+      "LED display"
+    ],
+    "topics": [
+      "15 Life on land",
+      "Input/output",
+      "Variables"
+    ]
+  },
+  "context": {
+    "summary": "A simple project to help you count... skips, jumps, birds you see out of your window - anything!",
+    "how_it_works": [
+      "This program uses a variable called 'count' to keep track of the number you're counting.",
+      "It sets the variable to 0 at the start.",
+      "Every time you press button B, it increases the count variable by 1 and shows it on the LED display.",
+      "Numbers over 9 won't stay on the display, so pressing button A shows the number.",
+      "You can reset the counter by pressing buttons A and B together."
+    ],
+    "improve_it": [
+      "Find another way of resetting the counter, for example by shaking the micro:bit.",
+      "Showing the number graphically - use a bar chart or dots.",
+      "Show a heart or another picture when you reach a certain number - it could be your target for star-jumps or another activity.",
+      "Use radio to send the count number to another micro:bit acting as a remote display."
+    ]
+  },
+  "code": [
+    {
+      "block_index": 0,
+      "source": "from microbit import *\n\ncount = 0\ndisplay.show(count)\n\nwhile True:\n    if button_a.is_pressed() and button_b.is_pressed():\n        count = 0\n        display.scroll(count)\n    elif button_b.is_pressed():\n        count += 1\n        display.scroll(count)\n    elif button_a.is_pressed():\n        display.scroll(count)\n    sleep(100)"
+    }
+  ],
+  "errors": []
+}

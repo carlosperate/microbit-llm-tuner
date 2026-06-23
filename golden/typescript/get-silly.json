@@ -1,0 +1,43 @@
+{
+  "slug": "get-silly",
+  "language": "makecode_ts",
+  "url": "https://microbit.org/projects/make-it-code-it/get-silly/",
+  "title": "Get silly",
+  "license": "CC BY-SA 4.0",
+  "meta": {
+    "level": "Beginner",
+    "tools": [
+      "MakeCode",
+      "Python"
+    ],
+    "features": [
+      "Accelerometer"
+    ],
+    "topics": [
+      "Input/output"
+    ]
+  },
+  "context": {
+    "summary": "Expand the range of emotions you can show â jump up and down to show that youâre feeling silly!",
+    "how_it_works": [
+      "Like the Emotion badge, this program shows a happy or sad face depending on which button input you press, A or B.",
+      "The micro:bit has other inputs, such as sensors.",
+      "This program uses the micro:bitâs accelerometer input to measure forces and sense when itâs shaken.",
+      "When the accelerometer senses sudden movement the program makes the silly face appear on the LED display output."
+    ],
+    "improve_it": [
+      "Use different built-in emotions images like MEH, CONFUSED or ANGRY.",
+      "Show another emotion when you press buttons A and B together.",
+      "Add new emotions using the LED display to draw your own pictures like we did in Animated animals.",
+      "The accelerometer can sense other âgesturesâ such as âfreefallâ and whether itâs tilted left or right â try them out. Find out more about gestures in micro:bit Python here."
+    ]
+  },
+  "code": [
+    {
+      "block_index": 0,
+      "pub_id": "_dkrYv67Ui9jW",
+      "source": "input.onButtonPressed(Button.A, function () {\n    basic.showIcon(IconNames.Happy)\n})\ninput.onButtonPressed(Button.B, function () {\n    basic.showIcon(IconNames.Sad)\n})\ninput.onGesture(Gesture.Shake, function () {\n    basic.showIcon(IconNames.Silly)\n})\n"
+    }
+  ],
+  "errors": []
+}

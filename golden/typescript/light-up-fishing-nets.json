@@ -1,0 +1,47 @@
+{
+  "slug": "light-up-fishing-nets",
+  "language": "makecode_ts",
+  "url": "https://microbit.org/projects/make-it-code-it/light-up-fishing-nets/",
+  "title": "Light-up fishing nets",
+  "license": "CC BY-SA 4.0",
+  "meta": {
+    "level": "Beginner",
+    "tools": [
+      "MakeCode",
+      "Python"
+    ],
+    "features": [
+      "LED display",
+      "Light sensor",
+      "Sound"
+    ],
+    "topics": [
+      "14 Life below water",
+      "Input/output",
+      "Selection"
+    ]
+  },
+  "context": {
+    "summary": "Use your micro:bit to create a prototype of LED lights that can stop unwanted fish, turtles and birds from getting trapped in fishing nets.",
+    "how_it_works": [
+      "A prototype is a working model used to test ideas. Remember to keep your micro:bit away from real water!",
+      "This program uses the micro:bit's LEDs as a light sensor. It tells the micro:bit to turn on the LEDs when the light is less than a certain level (50).",
+      "Cover your micro:bit's LED display, to simulate being deep in the sea, and it should light up.",
+      "You may need to change the number 50 depending on the lighting conditions where you are. If it's lighting up too easily, use a smaller number.",
+      "If you have a speaker attached, or you're using the new micro:bit with sound, it also gives out a high frequency pulsed sound to help to keep other creatures away from the nets."
+    ],
+    "improve_it": [
+      "Change the LED pattern into an animation of a pulsing light",
+      "Create your own sounds to scare away creatures you don't want to catch",
+      "Add radio to control the lights and sound remotely"
+    ]
+  },
+  "code": [
+    {
+      "block_index": 0,
+      "pub_id": "_H8diswhUCfym",
+      "source": "basic.forever(function () {\n    if (input.lightLevel() < 50) {\n        basic.showLeds(`\n            # # # # #\n            # # # # #\n            # # # # #\n            # # # # #\n            # # # # #\n            `)\n        music.playTone(880, music.beat(BeatFraction.Whole))\n    } else {\n        basic.clearScreen()\n    }\n})\n"
+    }
+  ],
+  "errors": []
+}

@@ -1,0 +1,48 @@
+{
+  "slug": "secure-messaging",
+  "language": "micropython",
+  "url": "https://microbit.org/projects/make-it-code-it/secure-messaging/",
+  "title": "Secure messaging",
+  "license": "CC BY-SA 4.0",
+  "meta": {
+    "level": "Intermediate",
+    "tools": [
+      "MakeCode"
+    ],
+    "features": [
+      "Buttons",
+      "LED display",
+      "Radio"
+    ],
+    "topics": [
+      "Abstraction",
+      "Communication",
+      "Encryption",
+      "Input/output",
+      "Selection"
+    ]
+  },
+  "context": {
+    "summary": "Send coded BBC micro:bit radio messages to tell someone how youâre feeling.",
+    "how_it_works": [
+      "Press different button inputs on your micro:bit to send different messages over radio to another micro:bit to tell someone how youâre feeling. The output on the receiver micro:bit is either a happy, sad or excited emoji on the LED display.",
+      "Make sure you and your partner use a unique radio group so that you can send your message to a particular micro:bit or a particular person who has that micro:bit.",
+      "The program uses a simple kind of code, or encryption. This could stop, for example, another person from reading your messages, and keep them secure.",
+      "The code used is a simple number cipher. This is a kind of encryption. In this example, 17 means happy, 23 means sad, and 42 means excited. Note - only numbers or letters can be sent by radio and not emojis.",
+      "Agreeing a unique radio group, a set of possible messages, and a way of encrypting those messages with a partner means you have agreed a protocol, or rules for communicating and keeping your messages secure. Use this sheet to plan your own messaging protocol.",
+      "The same code goes on both micro:bits, so you and your partner can communicate with each other."
+    ],
+    "improve_it": [
+      "Customise the emojis to send different messages.",
+      "Use more of the micro:bitâs physical inputs such as the shake gesture or the touch logo on the micro:bit V2 to send even more messages.",
+      "Show scrolling text, such as the words 'hot', 'cold' and 'warm', instead of emojis to play a hide and seek game."
+    ]
+  },
+  "code": [
+    {
+      "block_index": 0,
+      "source": "from microbit import *\nimport radio\n\n# The Python version of this project has sleep()\n# for each button press to make the A+B button work better\n\nradio.config(group=3)\nradio.on()\n\nwhile True:\n    if button_a.is_pressed() and button_b.is_pressed():\n        display.show(Image.SURPRISED)\n        radio.send('42')\n        sleep(300)\n        display.clear()        \n    elif button_a.is_pressed():\n        display.show(Image.HAPPY)        \n        radio.send('17')\n        sleep(300)\n        display.clear()\n    elif button_b.is_pressed():\n        display.show(Image.SAD)\n        radio.send('23')\n        sleep(300)\n        display.clear()\n        \n    message = radio.receive()\n    if message:\n        if message == '17':\n            display.show(Image.HAPPY)  \n        elif message == '23':\n            display.show(Image.SAD)\n        else:\n            display.show(Image.SURPRISED)\n        sleep(2000)\n    display.clear()\n    sleep(200)"
+    }
+  ],
+  "errors": []
+}

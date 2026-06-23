@@ -1,0 +1,43 @@
+{
+  "slug": "conductivity-tester",
+  "language": "micropython",
+  "url": "https://microbit.org/projects/make-it-code-it/conductivity-tester/",
+  "title": "Conductivity tester",
+  "license": "CC BY-SA 4.0",
+  "meta": {
+    "level": "Intermediate",
+    "tools": [
+      "MakeCode"
+    ],
+    "features": [
+      "LED display",
+      "Pins",
+      "Sound"
+    ],
+    "topics": [
+      "Electricity",
+      "Iteration",
+      "Selection"
+    ]
+  },
+  "context": {
+    "summary": "Use your micro:bit with two crocodile clip leads to investigate if a material conducts electricity - a simple way to carry out a classic science experiment!",
+    "how_it_works": [
+      "The project uses selection. If an electrical circuit is made (because the material conducts) then the micro:bit will show a heart on its LED display and play the note Middle C.",
+      "Else, if a circuit is not made, the micro:bit will clear its LED display and a note will not play - the micro:bit is instructed to play a note at a frequency of 0Hz.",
+      "The program uses a forever or infinite loop to keep on testing until you disconnect your micro:bit from a power supply."
+    ],
+    "improve_it": [
+      "Adjust the code to show a different icon or play a different sound if the material is conductive.",
+      "Try out a wide range of materials with your conductivity tester such as pencil graphite, PlayDoh, and dry and damp tissue paper.",
+      "It can be fun to use a human being as the test material! Simply hold the crocodile clip leads in both hands, or form a human chain."
+    ]
+  },
+  "code": [
+    {
+      "block_index": 0,
+      "source": "from microbit import *\nimport music\n\nwhile True:\n    if pin1.is_touched():\n        display.show(Image.HEART)\n        music.play('c')\n    else:\n        display.clear()"
+    }
+  ],
+  "errors": []
+}

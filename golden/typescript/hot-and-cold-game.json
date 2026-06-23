@@ -1,0 +1,54 @@
+{
+  "slug": "hot-and-cold-game",
+  "language": "makecode_ts",
+  "url": "https://microbit.org/projects/make-it-code-it/hot-and-cold-game/",
+  "title": "Hot and cold game",
+  "license": "CC BY-SA 4.0",
+  "meta": {
+    "level": "Intermediate",
+    "tools": [
+      "MakeCode",
+      "Python"
+    ],
+    "features": [
+      "Buttons",
+      "LED display",
+      "Radio"
+    ],
+    "topics": [
+      "Communication",
+      "Data types"
+    ]
+  },
+  "context": {
+    "summary": "Make this fun two-player game using the BBC micro:bitâs radio feature.",
+    "how_it_works": [
+      "This is a game for two people. One person hides an object and gives the seeker clues: âhotâ when they are close to the object, âcolderâ when they are moving further away, and âwarmerâ when they are getting closer.",
+      "Usually, this game is played by shouting the words âhotâ, âcolderâ and âwarmerâ but in this version of the game the words are sent by radio from one micro:bit to another and appear on the LED display.",
+      "There are two programs, one for the hider and one for the seeker.",
+      "First, each program sets the radio group to 47. Groups are like channels, so any micro:bit using the same group will get the message. You can use any group number you like from 0-255.",
+      "The hider presses button A to send the message âwarmerâ, presses button B to send the message âcolderâ and presses buttons A and B together to send the message âhotâ.",
+      "The micro:bit can send messages as numbers or text. Weâre using text messages in this project, so make sure you use radio blocks that refer toÂ stringsÂ rather thanÂ numbersÂ orÂ values.",
+      "In computing, a string is a sequence of characters that can contain letters, numbers, symbols, and spaces.",
+      "When the seeker's micro:bit receives a radio message, it shows the string received on its LED display. The strings are also displayed on the hiderâs micro:bit."
+    ],
+    "improve_it": [
+      "Edit the program so that different words appear instead of 'hot', 'colder' and 'warmer'. For example, you could use the words for 'hot', 'colder' and 'warmer' in a foreign language you are learning.",
+      "Add sound effects to the program.",
+      "Use this game with a timer or step counter program to see how quickly you found the object."
+    ]
+  },
+  "code": [
+    {
+      "block_index": 0,
+      "pub_id": "_YuWWDETetVkL",
+      "source": "input.onButtonPressed(Button.A, function () {\n    radio.sendString(\"Warmer\")\n    basic.showString(\"Warmer\")\n})\ninput.onButtonPressed(Button.AB, function () {\n    radio.sendString(\"HOT!\")\n    basic.showString(\"HOT!\")\n})\ninput.onButtonPressed(Button.B, function () {\n    radio.sendString(\"Colder\")\n    basic.showString(\"Colder\")\n})\nradio.setGroup(47)\n"
+    },
+    {
+      "block_index": 1,
+      "pub_id": "_EEH5Ykd2Ri5t",
+      "source": "radio.onReceivedString(function (receivedString) {\n    basic.showString(receivedString)\n})\nradio.setGroup(47)\n"
+    }
+  ],
+  "errors": []
+}

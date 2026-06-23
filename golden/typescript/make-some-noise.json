@@ -1,0 +1,44 @@
+{
+  "slug": "make-some-noise",
+  "language": "makecode_ts",
+  "url": "https://microbit.org/projects/make-it-code-it/make-some-noise/",
+  "title": "Make some noise",
+  "license": "CC BY-SA 4.0",
+  "meta": {
+    "level": "Intermediate",
+    "tools": [
+      "MakeCode",
+      "Python"
+    ],
+    "features": [
+      "Pins",
+      "Sound"
+    ],
+    "topics": [
+      "Hardware & software",
+      "Input/output",
+      "Sound"
+    ]
+  },
+  "context": {
+    "summary": "Attach headphones to your micro:bit and make music!",
+    "how_it_works": [
+      "To make sounds with micro:bit, attach headphones or a speaker. Clip the tip of the headphone plug to pin 0 on micro:bit. Clip the longer part of the headphone plug to the GND pin on micro:bit.",
+      "Use this program to make your micro:bit play one of its built-in tunes when you press button A.",
+      "The gold pins on the bottom of the micro:bit are used for inputs and outputs. Here we use pin 0 as an output. The micro:bit sends pulses of electrical signals from pin 0 when it plays the tune. The headphones must also be connected to the GND pin on the micro:bit to complete the electrical circuit."
+    ],
+    "improve_it": [
+      "Try different tunes like ODE, BLUES or BIRTHDAY. You can find a list of tunes you can use in Python here.",
+      "Make the tune repeat more than once using a loop.",
+      "What happens if you connect pin 0 to the middle part of the headphone plug instead of the tip?"
+    ]
+  },
+  "code": [
+    {
+      "block_index": 0,
+      "pub_id": "_DbcgCAdAKeE6",
+      "source": "input.onButtonPressed(Button.A, function () {\n    music._playDefaultBackground(music.builtInPlayableMelody(Melodies.Nyan), music.PlaybackMode.InBackground)\n})\n"
+    }
+  ],
+  "errors": []
+}

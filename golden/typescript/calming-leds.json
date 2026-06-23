@@ -1,0 +1,46 @@
+{
+  "slug": "calming-leds",
+  "language": "makecode_ts",
+  "url": "https://microbit.org/projects/make-it-code-it/calming-leds/",
+  "title": "Calming LEDs",
+  "license": "CC BY-SA 4.0",
+  "meta": {
+    "level": "Beginner",
+    "tools": [
+      "MakeCode",
+      "Python"
+    ],
+    "features": [
+      "LED display"
+    ],
+    "topics": [
+      "3 Health",
+      "Animation",
+      "Iteration",
+      "Sequence"
+    ]
+  },
+  "context": {
+    "summary": "Turn your micro:bit into a simple digital device to help you relax by slowing and regulating your breathing using a simple animation sequence.",
+    "how_it_works": [
+      "Build an animation sequence in a 'forever' loop to keep it running.",
+      "Use the large and small built-in diamond icons to create a pulsating effect.",
+      "Add pause blocks to slow down the animation to a relaxing pace.",
+      "Use a longer pause in the middle of the animation, perhaps 2 seconds which is 2000 milliseconds.",
+      "Test out your code in the MakeCode simulator to make sure it works the way you want before transferring it to your micro:bit."
+    ],
+    "improve_it": [
+      "Change the pause times to match your own preferred pace of breathing.",
+      "Create your own images to replace the diamond icons.",
+      "Add more steps to make your animation smoother."
+    ]
+  },
+  "code": [
+    {
+      "block_index": 0,
+      "pub_id": "_Aym5Ce0mAUTe",
+      "source": "basic.forever(function () {\n    basic.pause(2000)\n    basic.showLeds(`\n        . . . . .\n        . . . . .\n        . . # . .\n        . . . . .\n        . . . . .\n        `)\n    basic.pause(500)\n    basic.showIcon(IconNames.SmallDiamond)\n    basic.pause(500)\n    basic.showIcon(IconNames.Diamond)\n    basic.pause(2000)\n    basic.showIcon(IconNames.SmallDiamond)\n    basic.pause(500)\n    basic.showLeds(`\n        . . . . .\n        . . . . .\n        . . # . .\n        . . . . .\n        . . . . .\n        `)\n})\n"
+    }
+  ],
+  "errors": []
+}

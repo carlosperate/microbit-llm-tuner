@@ -1,0 +1,48 @@
+{
+  "slug": "sunlight-sensor",
+  "language": "micropython",
+  "url": "https://microbit.org/projects/make-it-code-it/sunlight-sensor/",
+  "title": "Sunlight sensor",
+  "license": "CC BY-SA 4.0",
+  "meta": {
+    "level": "Beginner",
+    "tools": [
+      "MakeCode",
+      "Python"
+    ],
+    "features": [
+      "Light sensor"
+    ],
+    "topics": [
+      "Input/output",
+      "Light",
+      "Relational operators",
+      "Selection",
+      "Weather & climate"
+    ]
+  },
+  "context": {
+    "summary": "Turn the LED display into a sensor to make your micro:bit react to light.",
+    "how_it_works": [
+      "As well as working as an output, the LEDs on your micro:bit can also work as an input device light sensor, measuring the amount of light falling on them.",
+      "This means that micro:bit programs can make different things happen depending on how light or dark it is.",
+      "The program uses an âifâ¦ elseâ statement to show the sun image only if the light level is greater than (>) a certain level. This is known as selection â selecting when different things happen.",
+      "Flash this program onto your micro:bit and shine a light source, like a torch, daylight or bright ceiling light on to the micro:bit, and you should see the sun appear.",
+      "Cover the micro:bit with your hand and the sun icon should vanish.",
+      "If it doesnât work, try making the 100 number smaller to suit the lighting where you are.",
+      "You can read more background information about how the micro:bit light sensor works here."
+    ],
+    "improve_it": [
+      "Show a different picture, like a moon or star, when itâs dark.",
+      "Show an animated sun when light falls on your micro:bit.",
+      "Turn this project into a night-light by making it light up the micro:bitâs display when it goes dark."
+    ]
+  },
+  "code": [
+    {
+      "block_index": 0,
+      "source": "from microbit import *\n\nwhile True:\n    if display.read_light_level() > 100:\n        display.show(Image(\n        \"90909:\"\n        \"09990:\"\n        \"99999:\"\n        \"09990:\"\n        \"90909\"))\n    else:\n        display.clear()"
+    }
+  ],
+  "errors": []
+}

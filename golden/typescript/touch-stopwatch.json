@@ -1,0 +1,52 @@
+{
+  "slug": "touch-stopwatch",
+  "language": "makecode_ts",
+  "url": "https://microbit.org/projects/make-it-code-it/touch-stopwatch/",
+  "title": "Touch stopwatch",
+  "license": "CC BY-SA 4.0",
+  "meta": {
+    "level": "Intermediate",
+    "tools": [
+      "MakeCode",
+      "Python"
+    ],
+    "features": [
+      "Buttons",
+      "LED display",
+      "Touch logo"
+    ],
+    "topics": [
+      "Arithmetic operators",
+      "Boolean logic",
+      "Input/output",
+      "Measurement",
+      "Variables"
+    ]
+  },
+  "context": {
+    "summary": "Make a real stopwatch using the new micro:bit's touch logo sensor as an extra button.",
+    "how_it_works": [
+      "The micro:bit tracks how long it's been powered on in milliseconds (thousandths of a second). This is called the running time.",
+      "When you press button A, a variable called start is set to the current running time.",
+      "When you press button B, the start time is subtracted from the new running time to work out how much time has elapsed since you started the stopwatch. This difference is added to the total time, which is stored in a variable called time.",
+      "If you press the touch logo, the program shows the total elapsed time on the LED display. it converts the time from milliseconds (thousandths of a second) to seconds by dividing it by 1000. It uses the integer division operator to give a result in whole numbers (integers).",
+      "The program also uses a Boolean variable called running to control the program. Boolean variables can only have two values: true or false. If running is true, the stopwatch has been started. If running is false, the stopwatch hasn't been started or has been stopped.",
+      "If running is true, a loop keeps the heart animation appearing on the LED display.",
+      "It will only show the time when you press the logo if the stopwatch has been stopped, if running is not true.",
+      "The code prevents false readings by making sure the time variable is only changed when you press button B if the stopwatch has already been started, if running is true."
+    ],
+    "improve_it": [
+      "Modify the program so you can reset the time by shaking the micro:bit.",
+      "Make the timer more accurate by using fractions of numbers instead of integers (whole numbers).",
+      "Add a lap time function so that if if you touch the logo while the stopwatch is running it shows the time at that point. Remember to make sure this is not added to the total time variable."
+    ]
+  },
+  "code": [
+    {
+      "block_index": 0,
+      "pub_id": "_13aRi9FVhAeD",
+      "source": "let running = false\nlet start = 0\nlet time = 0\ninput.onButtonPressed(Button.A, function () {\n    running = true\n    start = input.runningTime()\n})\ninput.onButtonPressed(Button.B, function () {\n    if (running) {\n        time += input.runningTime() - start\n    }\n    running = false\n})\ninput.onLogoEvent(TouchButtonEvent.Pressed, function () {\n    if (!(running)) {\n        basic.showNumber(Math.idiv(time, 1000))\n    }\n})\nbasic.forever(function () {\n    if (running) {\n        basic.showIcon(IconNames.Heart)\n        basic.showIcon(IconNames.SmallHeart)\n    } else {\n        basic.showIcon(IconNames.Asleep)\n    }\n})\n"
+    }
+  ],
+  "errors": []
+}

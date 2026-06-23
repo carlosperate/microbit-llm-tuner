@@ -1,0 +1,52 @@
+{
+  "slug": "energy-cost-calculator",
+  "language": "makecode_ts",
+  "url": "https://microbit.org/projects/make-it-code-it/energy-cost-calculator/",
+  "title": "Energy cost calculator",
+  "license": "CC BY-SA 4.0",
+  "meta": {
+    "level": "Advanced",
+    "tools": [
+      "MakeCode",
+      "Python"
+    ],
+    "features": [
+      "Buttons",
+      "LED display",
+      "Light sensor"
+    ],
+    "topics": [
+      "13 Climate",
+      "Boolean logic",
+      "Division",
+      "Input/output",
+      "Measurement",
+      "Money",
+      "Multiplication",
+      "Sensors",
+      "Variables"
+    ]
+  },
+  "context": {
+    "summary": "The third of three projects to help you gather data about your energy use. Learn how to work out the cost of energy and make a timer that measures how much electric lights cost to run.",
+    "how_it_works": [
+      "The program times how long a light is left switched on using the micro:bit's light sensor.",
+      "The amount of energy you use is calculated by multiplying the power of the lightbulb by the time. This is measured in kilowatt hours (kWh). Because a lightbulb's power is usually measured in watts, not kilowatts, the program converts from watts to kilowatts by dividing by 1000:watts Ã· 1000 = kilowattsSo for example, a 60 watt lightbulb uses 0.06 kilowatts of power:60 W Ã· 1000 = 0.06 kW",
+      "The program also converts the time units. To convert time from seconds to hours divide the time in seconds by 60. So:600 minutes Ã· 60 = 10 hours",
+      "To work out the cost of energy used in a given period of time, the program multiplies the energy use in kilowatt hours by the unit cost per kilowatt hour.",
+      "If my energy costs Â£0.16p per kWh, leaving a 60 watt lightbulb on for 10 hours will cost me ten pence:0.6 kWh Ã 16p = 9.6p"
+    ],
+    "improve_it": [
+      "Use multiple micro:bits to measure costs of lighting in different places.",
+      "Use radio to transmit cost data to another micro:bit and reset the timer remotely."
+    ]
+  },
+  "code": [
+    {
+      "block_index": 0,
+      "pub_id": "_HHgYucE7tK3k",
+      "source": "function calccost (m: number) {\n    kw = WATTS / 1000\n    hours = m / 60\n    kwh = kw * hours\n    cost = kwh * COSTPERKWH\n    return cost\n}\ninput.onButtonPressed(Button.B, function () {\n    minutes = totaltime / 60000\n    if (timing) {\n        minutes += (input.runningTime() - starttime) / 60000\n    }\n    displaying = false\n    basic.clearScreen()\n    basic.showNumber(calccost(minutes))\n    basic.pause(500)\n    displaying = true\n})\nlet endtime = 0\nlet starttime = 0\nlet timing = false\nlet totaltime = 0\nlet minutes = 0\nlet cost = 0\nlet kwh = 0\nlet hours = 0\nlet kw = 0\nlet displaying = false\nlet COSTPERKWH = 0\nlet WATTS = 0\nbasic.showString(\"C\")\nlet LIGHT = 114\nWATTS = 1000\nCOSTPERKWH = 0.18\nlet HYSTERESIS = 8\nLIGHT += HYSTERESIS / 2\nlet DARK = LIGHT - HYSTERESIS\nlet reading = input.lightLevel()\nbasic.pause(1000)\ndisplaying = true\nbasic.forever(function () {\n    reading = input.lightLevel()\n    if (reading < DARK) {\n        if (timing) {\n            endtime = input.runningTime()\n            totaltime += endtime - starttime\n            timing = false\n        }\n    } else if (reading >= LIGHT) {\n        if (!(timing)) {\n            starttime = input.runningTime()\n            timing = true\n        }\n    }\n})\nbasic.forever(function () {\n    if (displaying) {\n        if (timing) {\n            basic.showLeds(`\n                # # # # #\n                # # # # #\n                # # # # #\n                # # # # #\n                # # # # #\n                `)\n        } else {\n            basic.showLeds(`\n                . . . . .\n                . . . . .\n                . . # . .\n                . . . . .\n                . . . . .\n                `)\n        }\n    }\n})\n"
+    }
+  ],
+  "errors": []
+}

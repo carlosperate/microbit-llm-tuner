@@ -1,0 +1,48 @@
+{
+  "slug": "guitar-1-touch-tunes",
+  "language": "micropython",
+  "url": "https://microbit.org/projects/make-it-code-it/guitar-1-touch-tunes/",
+  "title": "Guitar 1 - touch tunes",
+  "license": "CC BY-SA 4.0",
+  "meta": {
+    "level": "Advanced",
+    "tools": [
+      "MakeCode",
+      "Python"
+    ],
+    "features": [
+      "Pins",
+      "Sound"
+    ],
+    "topics": [
+      "Composition",
+      "Electricity",
+      "Electronics",
+      "Input/output",
+      "Sound"
+    ]
+  },
+  "context": {
+    "summary": "Play different tunes by using the micro:bitâs touch sensor.",
+    "how_it_works": [
+      "This project is the same as the Jukebox project but instead of using the micro:bitâs buttons, youâll make your own input device using cardboard covered in strips of tin foil connected by crocodile clip leads to the micro:bit's pins.",
+      "Flash the program onto your micro:bit.",
+      "Attach one end of three crocodile clip leads to pins 1, 2 and GND (ground or Earth pin). Attach the other ends to a cardboard guitar or keyboard.",
+      "With one finger touch the foil connected to GND, and with another finger touch the foil connected to pin 1 and then pin 2. It should play a different tune depending on which strip of foil you touch.",
+      "The micro:bit is using pins 1 and 2 as touch inputs. When you touch either of these pins and the GND pin, youâre completing an electrical circuit. A small amount of electricity flows through you, the micro:bit can detect it and the program triggers the playing of a tune.",
+      "If you do not have a V2 micro:bit, which plays sound, attach headphones to pins 0 and GND."
+    ],
+    "improve_it": [
+      "Change the tunes that are played when you touch the tin foil.",
+      "Program your own tunes.",
+      "Show different pictures, letters, numbers, or words depending on which tune you picked."
+    ]
+  },
+  "code": [
+    {
+      "block_index": 0,
+      "source": "from microbit import *\nimport music\n\nwhile True:\n    if pin1.is_touched():\n        music.play(music.ODE)\n    if pin2.is_touched():\n        music.play(music.BLUES)\n"
+    }
+  ],
+  "errors": []
+}

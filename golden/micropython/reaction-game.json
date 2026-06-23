@@ -1,0 +1,49 @@
+{
+  "slug": "reaction-game",
+  "language": "micropython",
+  "url": "https://microbit.org/projects/make-it-code-it/reaction-game/",
+  "title": "Reaction game",
+  "license": "CC BY-SA 4.0",
+  "meta": {
+    "level": "Advanced",
+    "tools": [
+      "MakeCode",
+      "Python"
+    ],
+    "features": [
+      "LED display",
+      "Pins"
+    ],
+    "topics": [
+      "Boolean logic",
+      "Electricity",
+      "Electronics",
+      "Human body",
+      "Input/output",
+      "Iteration",
+      "Product design"
+    ]
+  },
+  "context": {
+    "summary": "Make a reaction game with real physical switches you can bash as hard as you like!",
+    "how_it_works": [
+      "Make two physical input switches using cardboard and tin foil â similar to the ones used in the Pressure switch alarm project.",
+      "Connect them to the micro:bit pins as in the picture â one tin foil pad on each switch goes to the micro:bitâs GND pin, and the other is connected to pin 1 or pin 2 depending on whether you are player A or player B.",
+      "The program waits a random time between 1 and 5 seconds, then shows a heart on the LED display output.",
+      "You canât hit your button before it lights because it uses Boolean logic to stop anyone cheating! Boolean variables can only have two values: True or False. The game started variable prevents either player pressing their button too soon by only checking which button is pressed while the game has started.",
+      "An infinite loop keeps the game running so you can keep playing."
+    ],
+    "improve_it": [
+      "Use variables to keep track of each playerâs score",
+      "Add a timer to show how quick each winnerâs reaction was",
+      "Track which player has the fastest reaction time"
+    ]
+  },
+  "code": [
+    {
+      "block_index": 0,
+      "source": "from microbit import *\nimport random\n\nwhile True:\n    gameStarted = False\n    sleep(random.randint(1000, 5000))\n    gameStarted = True\n    display.show(Image.HEART)\n    while gameStarted:\n        if pin1.is_touched():\n            display.show('A')\n            gameStarted = False\n        elif pin2.is_touched():\n            display.show('B')\n            gameStarted = False\n    sleep(3000)\n    display.clear()\n"
+    }
+  ],
+  "errors": []
+}

@@ -1,0 +1,52 @@
+{
+  "slug": "door-alarm",
+  "language": "makecode_ts",
+  "url": "https://microbit.org/projects/make-it-code-it/door-alarm/",
+  "title": "Radio door alarm",
+  "license": "CC BY-SA 4.0",
+  "meta": {
+    "level": "Advanced",
+    "tools": [
+      "MakeCode",
+      "Python"
+    ],
+    "features": [
+      "Compass",
+      "LED display",
+      "Radio"
+    ],
+    "topics": [
+      "Communication",
+      "Magnetism",
+      "Radio waves",
+      "Relational operators",
+      "Selection",
+      "Sensors"
+    ]
+  },
+  "context": {
+    "summary": "A wireless alarm to warn you when someone opens a door â or leaves it open.",
+    "how_it_works": [
+      "The transmitter program uses the micro:bitâsÂ compassÂ (magnetometer)Â input sensor and aÂ loopÂ to measure the strength of the magnetic field every two seconds.",
+      "It usesÂ selectionÂ so when the magnetic field strength falls below a certain level (the threshold), it sends aÂ radioÂ signal âopenâ. If the magnetism reading goes above the threshold, it sends the signal âclosed'.",
+      "When the receiver micro:bit receives the signal âopenâ, a cross appears on its LED display and an audible alarm sounds. When it receives the signal âclosedâ, a tick appears on its LED display and no sound plays."
+    ],
+    "improve_it": [
+      "Use multiple micro:bits to track the status of different doors by sending different radio messages, e.g. âback door openâ.",
+      "Use a variable to measure how long doors are left open â could this help you save heating energy?"
+    ]
+  },
+  "code": [
+    {
+      "block_index": 0,
+      "pub_id": "_iyMRX0K6D6jL",
+      "source": "input.onButtonPressed(Button.A, function () {\n    basic.showNumber(input.magneticForce(Dimension.Strength))\n})\nradio.setGroup(17)\nbasic.forever(function () {\n    if (input.magneticForce(Dimension.Strength) < 100) {\n        basic.showIcon(IconNames.SmallDiamond)\n        radio.sendString(\"open\")\n    } else {\n        basic.clearScreen()\n        radio.sendString(\"closed\")\n    }\n    basic.pause(2000)\n})\n"
+    },
+    {
+      "block_index": 1,
+      "pub_id": "_9bpMDr06f9qj",
+      "source": "radio.onReceivedStringDeprecated(function (receivedString) {\n    if (receivedString == \"open\") {\n        music.play(music.tonePlayable(262, music.beat(BeatFraction.Whole)), music.PlaybackMode.InBackground)\n        basic.showIcon(IconNames.No)\n    } else if (receivedString == \"closed\") {\n        basic.showIcon(IconNames.Yes)\n    }\n})\nradio.setGroup(17)\n"
+    }
+  ],
+  "errors": []
+}

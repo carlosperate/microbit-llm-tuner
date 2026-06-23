@@ -1,0 +1,50 @@
+{
+  "slug": "reaction-game",
+  "language": "makecode_ts",
+  "url": "https://microbit.org/projects/make-it-code-it/reaction-game/",
+  "title": "Reaction game",
+  "license": "CC BY-SA 4.0",
+  "meta": {
+    "level": "Advanced",
+    "tools": [
+      "MakeCode",
+      "Python"
+    ],
+    "features": [
+      "LED display",
+      "Pins"
+    ],
+    "topics": [
+      "Boolean logic",
+      "Electricity",
+      "Electronics",
+      "Human body",
+      "Input/output",
+      "Iteration",
+      "Product design"
+    ]
+  },
+  "context": {
+    "summary": "Make a reaction game with real physical switches you can bash as hard as you like!",
+    "how_it_works": [
+      "Make two physical input switches using cardboard and tin foil â similar to the ones used in the Pressure switch alarm project.",
+      "Connect them to the micro:bit pins as in the picture â one tin foil pad on each switch goes to the micro:bitâs GND pin, and the other is connected to pin 1 or pin 2 depending on whether you are player A or player B.",
+      "The program waits a random time between 1 and 5 seconds, then shows a heart on the LED display output.",
+      "You canât hit your button before it lights because it uses Boolean logic to stop anyone cheating! Boolean variables can only have two values: True or False. The game started variable prevents either player pressing their button too soon by only checking which button is pressed while the game has started.",
+      "An infinite loop keeps the game running so you can keep playing."
+    ],
+    "improve_it": [
+      "Use variables to keep track of each playerâs score",
+      "Add a timer to show how quick each winnerâs reaction was",
+      "Track which player has the fastest reaction time"
+    ]
+  },
+  "code": [
+    {
+      "block_index": 0,
+      "pub_id": "_Vya0Xhf1zRtX",
+      "source": "let game_started = false\nbasic.forever(function () {\n    game_started = false\n    basic.pause(Math.randomRange(1000, 5000))\n    game_started = true\n    basic.showIcon(IconNames.Heart)\n    while (game_started) {\n        if (input.pinIsPressed(TouchPin.P1)) {\n            basic.showString(\"A\")\n            game_started = false\n        } else {\n            if (input.pinIsPressed(TouchPin.P2)) {\n                basic.showString(\"B\")\n                game_started = false\n            }\n        }\n    }\n    basic.pause(3000)\n    basic.clearScreen()\n})\n"
+    }
+  ],
+  "errors": []
+}

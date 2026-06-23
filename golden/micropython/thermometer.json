@@ -1,0 +1,46 @@
+{
+  "slug": "thermometer",
+  "language": "micropython",
+  "url": "https://microbit.org/projects/make-it-code-it/thermometer/",
+  "title": "Thermometer",
+  "license": "CC BY-SA 4.0",
+  "meta": {
+    "level": "Beginner",
+    "tools": [
+      "MakeCode",
+      "Python"
+    ],
+    "features": [
+      "Buttons",
+      "LED display",
+      "Temperature sensor"
+    ],
+    "topics": [
+      "Input/output",
+      "Sensors",
+      "Temperature",
+      "Weather & climate"
+    ]
+  },
+  "context": {
+    "summary": "Show how hot or cold your micro:bit is using the built-in temperature sensor.",
+    "how_it_works": [
+      "This program shows how hot or cold your micro:bit is by taking a reading from the temperature sensor in its processor or CPU (central processing unit).",
+      "The processorâs temperature is a fairly good approximation of the temperature around you in Â°C (Celsius).",
+      "In this program, when you press input button A, the micro:bit displays the processorâs current temperature on its LED display output.",
+      "Take the micro:bit into warmer and colder places and see how the temperature readings change."
+    ],
+    "improve_it": [
+      "Compare the reading with another thermometer. How accurate is the micro:bit? Do you need to modify the micro:bit reading to get the air temperature?",
+      "Convert the temperature to Fahrenheit or Kelvin.",
+      "Use radio to make a remote sensor sending temperature readings to another micro:bit, for example from outside to inside. You could make an indoor / outdoor thermometer this way."
+    ]
+  },
+  "code": [
+    {
+      "block_index": 0,
+      "source": "from microbit import *\n\nwhile True:\n    if button_a.was_pressed():\n        display.scroll(temperature())\n"
+    }
+  ],
+  "errors": []
+}

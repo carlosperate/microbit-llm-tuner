@@ -1,0 +1,48 @@
+{
+  "slug": "species-counter",
+  "language": "micropython",
+  "url": "https://microbit.org/projects/make-it-code-it/species-counter/",
+  "title": "Species counter",
+  "license": "CC BY-SA 4.0",
+  "meta": {
+    "level": "Beginner",
+    "tools": [
+      "MakeCode",
+      "Python"
+    ],
+    "features": [
+      "Buttons",
+      "LED display"
+    ],
+    "topics": [
+      "Animals",
+      "Ecosystems",
+      "Number & place value",
+      "Plants",
+      "Variables"
+    ]
+  },
+  "context": {
+    "summary": "Use your BBC micro:bit to help you count two different species of plants or animals in your school playground, garden or local park. You will learn about variables, and using the micro:bit's buttons and LED display.",
+    "how_it_works": [
+      "The program uses variablesÂ called âAâ and âBâ to store the number of animals or plants counted.",
+      "VariablesÂ store numbers or values that can change in a computer program.",
+      "At the beginning of the program, âAâ and âBâ are set to zero and zero is shown on the LED display. You should always give variables an initial value in a computer program like this.",
+      "Press button A each time you see a particular animal or plant, for example, a duck, and each time one will be added to âAâ.",
+      "Press button B each time you see another plant or animal of interest, for example, a goose, and each time one will be added to âBâ.",
+      "Shake your micro:bit to show the totals on the LED display."
+    ],
+    "improve_it": [
+      "Find a way of resetting the counter, for example, by pressing buttons A and B together.",
+      "Make a graphical representation of the number of animals or plants counted, for example, by using dots.",
+      "Show icons representing the animals or plants, or play sound effects, when you have reached a target number."
+    ]
+  },
+  "code": [
+    {
+      "block_index": 0,
+      "source": "from microbit import *\n\na = 0\nb = 0\ndisplay.show(0)\n\nwhile True:\n    if button_a.is_pressed():\n        a += 1\n        display.scroll(a)\n    elif button_b.is_pressed():\n        b += 1\n        display.scroll(b)\n    if accelerometer.was_gesture('shake'):\n        display.scroll('A')\n        display.scroll(a)\n        sleep(1000)\n        display.clear()\n        sleep(2000)\n        display.scroll('B')\n        display.scroll(b)"
+    }
+  ],
+  "errors": []
+}

@@ -1,0 +1,47 @@
+{
+  "slug": "snow-globe",
+  "language": "micropython",
+  "url": "https://microbit.org/projects/make-it-code-it/snow-globe/",
+  "title": "Snow globe",
+  "license": "CC BY-SA 4.0",
+  "meta": {
+    "level": "Beginner",
+    "tools": [
+      "MakeCode"
+    ],
+    "features": [
+      "Accelerometer",
+      "Buttons",
+      "LED display",
+      "Sound"
+    ],
+    "topics": [
+      "Animation",
+      "Iteration"
+    ]
+  },
+  "context": {
+    "summary": "Make it snow on your micro:bit by shaking it, and press button A to hear a 'twinkle'.",
+    "how_it_works": [
+      "This program uses the micro:bitâsÂ accelerometer inputÂ to sense when itâs shaken.",
+      "When the accelerometer senses sudden movement, the programÂ shows an animation of moving snow on the micro:bitâs LED display.",
+      "An image of a chequerboard pattern and its inverse are shown in a sequence to create the illusion of movement.",
+      "After showing each image, the programÂ pausesÂ for half a second (500 milliseconds) before showing the next image. This slows the animation down.",
+      "The program uses a count-controlled loop to show the sequence of images ten times. Loops are also known as iteration.",
+      "The snow globe uses the button A input to play the expressive sound âtwinkleâ.",
+      "You will need a micro:bit V2 to play expressive sounds. If you have a micro:bit V1, you could just use the animation code. Or you could attach headphonesÂ and play music using the âplay melodyâ block instead. Using crocodile clip leads, connect micro:bit pin 0 to the tip of your headphone plug, and GND to the longer part of the headphone plug."
+    ],
+    "improve_it": [
+      "Use other inputs such as pressing button B to play festive tunes using the âplay melodyâ block. See the FrÃ¨re Jacques loops project for how to do this.",
+      "Make a more realistic animation of falling snow using several âshow LEDâ blocks.",
+      "Adapt the Nightlight project to show moving snow on the LED display if it gets dark."
+    ]
+  },
+  "code": [
+    {
+      "block_index": 0,
+      "source": "# Imports go at the top\nfrom microbit import *\n\n\nwhile True:\n    if button_a.was_pressed():\n        audio.play(Sound.TWINKLE) \n    if accelerometer.was_gesture('shake'):\n        for i in range(10): \n            display.show(Image('90909:'\n                               '09090:'\n                               '90909:'\n                               '09090:'\n                               '90909'))\n            sleep(500)\n            display.show(Image('09090:'\n                               '90909:'\n                               '09090:'\n                               '90909:'\n                               '09090'))\n            sleep(500)\n        display.clear()\n"
+    }
+  ],
+  "errors": []
+}

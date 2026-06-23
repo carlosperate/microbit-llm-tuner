@@ -1,0 +1,49 @@
+{
+  "slug": "sound-compass",
+  "language": "makecode_ts",
+  "url": "https://microbit.org/projects/make-it-code-it/sound-compass/",
+  "title": "Sound compass",
+  "license": "CC BY-SA 4.0",
+  "meta": {
+    "level": "Intermediate",
+    "tools": [
+      "MakeCode",
+      "Python"
+    ],
+    "features": [
+      "Buttons",
+      "Compass",
+      "LED display",
+      "Sound"
+    ],
+    "topics": [
+      "Relational operators",
+      "Selection",
+      "Using a compass",
+      "Variables"
+    ]
+  },
+  "context": {
+    "summary": "Make a compass that makes a sound when you're pointing North to make it more accessible and useful.",
+    "how_it_works": [
+      "A loop keeps the micro:bit checking which direction you're facing in. It stores this in a variable called direction.",
+      "If the direction is between 355 and 5 degrees, you are facing North so it shows an N on the LED display and makes a beeping sound.",
+      "If you have a new micro:bit you can hear the sound on the built-in speaker, otherwise you can connect headphones to pin 0 and GND.",
+      "If you're not facing North it clears the display and stops the sound.",
+      "You can also press button A to see a compass reading on the LED display if you're not facing North.",
+      "The first time you use a compass project on your micro:bit, youâll probably be asked to play a little game. Tilt the screen to light every LED on the display. This calibrates the compass and makes sure itâs working correctly."
+    ],
+    "improve_it": [
+      "Play different notes depending on which way you're facing: South, East or West.",
+      "Add another button press to calibrate the compass again if you think it's not accurate. In MakeCode you'll find the 'calibrate compass' block under Input... more. In Python use compass.calibrate()"
+    ]
+  },
+  "code": [
+    {
+      "block_index": 0,
+      "pub_id": "_Mofi9WM9afFM",
+      "source": "let direction = 0\nbasic.forever(function () {\n    direction = input.compassHeading()\n    if (direction < 5 || direction > 355) {\n        basic.showString(\"N\")\n        music.ringTone(262)\n    } else if (input.buttonIsPressed(Button.A)) {\n        basic.showNumber(direction)\n    } else {\n        basic.clearScreen()\n        music.ringTone(0)\n    }\n})\n"
+    }
+  ],
+  "errors": []
+}

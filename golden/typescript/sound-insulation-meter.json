@@ -1,0 +1,43 @@
+{
+  "slug": "sound-insulation-meter",
+  "language": "makecode_ts",
+  "url": "https://microbit.org/projects/make-it-code-it/sound-insulation-meter/",
+  "title": "Sound insulation meter",
+  "license": "CC BY-SA 4.0",
+  "meta": {
+    "level": "Intermediate",
+    "tools": [
+      "MakeCode",
+      "Python"
+    ],
+    "features": [
+      "Microphone",
+      "Radio"
+    ],
+    "topics": [
+      "Communication",
+      "Measurement",
+      "Selection",
+      "Variables",
+      "Working scientifically"
+    ]
+  },
+  "context": {
+    "summary": "Use two BBC micro:bits to measure sound levels in a science investigation into the sound insulation properties of different materials.",
+    "how_it_works": [],
+    "improve_it": []
+  },
+  "code": [
+    {
+      "block_index": 0,
+      "pub_id": "_Kt39iUh2c0rc",
+      "source": "radio.setGroup(1)\nloops.everyInterval(200, function () {\n    radio.sendNumber(input.soundLevel())\n})\n"
+    },
+    {
+      "block_index": 1,
+      "pub_id": "_2qrH692FidiK",
+      "source": "radio.onReceivedNumber(function (receivedNumber) {\n    if (receivedNumber > max) {\n        max = receivedNumber\n    }\n})\ninput.onButtonPressed(Button.A, function () {\n    basic.showNumber(max)\n})\nlet max = 0\nradio.setGroup(1)\nmax = 0\n"
+    }
+  ],
+  "errors": []
+}

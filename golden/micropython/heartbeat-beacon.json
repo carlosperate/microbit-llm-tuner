@@ -1,0 +1,48 @@
+{
+  "slug": "heartbeat-beacon",
+  "language": "micropython",
+  "url": "https://microbit.org/projects/make-it-code-it/heartbeat-beacon/",
+  "title": "Heartbeat beacon",
+  "license": "CC BY-SA 4.0",
+  "meta": {
+    "level": "Intermediate",
+    "tools": [
+      "MakeCode",
+      "Python"
+    ],
+    "features": [
+      "LED display",
+      "Radio"
+    ],
+    "topics": [
+      "Communication",
+      "Iteration",
+      "Radio waves"
+    ]
+  },
+  "context": {
+    "summary": "With two micro:bits you can keep track of a precious belonging or pet using radio messages.",
+    "how_it_works": [
+      "This uses two programs, a transmitter (beacon) program and a receiver.",
+      "Flash the transmitter program onto the first micro:bit, connect it to a battery pack and put it in or on your precious thing.",
+      "Using an infinite loop, it broadcasts a low power âhelloâ radio message on group 73 every 2 seconds. (You can use any radio group number you like between 0 and 255, just make sure that the receiver program uses the same number. Groups are like channels on TV or a walkie-talkie.)",
+      "The receiver program will show you a heart on the LED display output for 1 second every time it receives a message on the same channel. Because weâre using a low-power transmitter you have to be quite close to the transmitter to see it, so youâll know your precious thing is nearby."
+    ],
+    "improve_it": [
+      "Increase the range by increasing the power of the radio transmitter. The power can be any number from 0 to 7.",
+      "Make a heart âbeatâ on the transmitterâs LED display as well on the receiver.",
+      "You could use these programs as a simple treasure hunt game â hide the transmitters and challenge a friend to find them."
+    ]
+  },
+  "code": [
+    {
+      "block_index": 0,
+      "source": "from microbit import *\nimport radio\nradio.config(group=73, power=1)\nradio.on()\n\nwhile True:\n    radio.send('hello')\n    sleep(2000)\n"
+    },
+    {
+      "block_index": 1,
+      "source": "from microbit import *\nimport radio\nradio.config(group=73)\nradio.on()\n\nwhile True:\n    message = radio.receive()\n    if message:\n        display.show(Image.HEART)\n        sleep(1000)\n        display.clear()\n"
+    }
+  ],
+  "errors": []
+}

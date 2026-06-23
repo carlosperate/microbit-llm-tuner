@@ -1,0 +1,45 @@
+{
+  "slug": "flashing-emotions",
+  "language": "makecode_ts",
+  "url": "https://microbit.org/projects/make-it-code-it/flashing-emotions/",
+  "title": "Flashing emotions",
+  "license": "CC BY-SA 4.0",
+  "meta": {
+    "level": "Beginner",
+    "tools": [
+      "MakeCode",
+      "Python"
+    ],
+    "features": [
+      "Buttons",
+      "LED display"
+    ],
+    "topics": [
+      "Abstraction",
+      "Iteration",
+      "Sequence"
+    ]
+  },
+  "context": {
+    "summary": "Make your feelings really stand out with flashing happy and sad faces.",
+    "how_it_works": [
+      "Like the Emotion badge project, this program shows different emotion images on the LED display output depending on which button input you press.",
+      "Loops can make sets of instructions run for ever, but here we use a numbered loop to flash the image 4 times to make it really eye-catching.",
+      "Loops are an important idea in computer programming as they save repeating the same code many times, making your program more efficient. This idea is also called iteration."
+    ],
+    "improve_it": [
+      "Make the badge flash more times by making the number 4 larger.",
+      "Make the flashing faster or slower by changing the delay of 200 milliseconds (0.2 seconds).",
+      "Make it flash forever.",
+      "Use different emotion images, or draw your own."
+    ]
+  },
+  "code": [
+    {
+      "block_index": 0,
+      "pub_id": "_2DRXqjK1dc3R",
+      "source": "input.onButtonPressed(Button.A, function () {\n    for (let i = 0; i < 4; i++) {\n        basic.showIcon(IconNames.Happy)\n        basic.pause(200)\n        basic.clearScreen()\n        basic.pause(200)\n    }\n})\ninput.onButtonPressed(Button.B, function () {\n    for (let i = 0; i < 4; i++) {\n        basic.showIcon(IconNames.Sad)\n        basic.pause(200)\n        basic.clearScreen()\n        basic.pause(200)\n    }\n})\n"
+    }
+  ],
+  "errors": []
+}

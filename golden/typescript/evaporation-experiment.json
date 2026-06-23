@@ -1,0 +1,51 @@
+{
+  "slug": "evaporation-experiment",
+  "language": "makecode_ts",
+  "url": "https://microbit.org/projects/make-it-code-it/evaporation-experiment/",
+  "title": "Evaporation experiment",
+  "license": "CC BY-SA 4.0",
+  "meta": {
+    "level": "Intermediate",
+    "tools": [
+      "MakeCode"
+    ],
+    "features": [
+      "Buttons",
+      "Data logging",
+      "LED display",
+      "Pins",
+      "Sound"
+    ],
+    "topics": [
+      "Data collection",
+      "Earth's processes",
+      "Information handling",
+      "Iteration",
+      "Multiplication",
+      "Selection",
+      "Statistics & graphs",
+      "Temperature",
+      "Variables",
+      "Weather & climate",
+      "Working scientifically"
+    ]
+  },
+  "context": {
+    "summary": "Compare evaporation rates in warm and cold places with your BBC micro:bit.",
+    "how_it_works": [
+      "The experiment can be conducted in different locations, such as on a radiator or in a fridge. You can find the temperature in a location by pressing the touch logo on the micro:bit.",
+      "An electrical circuit is made using water in a cup, strips of silver foil attached to the inside, crocodile clip leads attached to the strips, and the other ends of crocodile clip leads connected to the micro:bit. When the water evaporates, the circuit is broken.",
+      "The micro:bit logs whether water is present every 15 minutes by detecting whether the electrical circuit is complete.",
+      "When water is present, the micro:bit records a â1â in its data table and lights up an LED next to pin 1. When water is not present, the micro:bit records a 0 in its data table and turns off the LED next to pin 1."
+    ],
+    "improve_it": []
+  },
+  "code": [
+    {
+      "block_index": 0,
+      "pub_id": "_bqUHi87jeKJM",
+      "source": "input.onButtonPressed(Button.A, function () {\n    logging = true\n    basic.showIcon(IconNames.Yes)\n    basic.pause(2000)\n    basic.clearScreen()\n    led.plot(0, 0)\n})\ninput.onButtonPressed(Button.AB, function () {\n    basic.showIcon(IconNames.Skull)\n    datalogger.deleteLog()\n    datalogger.setColumnTitles(\"water\")\n    basic.pause(2000)\n    basic.clearScreen()\n})\ninput.onButtonPressed(Button.B, function () {\n    logging = false\n    basic.showIcon(IconNames.No)\n    basic.pause(2000)\n    basic.clearScreen()\n})\ninput.onLogoEvent(TouchButtonEvent.Pressed, function () {\n    basic.showNumber(input.temperature())\n    basic.pause(5000)\n    basic.clearScreen()\n})\nlet logging = false\nlogging = false\nled.setBrightness(40)\ndatalogger.includeTimestamp(FlashLogTimeStampFormat.Minutes)\ndatalogger.setColumnTitles(\"water\")\nbasic.forever(function () {\n    if (logging) {\n        if (input.pinIsPressed(TouchPin.P1)) {\n            datalogger.log(datalogger.createCV(\"water\", 1))\n        } else {\n            datalogger.log(datalogger.createCV(\"water\", 0))\n        }\n        music.play(music.tonePlayable(523, music.beat(BeatFraction.Whole)), music.PlaybackMode.InBackground)\n        basic.pause(15 * 60 * 1000)\n    }\n})\nbasic.forever(function () {\n    if (input.pinIsPressed(TouchPin.P1)) {\n        led.plot(0, 4)\n    } else {\n        led.unplot(0, 4)\n    }\n})\n"
+    }
+  ],
+  "errors": []
+}

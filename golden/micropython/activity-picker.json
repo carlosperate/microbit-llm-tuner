@@ -1,0 +1,44 @@
+{
+  "slug": "activity-picker",
+  "language": "micropython",
+  "url": "https://microbit.org/projects/make-it-code-it/activity-picker/",
+  "title": "Activity picker",
+  "license": "CC BY-SA 4.0",
+  "meta": {
+    "level": "Beginner",
+    "tools": [
+      "MakeCode",
+      "Python"
+    ],
+    "features": [
+      "Buttons",
+      "LED display"
+    ],
+    "topics": [
+      "Randomisation",
+      "Selection",
+      "Variables"
+    ]
+  },
+  "context": {
+    "summary": "Finding it hard to decide or agree on what to do? Let this micro:bit program choose for you!",
+    "how_it_works": [
+      "Pressing button A makes your micro:bit choose a random number between 1 and 6.",
+      "It stores the number in a variable called random_number.",
+      "The program tests the random number using selection. Depending on the number, different activities are shown.",
+      "It doesn't specifically test if the random number is 6 - why is this?"
+    ],
+    "improve_it": [
+      "Customise it by putting your own activities in the code.",
+      "Add more activities.",
+      "How could you make it less likely that it tells you to tidy your room?"
+    ]
+  },
+  "code": [
+    {
+      "block_index": 0,
+      "source": "from microbit import *\nimport random\n\nwhile True:\n    if button_a.is_pressed():\n        random_number = random.randint(1, 6)\n        if random_number == 1:\n            display.scroll('PE with Joe')\n        elif random_number == 2:\n            display.scroll('watch a movie')\n        elif random_number == 3:\n            display.scroll('play a board game')\n        elif random_number == 4:\n            display.scroll('tidy our rooms')\n        elif random_number == 5:\n            display.scroll('play a card game')\n        else:\n            display.scroll('learn a song')"
+    }
+  ],
+  "errors": []
+}

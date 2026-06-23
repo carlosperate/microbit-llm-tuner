@@ -1,0 +1,48 @@
+{
+  "slug": "environment-data-logger",
+  "language": "makecode_ts",
+  "url": "https://microbit.org/projects/make-it-code-it/environment-data-logger/",
+  "title": "Environment data logger",
+  "license": "CC BY-SA 4.0",
+  "meta": {
+    "level": "Intermediate",
+    "tools": [
+      "MakeCode"
+    ],
+    "features": [
+      "Buttons",
+      "Data logging",
+      "LED display",
+      "Light sensor",
+      "Temperature sensor"
+    ],
+    "topics": [
+      "Boolean logic",
+      "Data collection",
+      "Data handling",
+      "Information handling",
+      "Sensors",
+      "Statistics & graphs",
+      "Working scientifically"
+    ]
+  },
+  "context": {
+    "summary": "Discover the best places to grow plants by using your BBC micro:bit to study light levels and temperatures over several hours or days.",
+    "how_it_works": [],
+    "improve_it": [
+      "Record data over a longer period of time, such as once an hour for several days.",
+      "Run the experiment in different places and compare your data.",
+      "Create a report based on your findings to help people make decisions about where plants will grow best.",
+      "You could user this project to study patterns of electric light and heating use and use the data to suggest ways of saving energy.",
+      "Modify the code to study noise levels over time using the microphone."
+    ]
+  },
+  "code": [
+    {
+      "block_index": 0,
+      "pub_id": "_PuXFj9Ds7baA",
+      "source": "datalogger.onLogFull(function () {\n    logging = false\n    basic.showLeds(`\n        # # # # #\n        # # # # #\n        # # # # #\n        # # # # #\n        # # # # #\n        `)\n})\ninput.onButtonPressed(Button.A, function () {\n    logging = true\n    basic.showIcon(IconNames.Yes)\n})\ninput.onButtonPressed(Button.AB, function () {\n    basic.showIcon(IconNames.Skull)\n    datalogger.deleteLog()\n    datalogger.setColumnTitles(\n    \"temperature\",\n    \"light\"\n    )\n})\ninput.onButtonPressed(Button.B, function () {\n    logging = false\n    basic.showIcon(IconNames.No)\n})\nlet logging = false\nlogging = false\nbasic.showIcon(IconNames.No)\ndatalogger.setColumnTitles(\n\"temperature\",\n\"light\"\n)\nloops.everyInterval(60000, function () {\n    if (logging) {\n        basic.showIcon(IconNames.Heart)\n        datalogger.log(\n        datalogger.createCV(\"temperature\", input.temperature()),\n        datalogger.createCV(\"light\", input.lightLevel())\n        )\n        basic.clearScreen()\n    }\n})\n"
+    }
+  ],
+  "errors": []
+}
