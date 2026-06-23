@@ -40,3 +40,5 @@ golden/
   micropython/<slug>.json    # language: "micropython" — inline page block(s)
   manifest.json              # top-level index + summary counts
 ```
+
+The `viewer.html` file is a standalone page to browse the corpus.

@@ -1,0 +1,357 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>micro:bit corpus viewer</title>
+<style>
+  :root { --bg:#fafafa; --panel:#fff; --line:#e3e3e3; --ink:#1d1d1f; --muted:#6b6b70;
+          --ts:#1f6feb; --py:#8957e5; --code:#0d1117; --codeink:#e6edf3; }
+  * { box-sizing:border-box; }
+  body { margin:0; font:14px/1.5 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;
+         color:var(--ink); background:var(--bg); display:flex; height:100vh; overflow:hidden; }
+
+  /* Sidebar */
+  #side { width:300px; flex:0 0 300px; border-right:1px solid var(--line); background:var(--panel);
+          display:flex; flex-direction:column; }
+  #side header { padding:14px 16px; border-bottom:1px solid var(--line); }
+  #side h1 { font-size:15px; margin:0 0 10px; }
+  .controls { display:flex; flex-direction:column; gap:8px; }
+  .controls button, .controls label { font:inherit; padding:7px 10px; border:1px solid var(--line);
+          border-radius:7px; background:#fff; cursor:pointer; text-align:center; }
+  .controls button:hover, .controls label:hover { background:#f0f0f2; }
+  #filter { padding:7px 10px; border:1px solid var(--line); border-radius:7px; font:inherit; }
+  #list { overflow:auto; flex:1; }
+  .item { padding:9px 16px; border-bottom:1px solid #f0f0f0; cursor:pointer; display:flex;
+          align-items:center; gap:6px; }
+  .item:hover { background:#f5f5f7; }
+  .item.active { background:#e8f0fe; }
+  .item .name { flex:1; overflow:hidden; text-overflow:ellipsis; white-space:nowrap; }
+  .badge { font-size:10px; font-weight:700; padding:1px 6px; border-radius:10px; color:#fff; }
+  .badge.ts { background:var(--ts); } .badge.py { background:var(--py); }
+  .count { padding:8px 16px; color:var(--muted); font-size:12px; border-bottom:1px solid var(--line); }
+
+  /* Main */
+  #main { flex:1; overflow:auto; padding:28px 36px; }
+  #empty { color:var(--muted); max-width:640px; }
+  #empty code { background:#eee; padding:1px 5px; border-radius:4px; }
+  h2.title { margin:0 0 4px; font-size:24px; }
+  .meta { color:var(--muted); font-size:13px; margin-bottom:6px; }
+  .summary { font-size:15px; margin:0 0 22px; max-width:760px; }
+  .lic { display:inline-block; font-size:11px; color:var(--muted); border:1px solid var(--line);
+         border-radius:10px; padding:1px 8px; margin-left:8px; vertical-align:middle; }
+  .section { margin:0 0 30px; }
+  .section > h3 { font-size:13px; text-transform:uppercase; letter-spacing:.04em; color:var(--muted);
+         margin:0 0 10px; padding-bottom:6px; border-bottom:1px solid var(--line); }
+  .block { margin:0 0 22px; }
+  .block .lbl { font-size:12px; color:var(--muted); margin-bottom:6px; }
+  .block .lbl a { color:var(--ts); text-decoration:none; }
+  pre.code { margin:0; padding:14px 16px; background:var(--code); color:var(--codeink);
+         border-radius:8px; overflow:auto; font:13px/1.5 "SF Mono",ui-monospace,Menlo,Consolas,monospace; }
+  .blocks-render { background:#fff; border:1px solid var(--line); border-radius:8px; padding:12px;
+         margin-bottom:8px; min-height:40px; }
+  .blocks-render img { max-width:100%; display:block; }
+  .render-status { color:var(--muted); font-size:12px; }
+  .render-status.err { color:#c0392b; }
+  ul.ctx { margin:6px 0 0; padding-left:18px; color:#333; }
+  details.ctx { margin-bottom:18px; } details.ctx summary { cursor:pointer; color:var(--muted); }
+  .errors { background:#fff5f5; border:1px solid #f3c0c0; border-radius:8px; padding:10px 14px;
+         color:#9b1c1c; font-size:13px; }
+  #drop.over { outline:3px dashed var(--ts); outline-offset:-12px; }
+</style>
+</head>
+<body id="drop">
+  <aside id="side">
+    <header>
+      <h1>micro:bit corpus viewer</h1>
+      <div class="controls">
+        <label>Open <code>golden/</code> folder…
+          <input id="pickDir" type="file" webkitdirectory directory multiple hidden>
+        </label>
+        <label>Open JSON file(s)…
+          <input id="pickFiles" type="file" accept="application/json,.json" multiple hidden>
+        </label>
+        <input id="filter" type="search" placeholder="Filter projects…">
+      </div>
+    </header>
+    <div id="count" class="count">No projects loaded</div>
+    <div id="list"></div>
+  </aside>
+
+  <main id="main">
+    <div id="empty">
+      <h2 class="title">No project selected</h2>
+      <p>Load the corpus to begin. Two ways:</p>
+      <ul>
+        <li><b>Open <code>golden/</code> folder</b> (or drag it onto this window) — reads every
+            <code>typescript/*.json</code> and <code>micropython/*.json</code>.</li>
+        <li>Or serve the repo over HTTP (<code>python3 -m http.server</code>) and this page
+            auto-loads <code>golden/manifest.json</code>.</li>
+      </ul>
+      <p>MakeCode TypeScript snippets are rendered as blocks by the official
+         <code>makecode.microbit.org</code> renderer (needs internet).</p>
+    </div>
+  </main>
+
+<script>
+"use strict";
+
+/* ---------- MakeCode block renderer (hidden iframe + postMessage) ---------- */
+// Docs: https://makecode.microbit.org/blocks-embed
+const MAKECODE_ORIGIN = "https://makecode.microbit.org";
+const renderer = {
+  iframe:null, ready:false, queue:[], pending:null, seq:0,
+  init() {
+    const f = document.createElement("iframe");
+    f.id = "makecoderenderer";
+    f.src = MAKECODE_ORIGIN + "/--docs?render=1&lang=en";
+    f.style.cssText = "position:absolute;left:-2000px;top:-2000px;width:1px;height:1px;border:0;";
+    document.body.appendChild(f);
+    this.iframe = f;
+    window.addEventListener("message", (ev) => this.onMessage(ev));
+  },
+  onMessage(ev) {
+    const d = ev.data;
+    if (!d || d.source !== "makecode") return;
+    if (d.type === "renderready") { this.ready = true; this.flush(); }
+    else if (d.type === "renderblocks" && this.pending && d.id === this.pending.id) {
+      const job = this.pending; this.pending = null;
+      clearTimeout(job.timer);
+      if (d.error) job.reject(new Error(d.error));
+      else job.resolve(d);          // d.uri (png data uri), d.svg, d.width, d.height
+      this.flush();
+    }
+  },
+  request(code) {
+    return new Promise((resolve, reject) => {
+      this.queue.push({ id:"snip-" + (++this.seq), code, resolve, reject, timer:null });
+      this.flush();
+    });
+  },
+  flush() {
+    if (this.pending || !this.queue.length) return;
+    if (!this.ready) return;        // will flush on renderready
+    const job = this.queue.shift();
+    this.pending = job;
+    job.timer = setTimeout(() => {
+      if (this.pending === job) { this.pending = null; job.reject(new Error("timeout")); this.flush(); }
+    }, 15000);
+    this.iframe.contentWindow.postMessage(
+      { type:"renderblocks", id:job.id, code:job.code }, MAKECODE_ORIGIN);
+  },
+  cancelPending() {            // drop queued (not in-flight) work when switching projects
+    this.queue.forEach(j => j.reject(new Error("cancelled")));
+    this.queue = [];
+  }
+};
+renderer.init();
+
+/* ---------- State ---------- */
+const projects = new Map();   // slug -> { ts:record|null, py:record|null }
+let activeSlug = null;
+
+function addRecord(rec) {
+  if (!rec || !rec.slug || !rec.language) return false;
+  const slot = projects.get(rec.slug) || { ts:null, py:null };
+  if (rec.language === "makecode_ts") slot.ts = rec;
+  else if (rec.language === "micropython") slot.py = rec;
+  else return false;
+  projects.set(rec.slug, slot);
+  return true;
+}
+
+/* ---------- Loading ---------- */
+async function loadFromFiles(fileList) {
+  const files = [...fileList].filter(f => f.name.endsWith(".json") && f.name !== "manifest.json");
+  let n = 0;
+  for (const f of files) {
+    try { if (addRecord(JSON.parse(await f.text()))) n++; }
+    catch (e) { console.warn("skip", f.name, e); }
+  }
+  afterLoad(n);
+}
+
+async function tryAutoFetch() {
+  try {
+    const m = await (await fetch("golden/manifest.json", {cache:"no-store"})).json();
+    let n = 0;
+    for (const p of m.projects || []) {
+      if (p.has_makecode_ts)  n += await fetchRecord(`golden/typescript/${p.slug}.json`);
+      if (p.has_micropython)  n += await fetchRecord(`golden/micropython/${p.slug}.json`);
+    }
+    if (n) afterLoad(n);
+  } catch (e) { /* file:// or not served — silent; user uses the picker */ }
+}
+async function fetchRecord(path) {
+  try { return addRecord(await (await fetch(path,{cache:"no-store"})).json()) ? 1 : 0; }
+  catch { return 0; }
+}
+
+function afterLoad(added) {
+  renderList();
+  if (!activeSlug && projects.size) select([...projects.keys()].sort()[0]);
+}
+
+/* ---------- Sidebar ---------- */
+const listEl = document.getElementById("list");
+const countEl = document.getElementById("count");
+const filterEl = document.getElementById("filter");
+
+function renderList() {
+  const q = filterEl.value.trim().toLowerCase();
+  const slugs = [...projects.keys()].sort()
+      .filter(s => !q || s.includes(q) || (title(s)||"").toLowerCase().includes(q));
+  countEl.textContent = `${projects.size} project${projects.size===1?"":"s"} loaded` +
+      (q ? ` · ${slugs.length} shown` : "");
+  listEl.innerHTML = "";
+  for (const slug of slugs) {
+    const { ts, py } = projects.get(slug);
+    const row = document.createElement("div");
+    row.className = "item" + (slug===activeSlug ? " active" : "");
+    row.onclick = () => select(slug);
+    row.innerHTML = `<span class="name">${esc(title(slug)||slug)}</span>` +
+        (ts ? `<span class="badge ts">TS</span>` : ``) +
+        (py ? `<span class="badge py">PY</span>` : ``);
+    listEl.appendChild(row);
+  }
+}
+function title(slug) {
+  const p = projects.get(slug); const r = p && (p.ts || p.py);
+  return r ? r.title : slug;
+}
+
+/* ---------- Detail ---------- */
+const mainEl = document.getElementById("main");
+
+function select(slug) {
+  activeSlug = slug;
+  renderer.cancelPending();
+  renderList();
+  const { ts, py } = projects.get(slug);
+  const r = ts || py;
+  const m = r.meta || {};
+  const metaLine = [m.level, (m.tools||[]).join(", "), (m.features||[]).join(", "), (m.topics||[]).join(", ")]
+      .filter(Boolean).join("  |  ");
+
+  const el = document.createElement("div");
+  el.innerHTML =
+    `<h2 class="title">${esc(r.title||slug)}<span class="lic">${esc(r.license||"")}</span></h2>` +
+    (metaLine ? `<div class="meta">${esc(metaLine)}</div>` : ``) +
+    (r.context && r.context.summary ? `<p class="summary">${esc(r.context.summary)}</p>` : ``) +
+    contextDetails(r.context) +
+    (ts ? sectionTS(ts) : ``) +
+    (py ? sectionPY(py) : ``);
+  mainEl.innerHTML = "";
+  mainEl.appendChild(el);
+
+  if (ts) renderAllBlocks(ts, el);
+}
+
+function contextDetails(ctx) {
+  if (!ctx) return "";
+  const ul = (arr) => `<ul class="ctx">${arr.map(x=>`<li>${esc(x)}</li>`).join("")}</ul>`;
+  let inner = "";
+  if ((ctx.how_it_works||[]).length) inner += `<b>How it works</b>${ul(ctx.how_it_works)}`;
+  if ((ctx.improve_it||[]).length)   inner += `<b>Improve it</b>${ul(ctx.improve_it)}`;
+  return inner ? `<details class="ctx"><summary>Context</summary>${inner}</details>` : "";
+}
+
+function sectionTS(rec) {
+  let html = `<div class="section"><h3>MakeCode TypeScript</h3>`;
+  (rec.code||[]).forEach((b, i) => {
+    const share = b.pub_id ? `https://makecode.microbit.org/#pub:${encodeURIComponent(b.pub_id)}` : null;
+    html +=
+      `<div class="block">` +
+        `<div class="lbl">Program ${i+1}` +
+          (b.pub_id ? ` · <a href="${share}" target="_blank" rel="noopener">${esc(b.pub_id)}</a>` : ``) +
+        `</div>` +
+        `<div class="blocks-render" data-block="${i}">` +
+          `<span class="render-status">Rendering blocks…</span>` +
+        `</div>` +
+        `<pre class="code">${esc(b.source)}</pre>` +
+      `</div>`;
+  });
+  if (!(rec.code||[]).length) html += `<p class="render-status">No TypeScript captured.</p>`;
+  html += errorsBlock(rec.errors);
+  return html + `</div>`;
+}
+
+function sectionPY(rec) {
+  let html = `<div class="section"><h3>MicroPython</h3>`;
+  (rec.code||[]).forEach((b, i) => {
+    html += `<div class="block">` +
+      ((rec.code.length>1) ? `<div class="lbl">Program ${i+1}</div>` : ``) +
+      `<pre class="code">${esc(b.source)}</pre></div>`;
+  });
+  if (!(rec.code||[]).length) html += `<p class="render-status">No MicroPython captured.</p>`;
+  return html + `</div>`;
+}
+
+function errorsBlock(errors) {
+  if (!errors || !errors.length) return "";
+  return `<div class="errors"><b>Errors:</b> ` +
+    errors.map(e => esc(JSON.stringify(e))).join("<br>") + `</div>`;
+}
+
+function renderAllBlocks(rec, root) {
+  (rec.code||[]).forEach((b, i) => {
+    const holder = root.querySelector(`.blocks-render[data-block="${i}"]`);
+    if (!holder) return;
+    renderer.request(b.source).then(msg => {
+      const img = new Image();
+      img.alt = "MakeCode blocks";
+      img.src = msg.uri || ("data:image/svg+xml;base64," + btoa(unescape(encodeURIComponent(msg.svg||""))));
+      if (msg.width) img.style.width = (msg.width * 0.75) + "px";  // render a bit smaller
+      holder.innerHTML = "";
+      holder.appendChild(img);
+    }).catch(err => {
+      holder.innerHTML = `<span class="render-status err">Could not render blocks (${esc(err.message)}). ` +
+        `Showing source only.</span>`;
+    });
+  });
+}
+
+/* ---------- utils ---------- */
+function esc(s) {
+  return String(s ?? "").replace(/[&<>"]/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;","\"":"&quot;"}[c]));
+}
+
+/* ---------- wire up ---------- */
+document.getElementById("pickDir").addEventListener("change", e => loadFromFiles(e.target.files));
+document.getElementById("pickFiles").addEventListener("change", e => loadFromFiles(e.target.files));
+filterEl.addEventListener("input", renderList);
+
+const drop = document.getElementById("drop");
+["dragenter","dragover"].forEach(t => drop.addEventListener(t, e => { e.preventDefault(); drop.classList.add("over"); }));
+["dragleave","drop"].forEach(t => drop.addEventListener(t, e => { e.preventDefault(); if (t==="drop"||e.target===drop) drop.classList.remove("over"); }));
+drop.addEventListener("drop", async e => {
+  const items = e.dataTransfer.items;
+  if (items && items[0] && items[0].webkitGetAsEntry) {
+    const files = [];
+    await Promise.all([...items].map(it => walkEntry(it.webkitGetAsEntry(), files)));
+    loadFromFiles(files);
+  } else {
+    loadFromFiles(e.dataTransfer.files);
+  }
+});
+// Recursively collect .json files from a dropped folder.
+function walkEntry(entry, out) {
+  return new Promise(res => {
+    if (!entry) return res();
+    if (entry.isFile) entry.file(f => { out.push(f); res(); }, () => res());
+    else if (entry.isDirectory) {
+      const reader = entry.createReader();
+      const readBatch = () => reader.readEntries(async ents => {
+        if (!ents.length) return res();
+        await Promise.all(ents.map(en => walkEntry(en, out)));
+        readBatch();
+      }, () => res());
+      readBatch();
+    } else res();
+  });
+}
+
+tryAutoFetch();
+</script>
+</body>
+</html>
