@@ -65,7 +65,7 @@
     <header>
       <h1>micro:bit corpus viewer</h1>
       <div class="controls">
-        <label>Open <code>golden/</code> folder…
+        <label>Open <code>data/golden/</code> folder…
           <input id="pickDir" type="file" webkitdirectory directory multiple hidden>
         </label>
         <label>Open JSON file(s)…
@@ -83,10 +83,10 @@
       <h2 class="title">No project selected</h2>
       <p>Load the corpus to begin. Two ways:</p>
       <ul>
-        <li><b>Open <code>golden/</code> folder</b> (or drag it onto this window) — reads every
+        <li><b>Open <code>data/golden/</code> folder</b> (or drag it onto this window) — reads every
             <code>typescript/*.json</code> and <code>micropython/*.json</code>.</li>
         <li>Or serve the repo over HTTP (<code>python3 -m http.server</code>) and this page
-            auto-loads <code>golden/manifest.json</code>.</li>
+            auto-loads <code>../data/golden/manifest.json</code>.</li>
       </ul>
       <p>MakeCode TypeScript snippets are rendered as blocks by the official
          <code>makecode.microbit.org</code> renderer (needs internet).</p>
@@ -173,11 +173,12 @@ async function loadFromFiles(fileList) {
 
 async function tryAutoFetch() {
   try {
-    const m = await (await fetch("golden/manifest.json", {cache:"no-store"})).json();
+    // viewer lives in tools/; the corpus is a sibling at ../data/golden/
+    const m = await (await fetch("../data/golden/manifest.json", {cache:"no-store"})).json();
     let n = 0;
     for (const p of m.projects || []) {
-      if (p.has_makecode_ts)  n += await fetchRecord(`golden/typescript/${p.slug}.json`);
-      if (p.has_micropython)  n += await fetchRecord(`golden/micropython/${p.slug}.json`);
+      if (p.has_makecode_ts)  n += await fetchRecord(`../data/golden/typescript/${p.slug}.json`);
+      if (p.has_micropython)  n += await fetchRecord(`../data/golden/micropython/${p.slug}.json`);
     }
     if (n) afterLoad(n);
   } catch (e) { /* file:// or not served — silent; user uses the picker */ }

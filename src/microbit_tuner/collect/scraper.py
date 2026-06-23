@@ -541,11 +541,12 @@ def build_manifest(index_url: str, listed: Optional[int],
 
 def main(argv: Optional[list[str]] = None) -> int:
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument("--out", type=Path, default=Path("golden"),
-                        help="Output directory (default: golden). Manifest is "
-                             "written to <out>/manifest.json.")
-    parser.add_argument("--cache", type=Path, default=Path("cache"),
-                        help="Cache directory for raw HTML and API JSON.")
+    parser.add_argument("--out", type=Path, default=Path("data/golden"),
+                        help="Output directory (default: data/golden). Manifest "
+                             "is written to <out>/manifest.json.")
+    parser.add_argument("--cache", type=Path, default=Path("data/cache"),
+                        help="Cache directory for raw HTML and API JSON "
+                             "(default: data/cache).")
     parser.add_argument("--delay", type=float, default=0.7,
                         help="Seconds to wait before each network request "
                              "(cache hits incur no delay).")

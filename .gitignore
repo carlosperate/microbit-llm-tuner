@@ -4,4 +4,7 @@ __pycache__/
 *.pyc
 
 # Scraper raw-response cache (regenerable; not part of the corpus)
-cache/
+data/cache/
+
+# Model weights / adapters / compiled browser bundles (too big for git)
+models/
