@@ -38,12 +38,20 @@
     {
       "block_index": 0,
       "pub_id": "_Lo4Pt4RTYaRs",
-      "source": "radio.setGroup(73)\nradio.setTransmitPower(1)\nbasic.forever(function () {\n    radio.sendString(\"hello\")\n    basic.pause(2000)\n})\n"
+      "source": "radio.setGroup(73)\nradio.setTransmitPower(1)\nbasic.forever(function () {\n    radio.sendString(\"hello\")\n    basic.pause(2000)\n})\n",
+      "dependencies": {
+        "core": "*",
+        "radio": "*"
+      }
     },
     {
       "block_index": 1,
       "pub_id": "_da27ih9422iL",
-      "source": "radio.onReceivedString(function (receivedString) {\n    basic.showIcon(IconNames.Heart)\n    basic.pause(1000)\n    basic.clearScreen()\n})\nradio.setGroup(73)\nradio.setTransmitPower(1)\n"
+      "source": "radio.onReceivedString(function (receivedString) {\n    basic.showIcon(IconNames.Heart)\n    basic.pause(1000)\n    basic.clearScreen()\n})\nradio.setGroup(73)\nradio.setTransmitPower(1)\n",
+      "dependencies": {
+        "core": "*",
+        "radio": "*"
+      }
     }
   ],
   "errors": []

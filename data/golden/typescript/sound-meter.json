@@ -35,7 +35,12 @@
     {
       "block_index": 0,
       "pub_id": "_Wzy8zrW2i8th",
-      "source": "basic.forever(function () {\n    led.plotBarGraph(\n    input.soundLevel(),\n    255\n    )\n})\n"
+      "source": "basic.forever(function () {\n    led.plotBarGraph(\n    input.soundLevel(),\n    255\n    )\n})\n",
+      "dependencies": {
+        "core": "*",
+        "radio": "*",
+        "microphone": "*"
+      }
     }
   ],
   "errors": []

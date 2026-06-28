@@ -37,7 +37,11 @@
     {
       "block_index": 0,
       "pub_id": "_arUf8fFvXX9w",
-      "source": "let tool = 0\ninput.onGesture(Gesture.Shake, function () {\n    tool = Math.randomRange(0, 2)\n    if (tool == 0) {\n        basic.showIcon(IconNames.SmallSquare)\n    } else if (tool == 1) {\n        basic.showIcon(IconNames.Square)\n    } else {\n        basic.showIcon(IconNames.Scissors)\n    }\n})\n"
+      "source": "let tool = 0\ninput.onGesture(Gesture.Shake, function () {\n    tool = Math.randomRange(0, 2)\n    if (tool == 0) {\n        basic.showIcon(IconNames.SmallSquare)\n    } else if (tool == 1) {\n        basic.showIcon(IconNames.Square)\n    } else {\n        basic.showIcon(IconNames.Scissors)\n    }\n})\n",
+      "dependencies": {
+        "core": "*",
+        "radio": "*"
+      }
     }
   ],
   "errors": []

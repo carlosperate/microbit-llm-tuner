@@ -39,7 +39,12 @@
     {
       "block_index": 0,
       "pub_id": "_XLVLpJXoji7b",
-      "source": "input.onGesture(Gesture.Shake, function () {\n    basic.showString(\"\" + (adjectives[randint(0, 2)]))\n    basic.showString(\"\" + (nouns[randint(0, 2)]))\n    basic.showString(\"\" + (verbs[randint(0, 2)]))\n    basic.showString(\"\" + (adverbs[randint(0, 2)]))\n})\nlet adverbs: string[] = []\nlet verbs: string[] = []\nlet nouns: string[] = []\nlet adjectives: string[] = []\nadjectives = [\"beautiful\", \"delicate\", \"bright\"]\nnouns = [\"bird\", \"butterfly\", \"dragonfly\"]\nverbs = [\"eats\", \"flies\", \"flutters\"]\nadverbs = [\"swiftly\", \"silently\", \"skilfully\"]\n"
+      "source": "input.onGesture(Gesture.Shake, function () {\n    basic.showString(\"\" + (adjectives[randint(0, 2)]))\n    basic.showString(\"\" + (nouns[randint(0, 2)]))\n    basic.showString(\"\" + (verbs[randint(0, 2)]))\n    basic.showString(\"\" + (adverbs[randint(0, 2)]))\n})\nlet adverbs: string[] = []\nlet verbs: string[] = []\nlet nouns: string[] = []\nlet adjectives: string[] = []\nadjectives = [\"beautiful\", \"delicate\", \"bright\"]\nnouns = [\"bird\", \"butterfly\", \"dragonfly\"]\nverbs = [\"eats\", \"flies\", \"flutters\"]\nadverbs = [\"swiftly\", \"silently\", \"skilfully\"]\n",
+      "dependencies": {
+        "core": "*",
+        "radio": "*",
+        "microphone": "*"
+      }
     }
   ],
   "errors": []

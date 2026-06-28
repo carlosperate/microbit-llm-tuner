@@ -42,7 +42,11 @@
     {
       "block_index": 0,
       "pub_id": "_TJmWc1MhsKCd",
-      "source": "input.onButtonPressed(Button.A, function () {\n    basic.clearScreen()\n    radio.sendString(\"smile\")\n})\nradio.onReceivedString(function (receivedString) {\n    basic.showIcon(IconNames.Happy)\n})\nradio.setGroup(2)\n"
+      "source": "input.onButtonPressed(Button.A, function () {\n    basic.clearScreen()\n    radio.sendString(\"smile\")\n})\nradio.onReceivedString(function (receivedString) {\n    basic.showIcon(IconNames.Happy)\n})\nradio.setGroup(2)\n",
+      "dependencies": {
+        "core": "*",
+        "radio": "*"
+      }
     }
   ],
   "errors": []

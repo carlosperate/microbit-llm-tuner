@@ -36,7 +36,12 @@
     {
       "block_index": 0,
       "pub_id": "_AhPKDR2UDf7H",
-      "source": "input.onSound(DetectedSound.Loud, function () {\n    basic.showIcon(IconNames.Heart)\n})\ninput.onSound(DetectedSound.Quiet, function () {\n    basic.showIcon(IconNames.SmallHeart)\n})\n"
+      "source": "input.onSound(DetectedSound.Loud, function () {\n    basic.showIcon(IconNames.Heart)\n})\ninput.onSound(DetectedSound.Quiet, function () {\n    basic.showIcon(IconNames.SmallHeart)\n})\n",
+      "dependencies": {
+        "core": "*",
+        "radio": "*",
+        "microphone": "*"
+      }
     }
   ],
   "errors": []

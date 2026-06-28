@@ -42,12 +42,21 @@
     {
       "block_index": 0,
       "pub_id": "_AvaezbbVqdoD",
-      "source": "input.onPinPressed(TouchPin.P0, function () {\n    radio.sendString(\"intruder\")\n})\nradio.setGroup(34)\n"
+      "source": "input.onPinPressed(TouchPin.P0, function () {\n    radio.sendString(\"intruder\")\n})\nradio.setGroup(34)\n",
+      "dependencies": {
+        "core": "*",
+        "radio": "*"
+      }
     },
     {
       "block_index": 1,
       "pub_id": "_TVx38dHioEy3",
-      "source": "input.onButtonPressed(Button.A, function () {\n    basic.clearScreen()\n})\nradio.onReceivedString(function (receivedString) {\n    if (receivedString == \"intruder\") {\n        basic.showIcon(IconNames.Angry)\n        music._playDefaultBackground(music.builtInPlayableMelody(Melodies.Baddy), music.PlaybackMode.UntilDone)\n    }\n})\nradio.setGroup(34)\n"
+      "source": "input.onButtonPressed(Button.A, function () {\n    basic.clearScreen()\n})\nradio.onReceivedString(function (receivedString) {\n    if (receivedString == \"intruder\") {\n        basic.showIcon(IconNames.Angry)\n        music._playDefaultBackground(music.builtInPlayableMelody(Melodies.Baddy), music.PlaybackMode.UntilDone)\n    }\n})\nradio.setGroup(34)\n",
+      "dependencies": {
+        "core": "*",
+        "radio": "*",
+        "microphone": "*"
+      }
     }
   ],
   "errors": []

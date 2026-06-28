@@ -38,7 +38,12 @@
     {
       "block_index": 0,
       "pub_id": "_MhoV0R1daKxa",
-      "source": "input.onButtonPressed(Button.A, function () {\n    basic.showIcon(IconNames.Happy)\n    soundExpression.happy.playUntilDone()\n})\ninput.onButtonPressed(Button.B, function () {\n    basic.showIcon(IconNames.Sad)\n    soundExpression.sad.playUntilDone()\n})\ninput.onLogoEvent(TouchButtonEvent.Pressed, function () {\n    basic.showIcon(IconNames.Surprised)\n    soundExpression.spring.playUntilDone()\n})\n"
+      "source": "input.onButtonPressed(Button.A, function () {\n    basic.showIcon(IconNames.Happy)\n    soundExpression.happy.playUntilDone()\n})\ninput.onButtonPressed(Button.B, function () {\n    basic.showIcon(IconNames.Sad)\n    soundExpression.sad.playUntilDone()\n})\ninput.onLogoEvent(TouchButtonEvent.Pressed, function () {\n    basic.showIcon(IconNames.Surprised)\n    soundExpression.spring.playUntilDone()\n})\n",
+      "dependencies": {
+        "core": "*",
+        "radio": "*",
+        "microphone": "*"
+      }
     }
   ],
   "errors": []

@@ -32,7 +32,12 @@
     {
       "block_index": 0,
       "pub_id": "_boiVzyUJL6ix",
-      "source": "input.onButtonPressed(Button.A, function () {\n\t\n})\ninput.onButtonPressed(Button.B, function () {\n\t\n})\n"
+      "source": "input.onButtonPressed(Button.A, function () {\n\t\n})\ninput.onButtonPressed(Button.B, function () {\n\t\n})\n",
+      "dependencies": {
+        "core": "*",
+        "radio": "*",
+        "microphone": "*"
+      }
     }
   ],
   "errors": []

@@ -43,7 +43,11 @@
     {
       "block_index": 0,
       "pub_id": "_eH4011gmdVtr",
-      "source": "function convertCtoF (C: number) {\n    return C * 1.8 + 32\n}\ninput.onButtonPressed(Button.A, function () {\n    basic.showNumber(input.temperature())\n})\ninput.onButtonPressed(Button.B, function () {\n    basic.showNumber(convertCtoF(input.temperature()))\n})\n"
+      "source": "function convertCtoF (C: number) {\n    return C * 1.8 + 32\n}\ninput.onButtonPressed(Button.A, function () {\n    basic.showNumber(input.temperature())\n})\ninput.onButtonPressed(Button.B, function () {\n    basic.showNumber(convertCtoF(input.temperature()))\n})\n",
+      "dependencies": {
+        "core": "*",
+        "radio": "*"
+      }
     }
   ],
   "errors": []

@@ -38,7 +38,11 @@
     {
       "block_index": 0,
       "pub_id": "_716cyLFpP66A",
-      "source": "input.onButtonPressed(Button.A, function () {\n    basic.showNumber(input.compassHeading())\n})\n"
+      "source": "input.onButtonPressed(Button.A, function () {\n    basic.showNumber(input.compassHeading())\n})\n",
+      "dependencies": {
+        "core": "*",
+        "radio": "*"
+      }
     }
   ],
   "errors": []

@@ -41,12 +41,20 @@
     {
       "block_index": 0,
       "pub_id": "_2hRFJ6WTWKgW",
-      "source": "radio.setGroup(1)\nradio.setTransmitPower(1)\nbasic.forever(function () {\n    radio.sendString(\"1\")\n    basic.pause(200)\n})\n"
+      "source": "radio.setGroup(1)\nradio.setTransmitPower(1)\nbasic.forever(function () {\n    radio.sendString(\"1\")\n    basic.pause(200)\n})\n",
+      "dependencies": {
+        "core": "*",
+        "radio": "*"
+      }
     },
     {
       "block_index": 1,
       "pub_id": "_MciderdAVEfM",
-      "source": "radio.onReceivedString(function (receivedString) {\n    signal = radio.receivedPacket(RadioPacketProperty.SignalStrength)\n    led.plotBarGraph(\n    Math.map(signal, -95, -42, 0, 9),\n    9\n    )\n})\nlet signal = 0\nradio.setGroup(1)\n"
+      "source": "radio.onReceivedString(function (receivedString) {\n    signal = radio.receivedPacket(RadioPacketProperty.SignalStrength)\n    led.plotBarGraph(\n    Math.map(signal, -95, -42, 0, 9),\n    9\n    )\n})\nlet signal = 0\nradio.setGroup(1)\n",
+      "dependencies": {
+        "core": "*",
+        "radio": "*"
+      }
     }
   ],
   "errors": []

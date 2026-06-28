@@ -37,7 +37,11 @@
     {
       "block_index": 0,
       "pub_id": "_XTpPLoAX0edC",
-      "source": "basic.forever(function () {\n    basic.showLeds(`\n        . . . . .\n        . . # . .\n        . # # # .\n        . . # . .\n        . . . . .\n        `)\n    basic.pause(500)\n    basic.showLeds(`\n        . . . . .\n        . # # # .\n        . # # # .\n        . # # # .\n        . . . . .\n        `)\n    basic.pause(500)\n    basic.showLeds(`\n        # . # . #\n        . # # # .\n        # # # # #\n        . # # # .\n        # . # . #\n        `)\n    basic.pause(500)\n})\n"
+      "source": "basic.forever(function () {\n    basic.showLeds(`\n        . . . . .\n        . . # . .\n        . # # # .\n        . . # . .\n        . . . . .\n        `)\n    basic.pause(500)\n    basic.showLeds(`\n        . . . . .\n        . # # # .\n        . # # # .\n        . # # # .\n        . . . . .\n        `)\n    basic.pause(500)\n    basic.showLeds(`\n        # . # . #\n        . # # # .\n        # # # # #\n        . # # # .\n        # . # . #\n        `)\n    basic.pause(500)\n})\n",
+      "dependencies": {
+        "core": "*",
+        "radio": "*"
+      }
     }
   ],
   "errors": []

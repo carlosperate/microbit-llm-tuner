@@ -44,12 +44,20 @@
     {
       "block_index": 0,
       "pub_id": "_7rKigED8cKhs",
-      "source": "radio.setGroup(23)\nbasic.forever(function () {\n    radio.sendNumber(input.temperature())\n    basic.pause(5000)\n})\n"
+      "source": "radio.setGroup(23)\nbasic.forever(function () {\n    radio.sendNumber(input.temperature())\n    basic.pause(5000)\n})\n",
+      "dependencies": {
+        "core": "*",
+        "radio": "*"
+      }
     },
     {
       "block_index": 1,
       "pub_id": "_0e5Mx9Hh5JvE",
-      "source": "input.onButtonPressed(Button.A, function () {\n    basic.showNumber(input.temperature())\n})\nradio.onReceivedNumber(function (receivedNumber) {\n    outdoorTemp = receivedNumber\n})\ninput.onButtonPressed(Button.B, function () {\n    basic.showNumber(outdoorTemp)\n})\nlet outdoorTemp = 0\nradio.setGroup(23)\n"
+      "source": "input.onButtonPressed(Button.A, function () {\n    basic.showNumber(input.temperature())\n})\nradio.onReceivedNumber(function (receivedNumber) {\n    outdoorTemp = receivedNumber\n})\ninput.onButtonPressed(Button.B, function () {\n    basic.showNumber(outdoorTemp)\n})\nlet outdoorTemp = 0\nradio.setGroup(23)\n",
+      "dependencies": {
+        "core": "*",
+        "radio": "*"
+      }
     }
   ],
   "errors": []

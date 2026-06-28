@@ -47,7 +47,12 @@
     {
       "block_index": 0,
       "pub_id": "_27VgywVTLHYV",
-      "source": "input.onButtonPressed(Button.A, function () {\n    basic.showNumber(min)\n})\ninput.onButtonPressed(Button.B, function () {\n    basic.showNumber(max)\n})\nlet min = 0\nlet max = 0\nlet currenttemperature = input.temperature()\nmax = currenttemperature\nmin = currenttemperature\nbasic.forever(function () {\n    basic.showString(\".\")\n    currenttemperature = input.temperature()\n    if (currenttemperature < min) {\n        min = currenttemperature\n    }\n    if (currenttemperature > max) {\n        max = currenttemperature\n    }\n    basic.pause(1000)\n    basic.clearScreen()\n    basic.pause(1000)\n})\n"
+      "source": "input.onButtonPressed(Button.A, function () {\n    basic.showNumber(min)\n})\ninput.onButtonPressed(Button.B, function () {\n    basic.showNumber(max)\n})\nlet min = 0\nlet max = 0\nlet currenttemperature = input.temperature()\nmax = currenttemperature\nmin = currenttemperature\nbasic.forever(function () {\n    basic.showString(\".\")\n    currenttemperature = input.temperature()\n    if (currenttemperature < min) {\n        min = currenttemperature\n    }\n    if (currenttemperature > max) {\n        max = currenttemperature\n    }\n    basic.pause(1000)\n    basic.clearScreen()\n    basic.pause(1000)\n})\n",
+      "dependencies": {
+        "core": "*",
+        "radio": "*",
+        "microphone": "*"
+      }
     }
   ],
   "errors": []

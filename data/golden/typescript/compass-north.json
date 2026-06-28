@@ -41,7 +41,11 @@
     {
       "block_index": 0,
       "pub_id": "_Fxi79gEXmA72",
-      "source": "let bearing = 0\nbasic.forever(function () {\n    bearing = input.compassHeading()\n    if (bearing < 45 || bearing > 315) {\n        basic.showString(\"N\")\n    } else {\n        basic.showString(\" \")\n    }\n})\n"
+      "source": "let bearing = 0\nbasic.forever(function () {\n    bearing = input.compassHeading()\n    if (bearing < 45 || bearing > 315) {\n        basic.showString(\"N\")\n    } else {\n        basic.showString(\" \")\n    }\n})\n",
+      "dependencies": {
+        "core": "*",
+        "radio": "*"
+      }
     }
   ],
   "errors": []

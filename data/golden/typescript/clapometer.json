@@ -42,7 +42,12 @@
     {
       "block_index": 0,
       "pub_id": "_WMi4U0RT84zE",
-      "source": "input.onSound(DetectedSound.Loud, function () {\n    start = input.runningTime()\n    basic.showIcon(IconNames.Target)\n})\ninput.onSound(DetectedSound.Quiet, function () {\n    if (start > 0) {\n        time = input.runningTime() - start\n        start = 0\n        basic.clearScreen()\n        basic.pause(100)\n        basic.showNumber(time / 1000)\n    }\n})\nlet time = 0\nlet start = 0\ninput.setSoundThreshold(SoundThreshold.Loud, 150)\nstart = 0\n"
+      "source": "input.onSound(DetectedSound.Loud, function () {\n    start = input.runningTime()\n    basic.showIcon(IconNames.Target)\n})\ninput.onSound(DetectedSound.Quiet, function () {\n    if (start > 0) {\n        time = input.runningTime() - start\n        start = 0\n        basic.clearScreen()\n        basic.pause(100)\n        basic.showNumber(time / 1000)\n    }\n})\nlet time = 0\nlet start = 0\ninput.setSoundThreshold(SoundThreshold.Loud, 150)\nstart = 0\n",
+      "dependencies": {
+        "core": "*",
+        "radio": "*",
+        "microphone": "*"
+      }
     }
   ],
   "errors": []

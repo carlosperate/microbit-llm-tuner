@@ -35,7 +35,13 @@
     {
       "block_index": 0,
       "pub_id": "_DX5R4u7K83tj",
-      "source": "let soundLevel = 0\nbasic.forever(function () {\n    if (input.buttonIsPressed(Button.A)) {\n        basic.showIcon(IconNames.Yes)\n        basic.pause(500)\n        soundLevel = input.soundLevelDb()\n    } else if (input.buttonIsPressed(Button.B)) {\n        basic.clearScreen()\n        basic.showNumber(soundLevel)\n    } else {\n        led.plotBarGraph(\n        input.soundLevel(),\n        255\n        )\n    }\n})\n"
+      "source": "let soundLevel = 0\nbasic.forever(function () {\n    if (input.buttonIsPressed(Button.A)) {\n        basic.showIcon(IconNames.Yes)\n        basic.pause(500)\n        soundLevel = input.soundLevelDb()\n    } else if (input.buttonIsPressed(Button.B)) {\n        basic.clearScreen()\n        basic.showNumber(soundLevel)\n    } else {\n        led.plotBarGraph(\n        input.soundLevel(),\n        255\n        )\n    }\n})\n",
+      "dependencies": {
+        "core": "*",
+        "radio": "*",
+        "microphone": "*",
+        "Sound Level in decibels (dB)": "github:microbit-foundation/pxt-sound-level-db#v0.1.10"
+      }
     }
   ],
   "errors": []

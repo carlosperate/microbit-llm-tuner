@@ -38,7 +38,11 @@
     {
       "block_index": 0,
       "pub_id": "_2DRXqjK1dc3R",
-      "source": "input.onButtonPressed(Button.A, function () {\n    for (let i = 0; i < 4; i++) {\n        basic.showIcon(IconNames.Happy)\n        basic.pause(200)\n        basic.clearScreen()\n        basic.pause(200)\n    }\n})\ninput.onButtonPressed(Button.B, function () {\n    for (let i = 0; i < 4; i++) {\n        basic.showIcon(IconNames.Sad)\n        basic.pause(200)\n        basic.clearScreen()\n        basic.pause(200)\n    }\n})\n"
+      "source": "input.onButtonPressed(Button.A, function () {\n    for (let i = 0; i < 4; i++) {\n        basic.showIcon(IconNames.Happy)\n        basic.pause(200)\n        basic.clearScreen()\n        basic.pause(200)\n    }\n})\ninput.onButtonPressed(Button.B, function () {\n    for (let i = 0; i < 4; i++) {\n        basic.showIcon(IconNames.Sad)\n        basic.pause(200)\n        basic.clearScreen()\n        basic.pause(200)\n    }\n})\n",
+      "dependencies": {
+        "core": "*",
+        "radio": "*"
+      }
     }
   ],
   "errors": []

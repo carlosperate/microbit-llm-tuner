@@ -34,7 +34,12 @@
     {
       "block_index": 0,
       "pub_id": "_XHuHFrDJc6jb",
-      "source": "input.onGesture(Gesture.Shake, function () {\n\t\n})\nbasic.forever(function () {\n\t\n})\n"
+      "source": "input.onGesture(Gesture.Shake, function () {\n\t\n})\nbasic.forever(function () {\n\t\n})\n",
+      "dependencies": {
+        "core": "*",
+        "radio": "*",
+        "microphone": "*"
+      }
     }
   ],
   "errors": []

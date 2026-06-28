@@ -37,7 +37,12 @@
     {
       "block_index": 0,
       "pub_id": "_MYX1XV9qyHWH",
-      "source": "input.onButtonPressed(Button.A, function () {\n    basic.showIcon(IconNames.Happy)\n})\ninput.onButtonPressed(Button.B, function () {\n    basic.showIcon(IconNames.Sad)\n})\ninput.onLogoEvent(TouchButtonEvent.Pressed, function () {\n    basic.showIcon(IconNames.Surprised)\n})\n"
+      "source": "input.onButtonPressed(Button.A, function () {\n    basic.showIcon(IconNames.Happy)\n})\ninput.onButtonPressed(Button.B, function () {\n    basic.showIcon(IconNames.Sad)\n})\ninput.onLogoEvent(TouchButtonEvent.Pressed, function () {\n    basic.showIcon(IconNames.Surprised)\n})\n",
+      "dependencies": {
+        "core": "*",
+        "radio": "*",
+        "microphone": "*"
+      }
     }
   ],
   "errors": []

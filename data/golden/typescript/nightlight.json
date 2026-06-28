@@ -42,12 +42,20 @@
     {
       "block_index": 0,
       "pub_id": "_dz7W7hWM2AdR",
-      "source": "basic.forever(function () {\n    if (input.lightLevel() < 100) {\n        basic.showLeds(`\n            # # # # #\n            # # # # #\n            # # # # #\n            # # # # #\n            # # # # #\n            `)\n    } else {\n        basic.clearScreen()\n    }\n})\n"
+      "source": "basic.forever(function () {\n    if (input.lightLevel() < 100) {\n        basic.showLeds(`\n            # # # # #\n            # # # # #\n            # # # # #\n            # # # # #\n            # # # # #\n            `)\n    } else {\n        basic.clearScreen()\n    }\n})\n",
+      "dependencies": {
+        "core": "*",
+        "radio": "*"
+      }
     },
     {
       "block_index": 1,
       "pub_id": "_HFH8X0Rt2bVH",
-      "source": "basic.showLeds(`\n    # # # # #\n    # # # # #\n    # # # # #\n    # # # # #\n    # # # # #\n    `)\nbasic.forever(function () {\n    led.setBrightness(255 - input.lightLevel())\n    basic.pause(200)\n})\n"
+      "source": "basic.showLeds(`\n    # # # # #\n    # # # # #\n    # # # # #\n    # # # # #\n    # # # # #\n    `)\nbasic.forever(function () {\n    led.setBrightness(255 - input.lightLevel())\n    basic.pause(200)\n})\n",
+      "dependencies": {
+        "core": "*",
+        "radio": "*"
+      }
     }
   ],
   "errors": []

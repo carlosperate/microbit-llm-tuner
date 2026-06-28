@@ -40,7 +40,11 @@
     {
       "block_index": 0,
       "pub_id": "_C545kRP4aDm2",
-      "source": "music.setTempo(120)\nfor (let i = 0; i < 2; i++) {\n    music.playTone(262, music.beat(BeatFraction.Whole))\n    music.playTone(294, music.beat(BeatFraction.Whole))\n    music.playTone(330, music.beat(BeatFraction.Whole))\n    music.playTone(262, music.beat(BeatFraction.Whole))\n}\nfor (let i = 0; i < 2; i++) {\n    music.playTone(330, music.beat(BeatFraction.Whole))\n    music.playTone(349, music.beat(BeatFraction.Whole))\n    music.playTone(392, music.beat(BeatFraction.Double))\n}\n"
+      "source": "music.setTempo(120)\nfor (let i = 0; i < 2; i++) {\n    music.playTone(262, music.beat(BeatFraction.Whole))\n    music.playTone(294, music.beat(BeatFraction.Whole))\n    music.playTone(330, music.beat(BeatFraction.Whole))\n    music.playTone(262, music.beat(BeatFraction.Whole))\n}\nfor (let i = 0; i < 2; i++) {\n    music.playTone(330, music.beat(BeatFraction.Whole))\n    music.playTone(349, music.beat(BeatFraction.Whole))\n    music.playTone(392, music.beat(BeatFraction.Double))\n}\n",
+      "dependencies": {
+        "core": "*",
+        "radio": "*"
+      }
     }
   ],
   "errors": []

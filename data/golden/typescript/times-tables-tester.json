@@ -40,7 +40,12 @@
     {
       "block_index": 0,
       "pub_id": "_fHxHYaPrm1gr",
-      "source": "let a = 0\nlet b = 0\ninput.onButtonPressed(Button.A, function () {\n    a = randint(1, 12)\n    basic.showNumber(a)\n})\ninput.onButtonPressed(Button.AB, function () {\n    basic.showNumber(a * b)\n})\ninput.onButtonPressed(Button.B, function () {\n    b = randint(1, 12)\n    basic.showNumber(b)\n})\n"
+      "source": "let a = 0\nlet b = 0\ninput.onButtonPressed(Button.A, function () {\n    a = randint(1, 12)\n    basic.showNumber(a)\n})\ninput.onButtonPressed(Button.AB, function () {\n    basic.showNumber(a * b)\n})\ninput.onButtonPressed(Button.B, function () {\n    b = randint(1, 12)\n    basic.showNumber(b)\n})\n",
+      "dependencies": {
+        "core": "*",
+        "radio": "*",
+        "microphone": "*"
+      }
     }
   ],
   "errors": []

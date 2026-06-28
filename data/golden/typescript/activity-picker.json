@@ -38,7 +38,11 @@
     {
       "block_index": 0,
       "pub_id": "_3mmA7TW7RK53",
-      "source": "let random_number = 0\ninput.onButtonPressed(Button.A, function () {\n    random_number = Math.randomRange(1, 6)\n    if (random_number == 1) {\n        basic.showString(\"PE with Joe\")\n    } else if (random_number == 2) {\n        basic.showString(\"watch a movie\")\n    } else if (random_number == 3) {\n        basic.showString(\"play a board game\")\n    } else if (random_number == 4) {\n        basic.showString(\"tidy our rooms\")\n    } else if (random_number == 5) {\n        basic.showString(\"play a card game\")\n    } else {\n        basic.showString(\"learn a song\")\n    }\n})\n"
+      "source": "let random_number = 0\ninput.onButtonPressed(Button.A, function () {\n    random_number = Math.randomRange(1, 6)\n    if (random_number == 1) {\n        basic.showString(\"PE with Joe\")\n    } else if (random_number == 2) {\n        basic.showString(\"watch a movie\")\n    } else if (random_number == 3) {\n        basic.showString(\"play a board game\")\n    } else if (random_number == 4) {\n        basic.showString(\"tidy our rooms\")\n    } else if (random_number == 5) {\n        basic.showString(\"play a card game\")\n    } else {\n        basic.showString(\"learn a song\")\n    }\n})\n",
+      "dependencies": {
+        "core": "*",
+        "radio": "*"
+      }
     }
   ],
   "errors": []

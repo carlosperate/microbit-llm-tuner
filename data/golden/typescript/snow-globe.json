@@ -41,7 +41,12 @@
     {
       "block_index": 0,
       "pub_id": "_cbVhLgUzhXEy",
-      "source": "input.onButtonPressed(Button.A, function () {\n    music.play(music.builtinPlayableSoundEffect(soundExpression.twinkle), music.PlaybackMode.UntilDone)\n})\ninput.onGesture(Gesture.Shake, function () {\n    for (let index = 0; index < 10; index++) {\n        basic.showLeds(`\n            # . # . #\n            . # . # .\n            # . # . #\n            . # . # .\n            # . # . #\n            `)\n        basic.pause(500)\n        basic.showLeds(`\n            . # . # .\n            # . # . #\n            . # . # .\n            # . # . #\n            . # . # .\n            `)\n        basic.pause(500)\n    }\n    basic.clearScreen()\n})\n"
+      "source": "input.onButtonPressed(Button.A, function () {\n    music.play(music.builtinPlayableSoundEffect(soundExpression.twinkle), music.PlaybackMode.UntilDone)\n})\ninput.onGesture(Gesture.Shake, function () {\n    for (let index = 0; index < 10; index++) {\n        basic.showLeds(`\n            # . # . #\n            . # . # .\n            # . # . #\n            . # . # .\n            # . # . #\n            `)\n        basic.pause(500)\n        basic.showLeds(`\n            . # . # .\n            # . # . #\n            . # . # .\n            # . # . #\n            . # . # .\n            `)\n        basic.pause(500)\n    }\n    basic.clearScreen()\n})\n",
+      "dependencies": {
+        "core": "*",
+        "radio": "*",
+        "microphone": "*"
+      }
     }
   ],
   "errors": []

@@ -33,7 +33,12 @@
     {
       "block_index": 0,
       "pub_id": "_K4d6Fdbt2Cst",
-      "source": "input.onGesture(Gesture.TiltRight, function () {\n    basic.showIcon(IconNames.No)\n})\nbasic.showIcon(IconNames.Heart)\n"
+      "source": "input.onGesture(Gesture.TiltRight, function () {\n    basic.showIcon(IconNames.No)\n})\nbasic.showIcon(IconNames.Heart)\n",
+      "dependencies": {
+        "core": "*",
+        "radio": "*",
+        "microphone": "*"
+      }
     }
   ],
   "errors": []

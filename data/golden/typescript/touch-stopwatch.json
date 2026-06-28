@@ -45,7 +45,12 @@
     {
       "block_index": 0,
       "pub_id": "_13aRi9FVhAeD",
-      "source": "let running = false\nlet start = 0\nlet time = 0\ninput.onButtonPressed(Button.A, function () {\n    running = true\n    start = input.runningTime()\n})\ninput.onButtonPressed(Button.B, function () {\n    if (running) {\n        time += input.runningTime() - start\n    }\n    running = false\n})\ninput.onLogoEvent(TouchButtonEvent.Pressed, function () {\n    if (!(running)) {\n        basic.showNumber(Math.idiv(time, 1000))\n    }\n})\nbasic.forever(function () {\n    if (running) {\n        basic.showIcon(IconNames.Heart)\n        basic.showIcon(IconNames.SmallHeart)\n    } else {\n        basic.showIcon(IconNames.Asleep)\n    }\n})\n"
+      "source": "let running = false\nlet start = 0\nlet time = 0\ninput.onButtonPressed(Button.A, function () {\n    running = true\n    start = input.runningTime()\n})\ninput.onButtonPressed(Button.B, function () {\n    if (running) {\n        time += input.runningTime() - start\n    }\n    running = false\n})\ninput.onLogoEvent(TouchButtonEvent.Pressed, function () {\n    if (!(running)) {\n        basic.showNumber(Math.idiv(time, 1000))\n    }\n})\nbasic.forever(function () {\n    if (running) {\n        basic.showIcon(IconNames.Heart)\n        basic.showIcon(IconNames.SmallHeart)\n    } else {\n        basic.showIcon(IconNames.Asleep)\n    }\n})\n",
+      "dependencies": {
+        "core": "*",
+        "radio": "*",
+        "microphone": "*"
+      }
     }
   ],
   "errors": []

@@ -36,7 +36,12 @@
     {
       "block_index": 0,
       "pub_id": "_cKEYtihoMW54",
-      "source": "let timer = 0\ninput.onButtonPressed(Button.A, function () {\n    timer = randint(5, 15)\n    basic.showIcon(IconNames.Chessboard)\n    while (timer > 0) {\n        timer += -1\n        basic.pause(1000)\n    }\n    basic.showIcon(IconNames.No)\n    music._playDefaultBackground(music.builtInPlayableMelody(Melodies.Wawawawaa), music.PlaybackMode.InBackground)\n    music.play(music.builtinPlayableSoundEffect(soundExpression.sad), music.PlaybackMode.UntilDone)\n})\n"
+      "source": "let timer = 0\ninput.onButtonPressed(Button.A, function () {\n    timer = randint(5, 15)\n    basic.showIcon(IconNames.Chessboard)\n    while (timer > 0) {\n        timer += -1\n        basic.pause(1000)\n    }\n    basic.showIcon(IconNames.No)\n    music._playDefaultBackground(music.builtInPlayableMelody(Melodies.Wawawawaa), music.PlaybackMode.InBackground)\n    music.play(music.builtinPlayableSoundEffect(soundExpression.sad), music.PlaybackMode.UntilDone)\n})\n",
+      "dependencies": {
+        "core": "*",
+        "radio": "*",
+        "microphone": "*"
+      }
     }
   ],
   "errors": []

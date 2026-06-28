@@ -38,7 +38,11 @@
     {
       "block_index": 0,
       "pub_id": "_FuiW8VFPwg36",
-      "source": "input.onGesture(Gesture.Shake, function () {\n    basic.showIcon(IconNames.Angry)\n    music.playMelody(\"G A B B B A G F \", 120)\n})\n"
+      "source": "input.onGesture(Gesture.Shake, function () {\n    basic.showIcon(IconNames.Angry)\n    music.playMelody(\"G A B B B A G F \", 120)\n})\n",
+      "dependencies": {
+        "core": "*",
+        "radio": "*"
+      }
     }
   ],
   "errors": []

@@ -41,7 +41,12 @@
     {
       "block_index": 0,
       "pub_id": "_Lxt6F3DLfXEu",
-      "source": "input.onButtonPressed(Button.A, function () {\n    music.changeTempoBy(-5)\n})\ninput.onButtonPressed(Button.AB, function () {\n    basic.showNumber(music.tempo())\n})\ninput.onButtonPressed(Button.B, function () {\n    music.changeTempoBy(5)\n})\nmusic.setTempo(100)\nbasic.forever(function () {\n    music.playTone(262, music.beat(BeatFraction.Sixteenth))\n    music.rest(music.beat(BeatFraction.Whole))\n})\n"
+      "source": "input.onButtonPressed(Button.A, function () {\n    music.changeTempoBy(-5)\n})\ninput.onButtonPressed(Button.AB, function () {\n    basic.showNumber(music.tempo())\n})\ninput.onButtonPressed(Button.B, function () {\n    music.changeTempoBy(5)\n})\nmusic.setTempo(100)\nbasic.forever(function () {\n    music.playTone(262, music.beat(BeatFraction.Sixteenth))\n    music.rest(music.beat(BeatFraction.Whole))\n})\n",
+      "dependencies": {
+        "core": "*",
+        "radio": "*",
+        "microphone": "*"
+      }
     }
   ],
   "errors": []

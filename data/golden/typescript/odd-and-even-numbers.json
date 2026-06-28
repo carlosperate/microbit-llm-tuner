@@ -40,7 +40,12 @@
     {
       "block_index": 0,
       "pub_id": "_h25c1HXdwT14",
-      "source": "let number = 0\ninput.onButtonPressed(Button.A, function () {\n    number = randint(1, 100)\n    basic.showNumber(number)\n})\ninput.onButtonPressed(Button.B, function () {\n    if (number % 2 == 0) {\n        basic.showString(\"even\")\n    } else {\n        basic.showString(\"odd\")\n    }\n})\n"
+      "source": "let number = 0\ninput.onButtonPressed(Button.A, function () {\n    number = randint(1, 100)\n    basic.showNumber(number)\n})\ninput.onButtonPressed(Button.B, function () {\n    if (number % 2 == 0) {\n        basic.showString(\"even\")\n    } else {\n        basic.showString(\"odd\")\n    }\n})\n",
+      "dependencies": {
+        "core": "*",
+        "radio": "*",
+        "microphone": "*"
+      }
     }
   ],
   "errors": []

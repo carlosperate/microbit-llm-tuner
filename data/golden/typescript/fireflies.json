@@ -39,7 +39,12 @@
     {
       "block_index": 0,
       "pub_id": "_XjpYC4X0K6F1",
-      "source": "input.onButtonPressed(Button.A, function () {\n    radio.sendString(\"flash\")\n})\nfunction flash () {\n    basic.showLeds(`\n        # # # # #\n        # # # # #\n        # # # # #\n        # # # # #\n        # # # # #\n        `)\n    for (let index = 0; index < 10; index++) {\n        bright += -25\n        led.setBrightness(bright)\n        basic.pause(40)\n    }\n    basic.clearScreen()\n    bright = 255\n    led.setBrightness(bright)\n}\nradio.onReceivedString(function (receivedString) {\n    if (receivedString == \"flash\") {\n        basic.pause(randint(50, 350))\n        flash()\n        if (randint(0, 9) == 0) {\n            basic.pause(500)\n            radio.sendString(\"flash\")\n        }\n    }\n})\nlet bright = 0\nradio.setGroup(17)\nbright = 255\n"
+      "source": "input.onButtonPressed(Button.A, function () {\n    radio.sendString(\"flash\")\n})\nfunction flash () {\n    basic.showLeds(`\n        # # # # #\n        # # # # #\n        # # # # #\n        # # # # #\n        # # # # #\n        `)\n    for (let index = 0; index < 10; index++) {\n        bright += -25\n        led.setBrightness(bright)\n        basic.pause(40)\n    }\n    basic.clearScreen()\n    bright = 255\n    led.setBrightness(bright)\n}\nradio.onReceivedString(function (receivedString) {\n    if (receivedString == \"flash\") {\n        basic.pause(randint(50, 350))\n        flash()\n        if (randint(0, 9) == 0) {\n            basic.pause(500)\n            radio.sendString(\"flash\")\n        }\n    }\n})\nlet bright = 0\nradio.setGroup(17)\nbright = 255\n",
+      "dependencies": {
+        "core": "*",
+        "radio": "*",
+        "microphone": "*"
+      }
     }
   ],
   "errors": []

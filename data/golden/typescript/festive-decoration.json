@@ -37,7 +37,12 @@
     {
       "block_index": 0,
       "pub_id": "_g0VMqHFhxbas",
-      "source": "basic.forever(function () {\n    if (input.lightLevel() < 100) {\n        basic.showLeds(`\n            # . # . #\n            . # # # .\n            # # # # #\n            . # # # .\n            # . # . #\n            `)\n        basic.pause(500)\n        basic.showLeds(`\n            . . . . .\n            . # . # .\n            . . # . .\n            . # . # .\n            . . . . .\n            `)\n        basic.pause(500)\n    } else {\n        basic.clearScreen()\n    }\n})\n"
+      "source": "basic.forever(function () {\n    if (input.lightLevel() < 100) {\n        basic.showLeds(`\n            # . # . #\n            . # # # .\n            # # # # #\n            . # # # .\n            # . # . #\n            `)\n        basic.pause(500)\n        basic.showLeds(`\n            . . . . .\n            . # . # .\n            . . # . .\n            . # . # .\n            . . . . .\n            `)\n        basic.pause(500)\n    } else {\n        basic.clearScreen()\n    }\n})\n",
+      "dependencies": {
+        "core": "*",
+        "radio": "*",
+        "microphone": "*"
+      }
     }
   ],
   "errors": []

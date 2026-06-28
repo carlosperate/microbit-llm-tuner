@@ -34,7 +34,12 @@
     {
       "block_index": 0,
       "pub_id": "_df3AkdckW3iP",
-      "source": "input.onButtonPressed(Button.A, function () {\n    basic.showNumber(input.temperature())\n})\ninput.onButtonPressed(Button.AB, function () {\n    basic.showNumber(input.lightLevel())\n})\ninput.onButtonPressed(Button.B, function () {\n    basic.pause(100)\n    basic.showNumber(input.soundLevel())\n})\n"
+      "source": "input.onButtonPressed(Button.A, function () {\n    basic.showNumber(input.temperature())\n})\ninput.onButtonPressed(Button.AB, function () {\n    basic.showNumber(input.lightLevel())\n})\ninput.onButtonPressed(Button.B, function () {\n    basic.pause(100)\n    basic.showNumber(input.soundLevel())\n})\n",
+      "dependencies": {
+        "core": "*",
+        "radio": "*",
+        "microphone": "*"
+      }
     }
   ],
   "errors": []

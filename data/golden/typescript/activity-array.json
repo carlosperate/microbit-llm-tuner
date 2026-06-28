@@ -39,7 +39,11 @@
     {
       "block_index": 0,
       "pub_id": "_X9Y0YR5Kvi0h",
-      "source": "input.onButtonPressed(Button.A, function () {\n    choice = Math.randomRange(0, options.length - 1)\n    basic.showString(\"\" + options[choice])\n})\nlet choice = 0\nlet options: string[] = []\noptions = [\"PE with Joe\", \"watch a movie\", \"play a board game\", \"tidy our rooms\", \"learn a song\", \"bake a cake\"]\n"
+      "source": "input.onButtonPressed(Button.A, function () {\n    choice = Math.randomRange(0, options.length - 1)\n    basic.showString(\"\" + options[choice])\n})\nlet choice = 0\nlet options: string[] = []\noptions = [\"PE with Joe\", \"watch a movie\", \"play a board game\", \"tidy our rooms\", \"learn a song\", \"bake a cake\"]\n",
+      "dependencies": {
+        "core": "*",
+        "radio": "*"
+      }
     }
   ],
   "errors": []

@@ -42,7 +42,12 @@
     {
       "block_index": 0,
       "pub_id": "_Mofi9WM9afFM",
-      "source": "let direction = 0\nbasic.forever(function () {\n    direction = input.compassHeading()\n    if (direction < 5 || direction > 355) {\n        basic.showString(\"N\")\n        music.ringTone(262)\n    } else if (input.buttonIsPressed(Button.A)) {\n        basic.showNumber(direction)\n    } else {\n        basic.clearScreen()\n        music.ringTone(0)\n    }\n})\n"
+      "source": "let direction = 0\nbasic.forever(function () {\n    direction = input.compassHeading()\n    if (direction < 5 || direction > 355) {\n        basic.showString(\"N\")\n        music.ringTone(262)\n    } else if (input.buttonIsPressed(Button.A)) {\n        basic.showNumber(direction)\n    } else {\n        basic.clearScreen()\n        music.ringTone(0)\n    }\n})\n",
+      "dependencies": {
+        "core": "*",
+        "radio": "*",
+        "microphone": "*"
+      }
     }
   ],
   "errors": []

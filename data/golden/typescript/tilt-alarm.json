@@ -41,7 +41,12 @@
     {
       "block_index": 0,
       "pub_id": "_4tuW6Mg3kRwR",
-      "source": "function alarm () {\n    basic.showIcon(IconNames.Angry)\n    music._playDefaultBackground(music.builtInPlayableMelody(Melodies.Baddy), music.PlaybackMode.InBackground)\n}\nradio.onReceivedString(function (receivedString) {\n    alarm()\n})\ninput.onGesture(Gesture.Shake, function () {\n    radio.sendString(\"thief!\")\n    alarm()\n})\nradio.setGroup(1)\n"
+      "source": "function alarm () {\n    basic.showIcon(IconNames.Angry)\n    music._playDefaultBackground(music.builtInPlayableMelody(Melodies.Baddy), music.PlaybackMode.InBackground)\n}\nradio.onReceivedString(function (receivedString) {\n    alarm()\n})\ninput.onGesture(Gesture.Shake, function () {\n    radio.sendString(\"thief!\")\n    alarm()\n})\nradio.setGroup(1)\n",
+      "dependencies": {
+        "core": "*",
+        "radio": "*",
+        "microphone": "*"
+      }
     }
   ],
   "errors": []

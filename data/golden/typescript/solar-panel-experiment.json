@@ -39,7 +39,13 @@
     {
       "block_index": 0,
       "pub_id": "_eWRWu2RC1Tsu",
-      "source": "input.onButtonPressed(Button.A, function () {\n    logging = true\n    basic.showIcon(IconNames.Yes)\n    basic.pause(2000)\n    basic.clearScreen()\n    led.plot(0, 0)\n})\ninput.onButtonPressed(Button.AB, function () {\n    basic.showIcon(IconNames.Skull)\n    datalogger.deleteLog()\n    datalogger.setColumnTitles(\"light\")\n})\ninput.onButtonPressed(Button.B, function () {\n    logging = false\n    basic.showIcon(IconNames.No)\n})\nlet logging = false\nlogging = false\nbasic.showIcon(IconNames.No)\ndatalogger.includeTimestamp(FlashLogTimeStampFormat.Hours)\ndatalogger.setColumnTitles(\"light\")\nloops.everyInterval(3600000, function () {\n    if (logging) {\n        basic.showIcon(IconNames.Heart)\n        datalogger.log(datalogger.createCV(\"light\", Math.round(Math.map(input.lightLevel(), 0, 255, 0, 100))))\n        basic.clearScreen()\n        led.plot(0, 0)\n    }\n})\n"
+      "source": "input.onButtonPressed(Button.A, function () {\n    logging = true\n    basic.showIcon(IconNames.Yes)\n    basic.pause(2000)\n    basic.clearScreen()\n    led.plot(0, 0)\n})\ninput.onButtonPressed(Button.AB, function () {\n    basic.showIcon(IconNames.Skull)\n    datalogger.deleteLog()\n    datalogger.setColumnTitles(\"light\")\n})\ninput.onButtonPressed(Button.B, function () {\n    logging = false\n    basic.showIcon(IconNames.No)\n})\nlet logging = false\nlogging = false\nbasic.showIcon(IconNames.No)\ndatalogger.includeTimestamp(FlashLogTimeStampFormat.Hours)\ndatalogger.setColumnTitles(\"light\")\nloops.everyInterval(3600000, function () {\n    if (logging) {\n        basic.showIcon(IconNames.Heart)\n        datalogger.log(datalogger.createCV(\"light\", Math.round(Math.map(input.lightLevel(), 0, 255, 0, 100))))\n        basic.clearScreen()\n        led.plot(0, 0)\n    }\n})\n",
+      "dependencies": {
+        "core": "*",
+        "radio": "*",
+        "microphone": "*",
+        "datalogger": "*"
+      }
     }
   ],
   "errors": []

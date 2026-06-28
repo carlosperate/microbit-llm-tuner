@@ -46,7 +46,11 @@
     {
       "block_index": 0,
       "pub_id": "_bd1Jesg2YTpg",
-      "source": "let steps = 0\nbasic.showNumber(0)\nbasic.forever(function () {\n    if (input.acceleration(Dimension.Strength) > 1500) {\n        steps += 1\n        basic.showNumber(steps)\n    }\n})\n"
+      "source": "let steps = 0\nbasic.showNumber(0)\nbasic.forever(function () {\n    if (input.acceleration(Dimension.Strength) > 1500) {\n        steps += 1\n        basic.showNumber(steps)\n    }\n})\n",
+      "dependencies": {
+        "core": "*",
+        "radio": "*"
+      }
     }
   ],
   "errors": []

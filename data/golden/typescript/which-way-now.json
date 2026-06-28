@@ -41,7 +41,12 @@
     {
       "block_index": 0,
       "pub_id": "_DbdPAXHm4Xgp",
-      "source": "let direction = 0\ninput.onGesture(Gesture.Shake, function () {\n    direction = randint(1, 3)\n    if (direction == 1) {\n        basic.showArrow(ArrowNames.North)\n    } else if (direction == 2) {\n        basic.showArrow(ArrowNames.East)\n    } else {\n        basic.showArrow(ArrowNames.West)\n    }\n    basic.pause(2000)\n    basic.clearScreen()\n})\n"
+      "source": "let direction = 0\ninput.onGesture(Gesture.Shake, function () {\n    direction = randint(1, 3)\n    if (direction == 1) {\n        basic.showArrow(ArrowNames.North)\n    } else if (direction == 2) {\n        basic.showArrow(ArrowNames.East)\n    } else {\n        basic.showArrow(ArrowNames.West)\n    }\n    basic.pause(2000)\n    basic.clearScreen()\n})\n",
+      "dependencies": {
+        "core": "*",
+        "radio": "*",
+        "microphone": "*"
+      }
     }
   ],
   "errors": []

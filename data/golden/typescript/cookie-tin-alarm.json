@@ -39,7 +39,12 @@
     {
       "block_index": 0,
       "pub_id": "_7yKVKiLX00Rs",
-      "source": "basic.forever(function () {\n    if (input.lightLevel() > 30) {\n        basic.showIcon(IconNames.Angry)\n    } else {\n        basic.clearScreen()\n    }\n})\n"
+      "source": "basic.forever(function () {\n    if (input.lightLevel() > 30) {\n        basic.showIcon(IconNames.Angry)\n    } else {\n        basic.clearScreen()\n    }\n})\n",
+      "dependencies": {
+        "core": "*",
+        "radio": "*",
+        "microphone": "*"
+      }
     }
   ],
   "errors": []

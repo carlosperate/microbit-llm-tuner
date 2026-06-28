@@ -41,7 +41,12 @@
     {
       "block_index": 0,
       "pub_id": "_RsWKrDbEo1of",
-      "source": "input.onGesture(Gesture.LogoUp, function () {\n    basic.showIcon(IconNames.Happy)\n    music.play(music.builtinPlayableSoundEffect(soundExpression.hello), music.PlaybackMode.UntilDone)\n})\ninput.onGesture(Gesture.TiltLeft, function () {\n    basic.showLeds(`\n        . . # . .\n        . # . . .\n        # # # # #\n        . # . . .\n        . . # . .\n        `)\n    music.play(music.builtinPlayableSoundEffect(soundExpression.slide), music.PlaybackMode.UntilDone)\n})\ninput.onGesture(Gesture.Shake, function () {\n    basic.showIcon(IconNames.Surprised)\n    music.play(music.builtinPlayableSoundEffect(soundExpression.giggle), music.PlaybackMode.UntilDone)\n})\ninput.onGesture(Gesture.TiltRight, function () {\n    basic.showLeds(`\n        . . # . .\n        . . . # .\n        # # # # #\n        . . . # .\n        . . # . .\n        `)\n    music.play(music.builtinPlayableSoundEffect(soundExpression.soaring), music.PlaybackMode.UntilDone)\n})\ninput.onGesture(Gesture.LogoDown, function () {\n    basic.showIcon(IconNames.Asleep)\n    music.play(music.builtinPlayableSoundEffect(soundExpression.yawn), music.PlaybackMode.UntilDone)\n})\n"
+      "source": "input.onGesture(Gesture.LogoUp, function () {\n    basic.showIcon(IconNames.Happy)\n    music.play(music.builtinPlayableSoundEffect(soundExpression.hello), music.PlaybackMode.UntilDone)\n})\ninput.onGesture(Gesture.TiltLeft, function () {\n    basic.showLeds(`\n        . . # . .\n        . # . . .\n        # # # # #\n        . # . . .\n        . . # . .\n        `)\n    music.play(music.builtinPlayableSoundEffect(soundExpression.slide), music.PlaybackMode.UntilDone)\n})\ninput.onGesture(Gesture.Shake, function () {\n    basic.showIcon(IconNames.Surprised)\n    music.play(music.builtinPlayableSoundEffect(soundExpression.giggle), music.PlaybackMode.UntilDone)\n})\ninput.onGesture(Gesture.TiltRight, function () {\n    basic.showLeds(`\n        . . # . .\n        . . . # .\n        # # # # #\n        . . . # .\n        . . # . .\n        `)\n    music.play(music.builtinPlayableSoundEffect(soundExpression.soaring), music.PlaybackMode.UntilDone)\n})\ninput.onGesture(Gesture.LogoDown, function () {\n    basic.showIcon(IconNames.Asleep)\n    music.play(music.builtinPlayableSoundEffect(soundExpression.yawn), music.PlaybackMode.UntilDone)\n})\n",
+      "dependencies": {
+        "core": "*",
+        "radio": "*",
+        "microphone": "*"
+      }
     }
   ],
   "errors": []

@@ -40,7 +40,11 @@
     {
       "block_index": 0,
       "pub_id": "_UF6hdEgq96PF",
-      "source": "input.onButtonPressed(Button.A, function () {\n    reading = input.lightLevel()\n    basic.showIcon(IconNames.SmallDiamond)\n    basic.showIcon(IconNames.Diamond)\n    basic.pause(500)\n    basic.showString(\"M\")\n})\ninput.onButtonPressed(Button.B, function () {\n    basic.clearScreen()\n    basic.showNumber(reading)\n    basic.pause(500)\n    basic.showString(\"M\")\n})\nlet reading = 0\nbasic.showString(\"M\")\nreading = input.lightLevel()\nbasic.pause(100)\n"
+      "source": "input.onButtonPressed(Button.A, function () {\n    reading = input.lightLevel()\n    basic.showIcon(IconNames.SmallDiamond)\n    basic.showIcon(IconNames.Diamond)\n    basic.pause(500)\n    basic.showString(\"M\")\n})\ninput.onButtonPressed(Button.B, function () {\n    basic.clearScreen()\n    basic.showNumber(reading)\n    basic.pause(500)\n    basic.showString(\"M\")\n})\nlet reading = 0\nbasic.showString(\"M\")\nreading = input.lightLevel()\nbasic.pause(100)\n",
+      "dependencies": {
+        "core": "*",
+        "radio": "*"
+      }
     }
   ],
   "errors": []

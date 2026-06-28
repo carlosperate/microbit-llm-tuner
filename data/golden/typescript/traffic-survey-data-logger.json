@@ -38,7 +38,13 @@
     {
       "block_index": 0,
       "pub_id": "_1EAcowV1Tc4e",
-      "source": "input.onButtonPressed(Button.A, function () {\n    basic.showLeds(`\n        . . . . .\n        . . # # .\n        . # # # .\n        . # . # .\n        . . . . .\n        `)\n    datalogger.log(datalogger.createCV(\"car\", 1))\n    basic.clearScreen()\n})\ninput.onButtonPressed(Button.AB, function () {\n    basic.showIcon(IconNames.Skull)\n    datalogger.deleteLog()\n    datalogger.setColumnTitles(\n    \"car\",\n    \"bus\",\n    \"truck\"\n    )\n    basic.showIcon(IconNames.Yes)\n})\ninput.onButtonPressed(Button.B, function () {\n    basic.showLeds(`\n        . . . . .\n        # # # # #\n        # # # # #\n        . # . # .\n        . . . . .\n        `)\n    datalogger.log(datalogger.createCV(\"bus\", 1))\n    basic.clearScreen()\n})\ninput.onLogoEvent(TouchButtonEvent.Pressed, function () {\n    basic.showLeds(`\n        # # . . .\n        # # # # #\n        # # # # #\n        . # . # .\n        . . . . .\n        `)\n    datalogger.log(datalogger.createCV(\"truck\", 1))\n    basic.clearScreen()\n})\ndatalogger.setColumnTitles(\n\"car\",\n\"bus\",\n\"truck\"\n)\nbasic.showIcon(IconNames.Yes)\n"
+      "source": "input.onButtonPressed(Button.A, function () {\n    basic.showLeds(`\n        . . . . .\n        . . # # .\n        . # # # .\n        . # . # .\n        . . . . .\n        `)\n    datalogger.log(datalogger.createCV(\"car\", 1))\n    basic.clearScreen()\n})\ninput.onButtonPressed(Button.AB, function () {\n    basic.showIcon(IconNames.Skull)\n    datalogger.deleteLog()\n    datalogger.setColumnTitles(\n    \"car\",\n    \"bus\",\n    \"truck\"\n    )\n    basic.showIcon(IconNames.Yes)\n})\ninput.onButtonPressed(Button.B, function () {\n    basic.showLeds(`\n        . . . . .\n        # # # # #\n        # # # # #\n        . # . # .\n        . . . . .\n        `)\n    datalogger.log(datalogger.createCV(\"bus\", 1))\n    basic.clearScreen()\n})\ninput.onLogoEvent(TouchButtonEvent.Pressed, function () {\n    basic.showLeds(`\n        # # . . .\n        # # # # #\n        # # # # #\n        . # . # .\n        . . . . .\n        `)\n    datalogger.log(datalogger.createCV(\"truck\", 1))\n    basic.clearScreen()\n})\ndatalogger.setColumnTitles(\n\"car\",\n\"bus\",\n\"truck\"\n)\nbasic.showIcon(IconNames.Yes)\n",
+      "dependencies": {
+        "core": "*",
+        "radio": "*",
+        "microphone": "*",
+        "datalogger": "*"
+      }
     }
   ],
   "errors": []

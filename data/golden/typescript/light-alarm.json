@@ -45,12 +45,21 @@
     {
       "block_index": 0,
       "pub_id": "_i51P3Cc18E2R",
-      "source": "input.onButtonPressed(Button.A, function () {\n    basic.showNumber(input.lightLevel())\n})\nradio.setGroup(5)\nbasic.forever(function () {\n    if (input.lightLevel() > 50) {\n        radio.sendString(\"lights on\")\n    } else {\n        radio.sendString(\"lights off\")\n    }\n    basic.pause(10000)\n})\n"
+      "source": "input.onButtonPressed(Button.A, function () {\n    basic.showNumber(input.lightLevel())\n})\nradio.setGroup(5)\nbasic.forever(function () {\n    if (input.lightLevel() > 50) {\n        radio.sendString(\"lights on\")\n    } else {\n        radio.sendString(\"lights off\")\n    }\n    basic.pause(10000)\n})\n",
+      "dependencies": {
+        "core": "*",
+        "radio": "*"
+      }
     },
     {
       "block_index": 1,
       "pub_id": "_86RbX2ddKPTW",
-      "source": "radio.onReceivedString(function (receivedString) {\n    if (receivedString == \"lights off\") {\n        basic.clearScreen()\n    } else if (receivedString == \"lights on\") {\n        basic.showIcon(IconNames.Angry)\n        music._playDefaultBackground(music.builtInPlayableMelody(Melodies.Baddy), music.PlaybackMode.UntilDone)\n    }\n})\nradio.setGroup(5)\n"
+      "source": "radio.onReceivedString(function (receivedString) {\n    if (receivedString == \"lights off\") {\n        basic.clearScreen()\n    } else if (receivedString == \"lights on\") {\n        basic.showIcon(IconNames.Angry)\n        music._playDefaultBackground(music.builtInPlayableMelody(Melodies.Baddy), music.PlaybackMode.UntilDone)\n    }\n})\nradio.setGroup(5)\n",
+      "dependencies": {
+        "core": "*",
+        "radio": "*",
+        "microphone": "*"
+      }
     }
   ],
   "errors": []

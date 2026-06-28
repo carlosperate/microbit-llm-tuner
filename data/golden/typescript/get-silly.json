@@ -36,7 +36,11 @@
     {
       "block_index": 0,
       "pub_id": "_dkrYv67Ui9jW",
-      "source": "input.onButtonPressed(Button.A, function () {\n    basic.showIcon(IconNames.Happy)\n})\ninput.onButtonPressed(Button.B, function () {\n    basic.showIcon(IconNames.Sad)\n})\ninput.onGesture(Gesture.Shake, function () {\n    basic.showIcon(IconNames.Silly)\n})\n"
+      "source": "input.onButtonPressed(Button.A, function () {\n    basic.showIcon(IconNames.Happy)\n})\ninput.onButtonPressed(Button.B, function () {\n    basic.showIcon(IconNames.Sad)\n})\ninput.onGesture(Gesture.Shake, function () {\n    basic.showIcon(IconNames.Silly)\n})\n",
+      "dependencies": {
+        "core": "*",
+        "radio": "*"
+      }
     }
   ],
   "errors": []

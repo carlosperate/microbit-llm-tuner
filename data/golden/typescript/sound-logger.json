@@ -38,7 +38,12 @@
     {
       "block_index": 0,
       "pub_id": "_4fPbdWMhiV2w",
-      "source": "let soundLevel = 0\nlet maxSound = 0\nbasic.forever(function () {\n    if (input.buttonIsPressed(Button.A)) {\n        basic.showNumber(maxSound)\n    } else {\n        soundLevel = input.soundLevel()\n        led.plotBarGraph(\n        soundLevel,\n        255\n        )\n        if (soundLevel > maxSound) {\n            maxSound = soundLevel\n        }\n    }\n})\n"
+      "source": "let soundLevel = 0\nlet maxSound = 0\nbasic.forever(function () {\n    if (input.buttonIsPressed(Button.A)) {\n        basic.showNumber(maxSound)\n    } else {\n        soundLevel = input.soundLevel()\n        led.plotBarGraph(\n        soundLevel,\n        255\n        )\n        if (soundLevel > maxSound) {\n            maxSound = soundLevel\n        }\n    }\n})\n",
+      "dependencies": {
+        "core": "*",
+        "radio": "*",
+        "microphone": "*"
+      }
     }
   ],
   "errors": []

@@ -37,7 +37,11 @@
     {
       "block_index": 0,
       "pub_id": "_YmcPs9MiUT5J",
-      "source": "input.onButtonPressed(Button.A, function () {\n    basic.showNumber(steps)\n    basic.pause(3000)\n    basic.clearScreen()\n})\ninput.onGesture(Gesture.Shake, function () {\n    steps += 1\n})\nlet steps = 0\nsteps = 0\n"
+      "source": "input.onButtonPressed(Button.A, function () {\n    basic.showNumber(steps)\n    basic.pause(3000)\n    basic.clearScreen()\n})\ninput.onGesture(Gesture.Shake, function () {\n    steps += 1\n})\nlet steps = 0\nsteps = 0\n",
+      "dependencies": {
+        "core": "*",
+        "radio": "*"
+      }
     }
   ],
   "errors": []

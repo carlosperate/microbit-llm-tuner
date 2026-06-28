@@ -40,7 +40,11 @@
     {
       "block_index": 0,
       "pub_id": "_JM345hbMLTyM",
-      "source": "input.onButtonPressed(Button.A, function () {\n    basic.showNumber(count)\n})\ninput.onButtonPressed(Button.B, function () {\n    count += 1\n    basic.showNumber(count)\n})\ninput.onButtonPressed(Button.AB, function () {\n    basic.showNumber(0)\n    count = 0\n})\nlet count = 0\nbasic.showNumber(0)\ncount = 0\n"
+      "source": "input.onButtonPressed(Button.A, function () {\n    basic.showNumber(count)\n})\ninput.onButtonPressed(Button.B, function () {\n    count += 1\n    basic.showNumber(count)\n})\ninput.onButtonPressed(Button.AB, function () {\n    basic.showNumber(0)\n    count = 0\n})\nlet count = 0\nbasic.showNumber(0)\ncount = 0\n",
+      "dependencies": {
+        "core": "*",
+        "radio": "*"
+      }
     }
   ],
   "errors": []

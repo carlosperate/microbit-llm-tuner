@@ -42,7 +42,11 @@
     {
       "block_index": 0,
       "pub_id": "_6RD45gFq8H41",
-      "source": "input.onButtonPressed(Button.A, function () {\n    basic.showNumber(input.magneticForce(Dimension.Strength))\n})\nbasic.forever(function () {\n    if (input.magneticForce(Dimension.Strength) < 200) {\n        basic.showIcon(IconNames.Angry)\n    }\n})\n"
+      "source": "input.onButtonPressed(Button.A, function () {\n    basic.showNumber(input.magneticForce(Dimension.Strength))\n})\nbasic.forever(function () {\n    if (input.magneticForce(Dimension.Strength) < 200) {\n        basic.showIcon(IconNames.Angry)\n    }\n})\n",
+      "dependencies": {
+        "core": "*",
+        "radio": "*"
+      }
     }
   ],
   "errors": []

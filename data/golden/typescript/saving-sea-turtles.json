@@ -38,7 +38,11 @@
     {
       "block_index": 0,
       "pub_id": "_HLJ17X2WALcq",
-      "source": "basic.forever(function () {\n    if (input.lightLevel() < 100) {\n        basic.showLeds(`\n            . . . . .\n            . # # . .\n            # # # # #\n            # # # # #\n            # . . # .\n            `)\n    } else {\n        basic.clearScreen()\n    }\n})\n"
+      "source": "basic.forever(function () {\n    if (input.lightLevel() < 100) {\n        basic.showLeds(`\n            . . . . .\n            . # # . .\n            # # # # #\n            # # # # #\n            # . . # .\n            `)\n    } else {\n        basic.clearScreen()\n    }\n})\n",
+      "dependencies": {
+        "core": "*",
+        "radio": "*"
+      }
     }
   ],
   "errors": []

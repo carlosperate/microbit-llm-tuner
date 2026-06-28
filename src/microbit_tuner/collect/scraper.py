@@ -349,20 +349,28 @@ class Scraper:
         self.py_dir = out_dir / "micropython"
         self.force = force
 
-    def fetch_main_ts(self, pubid: str) -> tuple[Optional[str], Optional[dict]]:
-        """Return (main_ts_source, error_dict). Only `main.ts` is taken;
-        `main.py`, `main.blocks`, `pxt.json` are explicitly ignored."""
+    def fetch_main_ts(self, pubid: str) -> tuple[Optional[str], dict, Optional[dict]]:
+        """Return (main_ts_source, dependencies, error_dict).
+
+        Only `main.ts` is taken as *code* (`main.py`, `main.blocks` are ignored).
+        The project's `pxt.json` `dependencies` map IS extracted — not as code,
+        but as provenance: it is the authoritative list of MakeCode extensions
+        the program needs to compile (e.g. ``datalogger``, or a github extension
+        such as ``github:microbit-foundation/pxt-sound-level-db``). Stage-3
+        verification builds against exactly these; a referenced-but-undeclared
+        extension is a genuine build failure, not something to guess around.
+        """
         url = MAKECODE_TEXT_API.format(pubid=pubid)
         cache_path = self.fetcher.cache_dir / "api" / f"{pubid}.json"
         text, status = self.fetcher.get(url, cache_path)
         if status == 404:
-            return None, {
+            return None, {}, {
                 "type": "pubid_404",
                 "pub_id": pubid,
                 "manual_url": MAKECODE_SHARE.format(pubid=pubid),
             }
         if text is None:
-            return None, {
+            return None, {}, {
                 "type": "pubid_fetch_failed",
                 "pub_id": pubid,
                 "http_status": status,
@@ -371,11 +379,21 @@ class Scraper:
         try:
             data = json.loads(text)
         except json.JSONDecodeError:
-            return None, {"type": "pubid_bad_json", "pub_id": pubid}
+            return None, {}, {"type": "pubid_bad_json", "pub_id": pubid}
         main_ts = data.get("main.ts")
         if main_ts is None:
-            return None, {"type": "pubid_no_main_ts", "pub_id": pubid}
-        return main_ts, None
+            return None, {}, {"type": "pubid_no_main_ts", "pub_id": pubid}
+        # Extract the dependency map verbatim (deterministic provenance). A
+        # missing/unparseable pxt.json yields no deps rather than an error: the
+        # code is still valid; verification simply uses the core defaults.
+        dependencies: dict = {}
+        pxt_raw = data.get("pxt.json")
+        if pxt_raw:
+            try:
+                dependencies = json.loads(pxt_raw).get("dependencies", {}) or {}
+            except (json.JSONDecodeError, AttributeError):
+                dependencies = {}
+        return main_ts, dependencies, None
 
     def scrape(self, slug: str, prior: Optional[dict]) -> Optional[dict]:
         """Scrape one project. Returns its manifest record (or None on a
@@ -421,7 +439,7 @@ class Scraper:
         ts_code: list[dict] = []
         ts_errors: list[dict] = []
         for pubid in pub_ids:
-            main_ts, err = self.fetch_main_ts(pubid)
+            main_ts, dependencies, err = self.fetch_main_ts(pubid)
             if err is not None:
                 ts_errors.append(err)
                 continue
@@ -429,6 +447,7 @@ class Scraper:
                 "block_index": len(ts_code),
                 "pub_id": pubid,
                 "source": main_ts,
+                "dependencies": dependencies,
             })
 
         # --- MicroPython (from inline page block(s)) --------------------------
@@ -544,9 +563,9 @@ def main(argv: Optional[list[str]] = None) -> int:
     parser.add_argument("--out", type=Path, default=Path("data/golden"),
                         help="Output directory (default: data/golden). Manifest "
                              "is written to <out>/manifest.json.")
-    parser.add_argument("--cache", type=Path, default=Path("data/cache"),
+    parser.add_argument("--cache", type=Path, default=Path("cache/scrape"),
                         help="Cache directory for raw HTML and API JSON "
-                             "(default: data/cache).")
+                             "(default: cache/scrape).")
     parser.add_argument("--delay", type=float, default=0.7,
                         help="Seconds to wait before each network request "
                              "(cache hits incur no delay).")

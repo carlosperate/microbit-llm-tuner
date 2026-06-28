@@ -42,7 +42,12 @@
     {
       "block_index": 0,
       "pub_id": "_3tT16pEcufqA",
-      "source": "input.onSound(DetectedSound.Loud, function () {\n    lit = !(lit)\n})\nlet flicker = 0\nlet lit = false\nlit = true\nbasic.forever(function () {\n    if (lit) {\n        basic.showLeds(`\n            . . # . .\n            . # # # .\n            . # # # .\n            . # # # .\n            . # # # .\n            `)\n        flicker = randint(1, 3)\n        if (flicker != 2) {\n            led.unplot(2, 0)\n            led.plot(flicker, 0)\n        }\n        basic.pause(200)\n    } else {\n        basic.clearScreen()\n    }\n})\n"
+      "source": "input.onSound(DetectedSound.Loud, function () {\n    lit = !(lit)\n})\nlet flicker = 0\nlet lit = false\nlit = true\nbasic.forever(function () {\n    if (lit) {\n        basic.showLeds(`\n            . . # . .\n            . # # # .\n            . # # # .\n            . # # # .\n            . # # # .\n            `)\n        flicker = randint(1, 3)\n        if (flicker != 2) {\n            led.unplot(2, 0)\n            led.plot(flicker, 0)\n        }\n        basic.pause(200)\n    } else {\n        basic.clearScreen()\n    }\n})\n",
+      "dependencies": {
+        "core": "*",
+        "radio": "*",
+        "microphone": "*"
+      }
     }
   ],
   "errors": []

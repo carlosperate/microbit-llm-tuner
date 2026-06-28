@@ -40,7 +40,12 @@
     {
       "block_index": 0,
       "pub_id": "_esA53UP5jfe1",
-      "source": "basic.forever(function () {\n    if (input.rotation(Rotation.Pitch) < 5 && input.rotation(Rotation.Pitch) > -5 && (input.rotation(Rotation.Roll) < 5 && input.rotation(Rotation.Roll) > -5)) {\n        basic.showIcon(IconNames.Yes)\n        music.ringTone(523)\n    } else {\n        basic.showIcon(IconNames.No)\n        music.ringTone(0)\n    }\n})\n"
+      "source": "basic.forever(function () {\n    if (input.rotation(Rotation.Pitch) < 5 && input.rotation(Rotation.Pitch) > -5 && (input.rotation(Rotation.Roll) < 5 && input.rotation(Rotation.Roll) > -5)) {\n        basic.showIcon(IconNames.Yes)\n        music.ringTone(523)\n    } else {\n        basic.showIcon(IconNames.No)\n        music.ringTone(0)\n    }\n})\n",
+      "dependencies": {
+        "core": "*",
+        "radio": "*",
+        "microphone": "*"
+      }
     }
   ],
   "errors": []

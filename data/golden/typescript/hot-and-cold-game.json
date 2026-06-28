@@ -42,12 +42,22 @@
     {
       "block_index": 0,
       "pub_id": "_YuWWDETetVkL",
-      "source": "input.onButtonPressed(Button.A, function () {\n    radio.sendString(\"Warmer\")\n    basic.showString(\"Warmer\")\n})\ninput.onButtonPressed(Button.AB, function () {\n    radio.sendString(\"HOT!\")\n    basic.showString(\"HOT!\")\n})\ninput.onButtonPressed(Button.B, function () {\n    radio.sendString(\"Colder\")\n    basic.showString(\"Colder\")\n})\nradio.setGroup(47)\n"
+      "source": "input.onButtonPressed(Button.A, function () {\n    radio.sendString(\"Warmer\")\n    basic.showString(\"Warmer\")\n})\ninput.onButtonPressed(Button.AB, function () {\n    radio.sendString(\"HOT!\")\n    basic.showString(\"HOT!\")\n})\ninput.onButtonPressed(Button.B, function () {\n    radio.sendString(\"Colder\")\n    basic.showString(\"Colder\")\n})\nradio.setGroup(47)\n",
+      "dependencies": {
+        "core": "*",
+        "radio": "*",
+        "microphone": "*"
+      }
     },
     {
       "block_index": 1,
       "pub_id": "_EEH5Ykd2Ri5t",
-      "source": "radio.onReceivedString(function (receivedString) {\n    basic.showString(receivedString)\n})\nradio.setGroup(47)\n"
+      "source": "radio.onReceivedString(function (receivedString) {\n    basic.showString(receivedString)\n})\nradio.setGroup(47)\n",
+      "dependencies": {
+        "core": "*",
+        "radio": "*",
+        "microphone": "*"
+      }
     }
   ],
   "errors": []
