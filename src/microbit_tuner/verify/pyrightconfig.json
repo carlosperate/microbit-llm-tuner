@@ -1,0 +1,8 @@
+{
+  "pythonVersion": "3.6",
+  "pythonPlatform": "Linux",
+  "typeCheckingMode": "basic",
+  "typeshedPath": "vendor/microbit-stubs/lang/en/typeshed",
+  "reportMissingModuleSource": false,
+  "reportWildcardImportFromLibrary": false
+}

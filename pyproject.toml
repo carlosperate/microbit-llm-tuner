@@ -1,13 +1,23 @@
 [project]
-name = "microbit-project-scraper"
+name = "microbit-llm-tuner"
 version = "0.1.0"
-description = "Deterministic scraper for microbit.org 'Make it: code it' projects, producing a byte-exact code corpus split by language (MakeCode TypeScript / MicroPython)."
+description = "Pipeline for fine-tuning a small, browser-runnable micro:bit code model: deterministic scraper + compilation-based verification (MakeCode TypeScript / MicroPython)."
 readme = "README.md"
 requires-python = ">=3.11"
 dependencies = [
     "requests>=2.31",
     "beautifulsoup4>=4.12",
+    "typer>=0.12",
 ]
 
-[tool.uv]
-package = false
+[project.scripts]
+mbtuner = "microbit_tuner.cli:main"
+
+[build-system]
+requires = ["uv_build>=0.7"]
+build-backend = "uv_build"
+
+[tool.uv.build-backend]
+# Project is `microbit-llm-tuner` but the importable package is `microbit_tuner`.
+module-name = "microbit_tuner"
+module-root = "src"

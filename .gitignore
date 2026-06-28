@@ -3,8 +3,11 @@
 __pycache__/
 *.pyc
 
-# Scraper raw-response cache (regenerable; not part of the corpus)
-data/cache/
+# Regenerable caches: scraper raw responses + built MakeCode projects.
+cache/
 
 # Model weights / adapters / compiled browser bundles (too big for git)
 models/
+
+# Verify toolchain: npm-installed tools (regenerable).
+src/microbit_tuner/verify/node_modules/

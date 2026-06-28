@@ -1,0 +1,10 @@
+{
+  "name": "microbit-tuner-verify",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Compile/type-check toolchain for micro:bit code verification: MakeCode TypeScript via the makecode (mkc) CLI, MicroPython via Pyright + the official micro:bit stubs (vendored as a git submodule at vendor/microbit-stubs).",
+  "devDependencies": {
+    "makecode": "^1.3.5",
+    "pyright": "^1.1.410"
+  }
+}
