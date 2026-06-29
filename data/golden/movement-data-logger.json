@@ -1,0 +1,22 @@
+{
+  "slug": "movement-data-logger",
+  "task": "",
+  "status": "draft",
+  "url": "https://microbit.org/projects/make-it-code-it/movement-data-logger/",
+  "license": "CC BY-SA 4.0",
+  "code": {
+    "makecode_ts": [
+      {
+        "program_index": 0,
+        "pub_id": "_UzueMJa7t5DC",
+        "source": "datalogger.onLogFull(function () {\n    logging = false\n    basic.showLeds(`\n        # # # # #\n        # # # # #\n        # # # # #\n        # # # # #\n        # # # # #\n        `)\n})\ninput.onButtonPressed(Button.A, function () {\n    logging = true\n    basic.showIcon(IconNames.Yes)\n})\ninput.onButtonPressed(Button.AB, function () {\n    logging = false\n    basic.showIcon(IconNames.Skull)\n    datalogger.deleteLog()\n    datalogger.setColumnTitles(\n    \"x\",\n    \"y\",\n    \"z\"\n    )\n})\ninput.onButtonPressed(Button.B, function () {\n    logging = false\n    basic.showIcon(IconNames.No)\n})\nlet logging = false\nlogging = false\nbasic.showIcon(IconNames.No)\ndatalogger.setColumnTitles(\n\"x\",\n\"y\",\n\"z\"\n)\nloops.everyInterval(100, function () {\n    if (logging) {\n        datalogger.log(\n        datalogger.createCV(\"x\", input.acceleration(Dimension.X)),\n        datalogger.createCV(\"y\", input.acceleration(Dimension.Y)),\n        datalogger.createCV(\"z\", input.acceleration(Dimension.Z))\n        )\n    }\n})\n",
+        "dependencies": {
+          "core": "*",
+          "radio": "*",
+          "microphone": "*",
+          "datalogger": "*"
+        }
+      }
+    ]
+  }
+}

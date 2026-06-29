@@ -1,0 +1,27 @@
+{
+  "slug": "clap-hearts",
+  "task": "",
+  "status": "draft",
+  "url": "https://microbit.org/projects/make-it-code-it/clap-hearts/",
+  "license": "CC BY-SA 4.0",
+  "code": {
+    "makecode_ts": [
+      {
+        "program_index": 0,
+        "pub_id": "_AhPKDR2UDf7H",
+        "source": "input.onSound(DetectedSound.Loud, function () {\n    basic.showIcon(IconNames.Heart)\n})\ninput.onSound(DetectedSound.Quiet, function () {\n    basic.showIcon(IconNames.SmallHeart)\n})\n",
+        "dependencies": {
+          "core": "*",
+          "radio": "*",
+          "microphone": "*"
+        }
+      }
+    ],
+    "micropython": [
+      {
+        "program_index": 0,
+        "source": "from microbit import *\n\nwhile True:\n    if microphone.current_event() == SoundEvent.LOUD:\n        display.show(Image.HEART)\n        sleep(200)\n    if microphone.current_event() == SoundEvent.QUIET:\n        display.show(Image.HEART_SMALL)"
+      }
+    ]
+  }
+}

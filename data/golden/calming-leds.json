@@ -1,0 +1,26 @@
+{
+  "slug": "calming-leds",
+  "task": "",
+  "status": "draft",
+  "url": "https://microbit.org/projects/make-it-code-it/calming-leds/",
+  "license": "CC BY-SA 4.0",
+  "code": {
+    "makecode_ts": [
+      {
+        "program_index": 0,
+        "pub_id": "_Aym5Ce0mAUTe",
+        "source": "basic.forever(function () {\n    basic.pause(2000)\n    basic.showLeds(`\n        . . . . .\n        . . . . .\n        . . # . .\n        . . . . .\n        . . . . .\n        `)\n    basic.pause(500)\n    basic.showIcon(IconNames.SmallDiamond)\n    basic.pause(500)\n    basic.showIcon(IconNames.Diamond)\n    basic.pause(2000)\n    basic.showIcon(IconNames.SmallDiamond)\n    basic.pause(500)\n    basic.showLeds(`\n        . . . . .\n        . . . . .\n        . . # . .\n        . . . . .\n        . . . . .\n        `)\n})\n",
+        "dependencies": {
+          "core": "*",
+          "radio": "*"
+        }
+      }
+    ],
+    "micropython": [
+      {
+        "program_index": 0,
+        "source": "from microbit import *\n\nwhile True:\n    sleep(2000)\n    display.show(Image('00000:'\n                       '00000:'\n                       '00900:'\n                       '00000:'\n                       '00000'))\n    sleep(500)\n    display.show(Image.DIAMOND_SMALL)\n    sleep(500)\n    display.show(Image.DIAMOND)\n    sleep(2000)\n    display.show(Image.DIAMOND_SMALL)\n    sleep(500)\n    display.show(Image('00000:'\n                       '00000:'\n                       '00900:'\n                       '00000:'\n                       '00000'))\n\n"
+      }
+    ]
+  }
+}

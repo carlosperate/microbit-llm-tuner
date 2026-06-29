@@ -1,0 +1,27 @@
+{
+  "slug": "guitar-2-chords",
+  "task": "",
+  "status": "draft",
+  "url": "https://microbit.org/projects/make-it-code-it/guitar-2-chords/",
+  "license": "CC BY-SA 4.0",
+  "code": {
+    "makecode_ts": [
+      {
+        "program_index": 0,
+        "pub_id": "_81TD3q2utRK1",
+        "source": "input.onPinPressed(TouchPin.P2, function () {\n    music.play(music.tonePlayable(440, music.beat(BeatFraction.Whole)), music.PlaybackMode.UntilDone)\n    music.play(music.tonePlayable(523, music.beat(BeatFraction.Whole)), music.PlaybackMode.UntilDone)\n    music.play(music.tonePlayable(659, music.beat(BeatFraction.Whole)), music.PlaybackMode.UntilDone)\n})\ninput.onPinPressed(TouchPin.P1, function () {\n    music.play(music.tonePlayable(349, music.beat(BeatFraction.Whole)), music.PlaybackMode.UntilDone)\n    music.play(music.tonePlayable(440, music.beat(BeatFraction.Whole)), music.PlaybackMode.UntilDone)\n    music.play(music.tonePlayable(523, music.beat(BeatFraction.Whole)), music.PlaybackMode.UntilDone)\n})\n",
+        "dependencies": {
+          "core": "*",
+          "radio": "*",
+          "microphone": "*"
+        }
+      }
+    ],
+    "micropython": [
+      {
+        "program_index": 0,
+        "source": "from microbit import *\nimport music\n\nwhile True:\n    if pin1.is_touched():\n        music.play([\"F4:4\", \"A4\", \"C5\"])\n    if pin2.is_touched():\n        music.play([\"A4:4\", \"C5\", \"E5\"])\n"
+      }
+    ]
+  }
+}

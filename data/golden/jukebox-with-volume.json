@@ -1,0 +1,21 @@
+{
+  "slug": "jukebox-with-volume",
+  "task": "",
+  "status": "draft",
+  "url": "https://microbit.org/projects/make-it-code-it/jukebox-with-volume/",
+  "license": "CC BY-SA 4.0",
+  "code": {
+    "makecode_ts": [
+      {
+        "program_index": 0,
+        "pub_id": "_1TwRmcCfjT3L",
+        "source": "input.onButtonPressed(Button.A, function () {\n    music._playDefaultBackground(music.builtInPlayableMelody(Melodies.Entertainer), music.PlaybackMode.InBackground)\n})\ninput.onGesture(Gesture.TiltLeft, function () {\n    volume += -32\n    if (volume < 0) {\n        volume = 0\n    }\n})\ninput.onButtonPressed(Button.B, function () {\n    music._playDefaultBackground(music.builtInPlayableMelody(Melodies.Prelude), music.PlaybackMode.InBackground)\n})\ninput.onGesture(Gesture.TiltRight, function () {\n    volume += 32\n    if (volume > 255) {\n        volume = 255\n    }\n})\nlet volume = 0\nvolume = 128\nbasic.forever(function () {\n    music.setVolume(volume)\n    led.plotBarGraph(\n    volume,\n    255\n    )\n})\n",
+        "dependencies": {
+          "core": "*",
+          "radio": "*",
+          "microphone": "*"
+        }
+      }
+    ]
+  }
+}

@@ -1,0 +1,27 @@
+{
+  "slug": "poetry-generator",
+  "task": "",
+  "status": "draft",
+  "url": "https://microbit.org/projects/make-it-code-it/poetry-generator/",
+  "license": "CC BY-SA 4.0",
+  "code": {
+    "makecode_ts": [
+      {
+        "program_index": 0,
+        "pub_id": "_XLVLpJXoji7b",
+        "source": "input.onGesture(Gesture.Shake, function () {\n    basic.showString(\"\" + (adjectives[randint(0, 2)]))\n    basic.showString(\"\" + (nouns[randint(0, 2)]))\n    basic.showString(\"\" + (verbs[randint(0, 2)]))\n    basic.showString(\"\" + (adverbs[randint(0, 2)]))\n})\nlet adverbs: string[] = []\nlet verbs: string[] = []\nlet nouns: string[] = []\nlet adjectives: string[] = []\nadjectives = [\"beautiful\", \"delicate\", \"bright\"]\nnouns = [\"bird\", \"butterfly\", \"dragonfly\"]\nverbs = [\"eats\", \"flies\", \"flutters\"]\nadverbs = [\"swiftly\", \"silently\", \"skilfully\"]\n",
+        "dependencies": {
+          "core": "*",
+          "radio": "*",
+          "microphone": "*"
+        }
+      }
+    ],
+    "micropython": [
+      {
+        "program_index": 0,
+        "source": "# Imports go at the top\nfrom microbit import *\nimport random\n\nadjectives = ['beautiful', \n           'delicate',\n           'bright']\n\nnouns = ['bird', \n           'butterfly',\n           'dragonfly']\n\nverbs = ['eats', \n           'flies',\n           'flutters']\n\nadverbs = ['swiftly', \n           'silently',\n           'skillfully']\n\nwhile True:\n    if accelerometer.was_gesture('shake'):\n        choice = random.randint(0, len(adjectives)-1)\n        display.scroll(adjectives[choice])        \n        choice = random.randint(0, len(nouns)-1)\n        display.scroll(nouns[choice])\n        choice = random.randint(0, len(verbs)-1)\n        display.scroll(verbs[choice])\n        choice = random.randint(0, len(adverbs)-1)\n        display.scroll(adverbs[choice]) "
+      }
+    ]
+  }
+}

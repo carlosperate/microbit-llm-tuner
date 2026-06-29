@@ -1,0 +1,26 @@
+{
+  "slug": "frere-jacques-tune",
+  "task": "",
+  "status": "draft",
+  "url": "https://microbit.org/projects/make-it-code-it/frere-jacques-tune/",
+  "license": "CC BY-SA 4.0",
+  "code": {
+    "makecode_ts": [
+      {
+        "program_index": 0,
+        "pub_id": "_C545kRP4aDm2",
+        "source": "music.setTempo(120)\nfor (let i = 0; i < 2; i++) {\n    music.playTone(262, music.beat(BeatFraction.Whole))\n    music.playTone(294, music.beat(BeatFraction.Whole))\n    music.playTone(330, music.beat(BeatFraction.Whole))\n    music.playTone(262, music.beat(BeatFraction.Whole))\n}\nfor (let i = 0; i < 2; i++) {\n    music.playTone(330, music.beat(BeatFraction.Whole))\n    music.playTone(349, music.beat(BeatFraction.Whole))\n    music.playTone(392, music.beat(BeatFraction.Double))\n}\n",
+        "dependencies": {
+          "core": "*",
+          "radio": "*"
+        }
+      }
+    ],
+    "micropython": [
+      {
+        "program_index": 0,
+        "source": "from microbit import *\nimport music\n\nfor x in range(2):\n    music.play([\"C4:4\", \"D4\", \"E4\", \"C4\"])\n\nfor x in range(2):\n    music.play([\"E4:4\", \"F4\", \"G4:8\"])\n"
+      }
+    ]
+  }
+}

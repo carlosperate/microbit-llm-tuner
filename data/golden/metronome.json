@@ -1,0 +1,27 @@
+{
+  "slug": "metronome",
+  "task": "",
+  "status": "draft",
+  "url": "https://microbit.org/projects/make-it-code-it/metronome/",
+  "license": "CC BY-SA 4.0",
+  "code": {
+    "makecode_ts": [
+      {
+        "program_index": 0,
+        "pub_id": "_Lxt6F3DLfXEu",
+        "source": "input.onButtonPressed(Button.A, function () {\n    music.changeTempoBy(-5)\n})\ninput.onButtonPressed(Button.AB, function () {\n    basic.showNumber(music.tempo())\n})\ninput.onButtonPressed(Button.B, function () {\n    music.changeTempoBy(5)\n})\nmusic.setTempo(100)\nbasic.forever(function () {\n    music.playTone(262, music.beat(BeatFraction.Sixteenth))\n    music.rest(music.beat(BeatFraction.Whole))\n})\n",
+        "dependencies": {
+          "core": "*",
+          "radio": "*",
+          "microphone": "*"
+        }
+      }
+    ],
+    "micropython": [
+      {
+        "program_index": 0,
+        "source": "from microbit import *\nimport music\ntempo = 100\n\nwhile True:\n    music.set_tempo(bpm=tempo)\n    music.play(['C4:1', 'r:3']) # play C for 1 tick, rest for 3 ticks\n    if button_a.was_pressed():\n        tempo -= 5\n    if button_b.was_pressed():\n        tempo += 5  \n    "
+      }
+    ]
+  }
+}

@@ -1,0 +1,15 @@
+{
+  "slug": "maxmin-temperature-logger",
+  "task": "",
+  "status": "draft",
+  "url": "https://microbit.org/projects/make-it-code-it/maxmin-temperature-logger/",
+  "license": "CC BY-SA 4.0",
+  "code": {
+    "micropython": [
+      {
+        "program_index": 0,
+        "source": "from microbit import *\n\n# function to read data file:\ndef get_nv_data(name):\n    try:\n        with open(name) as f:\n            v = int(f.read())\n    except OSError:\n        v = temperature()\n        try:\n            with open(name, 'w') as f:\n                f.write(str(v))\n        except OSError:\n            display.scroll('Cannot create file %s' % name)\n\n    except ValueError:\n        display.scroll('invalid data in file %s' % name)\n        v = temperature()\n\n    return v\n\n# function to write data file:\ndef set_nv_data(name, value):\n    try:\n        with open(name, 'w') as f:\n            f.write(str(value))\n    except OSError:\n        display.scroll('Cannot write to file %s' % name)\n\nmin = get_nv_data('min.txt')\nmax = get_nv_data('max.txt')\n\nwhile True:\n    currentTemp = temperature()\n    if currentTemp < min:\n        min = currentTemp\n        set_nv_data('min.txt', min)\n    if currentTemp > max:\n        max = currentTemp\n        set_nv_data('max.txt', max)\n    if accelerometer.was_gesture('shake'):\n        display.scroll(currentTemp)\n    if button_a.was_pressed():\n        display.scroll(get_nv_data('min.txt'))\n    if button_b.was_pressed():\n        display.scroll(get_nv_data('max.txt'))\n    if pin2.is_touched():\n        display.scroll('clearing data')\n        set_nv_data('min.txt', currentTemp)\n        set_nv_data('max.txt', currentTemp)\n"
+      }
+    ]
+  }
+}

@@ -1,0 +1,26 @@
+{
+  "slug": "animal-tracker",
+  "task": "",
+  "status": "draft",
+  "url": "https://microbit.org/projects/make-it-code-it/animal-tracker/",
+  "license": "CC BY-SA 4.0",
+  "code": {
+    "makecode_ts": [
+      {
+        "program_index": 0,
+        "pub_id": "_h0WPpa8aAKgY",
+        "source": "radio.onReceivedNumber(function (receivedNumber) {\n    basic.showNumber(receivedNumber)\n})\nradio.setGroup(7)\nbasic.forever(function () {\n    radio.sendNumber(input.acceleration(Dimension.Y))\n})\n",
+        "dependencies": {
+          "core": "*",
+          "radio": "*"
+        }
+      }
+    ],
+    "micropython": [
+      {
+        "program_index": 0,
+        "source": "from microbit import *\nimport radio\nradio.config(group=7)\nradio.on()\n\nwhile True:\n    radio.send(str(accelerometer.get_y()))\n    message = radio.receive()\n    if message:\n        display.scroll(message)\n    sleep(2000)"
+      }
+    ]
+  }
+}

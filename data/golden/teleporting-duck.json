@@ -1,0 +1,26 @@
+{
+  "slug": "teleporting-duck",
+  "task": "",
+  "status": "draft",
+  "url": "https://microbit.org/projects/make-it-code-it/teleporting-duck/",
+  "license": "CC BY-SA 4.0",
+  "code": {
+    "makecode_ts": [
+      {
+        "program_index": 0,
+        "pub_id": "_W9id6YdkMME9",
+        "source": "radio.onReceivedStringDeprecated(function (receivedString) {\n    basic.showIcon(IconNames.Duck)\n})\ninput.onGesture(Gesture.Shake, function () {\n    basic.clearScreen()\n    radio.sendString(\"DUCK\")\n})\nradio.setGroup(23)\n",
+        "dependencies": {
+          "core": "*",
+          "radio": "*"
+        }
+      }
+    ],
+    "micropython": [
+      {
+        "program_index": 0,
+        "source": "from microbit import *\nimport radio\nradio.config(group=23)\nradio.on()\n\nwhile True:\n    message = radio.receive()\n    if message:\n        display.show(Image.DUCK)\n    if accelerometer.was_gesture('shake'):\n        display.clear()\n        radio.send('duck')\n"
+      }
+    ]
+  }
+}

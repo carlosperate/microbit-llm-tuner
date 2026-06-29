@@ -1,0 +1,26 @@
+{
+  "slug": "activity-array",
+  "task": "",
+  "status": "draft",
+  "url": "https://microbit.org/projects/make-it-code-it/activity-array/",
+  "license": "CC BY-SA 4.0",
+  "code": {
+    "makecode_ts": [
+      {
+        "program_index": 0,
+        "pub_id": "_X9Y0YR5Kvi0h",
+        "source": "input.onButtonPressed(Button.A, function () {\n    choice = Math.randomRange(0, options.length - 1)\n    basic.showString(\"\" + options[choice])\n})\nlet choice = 0\nlet options: string[] = []\noptions = [\"PE with Joe\", \"watch a movie\", \"play a board game\", \"tidy our rooms\", \"learn a song\", \"bake a cake\"]\n",
+        "dependencies": {
+          "core": "*",
+          "radio": "*"
+        }
+      }
+    ],
+    "micropython": [
+      {
+        "program_index": 0,
+        "source": "from microbit import *\nimport random\n\noptions = ['PE with Joe', \n           'watch a movie',\n           'play a board game',\n           'tidy our rooms',\n           'learn a song',\n           'bake a cake']\n\nwhile True:\n    if button_a.is_pressed():\n        choice = random.randint(0, len(options)-1)\n        display.scroll(options[choice])"
+      }
+    ]
+  }
+}

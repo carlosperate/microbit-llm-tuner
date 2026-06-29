@@ -1,0 +1,39 @@
+{
+  "slug": "heartbeat-beacon",
+  "task": "",
+  "status": "draft",
+  "url": "https://microbit.org/projects/make-it-code-it/heartbeat-beacon/",
+  "license": "CC BY-SA 4.0",
+  "code": {
+    "makecode_ts": [
+      {
+        "program_index": 0,
+        "pub_id": "_Lo4Pt4RTYaRs",
+        "source": "radio.setGroup(73)\nradio.setTransmitPower(1)\nbasic.forever(function () {\n    radio.sendString(\"hello\")\n    basic.pause(2000)\n})\n",
+        "dependencies": {
+          "core": "*",
+          "radio": "*"
+        }
+      },
+      {
+        "program_index": 1,
+        "pub_id": "_da27ih9422iL",
+        "source": "radio.onReceivedString(function (receivedString) {\n    basic.showIcon(IconNames.Heart)\n    basic.pause(1000)\n    basic.clearScreen()\n})\nradio.setGroup(73)\nradio.setTransmitPower(1)\n",
+        "dependencies": {
+          "core": "*",
+          "radio": "*"
+        }
+      }
+    ],
+    "micropython": [
+      {
+        "program_index": 0,
+        "source": "from microbit import *\nimport radio\nradio.config(group=73, power=1)\nradio.on()\n\nwhile True:\n    radio.send('hello')\n    sleep(2000)\n"
+      },
+      {
+        "program_index": 1,
+        "source": "from microbit import *\nimport radio\nradio.config(group=73)\nradio.on()\n\nwhile True:\n    message = radio.receive()\n    if message:\n        display.show(Image.HEART)\n        sleep(1000)\n        display.clear()\n"
+      }
+    ]
+  }
+}

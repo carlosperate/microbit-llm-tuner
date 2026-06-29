@@ -1,0 +1,39 @@
+{
+  "slug": "indoor-outdoor-thermometer",
+  "task": "",
+  "status": "draft",
+  "url": "https://microbit.org/projects/make-it-code-it/indoor-outdoor-thermometer/",
+  "license": "CC BY-SA 4.0",
+  "code": {
+    "makecode_ts": [
+      {
+        "program_index": 0,
+        "pub_id": "_7rKigED8cKhs",
+        "source": "radio.setGroup(23)\nbasic.forever(function () {\n    radio.sendNumber(input.temperature())\n    basic.pause(5000)\n})\n",
+        "dependencies": {
+          "core": "*",
+          "radio": "*"
+        }
+      },
+      {
+        "program_index": 1,
+        "pub_id": "_0e5Mx9Hh5JvE",
+        "source": "input.onButtonPressed(Button.A, function () {\n    basic.showNumber(input.temperature())\n})\nradio.onReceivedNumber(function (receivedNumber) {\n    outdoorTemp = receivedNumber\n})\ninput.onButtonPressed(Button.B, function () {\n    basic.showNumber(outdoorTemp)\n})\nlet outdoorTemp = 0\nradio.setGroup(23)\n",
+        "dependencies": {
+          "core": "*",
+          "radio": "*"
+        }
+      }
+    ],
+    "micropython": [
+      {
+        "program_index": 0,
+        "source": "from microbit import *\nimport radio\nradio.config(group=23)\nradio.on()\n\nwhile True:\n    radio.send(str(temperature()))\n    sleep(5000)\n"
+      },
+      {
+        "program_index": 1,
+        "source": "from microbit import *\nimport radio\nradio.config(group=23)\nradio.on()\noutdoorTemp = '-'\n\nwhile True:\n    message = radio.receive()\n    if message:\n        outdoorTemp = message\n    if button_a.was_pressed():\n        display.scroll(str(temperature()))\n    if button_b.was_pressed():\n        display.scroll(outdoorTemp)\n        "
+      }
+    ]
+  }
+}

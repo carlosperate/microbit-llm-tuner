@@ -1,0 +1,26 @@
+{
+  "slug": "energy-light-meter",
+  "task": "",
+  "status": "draft",
+  "url": "https://microbit.org/projects/make-it-code-it/energy-light-meter/",
+  "license": "CC BY-SA 4.0",
+  "code": {
+    "makecode_ts": [
+      {
+        "program_index": 0,
+        "pub_id": "_UF6hdEgq96PF",
+        "source": "input.onButtonPressed(Button.A, function () {\n    reading = input.lightLevel()\n    basic.showIcon(IconNames.SmallDiamond)\n    basic.showIcon(IconNames.Diamond)\n    basic.pause(500)\n    basic.showString(\"M\")\n})\ninput.onButtonPressed(Button.B, function () {\n    basic.clearScreen()\n    basic.showNumber(reading)\n    basic.pause(500)\n    basic.showString(\"M\")\n})\nlet reading = 0\nbasic.showString(\"M\")\nreading = input.lightLevel()\nbasic.pause(100)\n",
+        "dependencies": {
+          "core": "*",
+          "radio": "*"
+        }
+      }
+    ],
+    "micropython": [
+      {
+        "program_index": 0,
+        "source": "from microbit import *\n\ndisplay.show('M')\nreading = display.read_light_level()\nsleep(100)\n\nwhile True:\n    if button_a.was_pressed():\n        # take a light measurement and store it\n        reading = display.read_light_level()\n        display.show(Image.DIAMOND_SMALL)\n        sleep(400)\n        display.show(Image.DIAMOND)\n        sleep(400+500)\n        display.show('M')\n\n    elif button_b.was_pressed():\n        # display the stored light measurement\n        display.clear()\n        display.scroll(reading)\n        sleep(500)\n        display.show('M')\n"
+      }
+    ]
+  }
+}

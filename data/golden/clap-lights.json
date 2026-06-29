@@ -1,0 +1,27 @@
+{
+  "slug": "clap-lights",
+  "task": "",
+  "status": "draft",
+  "url": "https://microbit.org/projects/make-it-code-it/clap-lights/",
+  "license": "CC BY-SA 4.0",
+  "code": {
+    "makecode_ts": [
+      {
+        "program_index": 0,
+        "pub_id": "_JPsDsTYeJd5z",
+        "source": "let lightsOn = false\ninput.onSound(DetectedSound.Loud, function () {\n    lightsOn = !(lightsOn)\n    if (lightsOn) {\n        basic.showLeds(`\n            # # # # #\n            # # # # #\n            # # # # #\n            # # # # #\n            # # # # #\n            `)\n    } else {\n        basic.clearScreen()\n    }\n})\n",
+        "dependencies": {
+          "core": "*",
+          "radio": "*",
+          "microphone": "*"
+        }
+      }
+    ],
+    "micropython": [
+      {
+        "program_index": 0,
+        "source": "from microbit import *\nlightsOn = False\n\nwhile True:\n    if microphone.was_event(SoundEvent.LOUD):\n        lightsOn = not lightsOn\n        if lightsOn:\n            display.show(Image('99999:'\n                               '99999:'\n                               '99999:'\n                               '99999:'\n                               '99999'))\n        else:\n            display.clear()\n    sleep(100)"
+      }
+    ]
+  }
+}

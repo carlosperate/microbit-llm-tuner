@@ -1,0 +1,22 @@
+{
+  "slug": "kick-strength-data-logger",
+  "task": "",
+  "status": "draft",
+  "url": "https://microbit.org/projects/make-it-code-it/kick-strength-data-logger/",
+  "license": "CC BY-SA 4.0",
+  "code": {
+    "makecode_ts": [
+      {
+        "program_index": 0,
+        "pub_id": "_comEJj2wbCJa",
+        "source": "datalogger.onLogFull(function () {\n    logging = false\n    basic.showLeds(`\n        # # # # #\n        # # # # #\n        # # # # #\n        # # # # #\n        # # # # #\n        `)\n})\ninput.onButtonPressed(Button.A, function () {\n    logging = true\n    basic.showIcon(IconNames.Yes)\n})\ninput.onButtonPressed(Button.AB, function () {\n    if (input.logoIsPressed()) {\n        logging = false\n        basic.showIcon(IconNames.Skull)\n        datalogger.deleteLog()\n    }\n})\nlet logging = false\ninput.setAccelerometerRange(AcceleratorRange.EightG)\nlogging = false\nbasic.showIcon(IconNames.No)\ndatalogger.setColumnTitles(\"strength\")\nloops.everyInterval(100, function () {\n    if (logging) {\n        datalogger.log(datalogger.createCV(\"strength\", input.acceleration(Dimension.Strength)))\n    }\n})\n",
+        "dependencies": {
+          "core": "*",
+          "radio": "*",
+          "microphone": "*",
+          "datalogger": "*"
+        }
+      }
+    ]
+  }
+}

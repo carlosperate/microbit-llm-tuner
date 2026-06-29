@@ -1,0 +1,35 @@
+{
+  "slug": "nightlight",
+  "task": "",
+  "status": "draft",
+  "url": "https://microbit.org/projects/make-it-code-it/nightlight/",
+  "license": "CC BY-SA 4.0",
+  "code": {
+    "makecode_ts": [
+      {
+        "program_index": 0,
+        "pub_id": "_dz7W7hWM2AdR",
+        "source": "basic.forever(function () {\n    if (input.lightLevel() < 100) {\n        basic.showLeds(`\n            # # # # #\n            # # # # #\n            # # # # #\n            # # # # #\n            # # # # #\n            `)\n    } else {\n        basic.clearScreen()\n    }\n})\n",
+        "dependencies": {
+          "core": "*",
+          "radio": "*"
+        }
+      },
+      {
+        "program_index": 1,
+        "pub_id": "_HFH8X0Rt2bVH",
+        "source": "basic.showLeds(`\n    # # # # #\n    # # # # #\n    # # # # #\n    # # # # #\n    # # # # #\n    `)\nbasic.forever(function () {\n    led.setBrightness(255 - input.lightLevel())\n    basic.pause(200)\n})\n",
+        "dependencies": {
+          "core": "*",
+          "radio": "*"
+        }
+      }
+    ],
+    "micropython": [
+      {
+        "program_index": 0,
+        "source": "from microbit import *\n\nwhile True:\n    if display.read_light_level() < 100:\n        display.show(Image(\n        \"99999:\"\n        \"99999:\"\n        \"99999:\"\n        \"99999:\"\n        \"99999\"))\n    else:\n        display.clear()\n    sleep(2000)\n"
+      }
+    ]
+  }
+}

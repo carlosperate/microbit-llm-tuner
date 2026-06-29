@@ -1,0 +1,15 @@
+{
+  "slug": "dance-steps",
+  "task": "",
+  "status": "draft",
+  "url": "https://microbit.org/projects/make-it-code-it/dance-steps/",
+  "license": "CC BY-NC-SA 4.0",
+  "code": {
+    "micropython": [
+      {
+        "program_index": 0,
+        "source": "# Imports go at the top\nfrom microbit import *\n\n\nwhile True:\n    if button_a.is_pressed():\n        for i in range(4):  \n            display.show(Image('00900:'\n                       '09000:'\n                       '99999:'\n                       '09000:'\n                       '00900'))\n            sleep(1000)\n            display.show(Image('00900:'\n                       '00090:'\n                       '99999:'\n                       '00090:'\n                       '00900'))\n            sleep(1000)\n            display.show(Image('00900:'\n                       '09990:'\n                       '90909:'\n                       '00900:'\n                       '00900'))\n            sleep(1000)\n            display.show(Image('00900:'\n                       '00900:'\n                       '90909:'\n                       '09990:'\n                       '00900'))\n            sleep(1000)\n    display.clear()\n"
+      }
+    ]
+  }
+}

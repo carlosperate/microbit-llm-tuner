@@ -1,0 +1,27 @@
+{
+  "slug": "microbit-pet",
+  "task": "",
+  "status": "draft",
+  "url": "https://microbit.org/projects/make-it-code-it/microbit-pet/",
+  "license": "CC BY-SA 4.0",
+  "code": {
+    "makecode_ts": [
+      {
+        "program_index": 0,
+        "pub_id": "_28F66oD2X6mz",
+        "source": "input.onGesture(Gesture.Shake, function () {\n    timer = 0\n    basic.showIcon(IconNames.Surprised)\n    music.play(music.builtinPlayableSoundEffect(soundExpression.giggle), music.PlaybackMode.UntilDone)\n})\ninput.onLogoEvent(TouchButtonEvent.Pressed, function () {\n    timer = 0\n    basic.showIcon(IconNames.Happy)\n    music.play(music.builtinPlayableSoundEffect(soundExpression.happy), music.PlaybackMode.UntilDone)\n})\nlet timer = 0\nbasic.showLeds(`\n    . . . . .\n    . # . # .\n    . . . . .\n    . # # # .\n    . . . . .\n    `)\nmusic.play(music.builtinPlayableSoundEffect(soundExpression.hello), music.PlaybackMode.UntilDone)\nbasic.forever(function () {\n    basic.pause(1000)\n    timer += 1\n    if (timer == 20) {\n        basic.showIcon(IconNames.Sad)\n        music.play(music.builtinPlayableSoundEffect(soundExpression.sad), music.PlaybackMode.UntilDone)\n    }\n    if (timer == 30) {\n        basic.showIcon(IconNames.Asleep)\n        music.play(music.builtinPlayableSoundEffect(soundExpression.yawn), music.PlaybackMode.UntilDone)\n    }\n    if (timer == 40) {\n        music.play(music.builtinPlayableSoundEffect(soundExpression.mysterious), music.PlaybackMode.UntilDone)\n        music.setBuiltInSpeakerEnabled(false)\n        while (true) {\n            basic.showIcon(IconNames.Skull)\n        }\n    }\n})\n",
+        "dependencies": {
+          "core": "*",
+          "radio": "*",
+          "microphone": "*"
+        }
+      }
+    ],
+    "micropython": [
+      {
+        "program_index": 0,
+        "source": "from microbit import *\nimport audio\n\ntimer = 0\ndisplay.show(Image(\n    \"00000:\"\n    \"09090:\"\n    \"00000:\"\n    \"09990:\"\n    \"00000\"))\naudio.play(Sound.HELLO)\n\nwhile True:\n    if pin_logo.is_touched():\n        timer = 0\n        display.show(Image.HAPPY)\n        audio.play(Sound.HAPPY)\n    elif accelerometer.was_gesture('shake'):\n        timer = 0\n        display.show(Image.SURPRISED)\n        audio.play(Sound.GIGGLE)\n    else:\n        sleep(500)\n        timer += 0.5\n        # sleep for half a second only to make it react more quickly to logo touch & shake\n        \n    if timer == 20:\n        display.show(Image.SAD)\n        audio.play(Sound.SAD)\n    elif timer == 30:\n        display.show(Image.ASLEEP)\n        audio.play(Sound.YAWN)\n    elif timer == 40:\n        display.show(Image.SKULL)\n        audio.play(Sound.MYSTERIOUS)\n        break\n    "
+      }
+    ]
+  }
+}

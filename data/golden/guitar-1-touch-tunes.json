@@ -1,0 +1,27 @@
+{
+  "slug": "guitar-1-touch-tunes",
+  "task": "",
+  "status": "draft",
+  "url": "https://microbit.org/projects/make-it-code-it/guitar-1-touch-tunes/",
+  "license": "CC BY-SA 4.0",
+  "code": {
+    "makecode_ts": [
+      {
+        "program_index": 0,
+        "pub_id": "_A67YTJ19o05p",
+        "source": "input.onPinPressed(TouchPin.P2, function () {\n    music._playDefaultBackground(music.builtInPlayableMelody(Melodies.Blues), music.PlaybackMode.InBackground)\n})\ninput.onPinPressed(TouchPin.P1, function () {\n    music._playDefaultBackground(music.builtInPlayableMelody(Melodies.Ode), music.PlaybackMode.InBackground)\n})\n",
+        "dependencies": {
+          "core": "*",
+          "radio": "*",
+          "microphone": "*"
+        }
+      }
+    ],
+    "micropython": [
+      {
+        "program_index": 0,
+        "source": "from microbit import *\nimport music\n\nwhile True:\n    if pin1.is_touched():\n        music.play(music.ODE)\n    if pin2.is_touched():\n        music.play(music.BLUES)\n"
+      }
+    ]
+  }
+}

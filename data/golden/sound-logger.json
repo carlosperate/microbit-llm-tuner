@@ -1,0 +1,27 @@
+{
+  "slug": "sound-logger",
+  "task": "",
+  "status": "draft",
+  "url": "https://microbit.org/projects/make-it-code-it/sound-logger/",
+  "license": "CC BY-SA 4.0",
+  "code": {
+    "makecode_ts": [
+      {
+        "program_index": 0,
+        "pub_id": "_4fPbdWMhiV2w",
+        "source": "let soundLevel = 0\nlet maxSound = 0\nbasic.forever(function () {\n    if (input.buttonIsPressed(Button.A)) {\n        basic.showNumber(maxSound)\n    } else {\n        soundLevel = input.soundLevel()\n        led.plotBarGraph(\n        soundLevel,\n        255\n        )\n        if (soundLevel > maxSound) {\n            maxSound = soundLevel\n        }\n    }\n})\n",
+        "dependencies": {
+          "core": "*",
+          "radio": "*",
+          "microphone": "*"
+        }
+      }
+    ],
+    "micropython": [
+      {
+        "program_index": 0,
+        "source": "from microbit import *\nmaxSound = 0\nlights = Image(\"11111:\"\n              \"11111:\"\n              \"11111:\"\n              \"11111:\"\n              \"11111\")\n# ignore first sound level reading\nsoundLevel = microphone.sound_level()\nsleep(200)\n\nwhile True:\n    if button_a.is_pressed():\n        display.scroll(maxSound)\n    else:\n        soundLevel = microphone.sound_level()\n        display.show(lights * soundLevel)\n        if soundLevel > maxSound:\n            maxSound = soundLevel\n            "
+      }
+    ]
+  }
+}

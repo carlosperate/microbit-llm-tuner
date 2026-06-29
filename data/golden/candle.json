@@ -1,0 +1,27 @@
+{
+  "slug": "candle",
+  "task": "",
+  "status": "draft",
+  "url": "https://microbit.org/projects/make-it-code-it/candle/",
+  "license": "CC BY-SA 4.0",
+  "code": {
+    "makecode_ts": [
+      {
+        "program_index": 0,
+        "pub_id": "_3tT16pEcufqA",
+        "source": "input.onSound(DetectedSound.Loud, function () {\n    lit = !(lit)\n})\nlet flicker = 0\nlet lit = false\nlit = true\nbasic.forever(function () {\n    if (lit) {\n        basic.showLeds(`\n            . . # . .\n            . # # # .\n            . # # # .\n            . # # # .\n            . # # # .\n            `)\n        flicker = randint(1, 3)\n        if (flicker != 2) {\n            led.unplot(2, 0)\n            led.plot(flicker, 0)\n        }\n        basic.pause(200)\n    } else {\n        basic.clearScreen()\n    }\n})\n",
+        "dependencies": {
+          "core": "*",
+          "radio": "*",
+          "microphone": "*"
+        }
+      }
+    ],
+    "micropython": [
+      {
+        "program_index": 0,
+        "source": "from microbit import *\nimport random\n\nlit = True\n\nwhile True:\n    if microphone.was_event(SoundEvent.LOUD):\n        lit = not lit\n        sleep(500)\n    if lit:\n        display.show(Image(\n        \"00900:\"\n        \"09990:\"\n        \"09990:\"\n        \"09990:\"\n        \"09990\"))\n        sleep(150)\n        flicker = random.randint(1, 3)\n        if flicker != 2:\n            display.set_pixel(2,0,0)\n            display.set_pixel(flicker,0,9)\n        sleep(150)\n    else:\n        display.clear()"
+      }
+    ]
+  }
+}

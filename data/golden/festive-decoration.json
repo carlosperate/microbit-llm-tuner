@@ -1,0 +1,27 @@
+{
+  "slug": "festive-decoration",
+  "task": "",
+  "status": "draft",
+  "url": "https://microbit.org/projects/make-it-code-it/festive-decoration/",
+  "license": "CC BY-SA 4.0",
+  "code": {
+    "makecode_ts": [
+      {
+        "program_index": 0,
+        "pub_id": "_g0VMqHFhxbas",
+        "source": "basic.forever(function () {\n    if (input.lightLevel() < 100) {\n        basic.showLeds(`\n            # . # . #\n            . # # # .\n            # # # # #\n            . # # # .\n            # . # . #\n            `)\n        basic.pause(500)\n        basic.showLeds(`\n            . . . . .\n            . # . # .\n            . . # . .\n            . # . # .\n            . . . . .\n            `)\n        basic.pause(500)\n    } else {\n        basic.clearScreen()\n    }\n})\n",
+        "dependencies": {
+          "core": "*",
+          "radio": "*",
+          "microphone": "*"
+        }
+      }
+    ],
+    "micropython": [
+      {
+        "program_index": 0,
+        "source": "# Imports go at the top\nfrom microbit import *\n\nwhile True:\n    if display.read_light_level() < 100:\n        display.show(Image('90909:'\n                           '09990:'\n                           '99999:'\n                           '09990:'\n                           '90909'))\n        sleep(500)\n        display.show(Image('00000:'\n                       '09090:'\n                       '00900:'\n                       '09090:'\n                       '00000'))\n        sleep(500)\n    else: display.clear()\n    sleep(500)\n   "
+      }
+    ]
+  }
+}

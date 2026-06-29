@@ -1,0 +1,27 @@
+{
+  "slug": "max-min-thermometer",
+  "task": "",
+  "status": "draft",
+  "url": "https://microbit.org/projects/make-it-code-it/max-min-thermometer/",
+  "license": "CC BY-SA 4.0",
+  "code": {
+    "makecode_ts": [
+      {
+        "program_index": 0,
+        "pub_id": "_27VgywVTLHYV",
+        "source": "input.onButtonPressed(Button.A, function () {\n    basic.showNumber(min)\n})\ninput.onButtonPressed(Button.B, function () {\n    basic.showNumber(max)\n})\nlet min = 0\nlet max = 0\nlet currenttemperature = input.temperature()\nmax = currenttemperature\nmin = currenttemperature\nbasic.forever(function () {\n    basic.showString(\".\")\n    currenttemperature = input.temperature()\n    if (currenttemperature < min) {\n        min = currenttemperature\n    }\n    if (currenttemperature > max) {\n        max = currenttemperature\n    }\n    basic.pause(1000)\n    basic.clearScreen()\n    basic.pause(1000)\n})\n",
+        "dependencies": {
+          "core": "*",
+          "radio": "*",
+          "microphone": "*"
+        }
+      }
+    ],
+    "micropython": [
+      {
+        "program_index": 0,
+        "source": "from microbit import *\n\ncurrentTemp = temperature()\nmax = currentTemp\nmin = currentTemp\n\nwhile True:\n    display.show('.')\n    currentTemp = temperature()\n    if currentTemp < min:\n        min = currentTemp\n    elif currentTemp > max:\n        max = currentTemp\n    if button_a.was_pressed():\n        display.scroll(min)\n    if button_b.was_pressed():\n        display.scroll(max)\n    sleep(1000)\n    display.clear()\n    sleep(1000)\n"
+      }
+    ]
+  }
+}

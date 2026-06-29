@@ -1,0 +1,27 @@
+{
+  "slug": "water-bottle-alert",
+  "task": "",
+  "status": "draft",
+  "url": "https://microbit.org/projects/make-it-code-it/water-bottle-alert/",
+  "license": "CC BY-SA 4.0",
+  "code": {
+    "makecode_ts": [
+      {
+        "program_index": 0,
+        "pub_id": "_K4d6Fdbt2Cst",
+        "source": "input.onGesture(Gesture.TiltRight, function () {\n    basic.showIcon(IconNames.No)\n})\nbasic.showIcon(IconNames.Heart)\n",
+        "dependencies": {
+          "core": "*",
+          "radio": "*",
+          "microphone": "*"
+        }
+      }
+    ],
+    "micropython": [
+      {
+        "program_index": 0,
+        "source": "# Imports go at the top\nfrom microbit import *\n\ndisplay.show(Image.HEART)\nsleep(400)\n\nwhile True:\n    if accelerometer.was_gesture('right'):\n        display.show(Image.NO)\n"
+      }
+    ]
+  }
+}

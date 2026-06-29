@@ -1,0 +1,27 @@
+{
+  "slug": "cookie-tin-alarm",
+  "task": "",
+  "status": "draft",
+  "url": "https://microbit.org/projects/make-it-code-it/cookie-tin-alarm/",
+  "license": "CC BY-SA 4.0",
+  "code": {
+    "makecode_ts": [
+      {
+        "program_index": 0,
+        "pub_id": "_7yKVKiLX00Rs",
+        "source": "basic.forever(function () {\n    if (input.lightLevel() > 30) {\n        basic.showIcon(IconNames.Angry)\n    } else {\n        basic.clearScreen()\n    }\n})\n",
+        "dependencies": {
+          "core": "*",
+          "radio": "*",
+          "microphone": "*"
+        }
+      }
+    ],
+    "micropython": [
+      {
+        "program_index": 0,
+        "source": "from microbit import *\n\nwhile True:\n    if display.read_light_level() > 30:\n        display.show(Image.ANGRY)\n    else:\n        display.clear()\n"
+      }
+    ]
+  }
+}

@@ -1,0 +1,26 @@
+{
+  "slug": "rock-paper-scissors",
+  "task": "",
+  "status": "draft",
+  "url": "https://microbit.org/projects/make-it-code-it/rock-paper-scissors/",
+  "license": "CC BY-SA 4.0",
+  "code": {
+    "makecode_ts": [
+      {
+        "program_index": 0,
+        "pub_id": "_arUf8fFvXX9w",
+        "source": "let tool = 0\ninput.onGesture(Gesture.Shake, function () {\n    tool = Math.randomRange(0, 2)\n    if (tool == 0) {\n        basic.showIcon(IconNames.SmallSquare)\n    } else if (tool == 1) {\n        basic.showIcon(IconNames.Square)\n    } else {\n        basic.showIcon(IconNames.Scissors)\n    }\n})\n",
+        "dependencies": {
+          "core": "*",
+          "radio": "*"
+        }
+      }
+    ],
+    "micropython": [
+      {
+        "program_index": 0,
+        "source": "from microbit import *\nimport random\n\nwhile True:\n    if accelerometer.was_gesture('shake'):\n        tool = random.randint(0,2)\n        if tool == 0:\n            display.show(Image.SQUARE_SMALL)\n        elif tool == 1:\n            display.show(Image.SQUARE)\n        else:\n            display.show(Image.SCISSORS)"
+      }
+    ]
+  }
+}

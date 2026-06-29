@@ -1,0 +1,26 @@
+{
+  "slug": "activity-picker",
+  "task": "",
+  "status": "draft",
+  "url": "https://microbit.org/projects/make-it-code-it/activity-picker/",
+  "license": "CC BY-SA 4.0",
+  "code": {
+    "makecode_ts": [
+      {
+        "program_index": 0,
+        "pub_id": "_3mmA7TW7RK53",
+        "source": "let random_number = 0\ninput.onButtonPressed(Button.A, function () {\n    random_number = Math.randomRange(1, 6)\n    if (random_number == 1) {\n        basic.showString(\"PE with Joe\")\n    } else if (random_number == 2) {\n        basic.showString(\"watch a movie\")\n    } else if (random_number == 3) {\n        basic.showString(\"play a board game\")\n    } else if (random_number == 4) {\n        basic.showString(\"tidy our rooms\")\n    } else if (random_number == 5) {\n        basic.showString(\"play a card game\")\n    } else {\n        basic.showString(\"learn a song\")\n    }\n})\n",
+        "dependencies": {
+          "core": "*",
+          "radio": "*"
+        }
+      }
+    ],
+    "micropython": [
+      {
+        "program_index": 0,
+        "source": "from microbit import *\nimport random\n\nwhile True:\n    if button_a.is_pressed():\n        random_number = random.randint(1, 6)\n        if random_number == 1:\n            display.scroll('PE with Joe')\n        elif random_number == 2:\n            display.scroll('watch a movie')\n        elif random_number == 3:\n            display.scroll('play a board game')\n        elif random_number == 4:\n            display.scroll('tidy our rooms')\n        elif random_number == 5:\n            display.scroll('play a card game')\n        else:\n            display.scroll('learn a song')"
+      }
+    ]
+  }
+}

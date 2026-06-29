@@ -1,0 +1,26 @@
+{
+  "slug": "step-counter",
+  "task": "",
+  "status": "draft",
+  "url": "https://microbit.org/projects/make-it-code-it/step-counter/",
+  "license": "CC BY-SA 4.0",
+  "code": {
+    "makecode_ts": [
+      {
+        "program_index": 0,
+        "pub_id": "_E6uhUWKEqL1L",
+        "source": "input.onGesture(Gesture.Shake, function () {\n    steps += 1\n    basic.showNumber(steps)\n})\nlet steps = 0\nsteps = 0\n",
+        "dependencies": {
+          "core": "*",
+          "radio": "*"
+        }
+      }
+    ],
+    "micropython": [
+      {
+        "program_index": 0,
+        "source": "from microbit import *\nsteps=0\n\nwhile True:\n    if accelerometer.was_gesture('shake'):\n        steps += 1\n        display.show(steps)"
+      }
+    ]
+  }
+}

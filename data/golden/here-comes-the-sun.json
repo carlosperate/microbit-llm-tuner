@@ -1,0 +1,26 @@
+{
+  "slug": "here-comes-the-sun",
+  "task": "",
+  "status": "draft",
+  "url": "https://microbit.org/projects/make-it-code-it/here-comes-the-sun/",
+  "license": "CC BY-SA 4.0",
+  "code": {
+    "makecode_ts": [
+      {
+        "program_index": 0,
+        "pub_id": "_WAP3mJ7dpWTe",
+        "source": "basic.showLeds(`\n    # . # . #\n    . # # # .\n    # # # # #\n    . # # # .\n    # . # . #\n    `)\n",
+        "dependencies": {
+          "core": "*",
+          "radio": "*"
+        }
+      }
+    ],
+    "micropython": [
+      {
+        "program_index": 0,
+        "source": "from microbit import *\n\nwhile True:\n    display.show(Image(\n        \"90909:\"\n        \"09990:\"\n        \"99999:\"\n        \"09990:\"\n        \"90909\"))"
+      }
+    ]
+  }
+}

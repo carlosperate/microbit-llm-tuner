@@ -1,0 +1,21 @@
+{
+  "slug": "light-investigation",
+  "task": "",
+  "status": "draft",
+  "url": "https://microbit.org/projects/make-it-code-it/light-investigation/",
+  "license": "CC BY-SA 4.0",
+  "code": {
+    "makecode_ts": [
+      {
+        "program_index": 0,
+        "pub_id": "_K7KY660s2RFR",
+        "source": "radio.onReceivedNumber(function (receivedNumber) {\n    boxLight = receivedNumber\n})\ninput.onButtonPressed(Button.B, function () {\n    basic.showNumber(Math.round(Math.map(boxLight, 0, 255, 0, 100)))\n    basic.pause(5000)\n    basic.clearScreen()\n})\nlet boxLight = 0\nradio.setGroup(50)\nmusic.play(music.tonePlayable(262, music.beat(BeatFraction.Whole)), music.PlaybackMode.UntilDone)\nbasic.forever(function () {\n    radio.sendNumber(input.lightLevel())\n    basic.pause(1000)\n})\n",
+        "dependencies": {
+          "core": "*",
+          "radio": "*",
+          "microphone": "*"
+        }
+      }
+    ]
+  }
+}

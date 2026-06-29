@@ -1,0 +1,26 @@
+{
+  "slug": "magic-8ball",
+  "task": "",
+  "status": "draft",
+  "url": "https://microbit.org/projects/make-it-code-it/magic-8ball/",
+  "license": "CC BY-SA 4.0",
+  "code": {
+    "makecode_ts": [
+      {
+        "program_index": 0,
+        "pub_id": "_V7FAm44TyfFT",
+        "source": "let number = 0\ninput.onGesture(Gesture.Shake, function () {\n    basic.clearScreen()\n    number = Math.randomRange(1, 3)\n    if (number == 3) {\n        basic.showIcon(IconNames.Yes)\n    } else if (number == 2) {\n        basic.showIcon(IconNames.No)\n    } else {\n        basic.showIcon(IconNames.Meh)\n    }\n})\n",
+        "dependencies": {
+          "core": "*",
+          "radio": "*"
+        }
+      }
+    ],
+    "micropython": [
+      {
+        "program_index": 0,
+        "source": "from microbit import *\nimport random\n\nwhile True:\n    if accelerometer.was_gesture('shake'):\n        number = random.randint(1, 3)\n        if number == 3:\n            display.show(Image.YES)\n        elif number == 2:\n            display.show(Image.NO)\n        else:\n            display.show(Image.MEH)"
+      }
+    ]
+  }
+}

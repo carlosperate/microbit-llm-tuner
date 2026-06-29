@@ -1,0 +1,40 @@
+{
+  "slug": "pressure-switch-alarm",
+  "task": "",
+  "status": "draft",
+  "url": "https://microbit.org/projects/make-it-code-it/pressure-switch-alarm/",
+  "license": "CC BY-SA 4.0",
+  "code": {
+    "makecode_ts": [
+      {
+        "program_index": 0,
+        "pub_id": "_AvaezbbVqdoD",
+        "source": "input.onPinPressed(TouchPin.P0, function () {\n    radio.sendString(\"intruder\")\n})\nradio.setGroup(34)\n",
+        "dependencies": {
+          "core": "*",
+          "radio": "*"
+        }
+      },
+      {
+        "program_index": 1,
+        "pub_id": "_TVx38dHioEy3",
+        "source": "input.onButtonPressed(Button.A, function () {\n    basic.clearScreen()\n})\nradio.onReceivedString(function (receivedString) {\n    if (receivedString == \"intruder\") {\n        basic.showIcon(IconNames.Angry)\n        music._playDefaultBackground(music.builtInPlayableMelody(Melodies.Baddy), music.PlaybackMode.UntilDone)\n    }\n})\nradio.setGroup(34)\n",
+        "dependencies": {
+          "core": "*",
+          "radio": "*",
+          "microphone": "*"
+        }
+      }
+    ],
+    "micropython": [
+      {
+        "program_index": 0,
+        "source": "from microbit import *\nimport radio\nradio.config(group=34)\nradio.on()\n\nwhile True:\n    if pin0.is_touched():\n        radio.send('intruder')\n"
+      },
+      {
+        "program_index": 1,
+        "source": "from microbit import *\nimport music\nimport radio\nradio.config(group=34)\nradio.on()\n\nwhile True:\n    message = radio.receive()\n    if message:\n        if message == 'intruder':\n            display.show(Image.ANGRY)\n            music.play(music.BADDY)\n    if button_a.was_pressed():\n        display.clear()\n"
+      }
+    ]
+  }
+}

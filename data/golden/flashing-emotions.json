@@ -1,0 +1,26 @@
+{
+  "slug": "flashing-emotions",
+  "task": "",
+  "status": "draft",
+  "url": "https://microbit.org/projects/make-it-code-it/flashing-emotions/",
+  "license": "CC BY-SA 4.0",
+  "code": {
+    "makecode_ts": [
+      {
+        "program_index": 0,
+        "pub_id": "_2DRXqjK1dc3R",
+        "source": "input.onButtonPressed(Button.A, function () {\n    for (let i = 0; i < 4; i++) {\n        basic.showIcon(IconNames.Happy)\n        basic.pause(200)\n        basic.clearScreen()\n        basic.pause(200)\n    }\n})\ninput.onButtonPressed(Button.B, function () {\n    for (let i = 0; i < 4; i++) {\n        basic.showIcon(IconNames.Sad)\n        basic.pause(200)\n        basic.clearScreen()\n        basic.pause(200)\n    }\n})\n",
+        "dependencies": {
+          "core": "*",
+          "radio": "*"
+        }
+      }
+    ],
+    "micropython": [
+      {
+        "program_index": 0,
+        "source": "from microbit import *\n\nwhile True:\n    if button_a.is_pressed():\n        for x in range(4):\n            display.show(Image.HAPPY)\n            sleep(200)\n            display.clear()\n            sleep(200)\n    if button_b.is_pressed():\n        for x in range(4):\n            display.show(Image.SAD)\n            sleep(200)\n            display.clear()\n            sleep(200)"
+      }
+    ]
+  }
+}

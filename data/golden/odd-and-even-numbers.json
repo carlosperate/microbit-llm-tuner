@@ -1,0 +1,27 @@
+{
+  "slug": "odd-and-even-numbers",
+  "task": "",
+  "status": "draft",
+  "url": "https://microbit.org/projects/make-it-code-it/odd-and-even-numbers/",
+  "license": "CC BY-SA 4.0",
+  "code": {
+    "makecode_ts": [
+      {
+        "program_index": 0,
+        "pub_id": "_h25c1HXdwT14",
+        "source": "let number = 0\ninput.onButtonPressed(Button.A, function () {\n    number = randint(1, 100)\n    basic.showNumber(number)\n})\ninput.onButtonPressed(Button.B, function () {\n    if (number % 2 == 0) {\n        basic.showString(\"even\")\n    } else {\n        basic.showString(\"odd\")\n    }\n})\n",
+        "dependencies": {
+          "core": "*",
+          "radio": "*",
+          "microphone": "*"
+        }
+      }
+    ],
+    "micropython": [
+      {
+        "program_index": 0,
+        "source": "from microbit import *\nimport random\n\n# An error could appear if you press button B without pressing button A first.\n# If the variable ânumberâ has not been assigned.\n# To work around this, the value of 101 is assigned to the variable 'number' \n# at the start of the program. When you press button B the program tests \n# first to see if the value of ânumberâ is 101 - if it is, it shows a helpful message.\n\nnumber = 101\n\nwhile True:\n    if button_a.was_pressed():\n        number = random.randint(1, 100)\n        display.scroll(number)   \n    if button_b.was_pressed():\n        if number == 101:\n            display.scroll('no number chosen yet') \n        elif number%2 == 0:\n            display.scroll('even')   \n        else:\n            display.scroll('odd') "
+      }
+    ]
+  }
+}
