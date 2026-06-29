@@ -9,6 +9,8 @@ import json
 import shutil
 import subprocess
 import sys
+import threading
+import webbrowser
 from enum import Enum
 from pathlib import Path
 from typing import Annotated, NoReturn, Optional
@@ -256,9 +258,23 @@ def sync_golden_cmd() -> None:
 
 
 @app.command()
-def viewer(port: int = 8000) -> None:
-    """Serve the repo over HTTP so tools/viewer.html can browse the corpus."""
-    typer.echo(f"Serving {REPO_ROOT} at http://localhost:{port}/tools/viewer.html")
+def viewer(
+    port: int = 8000,
+    open_browser: Annotated[bool, typer.Option(
+        "--open/--no-open",
+        help="Open the viewer in a browser once the server is up.")] = True,
+) -> None:
+    """Serve the repo over HTTP and open tools/viewer.html to browse the corpus.
+
+    The viewer's dropdown switches between the collected and golden corpora.
+    Press Ctrl-C to stop the server.
+    """
+    url = f"http://localhost:{port}/tools/viewer.html"
+    typer.echo(f"Serving {REPO_ROOT} at {url}")
+    if open_browser:
+        # Open after a short delay so the server is accepting connections; the
+        # blocking http.server runs in the foreground below.
+        threading.Timer(0.8, lambda: webbrowser.open(url)).start()
     rc = subprocess.run(
         [sys.executable, "-m", "http.server", str(port)], cwd=REPO_ROOT
     ).returncode

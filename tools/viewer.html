@@ -6,7 +6,7 @@
 <title>micro:bit corpus viewer</title>
 <style>
   :root { --bg:#fafafa; --panel:#fff; --line:#e3e3e3; --ink:#1d1d1f; --muted:#6b6b70;
-          --ts:#1f6feb; --py:#8957e5; --code:#0d1117; --codeink:#e6edf3; }
+          --ts:#1f6feb; --py:#8957e5; --code:#f6f8fa; --codeink:#24292e; }
   * { box-sizing:border-box; }
   body { margin:0; font:14px/1.5 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;
          color:var(--ink); background:var(--bg); display:flex; height:100vh; overflow:hidden; }
@@ -21,6 +21,8 @@
           border-radius:7px; background:#fff; cursor:pointer; text-align:center; }
   .controls button:hover, .controls label:hover { background:#f0f0f2; }
   #filter { padding:7px 10px; border:1px solid var(--line); border-radius:7px; font:inherit; }
+  #dataset { padding:7px 10px; border:1px solid var(--line); border-radius:7px; font:inherit;
+          background:#fff; cursor:pointer; }
   #list { overflow:auto; flex:1; }
   .item { padding:9px 16px; border-bottom:1px solid #f0f0f0; cursor:pointer; display:flex;
           align-items:center; gap:6px; }
@@ -29,6 +31,7 @@
   .item .name { flex:1; overflow:hidden; text-overflow:ellipsis; white-space:nowrap; }
   .badge { font-size:10px; font-weight:700; padding:1px 6px; border-radius:10px; color:#fff; }
   .badge.ts { background:var(--ts); } .badge.py { background:var(--py); }
+  .badge.draft { background:#9b9b9f; } .badge.verified { background:#1a7f37; }
   .count { padding:8px 16px; color:var(--muted); font-size:12px; border-bottom:1px solid var(--line); }
 
   /* Main */
@@ -40,6 +43,14 @@
   .summary { font-size:15px; margin:0 0 22px; max-width:760px; }
   .lic { display:inline-block; font-size:11px; color:var(--muted); border:1px solid var(--line);
          border-radius:10px; padding:1px 8px; margin-left:8px; vertical-align:middle; }
+  .title .src { font-size:12px; margin-left:8px; vertical-align:middle; color:var(--ts);
+         text-decoration:none; font-weight:400; }
+  .title .src:hover { text-decoration:underline; }
+  .task { font-size:15px; margin:0 0 22px; max-width:760px; padding:12px 14px;
+         background:#fff8e6; border:1px solid #f0e0a8; border-radius:8px; }
+  .task.empty { color:var(--muted); font-style:italic; background:#f7f7f8; border-color:var(--line); }
+  .task b { display:block; font-size:11px; text-transform:uppercase; letter-spacing:.04em;
+         color:var(--muted); margin-bottom:4px; font-weight:700; }
   .section { margin:0 0 30px; }
   .section > h3 { font-size:13px; text-transform:uppercase; letter-spacing:.04em; color:var(--muted);
          margin:0 0 10px; padding-bottom:6px; border-bottom:1px solid var(--line); }
@@ -47,7 +58,8 @@
   .block .lbl { font-size:12px; color:var(--muted); margin-bottom:6px; }
   .block .lbl a { color:var(--ts); text-decoration:none; }
   pre.code { margin:0; padding:14px 16px; background:var(--code); color:var(--codeink);
-         border-radius:8px; overflow:auto; font:13px/1.5 "SF Mono",ui-monospace,Menlo,Consolas,monospace; }
+         border:1px solid var(--line); border-radius:8px; overflow:auto;
+         font:13px/1.5 "SF Mono",ui-monospace,Menlo,Consolas,monospace; }
   .blocks-render { background:#fff; border:1px solid var(--line); border-radius:8px; padding:12px;
          margin-bottom:8px; min-height:40px; }
   .blocks-render img { max-width:100%; display:block; }
@@ -58,14 +70,26 @@
   .errors { background:#fff5f5; border:1px solid #f3c0c0; border-radius:8px; padding:10px 14px;
          color:#9b1c1c; font-size:13px; }
   #drop.over { outline:3px dashed var(--ts); outline-offset:-12px; }
+  /* highlight.js paints the <code> background itself; keep our box padding/radius. */
+  pre.code code.hljs { padding:0; background:transparent; }
 </style>
+<!-- Syntax highlighting (Python + TypeScript). Optional: if the CDN is blocked,
+     code still shows as plain monospace. -->
+<link rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/atom-one-light.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
 </head>
 <body id="drop">
   <aside id="side">
     <header>
       <h1>micro:bit corpus viewer</h1>
       <div class="controls">
-        <label>Open <code>data/collected/</code> folder…
+        <select id="dataset" title="Which corpus to auto-load when served over HTTP">
+          <option value="collected">Collected (scrape)</option>
+          <option value="golden">Golden (task + code)</option>
+          <option value="both">Collected + Golden (merged)</option>
+        </select>
+        <label>Open a <code>data/</code> folder…
           <input id="pickDir" type="file" webkitdirectory directory multiple hidden>
         </label>
         <label>Open JSON file(s)…
@@ -81,12 +105,14 @@
   <main id="main">
     <div id="empty">
       <h2 class="title">No project selected</h2>
-      <p>Load the corpus to begin. Two ways:</p>
+      <p>Load a corpus to begin. Two ways:</p>
       <ul>
-        <li><b>Open <code>data/collected/</code> folder</b> (or drag it onto this window) — reads every
-            merged <code>&lt;slug&gt;.json</code>.</li>
-        <li>Or serve the repo over HTTP (<code>python3 -m http.server</code>) and this page
-            auto-loads <code>../data/collected/manifest.json</code>.</li>
+        <li>Serve the repo over HTTP (<code>mbtuner viewer</code>) and pick
+            <b>Collected</b> or <b>Golden</b> from the dropdown — it auto-loads that
+            corpus.</li>
+        <li>Or <b>open a <code>data/</code> folder</b> (<code>collected/</code> or
+            <code>golden/</code>), or drag it onto this window — reads every
+            <code>&lt;slug&gt;.json</code>.</li>
       </ul>
       <p>MakeCode TypeScript snippets are rendered as blocks by the official
          <code>makecode.microbit.org</code> renderer (needs internet).</p>
@@ -149,10 +175,19 @@ renderer.init();
 /* ---------- State ---------- */
 const projects = new Map();   // slug -> merged record { code:{makecode_ts?,micropython?}, ... }
 let activeSlug = null;
+let dataset = "collected";    // which corpus to auto-load: "collected" | "golden"
 
 function addRecord(rec) {
   if (!rec || !rec.slug || !rec.code) return false;
-  projects.set(rec.slug, rec);
+  const existing = projects.get(rec.slug);
+  if (!existing) { projects.set(rec.slug, rec); return true; }
+  // "Both" merges the two same-slug records. Golden is the hand-improved source of
+  // truth, so on any shared key (task/status/code/…) golden wins — regardless of
+  // load order; collected only fills fields golden omits (title/meta/context).
+  // Golden is the record carrying `status` (collected never has one).
+  const isGolden = r => "status" in r;
+  const [base, top] = isGolden(rec) ? [existing, rec] : [rec, existing];
+  projects.set(rec.slug, {...base, ...top});
   return true;
 }
 
@@ -169,15 +204,32 @@ async function loadFromFiles(fileList) {
 
 async function tryAutoFetch() {
   try {
-    // viewer lives in tools/; the corpus is a sibling at ../data/collected/
+    // viewer lives in tools/; corpora are siblings at ../data/<dataset>/. Only
+    // collected has a manifest, so it's always the slug index; golden files are
+    // fetched by the same slugs and any that don't exist yet are skipped (404).
     const m = await (await fetch("../data/collected/manifest.json", {cache:"no-store"})).json();
+    // "both" loads collected first, then golden overlays it (golden wins on shared keys).
+    const order = dataset === "both" ? ["collected", "golden"] : [dataset];
     let n = 0;
     for (const p of m.projects || []) {
-      if (p.has_makecode_ts || p.has_micropython || p.error_count)
-        n += await fetchRecord(`../data/collected/${p.slug}.json`);
+      if (!(p.has_makecode_ts || p.has_micropython || p.error_count)) continue;
+      for (const ds of order) n += await fetchRecord(`../data/${ds}/${p.slug}.json`);
     }
-    if (n) afterLoad(n);
+    afterLoad(n);
   } catch (e) { /* file:// or not served — silent; user uses the picker */ }
+}
+
+async function loadDataset(ds) {
+  dataset = ds;
+  projects.clear();
+  activeSlug = null;
+  renderList();
+  mainEl.innerHTML = `<div id="empty"><h2 class="title">Loading ${esc(ds)}…</h2></div>`;
+  await tryAutoFetch();
+  if (projects.size === 0)
+    mainEl.innerHTML = `<div id="empty"><h2 class="title">Couldn't load ${esc(ds)}</h2>` +
+      `<p>Serve the repo with <code>mbtuner viewer</code> (recommended), or open a ` +
+      `<code>data/</code> folder with the picker.</p></div>`;
 }
 async function fetchRecord(path) {
   try { return addRecord(await (await fetch(path,{cache:"no-store"})).json()) ? 1 : 0; }
@@ -202,11 +254,13 @@ function renderList() {
       (q ? ` · ${slugs.length} shown` : "");
   listEl.innerHTML = "";
   for (const slug of slugs) {
-    const code = projects.get(slug).code || {};
+    const r = projects.get(slug);
+    const code = r.code || {};
     const row = document.createElement("div");
     row.className = "item" + (slug===activeSlug ? " active" : "");
     row.onclick = () => select(slug);
     row.innerHTML = `<span class="name">${esc(title(slug)||slug)}</span>` +
+        (r.status ? `<span class="badge ${esc(r.status)}" title="${esc(r.status)}">${r.status==="verified"?"✓":"·"}</span>` : ``) +
         (code.makecode_ts ? `<span class="badge ts">TS</span>` : ``) +
         (code.micropython ? `<span class="badge py">PY</span>` : ``);
     listEl.appendChild(row);
@@ -231,9 +285,19 @@ function select(slug) {
   const metaLine = [m.level, (m.tools||[]).join(", "), (m.features||[]).join(", "), (m.topics||[]).join(", ")]
       .filter(Boolean).join("  |  ");
 
+  // Golden records carry a `task` + `status`; collected ones don't.
+  const statusBadge = r.status ? `<span class="badge ${esc(r.status)}">${esc(r.status)}</span>` : ``;
+  const taskBlock = ("task" in r)
+    ? `<div class="task${r.task ? "" : " empty"}"><b>Task</b>${r.task ? esc(r.task) : "— no task written yet —"}</div>`
+    : ``;
+  const srcLink = r.url
+    ? `<a class="src" href="${esc(r.url)}" target="_blank" rel="noopener">microbit.org ↗</a>`
+    : ``;
+
   const el = document.createElement("div");
   el.innerHTML =
-    `<h2 class="title">${esc(r.title||slug)}<span class="lic">${esc(r.license||"")}</span></h2>` +
+    `<h2 class="title">${esc(r.title||slug)}<span class="lic">${esc(r.license||"")}</span>${statusBadge}${srcLink}</h2>` +
+    taskBlock +
     (metaLine ? `<div class="meta">${esc(metaLine)}</div>` : ``) +
     (r.context && r.context.summary ? `<p class="summary">${esc(r.context.summary)}</p>` : ``) +
     contextDetails(r.context) +
@@ -242,6 +306,8 @@ function select(slug) {
   mainEl.innerHTML = "";
   mainEl.appendChild(el);
 
+  if (window.hljs)
+    el.querySelectorAll("pre.code code").forEach(c => { try { hljs.highlightElement(c); } catch {} });
   if (tsBlocks) renderAllBlocks(tsBlocks, el);
 }
 
@@ -267,7 +333,7 @@ function sectionTS(blocks, errors) {
         `<div class="blocks-render" data-block="${i}">` +
           `<span class="render-status">Rendering blocks…</span>` +
         `</div>` +
-        `<pre class="code">${esc(b.source)}</pre>` +
+        `<pre class="code"><code class="language-typescript">${esc(b.source)}</code></pre>` +
       `</div>`;
   });
   if (!blocks.length) html += `<p class="render-status">No TypeScript captured.</p>`;
@@ -281,7 +347,7 @@ function sectionPY(blocks) {
   blocks.forEach((b, i) => {
     html += `<div class="block">` +
       ((blocks.length>1) ? `<div class="lbl">Program ${i+1}</div>` : ``) +
-      `<pre class="code">${esc(b.source)}</pre></div>`;
+      `<pre class="code"><code class="language-python">${esc(b.source)}</code></pre></div>`;
   });
   if (!blocks.length) html += `<p class="render-status">No MicroPython captured.</p>`;
   return html + `</div>`;
@@ -317,6 +383,7 @@ function esc(s) {
 }
 
 /* ---------- wire up ---------- */
+document.getElementById("dataset").addEventListener("change", e => loadDataset(e.target.value));
 document.getElementById("pickDir").addEventListener("change", e => loadFromFiles(e.target.files));
 document.getElementById("pickFiles").addEventListener("change", e => loadFromFiles(e.target.files));
 filterEl.addEventListener("input", renderList);
