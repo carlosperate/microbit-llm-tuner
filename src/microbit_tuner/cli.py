@@ -109,8 +109,11 @@ def _emit(result, name: str, as_json: bool) -> None:
 def _verify_samples(samples, as_json: bool) -> int:
     """Verify a stream of CodeSamples (lang, source, dependencies, label).
 
-    Returns an exit code: 0 if everything passed, 1 if anything failed. Streams
-    failures as they happen so a long scan shows progress.
+    Returns an exit code: 0 if everything passed, 1 if anything failed. In text
+    mode it prints one status line per program as it is checked (each echo
+    flushes), so a long scan shows live progress instead of looking stuck; a
+    failing program also lists its first diagnostics. JSON mode stays silent
+    until the final report so stdout holds only the JSON.
     """
     passed = total = 0
     failures: list[dict] = []
@@ -119,13 +122,16 @@ def _verify_samples(samples, as_json: bool) -> int:
         result = _run_one(s.source, s.lang, s.dependencies)
         if result.ok:
             passed += 1
-            continue
-        failures.append({"label": s.label, "tool": result.tool,
-                         "diagnostics": [str(d) for d in result.errors]})
+        else:
+            failures.append({"label": s.label, "tool": result.tool,
+                             "diagnostics": [str(d) for d in result.errors]})
         if not as_json:
-            typer.echo(f"  FAIL {s.label} ({result.tool}):", err=True)
-            for d in result.errors[:5]:
-                typer.echo(f"      {d}", err=True)
+            status = "ok  " if result.ok else "FAIL"
+            suffix = "" if result.ok else f" ({result.tool})"
+            typer.echo(f"[{total:>4}] {status} {s.label}{suffix}")
+            if not result.ok:
+                for d in result.errors[:5]:
+                    typer.echo(f"           {d}")
     if as_json:
         typer.echo(json.dumps({"passed": passed, "total": total,
                                "failures": failures}, indent=2))
