@@ -1,0 +1,74 @@
+{
+  "slug": "pressure-switch-alarm",
+  "url": "https://microbit.org/projects/make-it-code-it/pressure-switch-alarm/",
+  "title": "Pressure switch alarm",
+  "license": "CC BY-SA 4.0",
+  "meta": {
+    "level": "Advanced",
+    "tools": [
+      "MakeCode",
+      "Python"
+    ],
+    "features": [
+      "LED display",
+      "Pins",
+      "Radio",
+      "Sound"
+    ],
+    "topics": [
+      "Electricity",
+      "Electronics",
+      "Input/output",
+      "Radio waves",
+      "Selection",
+      "Sensors"
+    ]
+  },
+  "context": {
+    "summary": "Create a wireless intruder alarm that will warn you when someone steps on a home-made pressure sensor.",
+    "how_it_works": [
+      "Flash the sensor program onto a micro:bit.",
+      "Make a pressure input switch out of cardboard and tin foil like in the picture. Fold it over and place it under a rug or carpet. You may need to add some foam to keep each side apart. Connect the two foil pads on one side to pins 0 and GND on the sensor micro:bit. When you step on it, the foil on the top completes an electrical circuit, and it sends an âintruderâ radio message.",
+      "Flash the alarm program on to the other micro:bit (the alarm) and attach a buzzer or speaker to pin 0 and GND if you have one. When it receives the âintruderâ message it shows an angry face on the LED display and plays an audible alarm sound. Press button A to clear the display."
+    ],
+    "improve_it": [
+      "Add multiple sensors each sending its own message, e.g. âroom1â, âroom2â and have the alarm show where the intruder is.",
+      "Try different designs for the pressure switch. For example, place a foam pad inside it if is being triggered too easily.",
+      "You could make a rain alarm using two tin foil pads very close together â if they get wet, they will trigger the alarm. Be sure not to get your micro:bit wet though!"
+    ]
+  },
+  "code": {
+    "makecode_ts": [
+      {
+        "program_index": 0,
+        "pub_id": "_AvaezbbVqdoD",
+        "source": "input.onPinPressed(TouchPin.P0, function () {\n    radio.sendString(\"intruder\")\n})\nradio.setGroup(34)\n",
+        "dependencies": {
+          "core": "*",
+          "radio": "*"
+        }
+      },
+      {
+        "program_index": 1,
+        "pub_id": "_TVx38dHioEy3",
+        "source": "input.onButtonPressed(Button.A, function () {\n    basic.clearScreen()\n})\nradio.onReceivedString(function (receivedString) {\n    if (receivedString == \"intruder\") {\n        basic.showIcon(IconNames.Angry)\n        music._playDefaultBackground(music.builtInPlayableMelody(Melodies.Baddy), music.PlaybackMode.UntilDone)\n    }\n})\nradio.setGroup(34)\n",
+        "dependencies": {
+          "core": "*",
+          "radio": "*",
+          "microphone": "*"
+        }
+      }
+    ],
+    "micropython": [
+      {
+        "program_index": 0,
+        "source": "from microbit import *\nimport radio\nradio.config(group=34)\nradio.on()\n\nwhile True:\n    if pin0.is_touched():\n        radio.send('intruder')\n"
+      },
+      {
+        "program_index": 1,
+        "source": "from microbit import *\nimport music\nimport radio\nradio.config(group=34)\nradio.on()\n\nwhile True:\n    message = radio.receive()\n    if message:\n        if message == 'intruder':\n            display.show(Image.ANGRY)\n            music.play(music.BADDY)\n    if button_a.was_pressed():\n        display.clear()\n"
+      }
+    ]
+  },
+  "errors": []
+}

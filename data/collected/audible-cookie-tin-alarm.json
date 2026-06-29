@@ -1,0 +1,47 @@
+{
+  "slug": "audible-cookie-tin-alarm",
+  "url": "https://microbit.org/projects/make-it-code-it/audible-cookie-tin-alarm/",
+  "title": "Audible cookie tin alarm",
+  "license": "CC BY-SA 4.0",
+  "meta": {
+    "level": "Intermediate",
+    "tools": [
+      "MakeCode"
+    ],
+    "features": [
+      "LED display",
+      "Light sensor",
+      "Sound"
+    ],
+    "topics": [
+      "Iteration",
+      "Selection"
+    ]
+  },
+  "context": {
+    "summary": "Use the micro:bitâs light sensor to make an audible alarm to protect your cookies. Students will learn about selection in this fun project.",
+    "how_it_works": [
+      "The program turns the micro:bitâs LED display into a light sensor.",
+      "Put the micro:bit into your cookie tin. When the tin is opened, the light sensor detects a change in light level and sets off the alarm.",
+      "The program uses an infinite loop or forever block to keep checking the light levels. Loops are also known as iteration.",
+      "Selection or an if then else block is used with comparison logic so that if the light level is above a certain amount, an angry face appears on the display and an audible alarm plays.",
+      "Press the reset button on the back of your micro:bit to reset the alarm."
+    ],
+    "improve_it": []
+  },
+  "code": {
+    "makecode_ts": [
+      {
+        "program_index": 0,
+        "pub_id": "_HJaCFY1o9Mf4",
+        "source": "basic.forever(function () {\n\t\n})\n",
+        "dependencies": {
+          "core": "*",
+          "radio": "*",
+          "microphone": "*"
+        }
+      }
+    ]
+  },
+  "errors": []
+}

@@ -1,0 +1,55 @@
+{
+  "slug": "shining-sunbeams",
+  "url": "https://microbit.org/projects/make-it-code-it/shining-sunbeams/",
+  "title": "Shining sunbeams",
+  "license": "CC BY-SA 4.0",
+  "meta": {
+    "level": "Beginner",
+    "tools": [
+      "MakeCode",
+      "Python"
+    ],
+    "features": [
+      "LED display"
+    ],
+    "topics": [
+      "Iteration",
+      "Sequence"
+    ]
+  },
+  "context": {
+    "summary": "Use the sun icon from the Here comes the sun to make a sunbeam animation.",
+    "how_it_works": [
+      "The program shows a sequence of sun pictures on the LED display based on the one we made in the Here comes the sun project.",
+      "It waits 500 milliseconds (half a second) between showing each image to allow you to see it before displaying the next.",
+      "The sequence makes an animation of sunbeams coming from the centre of the sun.",
+      "The sequence repeats for as long as your micro:bit has power because the instructions are inside a forever, or infinite, loop.",
+      "Computers are often used to help animators make cartoons and films, creating an illusion of movement by showing a sequence of slightly different images one after another."
+    ],
+    "improve_it": [
+      "Speed up or slow down the animation by changing the delay of 500 milliseconds.",
+      "Use your own design for the sun and its rays.",
+      "In Python, use a range of numbers from 1 to 9 to show the sunâs rays getting dimmer as they get further from the centre."
+    ]
+  },
+  "code": {
+    "makecode_ts": [
+      {
+        "program_index": 0,
+        "pub_id": "_XTpPLoAX0edC",
+        "source": "basic.forever(function () {\n    basic.showLeds(`\n        . . . . .\n        . . # . .\n        . # # # .\n        . . # . .\n        . . . . .\n        `)\n    basic.pause(500)\n    basic.showLeds(`\n        . . . . .\n        . # # # .\n        . # # # .\n        . # # # .\n        . . . . .\n        `)\n    basic.pause(500)\n    basic.showLeds(`\n        # . # . #\n        . # # # .\n        # # # # #\n        . # # # .\n        # . # . #\n        `)\n    basic.pause(500)\n})\n",
+        "dependencies": {
+          "core": "*",
+          "radio": "*"
+        }
+      }
+    ],
+    "micropython": [
+      {
+        "program_index": 0,
+        "source": "from microbit import *\n\nwhile True:\n    display.show(Image(\n        \"00000:\"\n        \"00900:\"\n        \"09990:\"\n        \"00900:\"\n        \"00000\"))\n    sleep(500)\n    display.show(Image(\n        \"00000:\"\n        \"09990:\"\n        \"09990:\"\n        \"09990:\"\n        \"00000\"))\n    sleep(500)\n    display.show(Image(\n        \"90909:\"\n        \"09990:\"\n        \"99999:\"\n        \"09990:\"\n        \"90909\"))\n    sleep(500)"
+      }
+    ]
+  },
+  "errors": []
+}

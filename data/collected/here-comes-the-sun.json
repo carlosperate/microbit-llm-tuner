@@ -1,0 +1,53 @@
+{
+  "slug": "here-comes-the-sun",
+  "url": "https://microbit.org/projects/make-it-code-it/here-comes-the-sun/",
+  "title": "Here comes the sun",
+  "license": "CC BY-SA 4.0",
+  "meta": {
+    "level": "Beginner",
+    "tools": [
+      "MakeCode",
+      "Python"
+    ],
+    "features": [
+      "LED display"
+    ],
+    "topics": [
+      "Representation"
+    ]
+  },
+  "context": {
+    "summary": "Create your own sun icon for your micro:bit.",
+    "how_it_works": [
+      "The micro:bit has lots of pictures built in, but sometimes youâll want to add your own.",
+      "This program creates a sun image using the micro:bit display's 5x5 grid of LEDs.",
+      "Computers, phones and tablets use small pictures to represent things and ideas using a small number of dots, or pixels, as icons or emojis."
+    ],
+    "improve_it": [
+      "Draw your own version of the sun, or a star or moon.",
+      "Make a sun appear if you press button A, a moon if you press button B.",
+      "Use a loop to make the sun blink or rise.",
+      "In Python, use a range of numbers (not just 9) to show the sunâs rays getting dimmer as they get further from the centre."
+    ]
+  },
+  "code": {
+    "makecode_ts": [
+      {
+        "program_index": 0,
+        "pub_id": "_WAP3mJ7dpWTe",
+        "source": "basic.showLeds(`\n    # . # . #\n    . # # # .\n    # # # # #\n    . # # # .\n    # . # . #\n    `)\n",
+        "dependencies": {
+          "core": "*",
+          "radio": "*"
+        }
+      }
+    ],
+    "micropython": [
+      {
+        "program_index": 0,
+        "source": "from microbit import *\n\nwhile True:\n    display.show(Image(\n        \"90909:\"\n        \"09990:\"\n        \"99999:\"\n        \"09990:\"\n        \"90909\"))"
+      }
+    ]
+  },
+  "errors": []
+}

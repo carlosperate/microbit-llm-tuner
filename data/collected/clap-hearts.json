@@ -1,0 +1,55 @@
+{
+  "slug": "clap-hearts",
+  "url": "https://microbit.org/projects/make-it-code-it/clap-hearts/",
+  "title": "Clap hearts",
+  "license": "CC BY-SA 4.0",
+  "meta": {
+    "level": "Beginner",
+    "tools": [
+      "MakeCode",
+      "Python"
+    ],
+    "features": [
+      "LED display",
+      "Microphone"
+    ],
+    "topics": [
+      "Input/output"
+    ]
+  },
+  "context": {
+    "summary": "Make the new micro:bit's microphone respond to claps and beats with an animated light show.",
+    "how_it_works": [
+      "When the microphone detects a loud sound, like a clap, it shows a large heart on the LED display.",
+      "If it detects a quiet sound, for example after your clap has finished, it shows a small heart.",
+      "The effect of this is to create a simple heart animation that responds to claps or strong beats in music."
+    ],
+    "improve_it": [
+      "Create your own animation using other icons or drawing your own pictures.",
+      "Make the micro:bit respond to a loud sound by making a sound of its own. Does this cause any problems? How can you fix them?",
+      "You can change the sound level that triggers a loud sound event. This level is called a threshold. In MakeCode use the 'set loud sound threshold to...' input block to choose different sound levels to make it more or less sensitive to loud sounds.",
+      "In Python, to change the threshold for loud sounds use microphone.set_threshold(SoundEvent.LOUD, 128) - changing the number 128 to the value you want between 0 and 255."
+    ]
+  },
+  "code": {
+    "makecode_ts": [
+      {
+        "program_index": 0,
+        "pub_id": "_AhPKDR2UDf7H",
+        "source": "input.onSound(DetectedSound.Loud, function () {\n    basic.showIcon(IconNames.Heart)\n})\ninput.onSound(DetectedSound.Quiet, function () {\n    basic.showIcon(IconNames.SmallHeart)\n})\n",
+        "dependencies": {
+          "core": "*",
+          "radio": "*",
+          "microphone": "*"
+        }
+      }
+    ],
+    "micropython": [
+      {
+        "program_index": 0,
+        "source": "from microbit import *\n\nwhile True:\n    if microphone.current_event() == SoundEvent.LOUD:\n        display.show(Image.HEART)\n        sleep(200)\n    if microphone.current_event() == SoundEvent.QUIET:\n        display.show(Image.HEART_SMALL)"
+      }
+    ]
+  },
+  "errors": []
+}

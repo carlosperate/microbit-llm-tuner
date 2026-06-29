@@ -1,0 +1,59 @@
+{
+  "slug": "spirit-level",
+  "url": "https://microbit.org/projects/make-it-code-it/spirit-level/",
+  "title": "Spirit level",
+  "license": "CC BY-SA 4.0",
+  "meta": {
+    "level": "Intermediate",
+    "tools": [
+      "MakeCode",
+      "Python"
+    ],
+    "features": [
+      "Accelerometer",
+      "LED display",
+      "Sound"
+    ],
+    "topics": [
+      "Boolean logic",
+      "Relational operators",
+      "Selection",
+      "Sensors"
+    ]
+  },
+  "context": {
+    "summary": "Make a tool for making sure pictures, shelves or work surfaces are level. The new micro:bit's built-in speaker makes it easy to improve your spirit level with audio feedback.",
+    "how_it_works": [
+      "The micro:bit's accelerometer can measure angles of tilt in two directions: up and down (pitch) and side to side (roll). This project uses this to show when the micro:bit is level on the LED display and by making a sound, which could be useful when hanging a picture or making a work surface.",
+      "A loop keeps the program constantly measuring the micro:bit's angle.",
+      "If the accelerometer measures an angle of tilt between +5 and -5 degrees of both pitch and roll, the micro:bit must be reasonably level. It then shows a tick on the LED display output and plays a musical tone.",
+      "To hear the tone attach headphones or a speaker to pin 0 and GND, or if you have a new micro:bit you will hear it on the built-in speaker.",
+      "If either the pitch or the roll is outside the range +5 to -5 degrees, it shows a cross on the LED display and stops the sound."
+    ],
+    "improve_it": [
+      "Can you make the musical pitch change depending on the angle?",
+      "Could you code an LED 'bubble' that moves around the screen like a real spirit level?"
+    ]
+  },
+  "code": {
+    "makecode_ts": [
+      {
+        "program_index": 0,
+        "pub_id": "_esA53UP5jfe1",
+        "source": "basic.forever(function () {\n    if (input.rotation(Rotation.Pitch) < 5 && input.rotation(Rotation.Pitch) > -5 && (input.rotation(Rotation.Roll) < 5 && input.rotation(Rotation.Roll) > -5)) {\n        basic.showIcon(IconNames.Yes)\n        music.ringTone(523)\n    } else {\n        basic.showIcon(IconNames.No)\n        music.ringTone(0)\n    }\n})\n",
+        "dependencies": {
+          "core": "*",
+          "radio": "*",
+          "microphone": "*"
+        }
+      }
+    ],
+    "micropython": [
+      {
+        "program_index": 0,
+        "source": "from microbit import *\nimport music\n\n# Uses accelerometer readings in the x and y axis \n# and also allows the micro:bit to be slightly off-level\n# to make it work better in practice\nwhile True:\n    if accelerometer.get_x() > -10 and accelerometer.get_x() < 10 and accelerometer.get_y() > -10 and accelerometer.get_y() < 10:\n        display.show(Image.YES)\n        music.play('C5:1')\n        sleep(200)\n    else:\n        display.show(Image.NO)\n"
+      }
+    ]
+  },
+  "errors": []
+}

@@ -1,0 +1,58 @@
+{
+  "slug": "energy-light-meter",
+  "url": "https://microbit.org/projects/make-it-code-it/energy-light-meter/",
+  "title": "Energy light meter",
+  "license": "CC BY-SA 4.0",
+  "meta": {
+    "level": "Advanced",
+    "tools": [
+      "MakeCode",
+      "Python"
+    ],
+    "features": [
+      "Buttons",
+      "LED display",
+      "Light sensor"
+    ],
+    "topics": [
+      "13 Climate",
+      "Input/output",
+      "Sensors",
+      "Variables"
+    ]
+  },
+  "context": {
+    "summary": "The first of three projects to find out about energy use in your home or school by measuring how much light you use.",
+    "how_it_works": [
+      "The program uses a variable called reading to store the light level. It sets this at the start and whenever you press button A.",
+      "Storing the light sensor reading in a variable, rather than just showing it straight away, is a good idea because it means you can view the reading over and over again when you note it down.",
+      "Using a variable also means you can take a light reading in a place where it might be difficult to see the display and view the light measurement in a more convenient place."
+    ],
+    "improve_it": [
+      "Modify the code to calculate an average reading for you.",
+      "Add a second micro:bit and radio functionality to allow remote reading of light levels.",
+      "If you have access to a light meter that measures light levels in other units, compare the micro:bit's readings with it.",
+      "Use the light meter readings to make a timer to record how long lights are left on."
+    ]
+  },
+  "code": {
+    "makecode_ts": [
+      {
+        "program_index": 0,
+        "pub_id": "_UF6hdEgq96PF",
+        "source": "input.onButtonPressed(Button.A, function () {\n    reading = input.lightLevel()\n    basic.showIcon(IconNames.SmallDiamond)\n    basic.showIcon(IconNames.Diamond)\n    basic.pause(500)\n    basic.showString(\"M\")\n})\ninput.onButtonPressed(Button.B, function () {\n    basic.clearScreen()\n    basic.showNumber(reading)\n    basic.pause(500)\n    basic.showString(\"M\")\n})\nlet reading = 0\nbasic.showString(\"M\")\nreading = input.lightLevel()\nbasic.pause(100)\n",
+        "dependencies": {
+          "core": "*",
+          "radio": "*"
+        }
+      }
+    ],
+    "micropython": [
+      {
+        "program_index": 0,
+        "source": "from microbit import *\n\ndisplay.show('M')\nreading = display.read_light_level()\nsleep(100)\n\nwhile True:\n    if button_a.was_pressed():\n        # take a light measurement and store it\n        reading = display.read_light_level()\n        display.show(Image.DIAMOND_SMALL)\n        sleep(400)\n        display.show(Image.DIAMOND)\n        sleep(400+500)\n        display.show('M')\n\n    elif button_b.was_pressed():\n        # display the stored light measurement\n        display.clear()\n        display.scroll(reading)\n        sleep(500)\n        display.show('M')\n"
+      }
+    ]
+  },
+  "errors": []
+}

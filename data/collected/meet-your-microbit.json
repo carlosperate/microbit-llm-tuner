@@ -1,0 +1,65 @@
+{
+  "slug": "meet-your-microbit",
+  "url": "https://microbit.org/projects/make-it-code-it/meet-your-microbit/",
+  "title": "Meet your micro:bit",
+  "license": "CC BY-SA 4.0",
+  "meta": {
+    "level": "Beginner",
+    "tools": [
+      "MakeCode",
+      "Python"
+    ],
+    "features": [
+      "Accelerometer",
+      "Buttons",
+      "LED display",
+      "Sound"
+    ],
+    "topics": [
+      "Input/output",
+      "Iteration",
+      "Selection",
+      "Sensors",
+      "Sequence"
+    ]
+  },
+  "context": {
+    "summary": "Start discovering some of the things the BBC micro:bit can do with this interactive investigation.",
+    "how_it_works": [
+      "Instructions in the âon startâ block run once only, when the micro:bit is reset or is powered on. The 'show icon' block shows a happy face on the LED display output.",
+      "Events make different things happen when you press different input buttons. The 'on button A pressed' block is triggered when you press button A. Your micro:bit then shows a square zooming in quickly, then zooming out more slowly.",
+      "The animation is made by showing different images in a sequence. Pausing for shorter and longer times controls the speed of the animation.",
+      "Pressing button B shows how the micro:bit can scroll text on the LED display output using the 'show string' block. 'Strings' are what we call collections of letters and symbols stored in a computer.",
+      "Press button A and B together to reveal a puzzle. You'll either see a sun or a moon. Can you work out what determines which picture is shown?",
+      "It depends how much light is falling on your micro:bit. The micro:bit's LED output can also work as an input, a light sensor.",
+      "The code uses an 'if... then... else' statement. This is known as selection, or a conditional statement. It tests if the light level is below 50. If it is, then it shows a moon. Otherwise, else, it shows a sun.",
+      "The 'on shake' block reacts to information from the micro:bit's accelerometer sensor input. When you shake your micro:bit, it shows a surprised face for one second.",
+      "If you have a micro:bit V2 or connect headphones or a speaker to your micro:bit, you'll also hear different sounds when each different input event happens."
+    ],
+    "improve_it": [
+      "Modify the code to make your own 'Meet your micro:bit' project with different pictures, animations and sounds.",
+      "Add extra inputs: can you make your micro:bit react to gestures other than 'shake'? React to pressing pins? Or, if you have the micro:bit V2 with built-in speaker, react to loud sounds or touching the logo?"
+    ]
+  },
+  "code": {
+    "makecode_ts": [
+      {
+        "program_index": 0,
+        "pub_id": "_95o2F2hd3eJp",
+        "source": "input.onButtonPressed(Button.A, function () {\n    music._playDefaultBackground(music.builtInPlayableMelody(Melodies.Prelude), music.PlaybackMode.InBackground)\n    for (let index = 0; index < 2; index++) {\n        basic.showLeds(`\n            . . . . .\n            . . . . .\n            . . # . .\n            . . . . .\n            . . . . .\n            `)\n        basic.pause(100)\n        basic.showLeds(`\n            . . . . .\n            . # # # .\n            . # # # .\n            . # # # .\n            . . . . .\n            `)\n        basic.pause(100)\n        basic.showLeds(`\n            # # # # #\n            # # # # #\n            # # # # #\n            # # # # #\n            # # # # #\n            `)\n        basic.pause(1000)\n        basic.showLeds(`\n            . . . . .\n            . # # # .\n            . # # # .\n            . # # # .\n            . . . . .\n            `)\n        basic.pause(1000)\n        basic.showLeds(`\n            . . . . .\n            . . . . .\n            . . # . .\n            . . . . .\n            . . . . .\n            `)\n    }\n})\ninput.onButtonPressed(Button.AB, function () {\n    if (input.lightLevel() < 50) {\n        music._playDefaultBackground(music.builtInPlayableMelody(Melodies.PowerDown), music.PlaybackMode.InBackground)\n        basic.showLeds(`\n            . . # # .\n            . . . # #\n            . . . # #\n            . . . # #\n            . . # # .\n            `)\n    } else {\n        music._playDefaultBackground(music.builtInPlayableMelody(Melodies.PowerUp), music.PlaybackMode.InBackground)\n        basic.showLeds(`\n            # . # . #\n            . # # # .\n            # # # # #\n            . # # # .\n            # . # . #\n            `)\n    }\n    basic.pause(5000)\n})\ninput.onButtonPressed(Button.B, function () {\n    music._playDefaultBackground(music.builtInPlayableMelody(Melodies.BaDing), music.PlaybackMode.InBackground)\n    basic.clearScreen()\n    basic.pause(100)\n    basic.showString(\"Hello!\")\n})\ninput.onGesture(Gesture.Shake, function () {\n    music._playDefaultBackground(music.builtInPlayableMelody(Melodies.JumpUp), music.PlaybackMode.InBackground)\n    basic.showIcon(IconNames.Surprised)\n    basic.pause(1000)\n    basic.clearScreen()\n})\nbasic.showIcon(IconNames.Happy)\n",
+        "dependencies": {
+          "core": "*",
+          "radio": "*",
+          "microphone": "*"
+        }
+      }
+    ],
+    "micropython": [
+      {
+        "program_index": 0,
+        "source": "# Imports go at the top\nfrom microbit import *\nimport music\n\n\ndisplay.show(Image.HAPPY)\n\nwhile True:\n    sleep(300)\n    if button_a.is_pressed() and button_b.is_pressed():\n        if display.read_light_level() < 50:\n            music.play(music.POWER_DOWN, wait=False)\n            display.show(Image('00990:'\n                               '00099:'\n                               '00099:'\n                               '00099:'\n                               '00990'))\n        else:\n            music.play(music.POWER_UP, wait=False)\n            display.show(Image('90909:'\n                               '09990:'\n                               '99999:'\n                               '09990:'\n                               '90909'))\n    elif button_b.is_pressed():\n        music.play(music.BA_DING, wait=False)\n        display.clear()\n        sleep(100)\n        display.scroll('Hello!')\n    elif button_a.is_pressed():\n        music.play(music.PRELUDE, wait=False)\n        for i in range(2):\n            display.show(Image('00000:'\n                               '00000:'\n                               '00900:'\n                               '00000:'\n                               '00000'))\n            sleep(100)\n            display.show(Image('00000:'\n                               '09990:'\n                               '09990:'\n                               '09990:'\n                               '00000'))\n            sleep(100)\n            display.show(Image('99999:'\n                               '99999:'\n                               '99999:'\n                               '99999:'\n                               '99999'))\n            sleep(1000)\n            display.show(Image('00000:'\n                               '09990:'\n                               '09990:'\n                               '09990:'\n                               '00000'))\n            sleep(1000)\n            display.show(Image('00000:'\n                               '00000:'\n                               '00900:'\n                               '00000:'\n                               '00000'))\n            sleep(1000)\n    elif accelerometer.is_gesture('shake'):\n        music.play(music.JUMP_UP, wait=False)\n        display.show(Image.SURPRISED)\n    \n"
+      }
+    ]
+  },
+  "errors": []
+}

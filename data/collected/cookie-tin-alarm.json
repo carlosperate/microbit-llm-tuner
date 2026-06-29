@@ -1,0 +1,58 @@
+{
+  "slug": "cookie-tin-alarm",
+  "url": "https://microbit.org/projects/make-it-code-it/cookie-tin-alarm/",
+  "title": "Cookie tin alarm",
+  "license": "CC BY-SA 4.0",
+  "meta": {
+    "level": "Beginner",
+    "tools": [
+      "MakeCode",
+      "Python"
+    ],
+    "features": [
+      "LED display",
+      "Light sensor"
+    ],
+    "topics": [
+      "Number & place value",
+      "Selection",
+      "Sensors"
+    ]
+  },
+  "context": {
+    "summary": "Has anyone been in your cookie tin? You can program your BBC micro:bit to act as an alarm to let you know! You will learn about selection, comparison logic, and the micro:bit's light sensor.",
+    "how_it_works": [
+      "The program turns the micro:bitâs LED display into a light sensor.",
+      "Put your micro:bit into the tin you wish to protect. When the lid is opened, the light sensor detects a change in light level and triggers the alarm.",
+      "The program uses an infinite loop to keep sensing the light level.",
+      "Selection ('if... else') and comparison logic (> 30) are used so that if the light level is above a certain amount, an angry face appears on the display; else, it clears the screen."
+    ],
+    "improve_it": [
+      "Adjust the program, removing the \"else\" part of the comparison, so that the angry face remains on the micro:bitâs display whatever the light level so that you can tell someone has opened your tin.",
+      "Add an audible alarm using blocks from the music section of the MakeCode editor.",
+      "Count how many times your tin has been opened by introducing a variable into the program.",
+      "If you have two micro:bits, use the radio function to send you a signal as soon as your tin has been opened. Take a look at the light alarm project to find out how to do this."
+    ]
+  },
+  "code": {
+    "makecode_ts": [
+      {
+        "program_index": 0,
+        "pub_id": "_7yKVKiLX00Rs",
+        "source": "basic.forever(function () {\n    if (input.lightLevel() > 30) {\n        basic.showIcon(IconNames.Angry)\n    } else {\n        basic.clearScreen()\n    }\n})\n",
+        "dependencies": {
+          "core": "*",
+          "radio": "*",
+          "microphone": "*"
+        }
+      }
+    ],
+    "micropython": [
+      {
+        "program_index": 0,
+        "source": "from microbit import *\n\nwhile True:\n    if display.read_light_level() > 30:\n        display.show(Image.ANGRY)\n    else:\n        display.clear()\n"
+      }
+    ]
+  },
+  "errors": []
+}

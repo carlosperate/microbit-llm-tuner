@@ -65,7 +65,7 @@
     <header>
       <h1>micro:bit corpus viewer</h1>
       <div class="controls">
-        <label>Open <code>data/golden/</code> folder…
+        <label>Open <code>data/collected/</code> folder…
           <input id="pickDir" type="file" webkitdirectory directory multiple hidden>
         </label>
         <label>Open JSON file(s)…
@@ -83,10 +83,10 @@
       <h2 class="title">No project selected</h2>
       <p>Load the corpus to begin. Two ways:</p>
       <ul>
-        <li><b>Open <code>data/golden/</code> folder</b> (or drag it onto this window) — reads every
-            <code>typescript/*.json</code> and <code>micropython/*.json</code>.</li>
+        <li><b>Open <code>data/collected/</code> folder</b> (or drag it onto this window) — reads every
+            merged <code>&lt;slug&gt;.json</code>.</li>
         <li>Or serve the repo over HTTP (<code>python3 -m http.server</code>) and this page
-            auto-loads <code>../data/golden/manifest.json</code>.</li>
+            auto-loads <code>../data/collected/manifest.json</code>.</li>
       </ul>
       <p>MakeCode TypeScript snippets are rendered as blocks by the official
          <code>makecode.microbit.org</code> renderer (needs internet).</p>
@@ -147,16 +147,12 @@ const renderer = {
 renderer.init();
 
 /* ---------- State ---------- */
-const projects = new Map();   // slug -> { ts:record|null, py:record|null }
+const projects = new Map();   // slug -> merged record { code:{makecode_ts?,micropython?}, ... }
 let activeSlug = null;
 
 function addRecord(rec) {
-  if (!rec || !rec.slug || !rec.language) return false;
-  const slot = projects.get(rec.slug) || { ts:null, py:null };
-  if (rec.language === "makecode_ts") slot.ts = rec;
-  else if (rec.language === "micropython") slot.py = rec;
-  else return false;
-  projects.set(rec.slug, slot);
+  if (!rec || !rec.slug || !rec.code) return false;
+  projects.set(rec.slug, rec);
   return true;
 }
 
@@ -173,12 +169,12 @@ async function loadFromFiles(fileList) {
 
 async function tryAutoFetch() {
   try {
-    // viewer lives in tools/; the corpus is a sibling at ../data/golden/
-    const m = await (await fetch("../data/golden/manifest.json", {cache:"no-store"})).json();
+    // viewer lives in tools/; the corpus is a sibling at ../data/collected/
+    const m = await (await fetch("../data/collected/manifest.json", {cache:"no-store"})).json();
     let n = 0;
     for (const p of m.projects || []) {
-      if (p.has_makecode_ts)  n += await fetchRecord(`../data/golden/typescript/${p.slug}.json`);
-      if (p.has_micropython)  n += await fetchRecord(`../data/golden/micropython/${p.slug}.json`);
+      if (p.has_makecode_ts || p.has_micropython || p.error_count)
+        n += await fetchRecord(`../data/collected/${p.slug}.json`);
     }
     if (n) afterLoad(n);
   } catch (e) { /* file:// or not served — silent; user uses the picker */ }
@@ -206,19 +202,19 @@ function renderList() {
       (q ? ` · ${slugs.length} shown` : "");
   listEl.innerHTML = "";
   for (const slug of slugs) {
-    const { ts, py } = projects.get(slug);
+    const code = projects.get(slug).code || {};
     const row = document.createElement("div");
     row.className = "item" + (slug===activeSlug ? " active" : "");
     row.onclick = () => select(slug);
     row.innerHTML = `<span class="name">${esc(title(slug)||slug)}</span>` +
-        (ts ? `<span class="badge ts">TS</span>` : ``) +
-        (py ? `<span class="badge py">PY</span>` : ``);
+        (code.makecode_ts ? `<span class="badge ts">TS</span>` : ``) +
+        (code.micropython ? `<span class="badge py">PY</span>` : ``);
     listEl.appendChild(row);
   }
 }
 function title(slug) {
-  const p = projects.get(slug); const r = p && (p.ts || p.py);
-  return r ? r.title : slug;
+  const r = projects.get(slug);
+  return r ? (r.title || slug) : slug;
 }
 
 /* ---------- Detail ---------- */
@@ -228,8 +224,9 @@ function select(slug) {
   activeSlug = slug;
   renderer.cancelPending();
   renderList();
-  const { ts, py } = projects.get(slug);
-  const r = ts || py;
+  const r = projects.get(slug);
+  const tsBlocks = (r.code||{}).makecode_ts;
+  const pyBlocks = (r.code||{}).micropython;
   const m = r.meta || {};
   const metaLine = [m.level, (m.tools||[]).join(", "), (m.features||[]).join(", "), (m.topics||[]).join(", ")]
       .filter(Boolean).join("  |  ");
@@ -240,12 +237,12 @@ function select(slug) {
     (metaLine ? `<div class="meta">${esc(metaLine)}</div>` : ``) +
     (r.context && r.context.summary ? `<p class="summary">${esc(r.context.summary)}</p>` : ``) +
     contextDetails(r.context) +
-    (ts ? sectionTS(ts) : ``) +
-    (py ? sectionPY(py) : ``);
+    (tsBlocks ? sectionTS(tsBlocks, r.errors) : ``) +
+    (pyBlocks ? sectionPY(pyBlocks) : ``);
   mainEl.innerHTML = "";
   mainEl.appendChild(el);
 
-  if (ts) renderAllBlocks(ts, el);
+  if (tsBlocks) renderAllBlocks(tsBlocks, el);
 }
 
 function contextDetails(ctx) {
@@ -257,9 +254,10 @@ function contextDetails(ctx) {
   return inner ? `<details class="ctx"><summary>Context</summary>${inner}</details>` : "";
 }
 
-function sectionTS(rec) {
+function sectionTS(blocks, errors) {
+  blocks = blocks || [];
   let html = `<div class="section"><h3>MakeCode TypeScript</h3>`;
-  (rec.code||[]).forEach((b, i) => {
+  blocks.forEach((b, i) => {
     const share = b.pub_id ? `https://makecode.microbit.org/#pub:${encodeURIComponent(b.pub_id)}` : null;
     html +=
       `<div class="block">` +
@@ -272,19 +270,20 @@ function sectionTS(rec) {
         `<pre class="code">${esc(b.source)}</pre>` +
       `</div>`;
   });
-  if (!(rec.code||[]).length) html += `<p class="render-status">No TypeScript captured.</p>`;
-  html += errorsBlock(rec.errors);
+  if (!blocks.length) html += `<p class="render-status">No TypeScript captured.</p>`;
+  html += errorsBlock(errors);
   return html + `</div>`;
 }
 
-function sectionPY(rec) {
+function sectionPY(blocks) {
+  blocks = blocks || [];
   let html = `<div class="section"><h3>MicroPython</h3>`;
-  (rec.code||[]).forEach((b, i) => {
+  blocks.forEach((b, i) => {
     html += `<div class="block">` +
-      ((rec.code.length>1) ? `<div class="lbl">Program ${i+1}</div>` : ``) +
+      ((blocks.length>1) ? `<div class="lbl">Program ${i+1}</div>` : ``) +
       `<pre class="code">${esc(b.source)}</pre></div>`;
   });
-  if (!(rec.code||[]).length) html += `<p class="render-status">No MicroPython captured.</p>`;
+  if (!blocks.length) html += `<p class="render-status">No MicroPython captured.</p>`;
   return html + `</div>`;
 }
 
@@ -294,8 +293,8 @@ function errorsBlock(errors) {
     errors.map(e => esc(JSON.stringify(e))).join("<br>") + `</div>`;
 }
 
-function renderAllBlocks(rec, root) {
-  (rec.code||[]).forEach((b, i) => {
+function renderAllBlocks(blocks, root) {
+  (blocks||[]).forEach((b, i) => {
     const holder = root.querySelector(`.blocks-render[data-block="${i}"]`);
     if (!holder) return;
     renderer.request(b.source).then(msg => {

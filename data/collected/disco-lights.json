@@ -1,0 +1,57 @@
+{
+  "slug": "disco-lights",
+  "url": "https://microbit.org/projects/make-it-code-it/disco-lights/",
+  "title": "Disco lights",
+  "license": "CC BY-SA 4.0",
+  "meta": {
+    "level": "Beginner",
+    "tools": [
+      "MakeCode",
+      "Python"
+    ],
+    "features": [
+      "LED display",
+      "Microphone"
+    ],
+    "topics": [
+      "Input/output"
+    ]
+  },
+  "context": {
+    "summary": "Make your own disco light show with the new micro:bit! The LED lights pulse in time to music picked up by the built-in microphone. The louder the sounds, the brighter they glow.",
+    "how_it_works": [
+      "The microphone measures loudness of the sounds it picks up as numbers from 0-255. 0 is the quietest sound, 255 is the loudest.",
+      "All the LEDs on the display are switched on when the program starts.",
+      "The brightness of the LEDs can also be set using numbers from 0-255. 0 is the darkest (off) and 255 is the brightest.",
+      "A loop constantly sets the brightness of LEDs to match the amount of sound picked up by the microphone sensor.",
+      "The louder the sound, the brighter it makes the LEDs shine.",
+      "Flash this program on to a new micro:bit with sound, play some music with a strong beat and watch the lights pulse in time to the music!"
+    ],
+    "improve_it": [
+      "Modify the program to use your own images or patterns",
+      "If you're in a class or group, flash the program on to multiple micro:bits, dim the lights, play some music and have a light show!",
+      "Can you make the lights get darker with louder sounds?"
+    ]
+  },
+  "code": {
+    "makecode_ts": [
+      {
+        "program_index": 0,
+        "pub_id": "_gqHhoy6uT8j4",
+        "source": "basic.showLeds(`\n    # # # # #\n    # # # # #\n    # # # # #\n    # # # # #\n    # # # # #\n    `)\nbasic.forever(function () {\n    led.setBrightness(input.soundLevel())\n})\n",
+        "dependencies": {
+          "core": "*",
+          "radio": "*",
+          "microphone": "*"
+        }
+      }
+    ],
+    "micropython": [
+      {
+        "program_index": 0,
+        "source": "from microbit import *\n\nlights = Image(\"11111:\"\n              \"11111:\"\n              \"11111:\"\n              \"11111:\"\n              \"11111\")\n\nwhile True:\n    display.show(lights * microphone.sound_level())"
+      }
+    ]
+  },
+  "errors": []
+}

@@ -1,0 +1,64 @@
+{
+  "slug": "sound-insulation-meter",
+  "url": "https://microbit.org/projects/make-it-code-it/sound-insulation-meter/",
+  "title": "Sound insulation meter",
+  "license": "CC BY-SA 4.0",
+  "meta": {
+    "level": "Intermediate",
+    "tools": [
+      "MakeCode",
+      "Python"
+    ],
+    "features": [
+      "Microphone",
+      "Radio"
+    ],
+    "topics": [
+      "Communication",
+      "Measurement",
+      "Selection",
+      "Variables",
+      "Working scientifically"
+    ]
+  },
+  "context": {
+    "summary": "Use two BBC micro:bits to measure sound levels in a science investigation into the sound insulation properties of different materials.",
+    "how_it_works": [],
+    "improve_it": []
+  },
+  "code": {
+    "makecode_ts": [
+      {
+        "program_index": 0,
+        "pub_id": "_Kt39iUh2c0rc",
+        "source": "radio.setGroup(1)\nloops.everyInterval(200, function () {\n    radio.sendNumber(input.soundLevel())\n})\n",
+        "dependencies": {
+          "core": "*",
+          "radio": "*",
+          "microphone": "*"
+        }
+      },
+      {
+        "program_index": 1,
+        "pub_id": "_2qrH692FidiK",
+        "source": "radio.onReceivedNumber(function (receivedNumber) {\n    if (receivedNumber > max) {\n        max = receivedNumber\n    }\n})\ninput.onButtonPressed(Button.A, function () {\n    basic.showNumber(max)\n})\nlet max = 0\nradio.setGroup(1)\nmax = 0\n",
+        "dependencies": {
+          "core": "*",
+          "radio": "*",
+          "microphone": "*"
+        }
+      }
+    ],
+    "micropython": [
+      {
+        "program_index": 0,
+        "source": "from microbit import *\nimport radio\n\n\nradio.config(group=1)\nradio.on()\n\nwhile True:\n    # turn the sound level into a string so we can send it over radio\n    radio.send(str(microphone.sound_level()))\n    sleep(200)\n    "
+      },
+      {
+        "program_index": 1,
+        "source": "from microbit import *\nimport radio\n\n\nradio.config(group=1)\nradio.on()\nmax = 0\n\nwhile True:\n    if button_a.was_pressed():\n        display.scroll(max)\n    sound_level = radio.receive()\n    if sound_level:\n        if int(sound_level) > max:\n            max = int(sound_level)\n            "
+      }
+    ]
+  },
+  "errors": []
+}

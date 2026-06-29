@@ -1,0 +1,66 @@
+{
+  "slug": "max-min-thermometer",
+  "url": "https://microbit.org/projects/make-it-code-it/max-min-thermometer/",
+  "title": "Max-min thermometer",
+  "license": "CC BY-SA 4.0",
+  "meta": {
+    "level": "Intermediate",
+    "tools": [
+      "MakeCode",
+      "Python"
+    ],
+    "features": [
+      "Buttons",
+      "LED display",
+      "Temperature sensor"
+    ],
+    "topics": [
+      "Iteration",
+      "Measurement",
+      "Relational operators",
+      "Sensors",
+      "Temperature",
+      "Variables",
+      "Weather & climate"
+    ]
+  },
+  "context": {
+    "summary": "Track highest and lowest temperatures by leaving this program running on a micro:bit.",
+    "how_it_works": [
+      "Like the Thermometer project, this uses the temperature sensor inside the micro:bitâs CPU (central processing unit) to measure the temperature in Â°C (Celsius).",
+      "This program keeps track of the lowest and highest temperatures recorded by using 3 variables: currentTemp is the current temperature reading, max is the maximum and min is the minimum.",
+      "At the start of the program they are all set to the same value; an infinite (forever) loop ensures that every two seconds it takes a reading, and the program compares the current temperature with the max and min variables.",
+      "If the current temperature is less than (<) than the value stored in the min variable, it changes the min variable to be the same as the current temperature.",
+      "If the current temperature is greater than (>) the max variableâs value, it changes the max variable to be the same as the current temperature.",
+      "The program also flashes a dot on the LED display every time the infinite loop runs so that you know itâs working.",
+      "Press button A to show the minimum and button B to show the maximum temperatures recorded.",
+      "You could leave the micro:bit running for 24 hours, record the maximum and minimum temperatures and plot on a chart at the same time every day and then reset."
+    ],
+    "improve_it": [
+      "Compare the reading with another thermometer. How accurate is the micro:bit? Do you need to modify the micro:bit reading to get the air temperature? How could you do that?",
+      "Convert the temperature to Fahrenheit.",
+      "Use radio to send temperature readings to another micro:bit."
+    ]
+  },
+  "code": {
+    "makecode_ts": [
+      {
+        "program_index": 0,
+        "pub_id": "_27VgywVTLHYV",
+        "source": "input.onButtonPressed(Button.A, function () {\n    basic.showNumber(min)\n})\ninput.onButtonPressed(Button.B, function () {\n    basic.showNumber(max)\n})\nlet min = 0\nlet max = 0\nlet currenttemperature = input.temperature()\nmax = currenttemperature\nmin = currenttemperature\nbasic.forever(function () {\n    basic.showString(\".\")\n    currenttemperature = input.temperature()\n    if (currenttemperature < min) {\n        min = currenttemperature\n    }\n    if (currenttemperature > max) {\n        max = currenttemperature\n    }\n    basic.pause(1000)\n    basic.clearScreen()\n    basic.pause(1000)\n})\n",
+        "dependencies": {
+          "core": "*",
+          "radio": "*",
+          "microphone": "*"
+        }
+      }
+    ],
+    "micropython": [
+      {
+        "program_index": 0,
+        "source": "from microbit import *\n\ncurrentTemp = temperature()\nmax = currentTemp\nmin = currentTemp\n\nwhile True:\n    display.show('.')\n    currentTemp = temperature()\n    if currentTemp < min:\n        min = currentTemp\n    elif currentTemp > max:\n        max = currentTemp\n    if button_a.was_pressed():\n        display.scroll(min)\n    if button_b.was_pressed():\n        display.scroll(max)\n    sleep(1000)\n    display.clear()\n    sleep(1000)\n"
+      }
+    ]
+  },
+  "errors": []
+}

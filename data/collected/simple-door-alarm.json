@@ -1,0 +1,60 @@
+{
+  "slug": "simple-door-alarm",
+  "url": "https://microbit.org/projects/make-it-code-it/simple-door-alarm/",
+  "title": "Simple door alarm",
+  "license": "CC BY-SA 4.0",
+  "meta": {
+    "level": "Intermediate",
+    "tools": [
+      "MakeCode",
+      "Python"
+    ],
+    "features": [
+      "Buttons",
+      "Compass",
+      "LED display"
+    ],
+    "topics": [
+      "Magnetism",
+      "Relational operators",
+      "Selection"
+    ]
+  },
+  "context": {
+    "summary": "Has anyone been in your room? With a micro:bit, a battery pack and a magnet you can make an alarm to alert you to sneaky snoopers...",
+    "how_it_works": [
+      "In this project you'll make a door alarm that works just like a real door sensor in a home security system.",
+      "Your micro:bit has a built-in compass sensor called a magnetometer. You can use it to measure the Earthâs magnetic field as a compass - or to sense how strong magnetic fields are much closer to home!",
+      "Fix a magnet in the corner of a door and a micro:bit with the door alarm program close to it on the door frame like in the video.",
+      "The program uses the micro:bitâs compass (magnetometer) input sensor and a forever loop to keep measuring the strength of the magnetic field.",
+      "It uses selection so when it falls below a certain level (the threshold), it shows an angry face on the LED display. This means the magnet moved away from the micro:bit - when the door was opened - so someone may have been in your room!",
+      "Pressing button A shows the current magnetic force reading. Use this to decide what threshold number to use by taking readings with the door open and closed. We used 200 in our example, but this depends on how strong your magnet is and if there are any other magnetic fields nearby. The coding video above shows you how to do this.",
+      "Press button A to clear the angry face and reset the alarm."
+    ],
+    "improve_it": [
+      "Add a speaker and an audible alarm",
+      "Use a variable to count the number of times your door has been opened - you'll need to add code to sense when it's been opened and closed",
+      "Create a timer to measure how long a door has been left open"
+    ]
+  },
+  "code": {
+    "makecode_ts": [
+      {
+        "program_index": 0,
+        "pub_id": "_6RD45gFq8H41",
+        "source": "input.onButtonPressed(Button.A, function () {\n    basic.showNumber(input.magneticForce(Dimension.Strength))\n})\nbasic.forever(function () {\n    if (input.magneticForce(Dimension.Strength) < 200) {\n        basic.showIcon(IconNames.Angry)\n    }\n})\n",
+        "dependencies": {
+          "core": "*",
+          "radio": "*"
+        }
+      }
+    ],
+    "micropython": [
+      {
+        "program_index": 0,
+        "source": "# Python uses nanoteslas to measure magnetism.\n# Experiment with different numbers depending on the\n# strength of your magnet, which you can read by \n# pressing button A.\n\nfrom microbit import *\n\nwhile True:\n    if button_a.was_pressed():\n        display.scroll(compass.get_field_strength())\n    if compass.get_field_strength() < 200000:\n        display.show(Image.ANGRY)"
+      }
+    ]
+  },
+  "errors": []
+}

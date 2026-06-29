@@ -1,0 +1,57 @@
+{
+  "slug": "sound-logger",
+  "url": "https://microbit.org/projects/make-it-code-it/sound-logger/",
+  "title": "Sound logger",
+  "license": "CC BY-SA 4.0",
+  "meta": {
+    "level": "Intermediate",
+    "tools": [
+      "MakeCode",
+      "Python"
+    ],
+    "features": [
+      "LED display",
+      "Microphone"
+    ],
+    "topics": [
+      "Arithmetic operators",
+      "Data handling",
+      "Input/output",
+      "Variables"
+    ]
+  },
+  "context": {
+    "summary": "Make a sound level logger to monitor how loud or quiet different places around you get over time",
+    "how_it_works": [
+      "The new micro:bit's microphone measures sound levels in numbers between 0 and 255, just like the light sensor.",
+      "A loop constantly compares the current sound level with a variable maxSound storing the loudest sound. If the current sound is louder than the loudest previous sound, it resets maxSound to the new loudest sound value.",
+      "Inside the loop, an if statement checks if you have pressed button A. If you have, it shows the sound level number on the LED display output. You can use this to monitor how loud it gets in different places over time.",
+      "Reset the maximum value by pressing the reset button on the back of the micro:bit."
+    ],
+    "improve_it": [
+      "Modify the project so it also records the quietest, or minimum, sound level",
+      "Use radio to send sound levels to another micro:bit so you can monitor sound levels remotely"
+    ]
+  },
+  "code": {
+    "makecode_ts": [
+      {
+        "program_index": 0,
+        "pub_id": "_4fPbdWMhiV2w",
+        "source": "let soundLevel = 0\nlet maxSound = 0\nbasic.forever(function () {\n    if (input.buttonIsPressed(Button.A)) {\n        basic.showNumber(maxSound)\n    } else {\n        soundLevel = input.soundLevel()\n        led.plotBarGraph(\n        soundLevel,\n        255\n        )\n        if (soundLevel > maxSound) {\n            maxSound = soundLevel\n        }\n    }\n})\n",
+        "dependencies": {
+          "core": "*",
+          "radio": "*",
+          "microphone": "*"
+        }
+      }
+    ],
+    "micropython": [
+      {
+        "program_index": 0,
+        "source": "from microbit import *\nmaxSound = 0\nlights = Image(\"11111:\"\n              \"11111:\"\n              \"11111:\"\n              \"11111:\"\n              \"11111\")\n# ignore first sound level reading\nsoundLevel = microphone.sound_level()\nsleep(200)\n\nwhile True:\n    if button_a.is_pressed():\n        display.scroll(maxSound)\n    else:\n        soundLevel = microphone.sound_level()\n        display.show(lights * soundLevel)\n        if soundLevel > maxSound:\n            maxSound = soundLevel\n            "
+      }
+    ]
+  },
+  "errors": []
+}

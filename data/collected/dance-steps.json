@@ -1,0 +1,47 @@
+{
+  "slug": "dance-steps",
+  "url": "https://microbit.org/projects/make-it-code-it/dance-steps/",
+  "title": "Dance steps",
+  "license": "CC BY-NC-SA 4.0",
+  "meta": {
+    "level": "Beginner",
+    "tools": [
+      "MakeCode",
+      "Python"
+    ],
+    "features": [
+      "Buttons",
+      "LED display"
+    ],
+    "topics": [
+      "Dance",
+      "Iteration"
+    ]
+  },
+  "context": {
+    "summary": "Use count-controlled loops and a sequence to help create a dance routine project on your BBC micro:bit. You can use the project alone or with friends.",
+    "how_it_works": [
+      "The program starts when you press button A.",
+      "Arrows appear on the micro:bitâs LED display, which tell you how to dance â step left then right, put your hands up in the air, then point down to the floor.",
+      "If you are using the project in a group, everyone should press button A on their micro:bits at the same time, so that you start the dance routine at the same time and remain in sync.",
+      "After showing each image, the programÂ pausesÂ for a second (1000 milliseconds) before showing the next image. The pause helps everyone to keep in time.",
+      "The sequence of dance moves repeats four times then stops. The sequence is kept going using a count-controlledÂ loop. Count-controlled loops repeat instructions a set number of times.",
+      "Using loops to keep things happening is an important idea in computer programming. This is also called iteration.Â",
+      "When the routine is finished, the micro:bitâs LED display is cleared."
+    ],
+    "improve_it": [
+      "Make instructions for other dance sequences to appear when you use other inputs such as pressing button B or shaking the micro:bit.",
+      "Change the length of the pauses to make the program run in time with your favourite song.",
+      "Use this project alongside the step counter project to monitor how well you dance."
+    ]
+  },
+  "code": {
+    "micropython": [
+      {
+        "program_index": 0,
+        "source": "# Imports go at the top\nfrom microbit import *\n\n\nwhile True:\n    if button_a.is_pressed():\n        for i in range(4):  \n            display.show(Image('00900:'\n                       '09000:'\n                       '99999:'\n                       '09000:'\n                       '00900'))\n            sleep(1000)\n            display.show(Image('00900:'\n                       '00090:'\n                       '99999:'\n                       '00090:'\n                       '00900'))\n            sleep(1000)\n            display.show(Image('00900:'\n                       '09990:'\n                       '90909:'\n                       '00900:'\n                       '00900'))\n            sleep(1000)\n            display.show(Image('00900:'\n                       '00900:'\n                       '90909:'\n                       '09990:'\n                       '00900'))\n            sleep(1000)\n    display.clear()\n"
+      }
+    ]
+  },
+  "errors": []
+}

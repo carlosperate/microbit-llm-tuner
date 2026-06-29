@@ -1,0 +1,56 @@
+{
+  "slug": "touch-emotion-badge",
+  "url": "https://microbit.org/projects/make-it-code-it/touch-emotion-badge/",
+  "title": "Touch emotion badge",
+  "license": "CC BY-SA 4.0",
+  "meta": {
+    "level": "Beginner",
+    "tools": [
+      "MakeCode",
+      "Python"
+    ],
+    "features": [
+      "Buttons",
+      "LED display",
+      "Touch logo"
+    ],
+    "topics": [
+      "Abstraction",
+      "Input/output"
+    ]
+  },
+  "context": {
+    "summary": "Add another expression to an emotion badge project using the new micro:bit's touch logo sensor as an extra button",
+    "how_it_works": [
+      "This program senses if you press button A and shows a happy face icon on the LED display output.",
+      "It senses if you press button B and shows a sad face on the LED display.",
+      "If you touch the gold logo on the front of the new micro:bit, the program detects your finger and shows a surprised face on the LEDs."
+    ],
+    "improve_it": [
+      "Change the icons that appear, or draw your own to show different emotions.",
+      "Create an animated sequence of faces when you press each button.",
+      "Add different sounds that match each emotion."
+    ]
+  },
+  "code": {
+    "makecode_ts": [
+      {
+        "program_index": 0,
+        "pub_id": "_MYX1XV9qyHWH",
+        "source": "input.onButtonPressed(Button.A, function () {\n    basic.showIcon(IconNames.Happy)\n})\ninput.onButtonPressed(Button.B, function () {\n    basic.showIcon(IconNames.Sad)\n})\ninput.onLogoEvent(TouchButtonEvent.Pressed, function () {\n    basic.showIcon(IconNames.Surprised)\n})\n",
+        "dependencies": {
+          "core": "*",
+          "radio": "*",
+          "microphone": "*"
+        }
+      }
+    ],
+    "micropython": [
+      {
+        "program_index": 0,
+        "source": "from microbit import *\n\nwhile True:\n    if button_a.is_pressed():\n        display.show(Image.HAPPY)\n    if button_b.is_pressed():\n        display.show(Image.SAD)\n    if pin_logo.is_touched():\n        display.show(Image.SURPRISED)"
+      }
+    ]
+  },
+  "errors": []
+}

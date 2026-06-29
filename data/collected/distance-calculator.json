@@ -1,0 +1,72 @@
+{
+  "slug": "distance-calculator",
+  "url": "https://microbit.org/projects/make-it-code-it/distance-calculator/",
+  "title": "Distance calculator",
+  "license": "CC BY-SA 4.0",
+  "meta": {
+    "level": "Intermediate",
+    "tools": [
+      "MakeCode",
+      "Python"
+    ],
+    "features": [
+      "Buttons",
+      "LED display",
+      "Sound",
+      "Touch logo"
+    ],
+    "topics": [
+      "Measurement",
+      "Multiplication",
+      "Variables"
+    ]
+  },
+  "context": {
+    "summary": "Use your BBC micro:bit to measure distances as you walk.",
+    "how_it_works": [
+      "This program calculates distances by multiplying step length by the number of steps you take. It uses an average child's step length of 0.6 metres.",
+      "Carefully walk the distance you want to measure, pressing button A each time you take a step.",
+      "The program works by increasing the 'step count' variable by one each time button A is pressed.",
+      "Press button B to see the distance you have walked in metres. The micro:bit calculates this by multiplying the 'step count' variable by the step length.",
+      "If you want to know how many steps you took, press the touch logo on the front of your micro:bit.",
+      "Reset the micro:bit by pressing the reset button on the back."
+    ],
+    "improve_it": [
+      "Calculate your average step length in metres and use it to replace the 0.6 number in the code.",
+      "Calculate areas of rectangles, such as parts of a school playground, by measuring each side and multiplying the distances together.",
+      "Add cardboard to make the buttons easier to press, as seen in the Improve it section of the Emotion badge project.",
+      "Use this wheelchair distance calculator code that can automatically detect when your wheel rotates. Replace the 0.6 number with the circumference of your wheel measured in metres."
+    ]
+  },
+  "code": {
+    "makecode_ts": [
+      {
+        "program_index": 0,
+        "pub_id": "_9dt0HVcdhKFr",
+        "source": "input.onButtonPressed(Button.A, function () {\n    music.play(music.tonePlayable(131, music.beat(BeatFraction.Half)), music.PlaybackMode.UntilDone)\n    basic.showIcon(IconNames.Heart)\n    step_count += 1\n    basic.clearScreen()\n})\ninput.onButtonPressed(Button.B, function () {\n    basic.showNumber(step_count * step_length)\n})\ninput.onLogoEvent(TouchButtonEvent.Pressed, function () {\n    basic.showNumber(step_count)\n})\nlet step_length = 0\nlet step_count = 0\nstep_count = 0\nstep_length = 0.6\nbasic.showNumber(0)\nmusic.play(music.tonePlayable(262, music.beat(BeatFraction.Whole)), music.PlaybackMode.UntilDone)\n",
+        "dependencies": {
+          "core": "*",
+          "radio": "*",
+          "microphone": "*"
+        }
+      },
+      {
+        "program_index": 1,
+        "pub_id": "_57AWUiH0o52T",
+        "source": "input.onGesture(Gesture.LogoUp, function () {\n    music.play(music.tonePlayable(131, music.beat(BeatFraction.Half)), music.PlaybackMode.UntilDone)\n    basic.showIcon(IconNames.Heart)\n    revolutions += 1\n    basic.clearScreen()\n})\ninput.onButtonPressed(Button.B, function () {\n    basic.showNumber(revolutions * circumference)\n})\ninput.onLogoEvent(TouchButtonEvent.Pressed, function () {\n    basic.showNumber(revolutions)\n})\nlet circumference = 0\nlet revolutions = 0\nrevolutions = 0\ncircumference = 0.6\nbasic.showNumber(0)\nmusic.play(music.tonePlayable(262, music.beat(BeatFraction.Whole)), music.PlaybackMode.UntilDone)\n",
+        "dependencies": {
+          "core": "*",
+          "radio": "*",
+          "microphone": "*"
+        }
+      }
+    ],
+    "micropython": [
+      {
+        "program_index": 0,
+        "source": "# Imports go at the top\nfrom microbit import *\nimport music\n\nstepcount = 0\nsteplength = 0.6\ndisplay.show(0)\nmusic.play(['c4:4'])\n\nwhile True:\n    if button_a.is_pressed():\n        music.play(['c3:2'])\n        display.show(Image.HEART)\n        sleep(400)\n        stepcount += 1\n        display.clear()\n    if button_b.is_pressed():\n        display.scroll(stepcount*steplength)\n    if pin_logo.is_touched():\n        display.scroll(stepcount)"
+      }
+    ]
+  },
+  "errors": []
+}

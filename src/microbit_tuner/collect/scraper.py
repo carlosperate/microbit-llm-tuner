@@ -1,10 +1,10 @@
 #!/usr/bin/env python3
 """Deterministic scraper for microbit.org "Make it: code it" projects.
 
-Produces a byte-exact code corpus split by language into two independent
-folders (MakeCode TypeScript and MicroPython). No language model is involved
-anywhere in the extraction path: every byte of code is the original source,
-obtained by structural HTML/JSON parsing only.
+Produces a byte-exact code corpus as one merged JSON file per project, holding
+both languages (MakeCode TypeScript and MicroPython) under a single `code` map.
+No language model is involved anywhere in the extraction path: every byte of
+code is the original source, obtained by structural HTML/JSON parsing only.
 
 Sources (verified):
   - Index:        https://microbit.org/projects/make-it-code-it/
@@ -13,14 +13,17 @@ Sources (verified):
 
 MicroPython comes *only* from the inline code block(s) rendered in each project
 page. MakeCode TypeScript comes *only* from the MakeCode share API, resolved via
-the project's pub ID, and from `main.ts` only. The two never cross.
+the project's pub ID, and from `main.ts` only. The two never cross: they are
+co-located in one file but kept under distinct `code` keys and never merged.
 
-Output (see Scraper / _write_file):
-  - A project is written into a language folder only if that language has code.
-  - `code` is an array: multi-program (e.g. radio) projects ship several blocks
-    / pub IDs, captured in document order.
+Output (see Scraper / _write_record):
+  - One `<slug>.json` per project. `code` is a map keyed by language
+    (`makecode_ts` / `micropython`); a key is present only if that language has
+    code. Each language's value is an array of programs: multi-program (e.g.
+    radio) projects ship several programs / pub IDs, captured in document order
+    and numbered by `program_index`.
   - Each file records its source `url` and (for TS) `pub_id` as an audit trail,
-    and carries its own `meta` + `context` so each corpus folder stands alone.
+    and carries its `meta` + `context` so the record stands alone.
   - `license` is extracted per page (not assumed): most are CC BY-SA 4.0, but
     some differ (e.g. dance-steps is the NonCommercial CC BY-NC-SA 4.0). A
     missing/unrecognised licence is warned + recorded, never fatal.
@@ -345,8 +348,6 @@ class Scraper:
     def __init__(self, fetcher: Fetcher, out_dir: Path, force: bool = False):
         self.fetcher = fetcher
         self.out_dir = out_dir
-        self.ts_dir = out_dir / "typescript"
-        self.py_dir = out_dir / "micropython"
         self.force = force
 
     def fetch_main_ts(self, pubid: str) -> tuple[Optional[str], dict, Optional[dict]]:
@@ -400,16 +401,15 @@ class Scraper:
         permanent page failure, which is logged and skipped)."""
         url = PROJECT_URL.format(slug=slug)
 
-        # Resume: skip if a prior record exists and all its expected output
-        # files are present on disk. A code-less project has no expected files,
-        # so this also resumes those (vacuously true) without re-processing.
+        # Resume: skip if a prior record exists and its expected output file is
+        # present on disk. A project gets a file when it has code in either
+        # language or any TS error worth auditing; a code-less, error-less
+        # project has no file, so this resumes those (vacuously true) too.
         if prior is not None and not self.force:
-            expected = []
-            if prior.get("has_makecode_ts"):
-                expected.append(self.ts_dir / f"{slug}.json")
-            if prior.get("has_micropython"):
-                expected.append(self.py_dir / f"{slug}.json")
-            if all(p.exists() for p in expected):
+            expects_file = (prior.get("has_makecode_ts")
+                            or prior.get("has_micropython")
+                            or prior.get("error_count", 0) > 0)
+            if not expects_file or (self.out_dir / f"{slug}.json").exists():
                 print(f"  = {slug}: up-to-date, skipping")
                 return prior
 
@@ -444,7 +444,7 @@ class Scraper:
                 ts_errors.append(err)
                 continue
             ts_code.append({
-                "block_index": len(ts_code),
+                "program_index": len(ts_code),
                 "pub_id": pubid,
                 "source": main_ts,
                 "dependencies": dependencies,
@@ -453,19 +453,22 @@ class Scraper:
         # --- MicroPython (from inline page block(s)) --------------------------
         py_code: list[dict] = []
         for src in py_blocks:
-            py_code.append({"block_index": len(py_code), "source": src})
+            py_code.append({"program_index": len(py_code), "source": src})
 
         has_ts = bool(ts_code)
         has_py = bool(py_code)
 
-        # Write TS file if we captured code, or if we have errors worth keeping
-        # an audit trail for (pub IDs that failed to resolve).
-        if has_ts or ts_errors:
-            self._write_file(self.ts_dir, slug, url, title, license_code, meta,
-                             context, "makecode_ts", ts_code, ts_errors)
-        if has_py:
-            self._write_file(self.py_dir, slug, url, title, license_code, meta,
-                             context, "micropython", py_code, [])
+        # Write one merged file if we captured code in either language, or if we
+        # have TS errors worth keeping an audit trail for (pub IDs that failed to
+        # resolve). A code key is present only when that language has blocks.
+        if has_ts or has_py or ts_errors:
+            code: dict[str, list[dict]] = {}
+            if has_ts:
+                code["makecode_ts"] = ts_code
+            if has_py:
+                code["micropython"] = py_code
+            self._write_record(slug, url, title, license_code, meta, context,
+                               code, ts_errors)
 
         flags = []
         if has_ts:
@@ -487,14 +490,13 @@ class Scraper:
             "error_count": len(ts_errors),
         }
 
-    def _write_file(self, folder: Path, slug: str, url: str, title: str,
-                    license_code: str, meta: dict, context: dict, language: str,
-                    code: list[dict], errors: list[dict]) -> None:
-        # context and meta are intentionally duplicated into each language file
-        # so the folder stands alone for the next stage. Do not factor out.
+    def _write_record(self, slug: str, url: str, title: str,
+                      license_code: str, meta: dict, context: dict,
+                      code: dict[str, list[dict]], errors: list[dict]) -> None:
+        # `code` is a map keyed by language (makecode_ts / micropython); both
+        # languages live in one file but stay under distinct keys — never merged.
         record = {
             "slug": slug,
-            "language": language,
             "url": url,
             "title": title,
             "license": license_code,
@@ -503,8 +505,8 @@ class Scraper:
             "code": code,
             "errors": errors,
         }
-        folder.mkdir(parents=True, exist_ok=True)
-        path = folder / f"{slug}.json"
+        self.out_dir.mkdir(parents=True, exist_ok=True)
+        path = self.out_dir / f"{slug}.json"
         path.write_text(
             json.dumps(record, ensure_ascii=False, indent=2) + "\n",
             encoding="utf-8",
@@ -560,8 +562,8 @@ def build_manifest(index_url: str, listed: Optional[int],
 
 def main(argv: Optional[list[str]] = None) -> int:
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument("--out", type=Path, default=Path("data/golden"),
-                        help="Output directory (default: data/golden). Manifest "
+    parser.add_argument("--out", type=Path, default=Path("data/collected"),
+                        help="Output directory (default: data/collected). Manifest "
                              "is written to <out>/manifest.json.")
     parser.add_argument("--cache", type=Path, default=Path("cache/scrape"),
                         help="Cache directory for raw HTML and API JSON "

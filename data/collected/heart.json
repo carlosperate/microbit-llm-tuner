@@ -1,0 +1,55 @@
+{
+  "slug": "heart",
+  "url": "https://microbit.org/projects/make-it-code-it/heart/",
+  "title": "Heart",
+  "license": "CC BY-SA 4.0",
+  "meta": {
+    "level": "Beginner",
+    "tools": [
+      "MakeCode",
+      "Python"
+    ],
+    "features": [
+      "LED display"
+    ],
+    "topics": [
+      "Input/output"
+    ]
+  },
+  "context": {
+    "summary": "Light up your micro:bit with love by showing a heart.",
+    "how_it_works": [
+      "This is a great first project to learn how to program your micro:bit!",
+      "When the program is transferred (flashed) to your micro:bit, the processor steps through the instructions you gave it.",
+      "The program shows a heart picture on the micro:bitâs LED display output.",
+      "The heart stays on the display as long as it has power because you havenât given it any further instructions to show anything else.",
+      "The micro:bit has a set of other built-in images you can use in your projects.",
+      "Pictures on computers, phones and tablet screens are made using dots called âpixelsâ. The micro:bitâs display has 25 LED pixels arranged in a 5 x 5 grid."
+    ],
+    "improve_it": [
+      "Try choosing other built-in pictures like HAPPY, DUCK or GHOST.",
+      "Can you show more than one image?",
+      "See if you can make your own pictures by exploring the other projects below."
+    ]
+  },
+  "code": {
+    "makecode_ts": [
+      {
+        "program_index": 0,
+        "pub_id": "_1M2V0eiFb7jJ",
+        "source": "basic.showIcon(IconNames.Heart)\n",
+        "dependencies": {
+          "core": "*",
+          "radio": "*"
+        }
+      }
+    ],
+    "micropython": [
+      {
+        "program_index": 0,
+        "source": "from microbit import *\ndisplay.show(Image.HEART)"
+      }
+    ]
+  },
+  "errors": []
+}

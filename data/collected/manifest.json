@@ -1,0 +1,1354 @@
+{
+  "scraped_at": "2026-06-29T21:44:23Z",
+  "index_url": "https://microbit.org/projects/make-it-code-it/",
+  "projects_listed": 123,
+  "projects_scraped": 123,
+  "projects": [
+    {
+      "slug": "heart",
+      "has_makecode_ts": true,
+      "has_micropython": true,
+      "pub_ids": [
+        "_1M2V0eiFb7jJ"
+      ],
+      "license": "CC BY-SA 4.0",
+      "license_warning": null,
+      "error_count": 0
+    },
+    {
+      "slug": "beating-heart",
+      "has_makecode_ts": true,
+      "has_micropython": true,
+      "pub_ids": [
+        "_AUiYbFHgp6wK"
+      ],
+      "license": "CC BY-SA 4.0",
+      "license_warning": null,
+      "error_count": 0
+    },
+    {
+      "slug": "animated-animals",
+      "has_makecode_ts": true,
+      "has_micropython": true,
+      "pub_ids": [
+        "_J9rK89hgJJRV"
+      ],
+      "license": "CC BY-SA 4.0",
+      "license_warning": null,
+      "error_count": 0
+    },
+    {
+      "slug": "emotion-badge",
+      "has_makecode_ts": true,
+      "has_micropython": true,
+      "pub_ids": [
+        "_d4aPaHUrmcX4"
+      ],
+      "license": "CC BY-SA 4.0",
+      "license_warning": null,
+      "error_count": 0
+    },
+    {
+      "slug": "get-silly",
+      "has_makecode_ts": true,
+      "has_micropython": true,
+      "pub_ids": [
+        "_dkrYv67Ui9jW"
+      ],
+      "license": "CC BY-SA 4.0",
+      "license_warning": null,
+      "error_count": 0
+    },
+    {
+      "slug": "flashing-emotions",
+      "has_makecode_ts": true,
+      "has_micropython": true,
+      "pub_ids": [
+        "_2DRXqjK1dc3R"
+      ],
+      "license": "CC BY-SA 4.0",
+      "license_warning": null,
+      "error_count": 0
+    },
+    {
+      "slug": "here-comes-the-sun",
+      "has_makecode_ts": true,
+      "has_micropython": true,
+      "pub_ids": [
+        "_WAP3mJ7dpWTe"
+      ],
+      "license": "CC BY-SA 4.0",
+      "license_warning": null,
+      "error_count": 0
+    },
+    {
+      "slug": "shining-sunbeams",
+      "has_makecode_ts": true,
+      "has_micropython": true,
+      "pub_ids": [
+        "_XTpPLoAX0edC"
+      ],
+      "license": "CC BY-SA 4.0",
+      "license_warning": null,
+      "error_count": 0
+    },
+    {
+      "slug": "sunlight-sensor",
+      "has_makecode_ts": true,
+      "has_micropython": true,
+      "pub_ids": [
+        "_cetA5h6DF41v"
+      ],
+      "license": "CC BY-SA 4.0",
+      "license_warning": null,
+      "error_count": 0
+    },
+    {
+      "slug": "name-badge",
+      "has_makecode_ts": true,
+      "has_micropython": true,
+      "pub_ids": [
+        "_Lme8X5Lq5RXE"
+      ],
+      "license": "CC BY-SA 4.0",
+      "license_warning": null,
+      "error_count": 0
+    },
+    {
+      "slug": "dice",
+      "has_makecode_ts": true,
+      "has_micropython": true,
+      "pub_ids": [
+        "_hUpi4RFKjJF7"
+      ],
+      "license": "CC BY-SA 4.0",
+      "license_warning": null,
+      "error_count": 0
+    },
+    {
+      "slug": "magic-8ball",
+      "has_makecode_ts": true,
+      "has_micropython": true,
+      "pub_ids": [
+        "_V7FAm44TyfFT"
+      ],
+      "license": "CC BY-SA 4.0",
+      "license_warning": null,
+      "error_count": 0
+    },
+    {
+      "slug": "rock-paper-scissors",
+      "has_makecode_ts": true,
+      "has_micropython": true,
+      "pub_ids": [
+        "_arUf8fFvXX9w"
+      ],
+      "license": "CC BY-SA 4.0",
+      "license_warning": null,
+      "error_count": 0
+    },
+    {
+      "slug": "graphical-dice",
+      "has_makecode_ts": true,
+      "has_micropython": true,
+      "pub_ids": [
+        "_Em9XRuEpaERr"
+      ],
+      "license": "CC BY-SA 4.0",
+      "license_warning": null,
+      "error_count": 0
+    },
+    {
+      "slug": "step-counter",
+      "has_makecode_ts": true,
+      "has_micropython": true,
+      "pub_ids": [
+        "_E6uhUWKEqL1L"
+      ],
+      "license": "CC BY-SA 4.0",
+      "license_warning": null,
+      "error_count": 0
+    },
+    {
+      "slug": "low-energy-step-counter",
+      "has_makecode_ts": true,
+      "has_micropython": true,
+      "pub_ids": [
+        "_YmcPs9MiUT5J"
+      ],
+      "license": "CC BY-SA 4.0",
+      "license_warning": null,
+      "error_count": 0
+    },
+    {
+      "slug": "scratch-jumping-cat",
+      "has_makecode_ts": false,
+      "has_micropython": false,
+      "pub_ids": [],
+      "license": "CC BY-SA 4.0",
+      "license_warning": null,
+      "error_count": 0
+    },
+    {
+      "slug": "scratch-theremin",
+      "has_makecode_ts": false,
+      "has_micropython": false,
+      "pub_ids": [],
+      "license": "CC BY-SA 4.0",
+      "license_warning": null,
+      "error_count": 0
+    },
+    {
+      "slug": "scratch-boombox",
+      "has_makecode_ts": false,
+      "has_micropython": false,
+      "pub_ids": [],
+      "license": "CC BY-SA 4.0",
+      "license_warning": null,
+      "error_count": 0
+    },
+    {
+      "slug": "scratch-hungry-dino",
+      "has_makecode_ts": false,
+      "has_micropython": false,
+      "pub_ids": [],
+      "license": "CC BY-SA 4.0",
+      "license_warning": null,
+      "error_count": 0
+    },
+    {
+      "slug": "scratch-paint",
+      "has_makecode_ts": false,
+      "has_micropython": false,
+      "pub_ids": [],
+      "license": "CC BY-SA 4.0",
+      "license_warning": null,
+      "error_count": 0
+    },
+    {
+      "slug": "scratch-guitar",
+      "has_makecode_ts": false,
+      "has_micropython": false,
+      "pub_ids": [],
+      "license": "CC BY-SA 4.0",
+      "license_warning": null,
+      "error_count": 0
+    },
+    {
+      "slug": "compass-bearing",
+      "has_makecode_ts": true,
+      "has_micropython": true,
+      "pub_ids": [
+        "_716cyLFpP66A"
+      ],
+      "license": "CC BY-SA 4.0",
+      "license_warning": null,
+      "error_count": 0
+    },
+    {
+      "slug": "thermometer",
+      "has_makecode_ts": true,
+      "has_micropython": true,
+      "pub_ids": [
+        "_fEaXEL7KUU4x"
+      ],
+      "license": "CC BY-SA 4.0",
+      "license_warning": null,
+      "error_count": 0
+    },
+    {
+      "slug": "nightlight",
+      "has_makecode_ts": true,
+      "has_micropython": true,
+      "pub_ids": [
+        "_dz7W7hWM2AdR",
+        "_HFH8X0Rt2bVH"
+      ],
+      "license": "CC BY-SA 4.0",
+      "license_warning": null,
+      "error_count": 0
+    },
+    {
+      "slug": "jukebox",
+      "has_makecode_ts": true,
+      "has_micropython": true,
+      "pub_ids": [
+        "_guCi12DwYUKA"
+      ],
+      "license": "CC BY-SA 4.0",
+      "license_warning": null,
+      "error_count": 0
+    },
+    {
+      "slug": "teleporting-duck",
+      "has_makecode_ts": true,
+      "has_micropython": true,
+      "pub_ids": [
+        "_W9id6YdkMME9"
+      ],
+      "license": "CC BY-SA 4.0",
+      "license_warning": null,
+      "error_count": 0
+    },
+    {
+      "slug": "counter",
+      "has_makecode_ts": true,
+      "has_micropython": true,
+      "pub_ids": [
+        "_JM345hbMLTyM"
+      ],
+      "license": "CC BY-SA 4.0",
+      "license_warning": null,
+      "error_count": 0
+    },
+    {
+      "slug": "activity-picker",
+      "has_makecode_ts": true,
+      "has_micropython": true,
+      "pub_ids": [
+        "_3mmA7TW7RK53"
+      ],
+      "license": "CC BY-SA 4.0",
+      "license_warning": null,
+      "error_count": 0
+    },
+    {
+      "slug": "simple-tilt-alarm",
+      "has_makecode_ts": true,
+      "has_micropython": true,
+      "pub_ids": [
+        "_FuiW8VFPwg36"
+      ],
+      "license": "CC BY-SA 4.0",
+      "license_warning": null,
+      "error_count": 0
+    },
+    {
+      "slug": "calming-leds",
+      "has_makecode_ts": true,
+      "has_micropython": true,
+      "pub_ids": [
+        "_Aym5Ce0mAUTe"
+      ],
+      "license": "CC BY-SA 4.0",
+      "license_warning": null,
+      "error_count": 0
+    },
+    {
+      "slug": "saving-sea-turtles",
+      "has_makecode_ts": true,
+      "has_micropython": true,
+      "pub_ids": [
+        "_HLJ17X2WALcq"
+      ],
+      "license": "CC BY-SA 4.0",
+      "license_warning": null,
+      "error_count": 0
+    },
+    {
+      "slug": "light-up-fishing-nets",
+      "has_makecode_ts": true,
+      "has_micropython": true,
+      "pub_ids": [
+        "_H8diswhUCfym"
+      ],
+      "license": "CC BY-SA 4.0",
+      "license_warning": null,
+      "error_count": 0
+    },
+    {
+      "slug": "send-a-smile",
+      "has_makecode_ts": true,
+      "has_micropython": true,
+      "pub_ids": [
+        "_TJmWc1MhsKCd"
+      ],
+      "license": "CC BY-SA 4.0",
+      "license_warning": null,
+      "error_count": 0
+    },
+    {
+      "slug": "animal-tracker",
+      "has_makecode_ts": true,
+      "has_micropython": true,
+      "pub_ids": [
+        "_h0WPpa8aAKgY"
+      ],
+      "license": "CC BY-SA 4.0",
+      "license_warning": null,
+      "error_count": 0
+    },
+    {
+      "slug": "touch-emotion-badge",
+      "has_makecode_ts": true,
+      "has_micropython": true,
+      "pub_ids": [
+        "_MYX1XV9qyHWH"
+      ],
+      "license": "CC BY-SA 4.0",
+      "license_warning": null,
+      "error_count": 0
+    },
+    {
+      "slug": "clap-hearts",
+      "has_makecode_ts": true,
+      "has_micropython": true,
+      "pub_ids": [
+        "_AhPKDR2UDf7H"
+      ],
+      "license": "CC BY-SA 4.0",
+      "license_warning": null,
+      "error_count": 0
+    },
+    {
+      "slug": "disco-lights",
+      "has_makecode_ts": true,
+      "has_micropython": true,
+      "pub_ids": [
+        "_gqHhoy6uT8j4"
+      ],
+      "license": "CC BY-SA 4.0",
+      "license_warning": null,
+      "error_count": 0
+    },
+    {
+      "slug": "sound-meter",
+      "has_makecode_ts": true,
+      "has_micropython": true,
+      "pub_ids": [
+        "_Wzy8zrW2i8th"
+      ],
+      "license": "CC BY-SA 4.0",
+      "license_warning": null,
+      "error_count": 0
+    },
+    {
+      "slug": "touch-heart",
+      "has_makecode_ts": true,
+      "has_micropython": false,
+      "pub_ids": [
+        "_ii4cywLEsUD5"
+      ],
+      "license": "CC BY-SA 4.0",
+      "license_warning": null,
+      "error_count": 0
+    },
+    {
+      "slug": "sound-emotion-badge",
+      "has_makecode_ts": true,
+      "has_micropython": true,
+      "pub_ids": [
+        "_MhoV0R1daKxa"
+      ],
+      "license": "CC BY-SA 4.0",
+      "license_warning": null,
+      "error_count": 0
+    },
+    {
+      "slug": "sensory-toy",
+      "has_makecode_ts": true,
+      "has_micropython": true,
+      "pub_ids": [
+        "_RsWKrDbEo1of"
+      ],
+      "license": "CC BY-SA 4.0",
+      "license_warning": null,
+      "error_count": 0
+    },
+    {
+      "slug": "metronome",
+      "has_makecode_ts": true,
+      "has_micropython": true,
+      "pub_ids": [
+        "_Lxt6F3DLfXEu"
+      ],
+      "license": "CC BY-SA 4.0",
+      "license_warning": null,
+      "error_count": 0
+    },
+    {
+      "slug": "clap-lights",
+      "has_makecode_ts": true,
+      "has_micropython": true,
+      "pub_ids": [
+        "_JPsDsTYeJd5z"
+      ],
+      "license": "CC BY-SA 4.0",
+      "license_warning": null,
+      "error_count": 0
+    },
+    {
+      "slug": "which-way-now",
+      "has_makecode_ts": true,
+      "has_micropython": true,
+      "pub_ids": [
+        "_DbdPAXHm4Xgp"
+      ],
+      "license": "CC BY-SA 4.0",
+      "license_warning": null,
+      "error_count": 0
+    },
+    {
+      "slug": "species-counter",
+      "has_makecode_ts": false,
+      "has_micropython": true,
+      "pub_ids": [],
+      "license": "CC BY-SA 4.0",
+      "license_warning": null,
+      "error_count": 0
+    },
+    {
+      "slug": "water-bottle-alert",
+      "has_makecode_ts": true,
+      "has_micropython": true,
+      "pub_ids": [
+        "_K4d6Fdbt2Cst"
+      ],
+      "license": "CC BY-SA 4.0",
+      "license_warning": null,
+      "error_count": 0
+    },
+    {
+      "slug": "cookie-tin-alarm",
+      "has_makecode_ts": true,
+      "has_micropython": true,
+      "pub_ids": [
+        "_7yKVKiLX00Rs"
+      ],
+      "license": "CC BY-SA 4.0",
+      "license_warning": null,
+      "error_count": 0
+    },
+    {
+      "slug": "get-up",
+      "has_makecode_ts": true,
+      "has_micropython": true,
+      "pub_ids": [
+        "_2kfa1bKH8Uvk"
+      ],
+      "license": "CC BY-SA 4.0",
+      "license_warning": null,
+      "error_count": 0
+    },
+    {
+      "slug": "times-tables-tester",
+      "has_makecode_ts": true,
+      "has_micropython": true,
+      "pub_ids": [
+        "_fHxHYaPrm1gr"
+      ],
+      "license": "CC BY-SA 4.0",
+      "license_warning": null,
+      "error_count": 0
+    },
+    {
+      "slug": "meet-your-microbit",
+      "has_makecode_ts": true,
+      "has_micropython": true,
+      "pub_ids": [
+        "_95o2F2hd3eJp"
+      ],
+      "license": "CC BY-SA 4.0",
+      "license_warning": null,
+      "error_count": 0
+    },
+    {
+      "slug": "festive-decoration",
+      "has_makecode_ts": true,
+      "has_micropython": true,
+      "pub_ids": [
+        "_g0VMqHFhxbas"
+      ],
+      "license": "CC BY-SA 4.0",
+      "license_warning": null,
+      "error_count": 0
+    },
+    {
+      "slug": "environment-exploration",
+      "has_makecode_ts": true,
+      "has_micropython": true,
+      "pub_ids": [
+        "_df3AkdckW3iP"
+      ],
+      "license": "CC BY-SA 4.0",
+      "license_warning": null,
+      "error_count": 0
+    },
+    {
+      "slug": "dance-steps",
+      "has_makecode_ts": false,
+      "has_micropython": true,
+      "pub_ids": [],
+      "license": "CC BY-NC-SA 4.0",
+      "license_warning": null,
+      "error_count": 0
+    },
+    {
+      "slug": "snow-globe",
+      "has_makecode_ts": true,
+      "has_micropython": true,
+      "pub_ids": [
+        "_cbVhLgUzhXEy"
+      ],
+      "license": "CC BY-SA 4.0",
+      "license_warning": null,
+      "error_count": 0
+    },
+    {
+      "slug": "shake-and-sounds-3",
+      "has_makecode_ts": true,
+      "has_micropython": false,
+      "pub_ids": [
+        "_DqYaWcWboaKE"
+      ],
+      "license": "CC BY-SA 4.0",
+      "license_warning": null,
+      "error_count": 0
+    },
+    {
+      "slug": "audible-emotion-badge",
+      "has_makecode_ts": true,
+      "has_micropython": false,
+      "pub_ids": [
+        "_boiVzyUJL6ix"
+      ],
+      "license": "CC BY-SA 4.0",
+      "license_warning": null,
+      "error_count": 0
+    },
+    {
+      "slug": "sensitive-step-counter",
+      "has_makecode_ts": true,
+      "has_micropython": true,
+      "pub_ids": [
+        "_bd1Jesg2YTpg"
+      ],
+      "license": "CC BY-SA 4.0",
+      "license_warning": null,
+      "error_count": 0
+    },
+    {
+      "slug": "compass-north",
+      "has_makecode_ts": true,
+      "has_micropython": true,
+      "pub_ids": [
+        "_Fxi79gEXmA72"
+      ],
+      "license": "CC BY-SA 4.0",
+      "license_warning": null,
+      "error_count": 0
+    },
+    {
+      "slug": "max-min-thermometer",
+      "has_makecode_ts": true,
+      "has_micropython": true,
+      "pub_ids": [
+        "_27VgywVTLHYV"
+      ],
+      "license": "CC BY-SA 4.0",
+      "license_warning": null,
+      "error_count": 0
+    },
+    {
+      "slug": "make-some-noise",
+      "has_makecode_ts": true,
+      "has_micropython": true,
+      "pub_ids": [
+        "_DbcgCAdAKeE6"
+      ],
+      "license": "CC BY-SA 4.0",
+      "license_warning": null,
+      "error_count": 0
+    },
+    {
+      "slug": "frere-jacques-tune",
+      "has_makecode_ts": true,
+      "has_micropython": true,
+      "pub_ids": [
+        "_C545kRP4aDm2"
+      ],
+      "license": "CC BY-SA 4.0",
+      "license_warning": null,
+      "error_count": 0
+    },
+    {
+      "slug": "group-teleporting-duck",
+      "has_makecode_ts": true,
+      "has_micropython": true,
+      "pub_ids": [
+        "_70E1U38g80xc"
+      ],
+      "license": "CC BY-SA 4.0",
+      "license_warning": null,
+      "error_count": 0
+    },
+    {
+      "slug": "tell-me-a-secret",
+      "has_makecode_ts": true,
+      "has_micropython": true,
+      "pub_ids": [
+        "_UwzVpUf4YWA2"
+      ],
+      "license": "CC BY-SA 4.0",
+      "license_warning": null,
+      "error_count": 0
+    },
+    {
+      "slug": "indoor-outdoor-thermometer",
+      "has_makecode_ts": true,
+      "has_micropython": true,
+      "pub_ids": [
+        "_7rKigED8cKhs",
+        "_0e5Mx9Hh5JvE"
+      ],
+      "license": "CC BY-SA 4.0",
+      "license_warning": null,
+      "error_count": 0
+    },
+    {
+      "slug": "heartbeat-beacon",
+      "has_makecode_ts": true,
+      "has_micropython": true,
+      "pub_ids": [
+        "_Lo4Pt4RTYaRs",
+        "_da27ih9422iL"
+      ],
+      "license": "CC BY-SA 4.0",
+      "license_warning": null,
+      "error_count": 0
+    },
+    {
+      "slug": "treasure-hunt",
+      "has_makecode_ts": true,
+      "has_micropython": true,
+      "pub_ids": [
+        "_73dMchDJmRMU",
+        "_h3g067gjK2CW"
+      ],
+      "license": "CC BY-SA 4.0",
+      "license_warning": null,
+      "error_count": 0
+    },
+    {
+      "slug": "activity-array",
+      "has_makecode_ts": true,
+      "has_micropython": true,
+      "pub_ids": [
+        "_X9Y0YR5Kvi0h"
+      ],
+      "license": "CC BY-SA 4.0",
+      "license_warning": null,
+      "error_count": 0
+    },
+    {
+      "slug": "fahrenheit-thermometer",
+      "has_makecode_ts": true,
+      "has_micropython": true,
+      "pub_ids": [
+        "_eH4011gmdVtr"
+      ],
+      "license": "CC BY-SA 4.0",
+      "license_warning": null,
+      "error_count": 0
+    },
+    {
+      "slug": "jukebox-with-volume",
+      "has_makecode_ts": true,
+      "has_micropython": false,
+      "pub_ids": [
+        "_1TwRmcCfjT3L"
+      ],
+      "license": "CC BY-SA 4.0",
+      "license_warning": null,
+      "error_count": 0
+    },
+    {
+      "slug": "simple-door-alarm",
+      "has_makecode_ts": true,
+      "has_micropython": true,
+      "pub_ids": [
+        "_6RD45gFq8H41"
+      ],
+      "license": "CC BY-SA 4.0",
+      "license_warning": null,
+      "error_count": 0
+    },
+    {
+      "slug": "touch-timer",
+      "has_makecode_ts": true,
+      "has_micropython": false,
+      "pub_ids": [
+        "_6F4PXhbsTgDY"
+      ],
+      "license": "CC BY-SA 4.0",
+      "license_warning": null,
+      "error_count": 0
+    },
+    {
+      "slug": "touch-stopwatch",
+      "has_makecode_ts": true,
+      "has_micropython": true,
+      "pub_ids": [
+        "_13aRi9FVhAeD"
+      ],
+      "license": "CC BY-SA 4.0",
+      "license_warning": null,
+      "error_count": 0
+    },
+    {
+      "slug": "sound-logger",
+      "has_makecode_ts": true,
+      "has_micropython": true,
+      "pub_ids": [
+        "_4fPbdWMhiV2w"
+      ],
+      "license": "CC BY-SA 4.0",
+      "license_warning": null,
+      "error_count": 0
+    },
+    {
+      "slug": "microbit-pet",
+      "has_makecode_ts": true,
+      "has_micropython": true,
+      "pub_ids": [
+        "_28F66oD2X6mz"
+      ],
+      "license": "CC BY-SA 4.0",
+      "license_warning": null,
+      "error_count": 0
+    },
+    {
+      "slug": "spirit-level",
+      "has_makecode_ts": true,
+      "has_micropython": true,
+      "pub_ids": [
+        "_esA53UP5jfe1"
+      ],
+      "license": "CC BY-SA 4.0",
+      "license_warning": null,
+      "error_count": 0
+    },
+    {
+      "slug": "sound-compass",
+      "has_makecode_ts": true,
+      "has_micropython": true,
+      "pub_ids": [
+        "_Mofi9WM9afFM"
+      ],
+      "license": "CC BY-SA 4.0",
+      "license_warning": null,
+      "error_count": 0
+    },
+    {
+      "slug": "candle",
+      "has_makecode_ts": true,
+      "has_micropython": true,
+      "pub_ids": [
+        "_3tT16pEcufqA"
+      ],
+      "license": "CC BY-SA 4.0",
+      "license_warning": null,
+      "error_count": 0
+    },
+    {
+      "slug": "clapometer",
+      "has_makecode_ts": true,
+      "has_micropython": true,
+      "pub_ids": [
+        "_WMi4U0RT84zE"
+      ],
+      "license": "CC BY-SA 4.0",
+      "license_warning": null,
+      "error_count": 0
+    },
+    {
+      "slug": "traffic-survey-data-logger",
+      "has_makecode_ts": true,
+      "has_micropython": false,
+      "pub_ids": [
+        "_1EAcowV1Tc4e"
+      ],
+      "license": "CC BY-SA 4.0",
+      "license_warning": null,
+      "error_count": 0
+    },
+    {
+      "slug": "environment-data-logger",
+      "has_makecode_ts": true,
+      "has_micropython": false,
+      "pub_ids": [
+        "_PuXFj9Ds7baA"
+      ],
+      "license": "CC BY-SA 4.0",
+      "license_warning": null,
+      "error_count": 0
+    },
+    {
+      "slug": "movement-data-logger",
+      "has_makecode_ts": true,
+      "has_micropython": false,
+      "pub_ids": [
+        "_UzueMJa7t5DC"
+      ],
+      "license": "CC BY-SA 4.0",
+      "license_warning": null,
+      "error_count": 0
+    },
+    {
+      "slug": "conductivity-tester",
+      "has_makecode_ts": false,
+      "has_micropython": true,
+      "pub_ids": [],
+      "license": "CC BY-SA 4.0",
+      "license_warning": null,
+      "error_count": 0
+    },
+    {
+      "slug": "sound-insulation-meter",
+      "has_makecode_ts": true,
+      "has_micropython": true,
+      "pub_ids": [
+        "_Kt39iUh2c0rc",
+        "_2qrH692FidiK"
+      ],
+      "license": "CC BY-SA 4.0",
+      "license_warning": null,
+      "error_count": 0
+    },
+    {
+      "slug": "kick-strength-data-logger",
+      "has_makecode_ts": true,
+      "has_micropython": false,
+      "pub_ids": [
+        "_comEJj2wbCJa"
+      ],
+      "license": "CC BY-SA 4.0",
+      "license_warning": null,
+      "error_count": 0
+    },
+    {
+      "slug": "funny-voice-recorder",
+      "has_makecode_ts": false,
+      "has_micropython": false,
+      "pub_ids": [],
+      "license": "CC BY-SA 4.0",
+      "license_warning": null,
+      "error_count": 0
+    },
+    {
+      "slug": "secure-messaging",
+      "has_makecode_ts": true,
+      "has_micropython": true,
+      "pub_ids": [
+        "_7Mrha8AguX8T"
+      ],
+      "license": "CC BY-SA 4.0",
+      "license_warning": null,
+      "error_count": 0
+    },
+    {
+      "slug": "hot-potato-game",
+      "has_makecode_ts": true,
+      "has_micropython": true,
+      "pub_ids": [
+        "_cKEYtihoMW54"
+      ],
+      "license": "CC BY-SA 4.0",
+      "license_warning": null,
+      "error_count": 0
+    },
+    {
+      "slug": "hot-and-cold-game",
+      "has_makecode_ts": true,
+      "has_micropython": true,
+      "pub_ids": [
+        "_YuWWDETetVkL",
+        "_EEH5Ykd2Ri5t"
+      ],
+      "license": "CC BY-SA 4.0",
+      "license_warning": null,
+      "error_count": 0
+    },
+    {
+      "slug": "distance-calculator",
+      "has_makecode_ts": true,
+      "has_micropython": true,
+      "pub_ids": [
+        "_9dt0HVcdhKFr",
+        "_57AWUiH0o52T"
+      ],
+      "license": "CC BY-SA 4.0",
+      "license_warning": null,
+      "error_count": 0
+    },
+    {
+      "slug": "poetry-generator",
+      "has_makecode_ts": true,
+      "has_micropython": true,
+      "pub_ids": [
+        "_XLVLpJXoji7b"
+      ],
+      "license": "CC BY-SA 4.0",
+      "license_warning": null,
+      "error_count": 0
+    },
+    {
+      "slug": "odd-and-even-numbers",
+      "has_makecode_ts": true,
+      "has_micropython": true,
+      "pub_ids": [
+        "_h25c1HXdwT14"
+      ],
+      "license": "CC BY-SA 4.0",
+      "license_warning": null,
+      "error_count": 0
+    },
+    {
+      "slug": "simple-ai-exercise-timer",
+      "has_makecode_ts": false,
+      "has_micropython": false,
+      "pub_ids": [],
+      "license": "CC BY-SA 4.0",
+      "license_warning": null,
+      "error_count": 0
+    },
+    {
+      "slug": "halloween-project",
+      "has_makecode_ts": true,
+      "has_micropython": true,
+      "pub_ids": [
+        "_11viykXt3J3y"
+      ],
+      "license": "CC BY-SA 4.0",
+      "license_warning": null,
+      "error_count": 0
+    },
+    {
+      "slug": "ai-activity-timer",
+      "has_makecode_ts": false,
+      "has_micropython": false,
+      "pub_ids": [],
+      "license": "CC BY-SA 4.0",
+      "license_warning": null,
+      "error_count": 0
+    },
+    {
+      "slug": "ai-storytelling-friend",
+      "has_makecode_ts": false,
+      "has_micropython": false,
+      "pub_ids": [],
+      "license": "CC BY-SA 4.0",
+      "license_warning": null,
+      "error_count": 0
+    },
+    {
+      "slug": "light-investigation",
+      "has_makecode_ts": true,
+      "has_micropython": false,
+      "pub_ids": [
+        "_K7KY660s2RFR"
+      ],
+      "license": "CC BY-SA 4.0",
+      "license_warning": null,
+      "error_count": 0
+    },
+    {
+      "slug": "human-circuit-experiment",
+      "has_makecode_ts": true,
+      "has_micropython": false,
+      "pub_ids": [
+        "_Ua1KqX8CmACy"
+      ],
+      "license": "CC BY-SA 4.0",
+      "license_warning": null,
+      "error_count": 0
+    },
+    {
+      "slug": "sound-volume-experiment",
+      "has_makecode_ts": true,
+      "has_micropython": false,
+      "pub_ids": [
+        "_DX5R4u7K83tj"
+      ],
+      "license": "CC BY-SA 4.0",
+      "license_warning": null,
+      "error_count": 0
+    },
+    {
+      "slug": "evaporation-experiment",
+      "has_makecode_ts": true,
+      "has_micropython": false,
+      "pub_ids": [
+        "_bqUHi87jeKJM"
+      ],
+      "license": "CC BY-SA 4.0",
+      "license_warning": null,
+      "error_count": 0
+    },
+    {
+      "slug": "insulating-heat-experiment",
+      "has_makecode_ts": true,
+      "has_micropython": false,
+      "pub_ids": [
+        "_6wzX8YWJkiyu",
+        "_KCDgbtYekhdf"
+      ],
+      "license": "CC BY-SA 4.0",
+      "license_warning": null,
+      "error_count": 0
+    },
+    {
+      "slug": "solar-panel-experiment",
+      "has_makecode_ts": true,
+      "has_micropython": false,
+      "pub_ids": [
+        "_eWRWu2RC1Tsu"
+      ],
+      "license": "CC BY-SA 4.0",
+      "license_warning": null,
+      "error_count": 0
+    },
+    {
+      "slug": "ai-light-switch",
+      "has_makecode_ts": false,
+      "has_micropython": false,
+      "pub_ids": [],
+      "license": "CC BY-SA 4.0",
+      "license_warning": null,
+      "error_count": 0
+    },
+    {
+      "slug": "audible-cookie-tin-alarm",
+      "has_makecode_ts": true,
+      "has_micropython": false,
+      "pub_ids": [
+        "_HJaCFY1o9Mf4"
+      ],
+      "license": "CC BY-SA 4.0",
+      "license_warning": null,
+      "error_count": 0
+    },
+    {
+      "slug": "proximity-beacon",
+      "has_makecode_ts": true,
+      "has_micropython": true,
+      "pub_ids": [
+        "_2hRFJ6WTWKgW",
+        "_MciderdAVEfM"
+      ],
+      "license": "CC BY-SA 4.0",
+      "license_warning": null,
+      "error_count": 0
+    },
+    {
+      "slug": "guitar-1-touch-tunes",
+      "has_makecode_ts": true,
+      "has_micropython": true,
+      "pub_ids": [
+        "_A67YTJ19o05p"
+      ],
+      "license": "CC BY-SA 4.0",
+      "license_warning": null,
+      "error_count": 0
+    },
+    {
+      "slug": "guitar-2-chords",
+      "has_makecode_ts": true,
+      "has_micropython": true,
+      "pub_ids": [
+        "_81TD3q2utRK1"
+      ],
+      "license": "CC BY-SA 4.0",
+      "license_warning": null,
+      "error_count": 0
+    },
+    {
+      "slug": "guitar-3-octaves",
+      "has_makecode_ts": true,
+      "has_micropython": true,
+      "pub_ids": [
+        "_VCW88UYKdD3W"
+      ],
+      "license": "CC BY-SA 4.0",
+      "license_warning": null,
+      "error_count": 0
+    },
+    {
+      "slug": "tilt-alarm",
+      "has_makecode_ts": true,
+      "has_micropython": true,
+      "pub_ids": [
+        "_4tuW6Mg3kRwR"
+      ],
+      "license": "CC BY-SA 4.0",
+      "license_warning": null,
+      "error_count": 0
+    },
+    {
+      "slug": "light-alarm",
+      "has_makecode_ts": true,
+      "has_micropython": true,
+      "pub_ids": [
+        "_i51P3Cc18E2R",
+        "_86RbX2ddKPTW"
+      ],
+      "license": "CC BY-SA 4.0",
+      "license_warning": null,
+      "error_count": 0
+    },
+    {
+      "slug": "pressure-switch-alarm",
+      "has_makecode_ts": true,
+      "has_micropython": true,
+      "pub_ids": [
+        "_AvaezbbVqdoD",
+        "_TVx38dHioEy3"
+      ],
+      "license": "CC BY-SA 4.0",
+      "license_warning": null,
+      "error_count": 0
+    },
+    {
+      "slug": "door-alarm",
+      "has_makecode_ts": true,
+      "has_micropython": true,
+      "pub_ids": [
+        "_iyMRX0K6D6jL",
+        "_9bpMDr06f9qj"
+      ],
+      "license": "CC BY-SA 4.0",
+      "license_warning": null,
+      "error_count": 0
+    },
+    {
+      "slug": "pir-movement-alarm",
+      "has_makecode_ts": true,
+      "has_micropython": true,
+      "pub_ids": [
+        "_dT85p709LKYR",
+        "_2YKWFyijgUsh"
+      ],
+      "license": "CC BY-SA 4.0",
+      "license_warning": null,
+      "error_count": 0
+    },
+    {
+      "slug": "reaction-game",
+      "has_makecode_ts": true,
+      "has_micropython": true,
+      "pub_ids": [
+        "_Vya0Xhf1zRtX"
+      ],
+      "license": "CC BY-SA 4.0",
+      "license_warning": null,
+      "error_count": 0
+    },
+    {
+      "slug": "fireflies",
+      "has_makecode_ts": true,
+      "has_micropython": true,
+      "pub_ids": [
+        "_XjpYC4X0K6F1"
+      ],
+      "license": "CC BY-SA 4.0",
+      "license_warning": null,
+      "error_count": 0
+    },
+    {
+      "slug": "maxmin-temperature-logger",
+      "has_makecode_ts": false,
+      "has_micropython": true,
+      "pub_ids": [],
+      "license": "CC BY-SA 4.0",
+      "license_warning": null,
+      "error_count": 0
+    },
+    {
+      "slug": "energy-light-meter",
+      "has_makecode_ts": true,
+      "has_micropython": true,
+      "pub_ids": [
+        "_UF6hdEgq96PF"
+      ],
+      "license": "CC BY-SA 4.0",
+      "license_warning": null,
+      "error_count": 0
+    },
+    {
+      "slug": "energy-light-timer",
+      "has_makecode_ts": true,
+      "has_micropython": true,
+      "pub_ids": [
+        "_bRWa3tCk3adh"
+      ],
+      "license": "CC BY-SA 4.0",
+      "license_warning": null,
+      "error_count": 0
+    },
+    {
+      "slug": "energy-cost-calculator",
+      "has_makecode_ts": true,
+      "has_micropython": true,
+      "pub_ids": [
+        "_HHgYucE7tK3k"
+      ],
+      "license": "CC BY-SA 4.0",
+      "license_warning": null,
+      "error_count": 0
+    },
+    {
+      "slug": "ai-sports-data-logger",
+      "has_makecode_ts": false,
+      "has_micropython": false,
+      "pub_ids": [],
+      "license": "CC BY-SA 4.0",
+      "license_warning": null,
+      "error_count": 0
+    },
+    {
+      "slug": "audible-teleporting-duck",
+      "has_makecode_ts": true,
+      "has_micropython": false,
+      "pub_ids": [
+        "_PD49963ujXgL"
+      ],
+      "license": "CC BY-SA 4.0",
+      "license_warning": null,
+      "error_count": 0
+    },
+    {
+      "slug": "10-steps-counter",
+      "has_makecode_ts": true,
+      "has_micropython": false,
+      "pub_ids": [
+        "_XHuHFrDJc6jb"
+      ],
+      "license": "CC BY-SA 4.0",
+      "license_warning": null,
+      "error_count": 0
+    },
+    {
+      "slug": "audible-rock-paper-scissors",
+      "has_makecode_ts": true,
+      "has_micropython": false,
+      "pub_ids": [
+        "_5TuFvrcW32hb"
+      ],
+      "license": "CC BY-SA 4.0",
+      "license_warning": null,
+      "error_count": 0
+    }
+  ],
+  "summary": {
+    "with_both": 88,
+    "makecode_ts_only": 19,
+    "micropython_only": 4,
+    "no_code": 12,
+    "with_errors": 0,
+    "license_warnings": 0,
+    "licenses": {
+      "CC BY-SA 4.0": 122,
+      "CC BY-NC-SA 4.0": 1
+    }
+  }
+}

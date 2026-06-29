@@ -1,0 +1,53 @@
+{
+  "slug": "touch-timer",
+  "url": "https://microbit.org/projects/make-it-code-it/touch-timer/",
+  "title": "Touch timer",
+  "license": "CC BY-SA 4.0",
+  "meta": {
+    "level": "Intermediate",
+    "tools": [
+      "MakeCode"
+    ],
+    "features": [
+      "LED display",
+      "Touch logo"
+    ],
+    "topics": [
+      "Arithmetic operators",
+      "Input/output",
+      "Measurement",
+      "Variables"
+    ]
+  },
+  "context": {
+    "summary": "Make a simple timer using the new micro:bit's touch logo sensor.",
+    "how_it_works": [
+      "The program times how long in you hold your finger down on the gold logo on the new micro:bit",
+      "The micro:bit measures how long it's been switched on in milliseconds (thousands of a second). This is called the running time.",
+      "The 'on logo touched' block senses when you first touch the logo. It shows a heart on the LED display and sets a variable called start to capture the current running time.",
+      "The 'on logo released' block senses when you let go of the logo. The code then subtracts the start time from the new running time. The difference between the running time when you let go and the time when you touched it is the total time you held your finger on the logo. This is stored in a variable called time.",
+      "The code then converts the time from milliseconds to seconds by dividing it by 1000 and shows it on the LED display.",
+      "'On logo touched' only triggers when you first put your finger on the logo, unlike the 'on logo pressed' block used in the Touch emotion badge project, which behaves like the A and B button and only triggers when you press and let go of the button."
+    ],
+    "improve_it": [
+      "Modify the program so a different icon or your own picture appears when you touch the logo.",
+      "Add a variable to track the maximum time recorded.",
+      "Make the timer more accurate by using fractions of numbers instead of integers (whole numbers)."
+    ]
+  },
+  "code": {
+    "makecode_ts": [
+      {
+        "program_index": 0,
+        "pub_id": "_6F4PXhbsTgDY",
+        "source": "let start = 0\nlet time = 0\ninput.onLogoEvent(TouchButtonEvent.Touched, function () {\n    start = input.runningTime()\n    basic.showIcon(IconNames.Heart)\n})\ninput.onLogoEvent(TouchButtonEvent.Released, function () {\n    time = input.runningTime() - start\n    basic.showNumber(Math.idiv(time, 1000))\n})\n",
+        "dependencies": {
+          "core": "*",
+          "radio": "*",
+          "microphone": "*"
+        }
+      }
+    ]
+  },
+  "errors": []
+}

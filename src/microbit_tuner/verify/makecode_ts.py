@@ -42,7 +42,7 @@ def verify_makecode_ts(code_or_path: Union[str, Path],
     """Type-check one MakeCode TypeScript program. Accepts source or a path.
 
     ``dependencies`` is the program's declared ``pxt.json`` dependency map
-    (``name -> spec``), as captured in the golden corpus. The candidate is built
+    (``name -> spec``), as captured in the collected corpus. The candidate is built
     against exactly those extensions; one it uses but does not declare is a real
     build failure. ``None`` uses the default project (synthetic/raw code).
     """

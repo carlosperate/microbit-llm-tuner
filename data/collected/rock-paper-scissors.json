@@ -1,0 +1,55 @@
+{
+  "slug": "rock-paper-scissors",
+  "url": "https://microbit.org/projects/make-it-code-it/rock-paper-scissors/",
+  "title": "Rock, paper, scissors",
+  "license": "CC BY-SA 4.0",
+  "meta": {
+    "level": "Beginner",
+    "tools": [
+      "MakeCode",
+      "Python"
+    ],
+    "features": [
+      "Accelerometer",
+      "LED display"
+    ],
+    "topics": [
+      "Randomisation",
+      "Selection"
+    ]
+  },
+  "context": {
+    "summary": "Play this classic game with two micro:bits and learn about selection, variables and random numbers at the same time.",
+    "how_it_works": [
+      "Rock, paper, scissors is a classic game of chance for two people. You and a partner shake your fists 3 times and then make gestures at random to show a rock, paper or scissors. Rock beats scissors, scissors beat paper and paper beats rock (it wraps the rock!).",
+      "When the micro:bit accelerometer detects a shake movement, it sets the variable tool to a random number: 0, 1 or 2.",
+      "We use 0 because computers start counting at 0, and itâs good to remember that 0 is a number!",
+      "The program uses selection to decide what image to show on the LED display. If the random number was 0, it shows a rock icon, if it was 1 it shows the icon representing paper. If it wasnât 0 or 1, it must be 2 because we instructed the micro:bit to only pick random numbers between 0 and 2, so in that case it shows scissors."
+    ],
+    "improve_it": [
+      "Draw your own icons for rock, paper, scissors.",
+      "Think of other tools that could replace rock, paper and scissors or invent new rules.",
+      "Use the micro:bit radio function to make a game that knows if you won or lost by communicating with your friendâs micro:bit."
+    ]
+  },
+  "code": {
+    "makecode_ts": [
+      {
+        "program_index": 0,
+        "pub_id": "_arUf8fFvXX9w",
+        "source": "let tool = 0\ninput.onGesture(Gesture.Shake, function () {\n    tool = Math.randomRange(0, 2)\n    if (tool == 0) {\n        basic.showIcon(IconNames.SmallSquare)\n    } else if (tool == 1) {\n        basic.showIcon(IconNames.Square)\n    } else {\n        basic.showIcon(IconNames.Scissors)\n    }\n})\n",
+        "dependencies": {
+          "core": "*",
+          "radio": "*"
+        }
+      }
+    ],
+    "micropython": [
+      {
+        "program_index": 0,
+        "source": "from microbit import *\nimport random\n\nwhile True:\n    if accelerometer.was_gesture('shake'):\n        tool = random.randint(0,2)\n        if tool == 0:\n            display.show(Image.SQUARE_SMALL)\n        elif tool == 1:\n            display.show(Image.SQUARE)\n        else:\n            display.show(Image.SCISSORS)"
+      }
+    ]
+  },
+  "errors": []
+}

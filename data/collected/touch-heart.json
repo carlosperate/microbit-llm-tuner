@@ -1,0 +1,48 @@
+{
+  "slug": "touch-heart",
+  "url": "https://microbit.org/projects/make-it-code-it/touch-heart/",
+  "title": "Touch heart",
+  "license": "CC BY-SA 4.0",
+  "meta": {
+    "level": "Beginner",
+    "tools": [
+      "MakeCode"
+    ],
+    "features": [
+      "LED display",
+      "Touch logo"
+    ],
+    "topics": [
+      "Input/output"
+    ]
+  },
+  "context": {
+    "summary": "Light up your micro:bit with a heart - but only while you touch it!",
+    "how_it_works": [
+      "This project will light up the LED display with a heart icon, but only as long as you hold your finger on the logo on the front of the new micro:bit.",
+      "The gold logo is a touch sensor that works a bit like a touch screen on a mobile phone, measuring tiny changes in electricity. This is also called a capacitive touch sensor, because it uses measurements of electrical capacitance to work.",
+      "The 'on logo touched' block is triggered when you first touch the logo.",
+      "The 'on logo released' block senses when you let go of the logo and the program clears the display.",
+      "'On logo touched' only triggers when you first put your finger on the logo, unlike the 'on logo pressed' block used in the Touch emotion badge project, only triggering when you touch and let go of the logo, pressing it like a button."
+    ],
+    "improve_it": [
+      "Modify the program with different icons, or draw your own",
+      "Add sound so the micro:bit makes a noise when you touch it"
+    ]
+  },
+  "code": {
+    "makecode_ts": [
+      {
+        "program_index": 0,
+        "pub_id": "_ii4cywLEsUD5",
+        "source": "input.onLogoEvent(TouchButtonEvent.Touched, function () {\n    basic.showIcon(IconNames.Heart)\n})\ninput.onLogoEvent(TouchButtonEvent.Released, function () {\n    basic.clearScreen()\n})\n",
+        "dependencies": {
+          "core": "*",
+          "radio": "*",
+          "microphone": "*"
+        }
+      }
+    ]
+  },
+  "errors": []
+}

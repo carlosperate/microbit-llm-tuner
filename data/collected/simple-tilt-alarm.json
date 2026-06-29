@@ -1,0 +1,56 @@
+{
+  "slug": "simple-tilt-alarm",
+  "url": "https://microbit.org/projects/make-it-code-it/simple-tilt-alarm/",
+  "title": "Simple tilt alarm",
+  "license": "CC BY-SA 4.0",
+  "meta": {
+    "level": "Beginner",
+    "tools": [
+      "MakeCode",
+      "Python"
+    ],
+    "features": [
+      "Accelerometer",
+      "LED display",
+      "Sound"
+    ],
+    "topics": [
+      "Input/output",
+      "Sensors"
+    ]
+  },
+  "context": {
+    "summary": "Make an alarm that lights up and plays a tune when your micro:bit is moved.",
+    "how_it_works": [
+      "In this project you'll make an alarm that goes off when you move your micro:bit. You could hide it inside or place on top of something precious, or put it in a bag and use it as a reminder to check you have everything you need when you go out.",
+      "Your micro:bit contains an accelerometer which measures forces. The accelerometer detects a shake gesture and shows a pattern on the LED display.",
+      "It also plays a warning melody. To hear the melody, use the MakeCode simulator or attach headphones to pin 0 and GND. You can also use an amplified speaker.",
+      "Press the reset button on the back of your micro:bit to clear the screen and make it ready for using again."
+    ],
+    "improve_it": [
+      "Change the face icon to your own picture, using the 'show leds' block in MakeCode or the Image instruction in Python.",
+      "Replace the melody with your own creation or a tune you love.",
+      "Make it more sensitive using direct readings from the accelerometer instead of the shake gesture."
+    ]
+  },
+  "code": {
+    "makecode_ts": [
+      {
+        "program_index": 0,
+        "pub_id": "_FuiW8VFPwg36",
+        "source": "input.onGesture(Gesture.Shake, function () {\n    basic.showIcon(IconNames.Angry)\n    music.playMelody(\"G A B B B A G F \", 120)\n})\n",
+        "dependencies": {
+          "core": "*",
+          "radio": "*"
+        }
+      }
+    ],
+    "micropython": [
+      {
+        "program_index": 0,
+        "source": "from microbit import *\nimport music\n\nwhile True:\n    if accelerometer.was_gesture('shake'):\n        display.show(Image.ANGRY)\n        music.play([\"G4:4\", \"A4\", \"B4\", \"B4\", \"B4\", \"A4\", \"G4\", \"F4\"])\n        "
+      }
+    ]
+  },
+  "errors": []
+}

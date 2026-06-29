@@ -35,10 +35,11 @@ def _fail(message: str) -> NoReturn:
 
 @app.command(context_settings={"allow_extra_args": True, "ignore_unknown_options": True})
 def collect(ctx: typer.Context) -> None:
-    """Stage 1: scrape micro:bit projects into the golden corpus.
+    """Stage 1: scrape micro:bit projects into the collected corpus.
 
-    Extra arguments are forwarded to the scraper, e.g. `--force`, `--only SLUG`,
-    `--out DIR`, `--delay SEC`.
+    Writes one merged JSON per project to data/collected/. Extra arguments are
+    forwarded to the scraper, e.g. `--force`, `--only SLUG`, `--out DIR`,
+    `--delay SEC`.
     """
     from .collect.scraper import main as scraper_main
     raise typer.Exit(scraper_main(ctx.args))
@@ -47,6 +48,12 @@ def collect(ctx: typer.Context) -> None:
 class Lang(str, Enum):
     ts = "ts"
     py = "py"
+
+
+class Target(str, Enum):
+    collected = "collected"
+    golden = "golden"
+    synthetic = "synthetic"
 
 
 def _read_file(file: Path) -> str:
@@ -135,8 +142,9 @@ def verify(
         "--stdin", metavar="LANG",
         help="Read code from stdin instead of a file; LANG (ts|py) is the "
              "language.")] = None,
-    golden: Annotated[bool, typer.Option(
-        "--golden", help="Verify every program in the golden corpus.")] = False,
+    target: Annotated[Optional[Target], typer.Option(
+        "--target", metavar="DATASET",
+        help="Verify every program in a corpus: collected | golden | synthetic.")] = None,
     dep: Annotated[Optional[list[str]], typer.Option(
         "--dep", metavar="NAME[=SPEC]",
         help="MakeCode extension to build against, repeatable (TS only). Only "
@@ -146,22 +154,22 @@ def verify(
 ) -> None:
     """Stage 3: check that micro:bit code compiles.
 
-    Pick exactly one input: a FILE, --stdin LANG, or --golden. MakeCode
+    Pick exactly one input: a FILE, --stdin LANG, or --target DATASET. MakeCode
     TypeScript is checked with the makecode CLI, MicroPython with Pyright. Exits
     0 if everything compiles, 1 on diagnostics, 2 on a usage or toolchain error.
     """
-    modes = [file is not None, stdin is not None, golden]
+    modes = [file is not None, stdin is not None, target is not None]
     if sum(modes) > 1:
-        _fail("choose only one of: FILE, --stdin LANG, --golden")
+        _fail("choose only one of: FILE, --stdin LANG, --target DATASET")
     if sum(modes) == 0:
-        _fail("nothing to verify: pass a FILE, --stdin LANG, or --golden")
+        _fail("nothing to verify: pass a FILE, --stdin LANG, or --target DATASET")
 
     try:
-        if golden:
+        if target is not None:
             if dep:
                 _fail("--dep is only valid with a single FILE or --stdin")
-            from .collect import iter_sources
-            raise typer.Exit(_verify_samples(iter_sources(), as_json))
+            from .collect import iter_samples
+            raise typer.Exit(_verify_samples(iter_samples(target.value), as_json))
 
         if stdin is not None:
             source = sys.stdin.read()
@@ -221,20 +229,22 @@ def setup() -> None:
 @app.command()
 def clean(
     all_: Annotated[bool, typer.Option(
-        "--all", help="Also drop data/golden and models/, not just caches.")] = False,
+        "--all", help="Also drop data/collected (regenerable scrape) and models/, "
+                      "not just caches.")] = False,
 ) -> None:
     """Remove regenerable caches and build artifacts.
 
     Deletes the cache/ folder (scraper responses + MakeCode projects), the verify
     toolchain (node_modules), and __pycache__ dirs. Your Python venv is never
-    touched. The golden corpus and trained models are kept unless `--all` is given.
+    touched. The hand-committed golden corpus is always kept; the regenerable
+    collected scrape and trained models are kept unless `--all` is given.
     """
     targets = [
         VERIFY_DIR / "node_modules",
         REPO_ROOT / "cache",
     ]
     if all_:
-        targets += [REPO_ROOT / "data" / "golden", REPO_ROOT / "models"]
+        targets += [REPO_ROOT / "data" / "collected", REPO_ROOT / "models"]
 
     for t in targets:
         if t.exists():
@@ -250,7 +260,7 @@ def clean(
     if pyc:
         typer.echo(f"  rm {pyc} __pycache__ dir(s)")
     typer.echo("Clean complete." + ("" if all_ else
-               "  (use --all to also drop data/golden, models)"))
+               "  (use --all to also drop data/collected, models)"))
 
 
 def main() -> None:

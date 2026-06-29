@@ -15,7 +15,7 @@ wraps each pipeline stage:
 | `collect [args]` | stage 1 — the scraper (args forwarded) |
 | `verify [args]` | stage 3 — verification (args forwarded) |
 | `viewer [port]` | serve the repo so `tools/viewer.html` can browse the corpus |
-| `clean [--all]` | remove regenerable caches (`--all` also drops `data/golden`, `models`) |
+| `clean [--all]` | remove regenerable caches (`--all` also drops `data/collected`, `models`) |
 
 Run it through uv so the environment is active: `uv run mbtuner <command>`.
 
@@ -23,10 +23,11 @@ Run it through uv so the environment is active: `uv run mbtuner <command>`.
 
 A scraper for microbit.org's
 [Make it: code it](https://microbit.org/projects/make-it-code-it/) collection.
-It produces JSON files in the `data/golden` folder for the verified seed/floor
-for fine-tuning.
+It produces one merged JSON per project in `data/collected/` — the regenerable
+base of real, verified code that the stage-2 curation turns into `data/golden/`.
 
-Two sets of data samples, one for MicroPython, another for MakeCode TypeScript.
+Each project file holds both languages (MicroPython and MakeCode TypeScript)
+under distinct `code` keys; a key is present only if that language has code.
 
 ### Usage
 
@@ -39,7 +40,7 @@ Useful flags:
 
 | Flag | Purpose |
 | --- | --- |
-| `--out DIR` | output directory (default `data/golden`); manifest is `DIR/manifest.json` |
+| `--out DIR` | output directory (default `data/collected`); manifest is `DIR/manifest.json` |
 | `--cache DIR` | cache directory for raw HTML / API JSON (default `cache/scrape`) |
 | `--delay SEC` | delay before each *network* request (default `0.7`; cache hits skip it) |
 | `--force` | re-process and overwrite outputs even if present |
@@ -50,9 +51,10 @@ The run is cached (re-runs don't re-hit the site) and resumable.
 ### Output layout
 
 ```
-data/golden/
-  typescript/<slug>.json     # language: "makecode_ts" — main.ts per pub_id
-  micropython/<slug>.json    # language: "micropython" — inline page block(s)
+data/collected/
+  <slug>.json                # one per project; code = { makecode_ts?, micropython? }
+                             #   makecode_ts: main.ts per pub_id (+ dependencies)
+                             #   micropython: inline page block(s)
   manifest.json              # top-level index + summary counts
 ```
 
@@ -92,7 +94,7 @@ Pick exactly one input:
 uv run mbtuner verify path/to/main.ts          # a FILE (.ts -> MakeCode TS)
 uv run mbtuner verify path/to/main.py          # a FILE (.py -> MicroPython)
 printf '…' | uv run mbtuner verify --stdin py  # stdin; LANG is mandatory
-uv run mbtuner verify --golden                 # the whole golden corpus
+uv run mbtuner verify --target collected       # a whole corpus: collected|golden|synthetic
 uv run mbtuner verify main.ts --dep datalogger # build against an extension
 uv run mbtuner verify main.ts --json           # machine-readable result
 ```
@@ -103,9 +105,9 @@ for stdin — never guessed from content. With no input it prints help. Exit cod
 
 For TypeScript, the program is built against exactly the extensions it declares
 (`--dep`, or the `dependencies` recorded in the corpus). An extension that's used
-but not declared is a genuine build failure — we never guess deps. `--golden`
-pulls source via `collect.iter_sources`, so the verifier never has to know the
-corpus layout (the dataset stage will expose the same iterator for `--dataset`).
+but not declared is a genuine build failure — we never guess deps. `--target`
+pulls source via `collect.iter_samples`, so the verifier never has to know the
+corpus layout; the same iterator serves `collected`, `golden`, and `synthetic`.
 
-The whole golden corpus compiles: **222/222** code blocks (120 TypeScript,
+The whole collected corpus compiles: **222/222** code blocks (120 TypeScript,
 102 MicroPython).

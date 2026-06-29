@@ -1,0 +1,49 @@
+{
+  "slug": "sound-volume-experiment",
+  "url": "https://microbit.org/projects/make-it-code-it/sound-volume-experiment/",
+  "title": "Sound volume experiment",
+  "license": "CC BY-SA 4.0",
+  "meta": {
+    "level": "Intermediate",
+    "tools": [
+      "MakeCode"
+    ],
+    "features": [
+      "Buttons",
+      "LED display",
+      "Microphone"
+    ],
+    "topics": [
+      "Iteration",
+      "Selection",
+      "Sound",
+      "Variables",
+      "Working scientifically"
+    ]
+  },
+  "context": {
+    "summary": "Use your BBC micro:bit to find out how distance affects the volume of a sound.",
+    "how_it_works": [
+      "You play a continuous sound at a fixed volume from a fixed location.",
+      "You measure the sound levels in decibels at two-meter intervals from the sound source, using your micro:bit and a battery pack.",
+      "You should be able to work out from the measurements that sounds get fainter as they get further from the sound source."
+    ],
+    "improve_it": []
+  },
+  "code": {
+    "makecode_ts": [
+      {
+        "program_index": 0,
+        "pub_id": "_DX5R4u7K83tj",
+        "source": "let soundLevel = 0\nbasic.forever(function () {\n    if (input.buttonIsPressed(Button.A)) {\n        basic.showIcon(IconNames.Yes)\n        basic.pause(500)\n        soundLevel = input.soundLevelDb()\n    } else if (input.buttonIsPressed(Button.B)) {\n        basic.clearScreen()\n        basic.showNumber(soundLevel)\n    } else {\n        led.plotBarGraph(\n        input.soundLevel(),\n        255\n        )\n    }\n})\n",
+        "dependencies": {
+          "core": "*",
+          "radio": "*",
+          "microphone": "*",
+          "Sound Level in decibels (dB)": "github:microbit-foundation/pxt-sound-level-db#v0.1.10"
+        }
+      }
+    ]
+  },
+  "errors": []
+}
