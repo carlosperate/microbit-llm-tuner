@@ -1,26 +1,21 @@
 {
   "slug": "light-up-fishing-nets",
-  "task": "",
-  "status": "draft",
   "url": "https://microbit.org/projects/make-it-code-it/light-up-fishing-nets/",
   "license": "CC BY-SA 4.0",
-  "code": {
-    "makecode_ts": [
-      {
-        "program_index": 0,
+  "programs": [
+    {
+      "task": "",
+      "makecode_ts": {
         "pub_id": "_H8diswhUCfym",
         "source": "basic.forever(function () {\n    if (input.lightLevel() < 50) {\n        basic.showLeds(`\n            # # # # #\n            # # # # #\n            # # # # #\n            # # # # #\n            # # # # #\n            `)\n        music.playTone(880, music.beat(BeatFraction.Whole))\n    } else {\n        basic.clearScreen()\n    }\n})\n",
         "dependencies": {
           "core": "*",
           "radio": "*"
         }
-      }
-    ],
-    "micropython": [
-      {
-        "program_index": 0,
+      },
+      "micropython": {
         "source": "from microbit import *\nimport music\n\nwhile True:\n    if display.read_light_level() < 50:\n        display.show(Image(\n        \"99999:\"\n        \"99999:\"\n        \"99999:\"\n        \"99999:\"\n        \"99999\"))\n        music.play(\"A5\")\n    else:\n        display.clear()\n    sleep(1000)"
       }
-    ]
-  }
+    }
+  ]
 }

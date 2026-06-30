@@ -1,15 +1,13 @@
 {
   "slug": "conductivity-tester",
-  "task": "",
-  "status": "draft",
   "url": "https://microbit.org/projects/make-it-code-it/conductivity-tester/",
   "license": "CC BY-SA 4.0",
-  "code": {
-    "micropython": [
-      {
-        "program_index": 0,
+  "programs": [
+    {
+      "task": "",
+      "micropython": {
         "source": "from microbit import *\nimport music\n\nwhile True:\n    if pin1.is_touched():\n        display.show(Image.HEART)\n        music.play('c')\n    else:\n        display.clear()"
       }
-    ]
-  }
+    }
+  ]
 }

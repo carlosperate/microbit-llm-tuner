@@ -1,26 +1,21 @@
 {
   "slug": "simple-tilt-alarm",
-  "task": "",
-  "status": "draft",
   "url": "https://microbit.org/projects/make-it-code-it/simple-tilt-alarm/",
   "license": "CC BY-SA 4.0",
-  "code": {
-    "makecode_ts": [
-      {
-        "program_index": 0,
+  "programs": [
+    {
+      "task": "",
+      "makecode_ts": {
         "pub_id": "_FuiW8VFPwg36",
         "source": "input.onGesture(Gesture.Shake, function () {\n    basic.showIcon(IconNames.Angry)\n    music.playMelody(\"G A B B B A G F \", 120)\n})\n",
         "dependencies": {
           "core": "*",
           "radio": "*"
         }
-      }
-    ],
-    "micropython": [
-      {
-        "program_index": 0,
+      },
+      "micropython": {
         "source": "from microbit import *\nimport music\n\nwhile True:\n    if accelerometer.was_gesture('shake'):\n        display.show(Image.ANGRY)\n        music.play([\"G4:4\", \"A4\", \"B4\", \"B4\", \"B4\", \"A4\", \"G4\", \"F4\"])\n        "
       }
-    ]
-  }
+    }
+  ]
 }

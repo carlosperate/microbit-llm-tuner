@@ -1,21 +1,19 @@
 {
   "slug": "audible-emotion-badge",
-  "task": "",
-  "status": "draft",
   "url": "https://microbit.org/projects/make-it-code-it/audible-emotion-badge/",
   "license": "CC BY-SA 4.0",
-  "code": {
-    "makecode_ts": [
-      {
-        "program_index": 0,
+  "programs": [
+    {
+      "task": "",
+      "makecode_ts": {
         "pub_id": "_boiVzyUJL6ix",
-        "source": "input.onButtonPressed(Button.A, function () {\n\t\n})\ninput.onButtonPressed(Button.B, function () {\n\t\n})\n",
+        "source": "input.onButtonPressed(Button.A, function () {\n    basic.showIcon(IconNames.Happy)\n    music.play(music.builtinPlayableSoundEffect(soundExpression.happy), music.PlaybackMode.UntilDone)\n})\ninput.onButtonPressed(Button.B, function () {\n    basic.showIcon(IconNames.Sad)\n    music.play(music.builtinPlayableSoundEffect(soundExpression.sad), music.PlaybackMode.UntilDone)\n})\n",
         "dependencies": {
           "core": "*",
           "radio": "*",
           "microphone": "*"
         }
       }
-    ]
-  }
+    }
+  ]
 }

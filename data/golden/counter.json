@@ -1,26 +1,21 @@
 {
   "slug": "counter",
-  "task": "",
-  "status": "draft",
   "url": "https://microbit.org/projects/make-it-code-it/counter/",
   "license": "CC BY-SA 4.0",
-  "code": {
-    "makecode_ts": [
-      {
-        "program_index": 0,
+  "programs": [
+    {
+      "task": "",
+      "makecode_ts": {
         "pub_id": "_JM345hbMLTyM",
         "source": "input.onButtonPressed(Button.A, function () {\n    basic.showNumber(count)\n})\ninput.onButtonPressed(Button.B, function () {\n    count += 1\n    basic.showNumber(count)\n})\ninput.onButtonPressed(Button.AB, function () {\n    basic.showNumber(0)\n    count = 0\n})\nlet count = 0\nbasic.showNumber(0)\ncount = 0\n",
         "dependencies": {
           "core": "*",
           "radio": "*"
         }
-      }
-    ],
-    "micropython": [
-      {
-        "program_index": 0,
+      },
+      "micropython": {
         "source": "from microbit import *\n\ncount = 0\ndisplay.show(count)\n\nwhile True:\n    if button_a.is_pressed() and button_b.is_pressed():\n        count = 0\n        display.scroll(count)\n    elif button_b.is_pressed():\n        count += 1\n        display.scroll(count)\n    elif button_a.is_pressed():\n        display.scroll(count)\n    sleep(100)"
       }
-    ]
-  }
+    }
+  ]
 }

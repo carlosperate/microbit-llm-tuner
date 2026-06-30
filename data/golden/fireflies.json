@@ -1,13 +1,11 @@
 {
   "slug": "fireflies",
-  "task": "",
-  "status": "draft",
   "url": "https://microbit.org/projects/make-it-code-it/fireflies/",
   "license": "CC BY-SA 4.0",
-  "code": {
-    "makecode_ts": [
-      {
-        "program_index": 0,
+  "programs": [
+    {
+      "task": "",
+      "makecode_ts": {
         "pub_id": "_XjpYC4X0K6F1",
         "source": "input.onButtonPressed(Button.A, function () {\n    radio.sendString(\"flash\")\n})\nfunction flash () {\n    basic.showLeds(`\n        # # # # #\n        # # # # #\n        # # # # #\n        # # # # #\n        # # # # #\n        `)\n    for (let index = 0; index < 10; index++) {\n        bright += -25\n        led.setBrightness(bright)\n        basic.pause(40)\n    }\n    basic.clearScreen()\n    bright = 255\n    led.setBrightness(bright)\n}\nradio.onReceivedString(function (receivedString) {\n    if (receivedString == \"flash\") {\n        basic.pause(randint(50, 350))\n        flash()\n        if (randint(0, 9) == 0) {\n            basic.pause(500)\n            radio.sendString(\"flash\")\n        }\n    }\n})\nlet bright = 0\nradio.setGroup(17)\nbright = 255\n",
         "dependencies": {
@@ -15,13 +13,10 @@
           "radio": "*",
           "microphone": "*"
         }
-      }
-    ],
-    "micropython": [
-      {
-        "program_index": 0,
+      },
+      "micropython": {
         "source": "# A micro:bit Firefly.\n# By Nicholas H.Tollervey. Released to the public domain.\nimport radio\nimport random\nfrom microbit import display, Image, button_a, sleep\n\n# Create the \"flash\" animation frames. Can you work out how it's done?\nflash = [Image().invert()*(i/9) for i in range(9, -1, -1)]\n\n# The radio won't work unless it's switched on.\nradio.on()\n\n# Event loop.\nwhile True:\n    # Button A sends a \"flash\" message.\n    if button_a.was_pressed():\n        radio.send('flash')  # a-ha\n    # Read any incoming messages.\n    incoming = radio.receive()\n    if incoming == 'flash':\n        # If there's an incoming \"flash\" message display\n        # the firefly flash animation after a random short\n        # pause.\n        sleep(random.randint(50, 350))\n        display.show(flash, delay=100, wait=False)\n        # Randomly re-broadcast the flash message after a\n        # slight delay.\n        if random.randint(0, 9) == 0:\n            sleep(500)\n            radio.send('flash')  # a-ha\n            \n"
       }
-    ]
-  }
+    }
+  ]
 }

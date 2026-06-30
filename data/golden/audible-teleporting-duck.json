@@ -1,21 +1,19 @@
 {
   "slug": "audible-teleporting-duck",
-  "task": "",
-  "status": "draft",
   "url": "https://microbit.org/projects/make-it-code-it/audible-teleporting-duck/",
   "license": "CC BY-SA 4.0",
-  "code": {
-    "makecode_ts": [
-      {
-        "program_index": 0,
+  "programs": [
+    {
+      "task": "",
+      "makecode_ts": {
         "pub_id": "_PD49963ujXgL",
-        "source": "input.onGesture(Gesture.Shake, function () {\n\t\n})\nradio.onReceivedStringDeprecated(function (receivedString) {\n\t\n})\n",
+        "source": "input.onGesture(Gesture.Shake, function () {\n    basic.clearScreen()\n    radio.sendString(\"DUCK\")\n})\nradio.onReceivedStringDeprecated(function (receivedString) {\n    basic.showIcon(IconNames.Duck)\n    music.play(music.builtinPlayableSoundEffect(soundExpression.hello), music.PlaybackMode.UntilDone)\n})\nradio.setGroup(23)\n",
         "dependencies": {
           "core": "*",
           "radio": "*",
           "microphone": "*"
         }
       }
-    ]
-  }
+    }
+  ]
 }

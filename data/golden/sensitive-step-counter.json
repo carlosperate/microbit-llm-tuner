@@ -1,26 +1,21 @@
 {
   "slug": "sensitive-step-counter",
-  "task": "",
-  "status": "draft",
   "url": "https://microbit.org/projects/make-it-code-it/sensitive-step-counter/",
   "license": "CC BY-SA 4.0",
-  "code": {
-    "makecode_ts": [
-      {
-        "program_index": 0,
+  "programs": [
+    {
+      "task": "",
+      "makecode_ts": {
         "pub_id": "_bd1Jesg2YTpg",
         "source": "let steps = 0\nbasic.showNumber(0)\nbasic.forever(function () {\n    if (input.acceleration(Dimension.Strength) > 1500) {\n        steps += 1\n        basic.showNumber(steps)\n    }\n})\n",
         "dependencies": {
           "core": "*",
           "radio": "*"
         }
-      }
-    ],
-    "micropython": [
-      {
-        "program_index": 0,
+      },
+      "micropython": {
         "source": "from microbit import *\nsteps=0\n\nwhile True:\n    if accelerometer.get_y() > 1500:\n        steps += 1\n        display.scroll(steps)\n"
       }
-    ]
-  }
+    }
+  ]
 }

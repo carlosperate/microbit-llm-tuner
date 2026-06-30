@@ -32,14 +32,33 @@ class CodeSample(NamedTuple):
 
 
 def _record_samples(record: dict, slug: str) -> Iterator[CodeSample]:
-    """Yield the CodeSamples in one record, tolerating both on-disk shapes.
+    """Yield the CodeSamples in one record, tolerating every on-disk shape.
 
-    - collected / golden: ``code`` is a map ``{lang_key: [block, ...]}`` (a
-      golden block may be a bare source string rather than a ``{source: ...}``
-      dict, for hand-flattened single-solution entries).
+    - golden: ``programs`` is a list; each program carries its own ``task`` and
+      at most one solution per language key (``{lang_key: block}``), where a
+      block is a ``{source: ...}`` dict (or a bare source string).
+    - collected: ``code`` is a map ``{lang_key: [block, ...]}`` (one block per
+      program_index).
     - synthetic: ``code`` is a single source string with a top-level
       ``language`` key.
     """
+    programs = record.get("programs")
+    if isinstance(programs, list):
+        for i, program in enumerate(programs):
+            for lang_key, lang in _LANG_KEYS.items():
+                block = program.get(lang_key)
+                if block is None:
+                    continue
+                if isinstance(block, str):
+                    block = {"source": block}
+                yield CodeSample(
+                    lang=lang,
+                    source=block["source"],
+                    dependencies=block.get("dependencies", {}),
+                    label=f"{slug}[{lang_key}:{i}]",
+                )
+        return
+
     code = record.get("code")
     if isinstance(code, dict):
         for lang_key, blocks in code.items():

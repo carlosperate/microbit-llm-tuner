@@ -1,13 +1,11 @@
 {
   "slug": "environment-exploration",
-  "task": "",
-  "status": "draft",
   "url": "https://microbit.org/projects/make-it-code-it/environment-exploration/",
   "license": "CC BY-SA 4.0",
-  "code": {
-    "makecode_ts": [
-      {
-        "program_index": 0,
+  "programs": [
+    {
+      "task": "",
+      "makecode_ts": {
         "pub_id": "_df3AkdckW3iP",
         "source": "input.onButtonPressed(Button.A, function () {\n    basic.showNumber(input.temperature())\n})\ninput.onButtonPressed(Button.AB, function () {\n    basic.showNumber(input.lightLevel())\n})\ninput.onButtonPressed(Button.B, function () {\n    basic.pause(100)\n    basic.showNumber(input.soundLevel())\n})\n",
         "dependencies": {
@@ -15,13 +13,10 @@
           "radio": "*",
           "microphone": "*"
         }
-      }
-    ],
-    "micropython": [
-      {
-        "program_index": 0,
+      },
+      "micropython": {
         "source": "from microbit import *\n\n# The Python version of this project has sleep()\n# for each button press to make the A+B button work better\n\nwhile True:\n    if button_a.is_pressed() and button_b.is_pressed():\n        display.scroll(display.read_light_level())\n        sleep(200)\n    elif button_a.is_pressed():\n        display.scroll(temperature())\n        sleep(200)\n    elif button_b.is_pressed():\n        sleep(200)\n        display.scroll(microphone.sound_level())"
       }
-    ]
-  }
+    }
+  ]
 }

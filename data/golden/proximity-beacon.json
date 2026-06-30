@@ -1,13 +1,12 @@
 {
   "slug": "proximity-beacon",
-  "task": "",
-  "status": "draft",
   "url": "https://microbit.org/projects/make-it-code-it/proximity-beacon/",
   "license": "CC BY-SA 4.0",
-  "code": {
-    "makecode_ts": [
-      {
-        "program_index": 0,
+  "programs": [
+    {
+      "task": "",
+      "role": "beacon",
+      "makecode_ts": {
         "pub_id": "_2hRFJ6WTWKgW",
         "source": "radio.setGroup(1)\nradio.setTransmitPower(1)\nbasic.forever(function () {\n    radio.sendString(\"1\")\n    basic.pause(200)\n})\n",
         "dependencies": {
@@ -15,25 +14,24 @@
           "radio": "*"
         }
       },
-      {
-        "program_index": 1,
+      "micropython": {
+        "source": "from microbit import *\nimport radio\nradio.config(group=1, power=1)\nradio.on()\n\nwhile True:\n    radio.send('1')\n    sleep(200)\n"
+      }
+    },
+    {
+      "task": "",
+      "role": "receiver",
+      "makecode_ts": {
         "pub_id": "_MciderdAVEfM",
         "source": "radio.onReceivedString(function (receivedString) {\n    signal = radio.receivedPacket(RadioPacketProperty.SignalStrength)\n    led.plotBarGraph(\n    Math.map(signal, -95, -42, 0, 9),\n    9\n    )\n})\nlet signal = 0\nradio.setGroup(1)\n",
         "dependencies": {
           "core": "*",
           "radio": "*"
         }
-      }
-    ],
-    "micropython": [
-      {
-        "program_index": 0,
-        "source": "from microbit import *\nimport radio\nradio.config(group=1, power=1)\nradio.on()\n\nwhile True:\n    radio.send('1')\n    sleep(200)\n"
       },
-      {
-        "program_index": 1,
+      "micropython": {
         "source": "from microbit import *\nimport radio\nradio.config(group=1)\nradio.on()\nlight = Image(5,5) # create an empty image\n\n# function to map signal stength to LED brightness\ndef map(value, fromMin, fromMax, toMin, toMax):\n    fromRange = fromMax - fromMin\n    toRange = toMax - toMin\n    valueScaled = float(value - fromMin) / float(fromRange)\n    return toMin + (valueScaled * toRange)\n\nwhile True:\n    message = radio.receive_full()\n    if message:\n        signal = message[1]\n        brightness = map(signal, -98, -44, 0, 9)\n        light.fill(round(brightness))\n        display.show(light)\n"
       }
-    ]
-  }
+    }
+  ]
 }

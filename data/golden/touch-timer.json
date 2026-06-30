@@ -1,13 +1,11 @@
 {
   "slug": "touch-timer",
-  "task": "",
-  "status": "draft",
   "url": "https://microbit.org/projects/make-it-code-it/touch-timer/",
   "license": "CC BY-SA 4.0",
-  "code": {
-    "makecode_ts": [
-      {
-        "program_index": 0,
+  "programs": [
+    {
+      "task": "",
+      "makecode_ts": {
         "pub_id": "_6F4PXhbsTgDY",
         "source": "let start = 0\nlet time = 0\ninput.onLogoEvent(TouchButtonEvent.Touched, function () {\n    start = input.runningTime()\n    basic.showIcon(IconNames.Heart)\n})\ninput.onLogoEvent(TouchButtonEvent.Released, function () {\n    time = input.runningTime() - start\n    basic.showNumber(Math.idiv(time, 1000))\n})\n",
         "dependencies": {
@@ -16,6 +14,6 @@
           "microphone": "*"
         }
       }
-    ]
-  }
+    }
+  ]
 }

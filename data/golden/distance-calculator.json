@@ -1,13 +1,12 @@
 {
   "slug": "distance-calculator",
-  "task": "",
-  "status": "draft",
   "url": "https://microbit.org/projects/make-it-code-it/distance-calculator/",
   "license": "CC BY-SA 4.0",
-  "code": {
-    "makecode_ts": [
-      {
-        "program_index": 0,
+  "programs": [
+    {
+      "task": "",
+      "role": "step counter",
+      "makecode_ts": {
         "pub_id": "_9dt0HVcdhKFr",
         "source": "input.onButtonPressed(Button.A, function () {\n    music.play(music.tonePlayable(131, music.beat(BeatFraction.Half)), music.PlaybackMode.UntilDone)\n    basic.showIcon(IconNames.Heart)\n    step_count += 1\n    basic.clearScreen()\n})\ninput.onButtonPressed(Button.B, function () {\n    basic.showNumber(step_count * step_length)\n})\ninput.onLogoEvent(TouchButtonEvent.Pressed, function () {\n    basic.showNumber(step_count)\n})\nlet step_length = 0\nlet step_count = 0\nstep_count = 0\nstep_length = 0.6\nbasic.showNumber(0)\nmusic.play(music.tonePlayable(262, music.beat(BeatFraction.Whole)), music.PlaybackMode.UntilDone)\n",
         "dependencies": {
@@ -16,8 +15,14 @@
           "microphone": "*"
         }
       },
-      {
-        "program_index": 1,
+      "micropython": {
+        "source": "# Imports go at the top\nfrom microbit import *\nimport music\n\nstepcount = 0\nsteplength = 0.6\ndisplay.show(0)\nmusic.play(['c4:4'])\n\nwhile True:\n    if button_a.is_pressed():\n        music.play(['c3:2'])\n        display.show(Image.HEART)\n        sleep(400)\n        stepcount += 1\n        display.clear()\n    if button_b.is_pressed():\n        display.scroll(stepcount*steplength)\n    if pin_logo.is_touched():\n        display.scroll(stepcount)"
+      }
+    },
+    {
+      "task": "",
+      "role": "wheel-turn counter",
+      "makecode_ts": {
         "pub_id": "_57AWUiH0o52T",
         "source": "input.onGesture(Gesture.LogoUp, function () {\n    music.play(music.tonePlayable(131, music.beat(BeatFraction.Half)), music.PlaybackMode.UntilDone)\n    basic.showIcon(IconNames.Heart)\n    revolutions += 1\n    basic.clearScreen()\n})\ninput.onButtonPressed(Button.B, function () {\n    basic.showNumber(revolutions * circumference)\n})\ninput.onLogoEvent(TouchButtonEvent.Pressed, function () {\n    basic.showNumber(revolutions)\n})\nlet circumference = 0\nlet revolutions = 0\nrevolutions = 0\ncircumference = 0.6\nbasic.showNumber(0)\nmusic.play(music.tonePlayable(262, music.beat(BeatFraction.Whole)), music.PlaybackMode.UntilDone)\n",
         "dependencies": {
@@ -26,12 +31,6 @@
           "microphone": "*"
         }
       }
-    ],
-    "micropython": [
-      {
-        "program_index": 0,
-        "source": "# Imports go at the top\nfrom microbit import *\nimport music\n\nstepcount = 0\nsteplength = 0.6\ndisplay.show(0)\nmusic.play(['c4:4'])\n\nwhile True:\n    if button_a.is_pressed():\n        music.play(['c3:2'])\n        display.show(Image.HEART)\n        sleep(400)\n        stepcount += 1\n        display.clear()\n    if button_b.is_pressed():\n        display.scroll(stepcount*steplength)\n    if pin_logo.is_touched():\n        display.scroll(stepcount)"
-      }
-    ]
-  }
+    }
+  ]
 }

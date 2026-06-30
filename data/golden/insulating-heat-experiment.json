@@ -1,13 +1,12 @@
 {
   "slug": "insulating-heat-experiment",
-  "task": "",
-  "status": "draft",
   "url": "https://microbit.org/projects/make-it-code-it/insulating-heat-experiment/",
   "license": "CC BY-SA 4.0",
-  "code": {
-    "makecode_ts": [
-      {
-        "program_index": 0,
+  "programs": [
+    {
+      "task": "",
+      "role": "sensor",
+      "makecode_ts": {
         "pub_id": "_6wzX8YWJkiyu",
         "source": "input.onButtonPressed(Button.A, function () {\n    logging = true\n    basic.showIcon(IconNames.Yes)\n})\ninput.onButtonPressed(Button.AB, function () {\n    basic.showIcon(IconNames.Skull)\n    datalogger.deleteLog()\n    datalogger.setColumnTitles(\"temperature\")\n})\ninput.onButtonPressed(Button.B, function () {\n    logging = false\n    basic.showIcon(IconNames.No)\n})\nlet logging = false\nradio.setGroup(10)\nlogging = false\nbasic.showIcon(IconNames.No)\ndatalogger.includeTimestamp(FlashLogTimeStampFormat.Minutes)\ndatalogger.setColumnTitles(\"temperature\")\nloops.everyInterval(60000, function () {\n    if (logging) {\n        basic.showIcon(IconNames.Heart)\n        datalogger.log(datalogger.createCV(\"temperature\", input.temperature()))\n        basic.clearScreen()\n    }\n})\nbasic.forever(function () {\n    radio.sendNumber(input.temperature())\n    basic.pause(1000)\n})\n",
         "dependencies": {
@@ -16,9 +15,12 @@
           "microphone": "*",
           "datalogger": "*"
         }
-      },
-      {
-        "program_index": 1,
+      }
+    },
+    {
+      "task": "",
+      "role": "display",
+      "makecode_ts": {
         "pub_id": "_KCDgbtYekhdf",
         "source": "radio.onReceivedNumber(function (receivedNumber) {\n    insulatedTemp = receivedNumber\n})\ninput.onButtonPressed(Button.B, function () {\n    basic.showNumber(insulatedTemp)\n})\nlet insulatedTemp = 0\nradio.setGroup(10)\n",
         "dependencies": {
@@ -27,6 +29,6 @@
           "microphone": "*"
         }
       }
-    ]
-  }
+    }
+  ]
 }

@@ -1,13 +1,11 @@
 {
   "slug": "secure-messaging",
-  "task": "",
-  "status": "draft",
   "url": "https://microbit.org/projects/make-it-code-it/secure-messaging/",
   "license": "CC BY-SA 4.0",
-  "code": {
-    "makecode_ts": [
-      {
-        "program_index": 0,
+  "programs": [
+    {
+      "task": "",
+      "makecode_ts": {
         "pub_id": "_7Mrha8AguX8T",
         "source": "radio.onReceivedNumber(function (receivedNumber) {\n    if (receivedNumber == 17) {\n        basic.showLeds(`\n            . . . . .\n            . # . # .\n            . . . . .\n            # . . . #\n            . # # # .\n            `)\n    } else if (receivedNumber == 23) {\n        basic.showLeds(`\n            . . . . .\n            . # . # .\n            . . . . .\n            . # # # .\n            # . . . #\n            `)\n    } else {\n        basic.showLeds(`\n            . # . # .\n            . . . . .\n            . . # . .\n            . # . # .\n            . . # . .\n            `)\n    }\n    basic.pause(2000)\n    basic.clearScreen()\n})\ninput.onButtonPressed(Button.A, function () {\n    basic.showLeds(`\n        . . . . .\n        . # . # .\n        . . . . .\n        # . . . #\n        . # # # .\n        `)\n    radio.sendNumber(17)\n    basic.clearScreen()\n})\ninput.onButtonPressed(Button.AB, function () {\n    basic.showLeds(`\n        . # . # .\n        . . . . .\n        . . # . .\n        . # . # .\n        . . # . .\n        `)\n    radio.sendNumber(42)\n    basic.clearScreen()\n})\ninput.onButtonPressed(Button.B, function () {\n    basic.showLeds(`\n        . . . . .\n        . # . # .\n        . . . . .\n        . # # # .\n        # . . . #\n        `)\n    radio.sendNumber(23)\n    basic.clearScreen()\n})\nradio.setGroup(3)\n",
         "dependencies": {
@@ -15,13 +13,10 @@
           "radio": "*",
           "microphone": "*"
         }
-      }
-    ],
-    "micropython": [
-      {
-        "program_index": 0,
+      },
+      "micropython": {
         "source": "from microbit import *\nimport radio\n\n# The Python version of this project has sleep()\n# for each button press to make the A+B button work better\n\nradio.config(group=3)\nradio.on()\n\nwhile True:\n    if button_a.is_pressed() and button_b.is_pressed():\n        display.show(Image.SURPRISED)\n        radio.send('42')\n        sleep(300)\n        display.clear()        \n    elif button_a.is_pressed():\n        display.show(Image.HAPPY)        \n        radio.send('17')\n        sleep(300)\n        display.clear()\n    elif button_b.is_pressed():\n        display.show(Image.SAD)\n        radio.send('23')\n        sleep(300)\n        display.clear()\n        \n    message = radio.receive()\n    if message:\n        if message == '17':\n            display.show(Image.HAPPY)  \n        elif message == '23':\n            display.show(Image.SAD)\n        else:\n            display.show(Image.SURPRISED)\n        sleep(2000)\n    display.clear()\n    sleep(200)"
       }
-    ]
-  }
+    }
+  ]
 }

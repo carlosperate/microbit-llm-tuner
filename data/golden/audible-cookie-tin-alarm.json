@@ -1,21 +1,19 @@
 {
   "slug": "audible-cookie-tin-alarm",
-  "task": "",
-  "status": "draft",
   "url": "https://microbit.org/projects/make-it-code-it/audible-cookie-tin-alarm/",
   "license": "CC BY-SA 4.0",
-  "code": {
-    "makecode_ts": [
-      {
-        "program_index": 0,
+  "programs": [
+    {
+      "task": "",
+      "makecode_ts": {
         "pub_id": "_HJaCFY1o9Mf4",
-        "source": "basic.forever(function () {\n\t\n})\n",
+        "source": "basic.forever(function () {\n    if (input.lightLevel() > 30) {\n        basic.showIcon(IconNames.Angry)\n        music._playDefaultBackground(music.builtInPlayableMelody(Melodies.Dadadadum), music.PlaybackMode.InBackground)\n    } else {\n        basic.clearScreen()\n    }\n})\n",
         "dependencies": {
           "core": "*",
           "radio": "*",
           "microphone": "*"
         }
       }
-    ]
-  }
+    }
+  ]
 }

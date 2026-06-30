@@ -1,26 +1,21 @@
 {
   "slug": "send-a-smile",
-  "task": "",
-  "status": "draft",
   "url": "https://microbit.org/projects/make-it-code-it/send-a-smile/",
   "license": "CC BY-SA 4.0",
-  "code": {
-    "makecode_ts": [
-      {
-        "program_index": 0,
+  "programs": [
+    {
+      "task": "",
+      "makecode_ts": {
         "pub_id": "_TJmWc1MhsKCd",
         "source": "input.onButtonPressed(Button.A, function () {\n    basic.clearScreen()\n    radio.sendString(\"smile\")\n})\nradio.onReceivedString(function (receivedString) {\n    basic.showIcon(IconNames.Happy)\n})\nradio.setGroup(2)\n",
         "dependencies": {
           "core": "*",
           "radio": "*"
         }
-      }
-    ],
-    "micropython": [
-      {
-        "program_index": 0,
+      },
+      "micropython": {
         "source": "from microbit import *\nimport radio\nradio.config(group=2)\nradio.on()\n\nwhile True:\n    message = radio.receive()\n    if message:\n        display.show(Image.HAPPY)\n    if button_a.is_pressed():\n        display.clear()\n        radio.send('smile')"
       }
-    ]
-  }
+    }
+  ]
 }

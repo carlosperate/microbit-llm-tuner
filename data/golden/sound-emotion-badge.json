@@ -1,13 +1,11 @@
 {
   "slug": "sound-emotion-badge",
-  "task": "",
-  "status": "draft",
   "url": "https://microbit.org/projects/make-it-code-it/sound-emotion-badge/",
   "license": "CC BY-SA 4.0",
-  "code": {
-    "makecode_ts": [
-      {
-        "program_index": 0,
+  "programs": [
+    {
+      "task": "",
+      "makecode_ts": {
         "pub_id": "_MhoV0R1daKxa",
         "source": "input.onButtonPressed(Button.A, function () {\n    basic.showIcon(IconNames.Happy)\n    soundExpression.happy.playUntilDone()\n})\ninput.onButtonPressed(Button.B, function () {\n    basic.showIcon(IconNames.Sad)\n    soundExpression.sad.playUntilDone()\n})\ninput.onLogoEvent(TouchButtonEvent.Pressed, function () {\n    basic.showIcon(IconNames.Surprised)\n    soundExpression.spring.playUntilDone()\n})\n",
         "dependencies": {
@@ -15,13 +13,10 @@
           "radio": "*",
           "microphone": "*"
         }
-      }
-    ],
-    "micropython": [
-      {
-        "program_index": 0,
+      },
+      "micropython": {
         "source": "from microbit import *\nimport audio\n\nwhile True:\n    if button_a.is_pressed():\n        display.show(Image.HAPPY)\n        audio.play(Sound.HAPPY)\n    if button_b.is_pressed():\n        display.show(Image.SAD)\n        audio.play(Sound.SAD)\n    if pin_logo.is_touched():\n        display.show(Image.SURPRISED)\n        audio.play(Sound.SPRING)"
       }
-    ]
-  }
+    }
+  ]
 }

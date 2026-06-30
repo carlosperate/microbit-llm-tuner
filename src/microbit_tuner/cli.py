@@ -145,31 +145,31 @@ def _verify_samples(samples, as_json: bool) -> int:
 def _run_golden_gate(results, as_json: bool) -> int:
     """Stream the golden gate's per-entry results and return an exit code.
 
-    Exit 0 only if every entry is verified. Like the verifier, text mode prints
-    one line per entry as it is gated (each echo flushes) so a long run shows
-    live progress; a not-yet-verified entry shows why (empty task / compile fail).
+    Exit 0 only if every entry passes. Like the verifier, text mode prints one
+    line per entry as it is gated (each echo flushes) so a long run shows live
+    progress; a failing entry shows why (empty task / compile fail).
     """
-    verified = total = 0
+    passed = total = 0
     entries: list[dict] = []
     for r in results:
         total += 1
-        if r["verified"]:
-            verified += 1
+        if r["passed"]:
+            passed += 1
         if as_json:
             entries.append(r)
             continue
-        status = "verified" if r["verified"] else "draft   "
+        mark = "ok  " if r["passed"] else "FAIL"
         task = "ok" if r["task_ok"] else "MISSING"
         code = "ok" if r["code_ok"] else "FAIL"
-        typer.echo(f"[{total:>4}] {status} {r['slug']}  (task {task}, code {code})")
+        typer.echo(f"[{total:>4}] {mark} {r['slug']}  (task {task}, code {code})")
         for d in r["diagnostics"][:5]:
             typer.echo(f"           {d}")
     if as_json:
-        typer.echo(json.dumps({"verified": verified, "total": total,
+        typer.echo(json.dumps({"passed": passed, "total": total,
                                "entries": entries}, indent=2))
     else:
-        typer.echo(f"{verified}/{total} verified")
-    return 0 if verified == total else 1
+        typer.echo(f"{passed}/{total} passed")
+    return 0 if passed == total else 1
 
 
 @app.command(no_args_is_help=True)
@@ -197,8 +197,9 @@ def verify(
     0 if everything compiles, 1 on diagnostics, 2 on a usage or toolchain error.
 
     `--target collected`/`synthetic` is a read-only compile check. `--target
-    golden` runs the stage-2 *gate*: it also requires a non-empty task and writes
-    each entry's resolved `status` (verified/draft) back to its file.
+    golden` runs the stage-2 *gate*: same compile check, but it also requires a
+    non-empty task on every program. It is read-only too — it never writes to
+    the golden files.
     """
     modes = [file is not None, stdin is not None, target is not None]
     if sum(modes) > 1:
@@ -211,8 +212,8 @@ def verify(
             if dep:
                 _fail("--dep is only valid with a single FILE or --stdin")
             if target is Target.golden:
-                # The golden gate: also checks the task is non-empty and writes
-                # each entry's resolved `status` back to its file.
+                # The golden gate: like the compile check, but also requires a
+                # non-empty task on every program. Read-only — never writes.
                 from .dataset.golden import gate_golden
                 raise typer.Exit(_run_golden_gate(gate_golden(), as_json))
             from .collect import iter_samples
@@ -243,12 +244,12 @@ def verify(
 def sync_golden_cmd() -> None:
     """Stage 2: scaffold the golden corpus from collected (add-only).
 
-    Creates a draft golden stub in data/golden/ for every collected project that
-    has no golden file yet: slug, code, and url + license provenance, with an
-    empty `task` and `status: draft` for a human to fill in (editorial
-    title/meta/context stay in collected). Existing golden files are never
-    touched, so re-running only adds stubs for newly collected projects. Then
-    write each task and run `mbtuner verify --target golden` to check them.
+    Creates a golden stub in data/golden/ for every collected project that has no
+    golden file yet: slug, code, and url + license provenance, with an empty
+    `task` for a human to fill in (editorial title/meta/context stay in
+    collected). Existing golden files are never touched, so re-running only adds
+    stubs for newly collected projects. Then write each task and run `mbtuner
+    verify --target golden` to check them.
     """
     from .dataset.golden import sync_golden
     created, existing = sync_golden()

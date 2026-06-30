@@ -1,13 +1,11 @@
 {
   "slug": "hot-potato-game",
-  "task": "",
-  "status": "draft",
   "url": "https://microbit.org/projects/make-it-code-it/hot-potato-game/",
   "license": "CC BY-SA 4.0",
-  "code": {
-    "makecode_ts": [
-      {
-        "program_index": 0,
+  "programs": [
+    {
+      "task": "",
+      "makecode_ts": {
         "pub_id": "_cKEYtihoMW54",
         "source": "let timer = 0\ninput.onButtonPressed(Button.A, function () {\n    timer = randint(5, 15)\n    basic.showIcon(IconNames.Chessboard)\n    while (timer > 0) {\n        timer += -1\n        basic.pause(1000)\n    }\n    basic.showIcon(IconNames.No)\n    music._playDefaultBackground(music.builtInPlayableMelody(Melodies.Wawawawaa), music.PlaybackMode.InBackground)\n    music.play(music.builtinPlayableSoundEffect(soundExpression.sad), music.PlaybackMode.UntilDone)\n})\n",
         "dependencies": {
@@ -15,13 +13,10 @@
           "radio": "*",
           "microphone": "*"
         }
-      }
-    ],
-    "micropython": [
-      {
-        "program_index": 0,
+      },
+      "micropython": {
         "source": "from microbit import *\nimport music, random\n\nwhile True:\n    if button_a.is_pressed():\n        timer = random.randint(5, 15)\n        display.show(Image.CHESSBOARD)\n        while timer > 0:\n            timer -= 1\n            sleep(1000)\n        display.show(Image.NO)\n        music.play(music.WAWAWAWAA, wait=False)\n        audio.play(Sound.SAD)\n        "
       }
-    ]
-  }
+    }
+  ]
 }

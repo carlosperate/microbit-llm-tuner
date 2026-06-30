@@ -1,15 +1,13 @@
 {
   "slug": "species-counter",
-  "task": "",
-  "status": "draft",
   "url": "https://microbit.org/projects/make-it-code-it/species-counter/",
   "license": "CC BY-SA 4.0",
-  "code": {
-    "micropython": [
-      {
-        "program_index": 0,
+  "programs": [
+    {
+      "task": "",
+      "micropython": {
         "source": "from microbit import *\n\na = 0\nb = 0\ndisplay.show(0)\n\nwhile True:\n    if button_a.is_pressed():\n        a += 1\n        display.scroll(a)\n    elif button_b.is_pressed():\n        b += 1\n        display.scroll(b)\n    if accelerometer.was_gesture('shake'):\n        display.scroll('A')\n        display.scroll(a)\n        sleep(1000)\n        display.clear()\n        sleep(2000)\n        display.scroll('B')\n        display.scroll(b)"
       }
-    ]
-  }
+    }
+  ]
 }

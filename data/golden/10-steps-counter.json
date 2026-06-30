@@ -1,21 +1,19 @@
 {
   "slug": "10-steps-counter",
-  "task": "",
-  "status": "draft",
   "url": "https://microbit.org/projects/make-it-code-it/10-steps-counter/",
   "license": "CC BY-SA 4.0",
-  "code": {
-    "makecode_ts": [
-      {
-        "program_index": 0,
+  "programs": [
+    {
+      "task": "",
+      "makecode_ts": {
         "pub_id": "_XHuHFrDJc6jb",
-        "source": "input.onGesture(Gesture.Shake, function () {\n\t\n})\nbasic.forever(function () {\n\t\n})\n",
+        "source": "input.onGesture(Gesture.Shake, function () {\n    steps += 1\n    basic.showNumber(steps)\n})\nlet steps = 0\nsteps = 0\nbasic.forever(function () {\n    if (steps == 10) {\n        basic.showIcon(IconNames.Happy)\n        music._playDefaultBackground(music.builtInPlayableMelody(Melodies.Dadadadum), music.PlaybackMode.InBackground)\n    }\n})\n",
         "dependencies": {
           "core": "*",
           "radio": "*",
           "microphone": "*"
         }
       }
-    ]
-  }
+    }
+  ]
 }

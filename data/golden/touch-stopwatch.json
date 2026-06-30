@@ -1,13 +1,11 @@
 {
   "slug": "touch-stopwatch",
-  "task": "",
-  "status": "draft",
   "url": "https://microbit.org/projects/make-it-code-it/touch-stopwatch/",
   "license": "CC BY-SA 4.0",
-  "code": {
-    "makecode_ts": [
-      {
-        "program_index": 0,
+  "programs": [
+    {
+      "task": "",
+      "makecode_ts": {
         "pub_id": "_13aRi9FVhAeD",
         "source": "let running = false\nlet start = 0\nlet time = 0\ninput.onButtonPressed(Button.A, function () {\n    running = true\n    start = input.runningTime()\n})\ninput.onButtonPressed(Button.B, function () {\n    if (running) {\n        time += input.runningTime() - start\n    }\n    running = false\n})\ninput.onLogoEvent(TouchButtonEvent.Pressed, function () {\n    if (!(running)) {\n        basic.showNumber(Math.idiv(time, 1000))\n    }\n})\nbasic.forever(function () {\n    if (running) {\n        basic.showIcon(IconNames.Heart)\n        basic.showIcon(IconNames.SmallHeart)\n    } else {\n        basic.showIcon(IconNames.Asleep)\n    }\n})\n",
         "dependencies": {
@@ -15,13 +13,10 @@
           "radio": "*",
           "microphone": "*"
         }
-      }
-    ],
-    "micropython": [
-      {
-        "program_index": 0,
+      },
+      "micropython": {
         "source": "from microbit import *\ntime = 0\nstart = 0\nrunning = False\n\nwhile True:\n    if running:\n        display.show(Image.HEART)\n        sleep(300)\n        display.show(Image.HEART_SMALL)\n        sleep(300)\n    else:\n        display.show(Image.ASLEEP)\n    if button_a.was_pressed():\n        running = True\n        start = running_time()\n    if button_b.was_pressed():\n        if running:\n            time += running_time() - start\n        running = False\n    if pin_logo.is_touched():\n        if not running:\n            display.scroll(int(time/1000))"
       }
-    ]
-  }
+    }
+  ]
 }

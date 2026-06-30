@@ -1,13 +1,11 @@
 {
   "slug": "times-tables-tester",
-  "task": "",
-  "status": "draft",
   "url": "https://microbit.org/projects/make-it-code-it/times-tables-tester/",
   "license": "CC BY-SA 4.0",
-  "code": {
-    "makecode_ts": [
-      {
-        "program_index": 0,
+  "programs": [
+    {
+      "task": "",
+      "makecode_ts": {
         "pub_id": "_fHxHYaPrm1gr",
         "source": "let a = 0\nlet b = 0\ninput.onButtonPressed(Button.A, function () {\n    a = randint(1, 12)\n    basic.showNumber(a)\n})\ninput.onButtonPressed(Button.AB, function () {\n    basic.showNumber(a * b)\n})\ninput.onButtonPressed(Button.B, function () {\n    b = randint(1, 12)\n    basic.showNumber(b)\n})\n",
         "dependencies": {
@@ -15,13 +13,10 @@
           "radio": "*",
           "microphone": "*"
         }
-      }
-    ],
-    "micropython": [
-      {
-        "program_index": 0,
+      },
+      "micropython": {
         "source": "from microbit import *\nimport random\na = 0\nb = 0\n\n# Shake the micro:bit to see the answer in the Python version\nwhile True:\n    if accelerometer.was_gesture('shake'):\n        display.scroll(a*b)\n    if button_a.was_pressed():\n        a = random.randint(1, 12)\n        display.scroll(a)\n    if button_b.was_pressed():\n        b = random.randint(1, 12)\n        display.scroll(b)"
       }
-    ]
-  }
+    }
+  ]
 }

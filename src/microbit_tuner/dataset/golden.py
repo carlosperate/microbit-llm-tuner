@@ -7,19 +7,18 @@ the task and checks every entry; this module only scaffolds and gates it.
 
 Two operations, kept strictly apart:
 
-- :func:`sync_golden` — **add-only**. Creates a draft stub for every collected
+- :func:`sync_golden` — **add-only**. Creates a stub for every collected
   project that has no golden file yet, carrying just the curated core
-  (``slug``/``task``/``status``/``code``) plus ``url`` + ``license`` provenance;
-  editorial ``title``/``meta``/``context`` stay in ``collected``. It never
-  touches an existing golden file, so a human's task and code edits are safe
-  across re-runs (e.g. after new projects are scraped).
+  (``slug``/``task``/``code``) plus ``url`` + ``license`` provenance; editorial
+  ``title``/``meta``/``context`` stay in ``collected``. It never touches an
+  existing golden file, so a human's task and code edits are safe across re-runs
+  (e.g. after new projects are scraped).
 
 - :func:`gate_golden` — the **gate**. For every golden entry it checks the task
   is non-empty and that every program still compiles (fast tier, the same
-  verifier as stage 3), then writes the resolved ``status`` back
-  (``verified`` / ``draft``). Only the derived ``status`` field is ever changed;
-  human-authored ``task`` and ``code`` are never modified. Compilation is the
-  real gate — no language model is involved in the verdict.
+  verifier as stage 3), then reports the verdict per entry. It is read-only —
+  the golden files are never written; a human owns every field. Compilation is
+  the real gate.
 """
 
 from __future__ import annotations
@@ -28,7 +27,7 @@ import json
 from pathlib import Path
 from typing import Iterator
 
-from ..collect import COLLECTED_DIR, GOLDEN_DIR, _record_samples
+from ..collect import COLLECTED_DIR, GOLDEN_DIR, _LANG_KEYS, _record_samples
 from ..verify import verify_makecode_ts, verify_micropython
 
 
@@ -39,32 +38,56 @@ def _write_json(path: Path, record: dict) -> None:
     )
 
 
+def _programs_from_code(code: dict) -> list[dict]:
+    """Group a collected ``code`` map into golden ``programs`` by program_index.
+
+    Collected stores ``{lang_key: [block, ...]}`` (one block per program_index);
+    golden stores a list of programs, each carrying its own ``task`` and at most
+    one solution per language. Blocks sharing a program_index describe the same
+    program in different languages, so they collapse into one stub program with
+    an empty ``task`` for a human to author.
+    """
+    by_index: dict = {}
+    for lang_key in _LANG_KEYS:
+        for i, block in enumerate(code.get(lang_key) or []):
+            idx = block.get("program_index", i)
+            clean = {k: block[k] for k in ("pub_id", "source", "dependencies") if k in block}
+            by_index.setdefault(idx, {})[lang_key] = clean
+    programs = []
+    for idx in sorted(by_index):
+        program = {"task": ""}
+        for lang_key in _LANG_KEYS:
+            if lang_key in by_index[idx]:
+                program[lang_key] = by_index[idx][lang_key]
+        programs.append(program)
+    return programs
+
+
 def _stub_from_collected(collected: dict, slug: str) -> dict:
-    """Build a draft golden stub from a collected record.
+    """Build a golden stub from a collected record.
 
     Golden carries only the curated/derived core plus provenance: ``slug`` (the
-    id), the human-owned ``task`` and ``code``, the gate's ``status``, and
-    ``url`` + ``license`` for attribution (each TS program also keeps its own
-    ``pub_id`` / ``dependencies``). Editorial fields (``title``, ``meta``,
-    ``context``) and the scrape ``errors`` audit are intentionally *not* copied:
-    they stay in ``collected/<slug>.json`` under the same slug and are joined
-    there if a later stage needs them. ``code`` may diverge from collected once a
-    human tweaks it — that is why it lives here.
+    id), ``url`` + ``license`` for attribution, and a ``programs`` list. Each
+    program holds a human-owned ``task`` and at most one solution per language (a
+    TS solution also keeps its own ``pub_id`` / ``dependencies``); programs are
+    grouped from collected by program_index. Editorial fields (``title``,
+    ``meta``, ``context``) and the scrape ``errors`` audit are intentionally
+    *not* copied: they stay in ``collected/<slug>.json`` under the same slug and
+    are joined there if a later stage needs them. A program's ``source`` may
+    diverge from collected once a human tweaks it — that is why it lives here.
     """
     return {
         "slug": slug,
-        "task": "",
-        "status": "draft",
         "url": collected.get("url", ""),
         "license": collected.get("license", ""),
-        "code": collected.get("code", {}),
+        "programs": _programs_from_code(collected.get("code", {})),
     }
 
 
 def sync_golden(
     collected_dir: Path = COLLECTED_DIR, golden_dir: Path = GOLDEN_DIR
 ) -> tuple[list[str], list[str]]:
-    """Create a draft golden stub for every collected project lacking one.
+    """Create a golden stub for every collected project lacking one.
 
     Strictly add-only: returns ``(created_slugs, existing_slugs)`` and never
     writes over an existing golden file.
@@ -87,24 +110,27 @@ def sync_golden(
 
 
 def gate_golden(golden_dir: Path = GOLDEN_DIR) -> Iterator[dict]:
-    """Gate every golden entry and persist its ``status``.
+    """Gate every golden entry and report whether it passes.
 
     Yields one result dict per entry as it is checked (so a caller can stream
     progress)::
 
-        {"slug", "verified": bool, "task_ok": bool, "code_ok": bool,
+        {"slug", "passed": bool, "task_ok": bool, "code_ok": bool,
          "diagnostics": [str, ...]}
 
-    An entry is ``verified`` iff its ``task`` is non-empty **and** every program
-    compiles. The resolved status is written back to the file (only when it
-    changed); nothing else in the file is touched.
+    An entry passes iff *every* program carries a non-empty ``task`` **and**
+    every program compiles. The gate is read-only — it never writes to the
+    golden files.
     """
     for path in sorted(golden_dir.glob("*.json")):
         if path.name == "manifest.json":
             continue
         record = json.loads(path.read_text(encoding="utf-8"))
 
-        task_ok = bool(str(record.get("task", "")).strip())
+        programs = record.get("programs") or []
+        task_ok = bool(programs) and all(
+            str(p.get("task", "")).strip() for p in programs
+        )
         code_ok = True
         diagnostics: list[str] = []
         for sample in _record_samples(record, path.stem):
@@ -118,15 +144,9 @@ def gate_golden(golden_dir: Path = GOLDEN_DIR) -> Iterator[dict]:
                 for diag in result.errors:
                     diagnostics.append(f"{sample.label} ({result.tool}): {diag}")
 
-        verified = task_ok and code_ok
-        status = "verified" if verified else "draft"
-        if record.get("status") != status:
-            record["status"] = status
-            _write_json(path, record)
-
         yield {
             "slug": path.stem,
-            "verified": verified,
+            "passed": task_ok and code_ok,
             "task_ok": task_ok,
             "code_ok": code_ok,
             "diagnostics": diagnostics,

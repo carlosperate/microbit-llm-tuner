@@ -1,13 +1,11 @@
 {
   "slug": "make-some-noise",
-  "task": "",
-  "status": "draft",
   "url": "https://microbit.org/projects/make-it-code-it/make-some-noise/",
   "license": "CC BY-SA 4.0",
-  "code": {
-    "makecode_ts": [
-      {
-        "program_index": 0,
+  "programs": [
+    {
+      "task": "",
+      "makecode_ts": {
         "pub_id": "_DbcgCAdAKeE6",
         "source": "input.onButtonPressed(Button.A, function () {\n    music._playDefaultBackground(music.builtInPlayableMelody(Melodies.Nyan), music.PlaybackMode.InBackground)\n})\n",
         "dependencies": {
@@ -15,13 +13,10 @@
           "radio": "*",
           "microphone": "*"
         }
-      }
-    ],
-    "micropython": [
-      {
-        "program_index": 0,
+      },
+      "micropython": {
         "source": "from microbit import *\nimport music\n\nwhile True:\n    if button_a.was_pressed():\n        music.play(music.NYAN)\n"
       }
-    ]
-  }
+    }
+  ]
 }

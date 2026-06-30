@@ -31,7 +31,6 @@
   .item .name { flex:1; overflow:hidden; text-overflow:ellipsis; white-space:nowrap; }
   .badge { font-size:10px; font-weight:700; padding:1px 6px; border-radius:10px; color:#fff; }
   .badge.ts { background:var(--ts); } .badge.py { background:var(--py); }
-  .badge.draft { background:#9b9b9f; } .badge.verified { background:#1a7f37; }
   .count { padding:8px 16px; color:var(--muted); font-size:12px; border-bottom:1px solid var(--line); }
 
   /* Main */
@@ -51,6 +50,8 @@
   .task.empty { color:var(--muted); font-style:italic; background:#f7f7f8; border-color:var(--line); }
   .task b { display:block; font-size:11px; text-transform:uppercase; letter-spacing:.04em;
          color:var(--muted); margin-bottom:4px; font-weight:700; }
+  .program + .program { margin-top:30px; padding-top:18px; border-top:1px solid var(--line); }
+  .program > h3 { font-size:14px; margin:0 0 12px; }
   .section { margin:0 0 30px; }
   .section > h3 { font-size:13px; text-transform:uppercase; letter-spacing:.04em; color:var(--muted);
          margin:0 0 10px; padding-bottom:6px; border-bottom:1px solid var(--line); }
@@ -173,19 +174,19 @@ const renderer = {
 renderer.init();
 
 /* ---------- State ---------- */
-const projects = new Map();   // slug -> merged record { code:{makecode_ts?,micropython?}, ... }
+const projects = new Map();   // slug -> record: golden { programs:[{task,…}], … } or collected { code:{…}, … }
 let activeSlug = null;
 let dataset = "collected";    // which corpus to auto-load: "collected" | "golden"
 
 function addRecord(rec) {
-  if (!rec || !rec.slug || !rec.code) return false;
+  if (!rec || !rec.slug || !(rec.code || rec.programs)) return false;
   const existing = projects.get(rec.slug);
   if (!existing) { projects.set(rec.slug, rec); return true; }
   // "Both" merges the two same-slug records. Golden is the hand-improved source of
-  // truth, so on any shared key (task/status/code/…) golden wins — regardless of
-  // load order; collected only fills fields golden omits (title/meta/context).
-  // Golden is the record carrying `status` (collected never has one).
-  const isGolden = r => "status" in r;
+  // truth, so on any shared key (programs/task/…) golden wins — regardless of
+  // load order; collected only fills fields golden omits (title/meta/context/code).
+  // Golden is the record carrying `programs`; collected carries `code` instead.
+  const isGolden = r => "programs" in r;
   const [base, top] = isGolden(rec) ? [existing, rec] : [rec, existing];
   projects.set(rec.slug, {...base, ...top});
   return true;
@@ -255,16 +256,25 @@ function renderList() {
   listEl.innerHTML = "";
   for (const slug of slugs) {
     const r = projects.get(slug);
-    const code = r.code || {};
+    const has = recordLangs(r);
     const row = document.createElement("div");
     row.className = "item" + (slug===activeSlug ? " active" : "");
     row.onclick = () => select(slug);
     row.innerHTML = `<span class="name">${esc(title(slug)||slug)}</span>` +
-        (r.status ? `<span class="badge ${esc(r.status)}" title="${esc(r.status)}">${r.status==="verified"?"✓":"·"}</span>` : ``) +
-        (code.makecode_ts ? `<span class="badge ts">TS</span>` : ``) +
-        (code.micropython ? `<span class="badge py">PY</span>` : ``);
+        (has.ts ? `<span class="badge ts">TS</span>` : ``) +
+        (has.py ? `<span class="badge py">PY</span>` : ``);
     listEl.appendChild(row);
   }
+}
+// Which languages a record carries, across both on-disk shapes: golden's
+// `programs` (per-program solutions) or collected's `code` (per-language arrays).
+function recordLangs(r) {
+  if (r.programs) return {
+    ts: r.programs.some(p => p.makecode_ts),
+    py: r.programs.some(p => p.micropython),
+  };
+  const c = r.code || {};
+  return {ts: !!c.makecode_ts, py: !!c.micropython};
 }
 function title(slug) {
   const r = projects.get(slug);
@@ -279,36 +289,77 @@ function select(slug) {
   renderer.cancelPending();
   renderList();
   const r = projects.get(slug);
-  const tsBlocks = (r.code||{}).makecode_ts;
-  const pyBlocks = (r.code||{}).micropython;
   const m = r.meta || {};
   const metaLine = [m.level, (m.tools||[]).join(", "), (m.features||[]).join(", "), (m.topics||[]).join(", ")]
       .filter(Boolean).join("  |  ");
 
-  // Golden records carry a `task` + `status`; collected ones don't.
-  const statusBadge = r.status ? `<span class="badge ${esc(r.status)}">${esc(r.status)}</span>` : ``;
-  const taskBlock = ("task" in r)
-    ? `<div class="task${r.task ? "" : " empty"}"><b>Task</b>${r.task ? esc(r.task) : "— no task written yet —"}</div>`
-    : ``;
+  // Golden records carry `programs` (each with its own task); collected ones
+  // carry `code` (per-language arrays) and no task.
   const srcLink = r.url
     ? `<a class="src" href="${esc(r.url)}" target="_blank" rel="noopener">microbit.org ↗</a>`
     : ``;
 
+  // tsSources: every MakeCode source on the page in DOM order, so the async
+  // blocks-render can find each by its global data-block index.
+  let body, tsSources;
+  if (r.programs) {
+    const v = sectionPrograms(r.programs);
+    body = v.html; tsSources = v.tsSources;
+  } else {
+    const tsBlocks = (r.code||{}).makecode_ts;
+    const pyBlocks = (r.code||{}).micropython;
+    body = (tsBlocks ? sectionTS(tsBlocks, r.errors) : ``) + (pyBlocks ? sectionPY(pyBlocks) : ``);
+    tsSources = tsBlocks || [];
+  }
+
   const el = document.createElement("div");
   el.innerHTML =
-    `<h2 class="title">${esc(r.title||slug)}<span class="lic">${esc(r.license||"")}</span>${statusBadge}${srcLink}</h2>` +
-    taskBlock +
+    `<h2 class="title">${esc(r.title||slug)}<span class="lic">${esc(r.license||"")}</span>${srcLink}</h2>` +
     (metaLine ? `<div class="meta">${esc(metaLine)}</div>` : ``) +
     (r.context && r.context.summary ? `<p class="summary">${esc(r.context.summary)}</p>` : ``) +
     contextDetails(r.context) +
-    (tsBlocks ? sectionTS(tsBlocks, r.errors) : ``) +
-    (pyBlocks ? sectionPY(pyBlocks) : ``);
+    body;
   mainEl.innerHTML = "";
   mainEl.appendChild(el);
 
   if (window.hljs)
     el.querySelectorAll("pre.code code").forEach(c => { try { hljs.highlightElement(c); } catch {} });
-  if (tsBlocks) renderAllBlocks(tsBlocks, el);
+  renderAllBlocks(tsSources, el);
+}
+
+// Golden: render each program with its own task (+ optional role) followed by
+// its MakeCode and/or MicroPython solution. Returns the HTML and the ordered
+// list of TS sources (as {source} blocks) for renderAllBlocks.
+function sectionPrograms(programs) {
+  programs = programs || [];
+  const multi = programs.length > 1;
+  const tsSources = [];
+  let html = "";
+  programs.forEach((p, i) => {
+    const roleLbl = p.role ? ` — ${esc(p.role)}` : "";
+    html += `<div class="program">`;
+    if (multi) html += `<h3>Program ${i+1}${roleLbl}</h3>`;
+    html += `<div class="task${p.task ? "" : " empty"}"><b>Task</b>${p.task ? esc(p.task) : "— no task written yet —"}</div>`;
+    if (p.makecode_ts) {
+      const b = p.makecode_ts;
+      const share = b.pub_id ? `https://makecode.microbit.org/#pub:${encodeURIComponent(b.pub_id)}` : null;
+      html +=
+        `<div class="section"><h3>MakeCode TypeScript</h3><div class="block">` +
+          `<div class="lbl">` + (b.pub_id ? `<a href="${share}" target="_blank" rel="noopener">${esc(b.pub_id)}</a>` : `&nbsp;`) + `</div>` +
+          `<div class="blocks-render" data-block="${tsSources.length}"><span class="render-status">Rendering blocks…</span></div>` +
+          `<pre class="code"><code class="language-typescript">${esc(b.source)}</code></pre>` +
+        `</div></div>`;
+      tsSources.push({source: b.source});
+    }
+    if (p.micropython) {
+      html +=
+        `<div class="section"><h3>MicroPython</h3><div class="block">` +
+          `<pre class="code"><code class="language-python">${esc(p.micropython.source)}</code></pre>` +
+        `</div></div>`;
+    }
+    html += `</div>`;
+  });
+  return {html, tsSources};
 }
 
 function contextDetails(ctx) {

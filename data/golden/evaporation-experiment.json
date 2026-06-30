@@ -1,13 +1,11 @@
 {
   "slug": "evaporation-experiment",
-  "task": "",
-  "status": "draft",
   "url": "https://microbit.org/projects/make-it-code-it/evaporation-experiment/",
   "license": "CC BY-SA 4.0",
-  "code": {
-    "makecode_ts": [
-      {
-        "program_index": 0,
+  "programs": [
+    {
+      "task": "",
+      "makecode_ts": {
         "pub_id": "_bqUHi87jeKJM",
         "source": "input.onButtonPressed(Button.A, function () {\n    logging = true\n    basic.showIcon(IconNames.Yes)\n    basic.pause(2000)\n    basic.clearScreen()\n    led.plot(0, 0)\n})\ninput.onButtonPressed(Button.AB, function () {\n    basic.showIcon(IconNames.Skull)\n    datalogger.deleteLog()\n    datalogger.setColumnTitles(\"water\")\n    basic.pause(2000)\n    basic.clearScreen()\n})\ninput.onButtonPressed(Button.B, function () {\n    logging = false\n    basic.showIcon(IconNames.No)\n    basic.pause(2000)\n    basic.clearScreen()\n})\ninput.onLogoEvent(TouchButtonEvent.Pressed, function () {\n    basic.showNumber(input.temperature())\n    basic.pause(5000)\n    basic.clearScreen()\n})\nlet logging = false\nlogging = false\nled.setBrightness(40)\ndatalogger.includeTimestamp(FlashLogTimeStampFormat.Minutes)\ndatalogger.setColumnTitles(\"water\")\nbasic.forever(function () {\n    if (logging) {\n        if (input.pinIsPressed(TouchPin.P1)) {\n            datalogger.log(datalogger.createCV(\"water\", 1))\n        } else {\n            datalogger.log(datalogger.createCV(\"water\", 0))\n        }\n        music.play(music.tonePlayable(523, music.beat(BeatFraction.Whole)), music.PlaybackMode.InBackground)\n        basic.pause(15 * 60 * 1000)\n    }\n})\nbasic.forever(function () {\n    if (input.pinIsPressed(TouchPin.P1)) {\n        led.plot(0, 4)\n    } else {\n        led.unplot(0, 4)\n    }\n})\n",
         "dependencies": {
@@ -17,6 +15,6 @@
           "datalogger": "*"
         }
       }
-    ]
-  }
+    }
+  ]
 }

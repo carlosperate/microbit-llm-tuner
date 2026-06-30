@@ -1,13 +1,11 @@
 {
   "slug": "sensory-toy",
-  "task": "",
-  "status": "draft",
   "url": "https://microbit.org/projects/make-it-code-it/sensory-toy/",
   "license": "CC BY-SA 4.0",
-  "code": {
-    "makecode_ts": [
-      {
-        "program_index": 0,
+  "programs": [
+    {
+      "task": "",
+      "makecode_ts": {
         "pub_id": "_RsWKrDbEo1of",
         "source": "input.onGesture(Gesture.LogoUp, function () {\n    basic.showIcon(IconNames.Happy)\n    music.play(music.builtinPlayableSoundEffect(soundExpression.hello), music.PlaybackMode.UntilDone)\n})\ninput.onGesture(Gesture.TiltLeft, function () {\n    basic.showLeds(`\n        . . # . .\n        . # . . .\n        # # # # #\n        . # . . .\n        . . # . .\n        `)\n    music.play(music.builtinPlayableSoundEffect(soundExpression.slide), music.PlaybackMode.UntilDone)\n})\ninput.onGesture(Gesture.Shake, function () {\n    basic.showIcon(IconNames.Surprised)\n    music.play(music.builtinPlayableSoundEffect(soundExpression.giggle), music.PlaybackMode.UntilDone)\n})\ninput.onGesture(Gesture.TiltRight, function () {\n    basic.showLeds(`\n        . . # . .\n        . . . # .\n        # # # # #\n        . . . # .\n        . . # . .\n        `)\n    music.play(music.builtinPlayableSoundEffect(soundExpression.soaring), music.PlaybackMode.UntilDone)\n})\ninput.onGesture(Gesture.LogoDown, function () {\n    basic.showIcon(IconNames.Asleep)\n    music.play(music.builtinPlayableSoundEffect(soundExpression.yawn), music.PlaybackMode.UntilDone)\n})\n",
         "dependencies": {
@@ -15,13 +13,10 @@
           "radio": "*",
           "microphone": "*"
         }
-      }
-    ],
-    "micropython": [
-      {
-        "program_index": 0,
+      },
+      "micropython": {
         "source": "from microbit import *\nimport audio\n\nwhile True:\n    if accelerometer.was_gesture('shake'):\n        display.show(Image.SURPRISED)\n        audio.play(Sound.GIGGLE)\n    if accelerometer.was_gesture('up'):\n        display.show(Image.HAPPY)\n        audio.play(Sound.HELLO)\n    if accelerometer.was_gesture('down'):\n        display.show(Image.ASLEEP)\n        audio.play(Sound.YAWN)\n    if accelerometer.was_gesture('left'):\n        display.show(Image.ARROW_W)\n        audio.play(Sound.SLIDE)\n    if accelerometer.was_gesture('right'):\n        display.show(Image.ARROW_E)\n        audio.play(Sound.SOARING)\n"
       }
-    ]
-  }
+    }
+  ]
 }

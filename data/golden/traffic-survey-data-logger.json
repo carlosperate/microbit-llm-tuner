@@ -1,13 +1,11 @@
 {
   "slug": "traffic-survey-data-logger",
-  "task": "",
-  "status": "draft",
   "url": "https://microbit.org/projects/make-it-code-it/traffic-survey-data-logger/",
   "license": "CC BY-SA 4.0",
-  "code": {
-    "makecode_ts": [
-      {
-        "program_index": 0,
+  "programs": [
+    {
+      "task": "",
+      "makecode_ts": {
         "pub_id": "_1EAcowV1Tc4e",
         "source": "input.onButtonPressed(Button.A, function () {\n    basic.showLeds(`\n        . . . . .\n        . . # # .\n        . # # # .\n        . # . # .\n        . . . . .\n        `)\n    datalogger.log(datalogger.createCV(\"car\", 1))\n    basic.clearScreen()\n})\ninput.onButtonPressed(Button.AB, function () {\n    basic.showIcon(IconNames.Skull)\n    datalogger.deleteLog()\n    datalogger.setColumnTitles(\n    \"car\",\n    \"bus\",\n    \"truck\"\n    )\n    basic.showIcon(IconNames.Yes)\n})\ninput.onButtonPressed(Button.B, function () {\n    basic.showLeds(`\n        . . . . .\n        # # # # #\n        # # # # #\n        . # . # .\n        . . . . .\n        `)\n    datalogger.log(datalogger.createCV(\"bus\", 1))\n    basic.clearScreen()\n})\ninput.onLogoEvent(TouchButtonEvent.Pressed, function () {\n    basic.showLeds(`\n        # # . . .\n        # # # # #\n        # # # # #\n        . # . # .\n        . . . . .\n        `)\n    datalogger.log(datalogger.createCV(\"truck\", 1))\n    basic.clearScreen()\n})\ndatalogger.setColumnTitles(\n\"car\",\n\"bus\",\n\"truck\"\n)\nbasic.showIcon(IconNames.Yes)\n",
         "dependencies": {
@@ -17,6 +15,6 @@
           "datalogger": "*"
         }
       }
-    ]
-  }
+    }
+  ]
 }

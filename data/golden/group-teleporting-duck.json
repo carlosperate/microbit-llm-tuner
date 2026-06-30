@@ -1,26 +1,21 @@
 {
   "slug": "group-teleporting-duck",
-  "task": "",
-  "status": "draft",
   "url": "https://microbit.org/projects/make-it-code-it/group-teleporting-duck/",
   "license": "CC BY-SA 4.0",
-  "code": {
-    "makecode_ts": [
-      {
-        "program_index": 0,
+  "programs": [
+    {
+      "task": "",
+      "makecode_ts": {
         "pub_id": "_70E1U38g80xc",
         "source": "input.onGesture(Gesture.Shake, function () {\n    if (hasDuck) {\n        sendTo = Math.randomRange(1, players)\n        if (sendTo != ID) {\n            hasDuck = false\n            basic.clearScreen()\n            radio.sendNumber(sendTo)\n        }\n    }\n})\nradio.onReceivedNumber(function (receivedNumber) {\n    if (receivedNumber == ID) {\n        hasDuck = true\n        basic.showIcon(IconNames.Duck)\n    } else {\n        hasDuck = false\n    }\n})\nlet sendTo = 0\nlet hasDuck = false\nlet ID = 0\nlet players = 0\nradio.setGroup(42)\n// Number of players in game\nplayers = 3\n// change this number for each player\nID = 1\nbasic.showNumber(ID)\nif (ID == 1) {\n    hasDuck = true\n} else {\n    hasDuck = false\n}\n",
         "dependencies": {
           "core": "*",
           "radio": "*"
         }
-      }
-    ],
-    "micropython": [
-      {
-        "program_index": 0,
+      },
+      "micropython": {
         "source": "from microbit import *\nimport radio\nimport random\n\nradio.config(group=42)\nplayers = 3\nID = 3\ndisplay.show(ID)\nif ID == 1:\n    hasDuck = True\nelse:\n    hasDuck = False\nradio.on()\n\nwhile True:\n    message = radio.receive()\n    if accelerometer.was_gesture('shake'):\n        if hasDuck:\n            sendTo = random.randint(1, players)\n            if sendTo != ID:\n                display.clear()\n                radio.send(str(sendTo))\n    if message:\n        if message == str(ID):\n            hasDuck = True\n            display.show(Image.DUCK)\n        else:\n            hasDuck = False\n    "
       }
-    ]
-  }
+    }
+  ]
 }

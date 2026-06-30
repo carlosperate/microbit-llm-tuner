@@ -1,13 +1,11 @@
 {
   "slug": "get-up",
-  "task": "",
-  "status": "draft",
   "url": "https://microbit.org/projects/make-it-code-it/get-up/",
   "license": "CC BY-SA 4.0",
-  "code": {
-    "makecode_ts": [
-      {
-        "program_index": 0,
+  "programs": [
+    {
+      "task": "",
+      "makecode_ts": {
         "pub_id": "_2kfa1bKH8Uvk",
         "source": "basic.forever(function () {\n    if (input.lightLevel() > 70) {\n        basic.showLeds(`\n            # . # . #\n            . # # # .\n            # # # # #\n            . # # # .\n            # . # . #\n            `)\n        music._playDefaultBackground(music.builtInPlayableMelody(Melodies.Dadadadum), music.PlaybackMode.UntilDone)\n    } else {\n        basic.clearScreen()\n    }\n})\n",
         "dependencies": {
@@ -15,13 +13,10 @@
           "radio": "*",
           "microphone": "*"
         }
-      }
-    ],
-    "micropython": [
-      {
-        "program_index": 0,
+      },
+      "micropython": {
         "source": "from microbit import *\nimport music\n\nwhile True:\n    if display.read_light_level() > 70:\n        display.show(Image(\n        \"90909:\"\n        \"09990:\"\n        \"99999:\"\n        \"09990:\"\n        \"90909\"))\n        music.play(music.DADADADUM)    \n    else:\n        display.clear()\n        "
       }
-    ]
-  }
+    }
+  ]
 }

@@ -1,13 +1,11 @@
 {
   "slug": "guitar-3-octaves",
-  "task": "",
-  "status": "draft",
   "url": "https://microbit.org/projects/make-it-code-it/guitar-3-octaves/",
   "license": "CC BY-SA 4.0",
-  "code": {
-    "makecode_ts": [
-      {
-        "program_index": 0,
+  "programs": [
+    {
+      "task": "",
+      "makecode_ts": {
         "pub_id": "_VCW88UYKdD3W",
         "source": "input.onButtonPressed(Button.A, function () {\n    F = F / 2\n    A = A / 2\n    C = C / 2\n    E = E / 2\n})\ninput.onPinPressed(TouchPin.P2, function () {\n    music.play(music.tonePlayable(A, music.beat(BeatFraction.Half)), music.PlaybackMode.UntilDone)\n    music.play(music.tonePlayable(C, music.beat(BeatFraction.Half)), music.PlaybackMode.UntilDone)\n    music.play(music.tonePlayable(E, music.beat(BeatFraction.Half)), music.PlaybackMode.UntilDone)\n})\ninput.onButtonPressed(Button.B, function () {\n    F = F * 2\n    A = A * 2\n    C = C * 2\n    E = E * 2\n})\ninput.onPinPressed(TouchPin.P1, function () {\n    music.play(music.tonePlayable(F, music.beat(BeatFraction.Half)), music.PlaybackMode.UntilDone)\n    music.play(music.tonePlayable(A, music.beat(BeatFraction.Half)), music.PlaybackMode.UntilDone)\n    music.play(music.tonePlayable(C, music.beat(BeatFraction.Half)), music.PlaybackMode.UntilDone)\n})\nlet E = 0\nlet C = 0\nlet A = 0\nlet F = 0\nF = 349\nA = 440\nC = 523\nE = 659\n",
         "dependencies": {
@@ -15,13 +13,10 @@
           "radio": "*",
           "microphone": "*"
         }
-      }
-    ],
-    "micropython": [
-      {
-        "program_index": 0,
+      },
+      "micropython": {
         "source": "from microbit import *\nimport music\nF = 349\nA = 440\nC = 523\nE = 659\n\nwhile True:\n    if pin1.is_touched():\n        music.pitch(int(F), 500)\n        music.pitch(int(A), 500)\n        music.pitch(int(C), 500)\n    if pin2.is_touched():\n        music.pitch(int(A), 500)\n        music.pitch(int(C), 500)\n        music.pitch(int(E), 500)\n    if button_a.was_pressed():\n        F = F / 2\n        A = A / 2\n        C = C / 2\n        E = E / 2\n    if button_b.was_pressed():\n        F = F * 2\n        A = A * 2\n        C = C * 2\n        E = E * 2\n        "
       }
-    ]
-  }
+    }
+  ]
 }

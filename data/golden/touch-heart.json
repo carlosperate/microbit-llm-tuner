@@ -1,13 +1,11 @@
 {
   "slug": "touch-heart",
-  "task": "",
-  "status": "draft",
   "url": "https://microbit.org/projects/make-it-code-it/touch-heart/",
   "license": "CC BY-SA 4.0",
-  "code": {
-    "makecode_ts": [
-      {
-        "program_index": 0,
+  "programs": [
+    {
+      "task": "",
+      "makecode_ts": {
         "pub_id": "_ii4cywLEsUD5",
         "source": "input.onLogoEvent(TouchButtonEvent.Touched, function () {\n    basic.showIcon(IconNames.Heart)\n})\ninput.onLogoEvent(TouchButtonEvent.Released, function () {\n    basic.clearScreen()\n})\n",
         "dependencies": {
@@ -16,6 +14,6 @@
           "microphone": "*"
         }
       }
-    ]
-  }
+    }
+  ]
 }

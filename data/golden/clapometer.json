@@ -1,13 +1,11 @@
 {
   "slug": "clapometer",
-  "task": "",
-  "status": "draft",
   "url": "https://microbit.org/projects/make-it-code-it/clapometer/",
   "license": "CC BY-SA 4.0",
-  "code": {
-    "makecode_ts": [
-      {
-        "program_index": 0,
+  "programs": [
+    {
+      "task": "",
+      "makecode_ts": {
         "pub_id": "_WMi4U0RT84zE",
         "source": "input.onSound(DetectedSound.Loud, function () {\n    start = input.runningTime()\n    basic.showIcon(IconNames.Target)\n})\ninput.onSound(DetectedSound.Quiet, function () {\n    if (start > 0) {\n        time = input.runningTime() - start\n        start = 0\n        basic.clearScreen()\n        basic.pause(100)\n        basic.showNumber(time / 1000)\n    }\n})\nlet time = 0\nlet start = 0\ninput.setSoundThreshold(SoundThreshold.Loud, 150)\nstart = 0\n",
         "dependencies": {
@@ -15,13 +13,10 @@
           "radio": "*",
           "microphone": "*"
         }
-      }
-    ],
-    "micropython": [
-      {
-        "program_index": 0,
+      },
+      "micropython": {
         "source": "from microbit import *\nmicrophone.set_threshold(SoundEvent.LOUD, 150)\nstart = 0\n\nwhile True:\n    if microphone.was_event(SoundEvent.LOUD):\n        start = running_time()\n        display.show(Image.TARGET)\n\n    if microphone.was_event(SoundEvent.QUIET):\n        if start > 0:\n            time = running_time() - start\n            start = 0\n            display.clear()\n            sleep(100)\n            display.scroll(time / 1000)"
       }
-    ]
-  }
+    }
+  ]
 }

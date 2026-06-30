@@ -1,26 +1,21 @@
 {
   "slug": "graphical-dice",
-  "task": "",
-  "status": "draft",
   "url": "https://microbit.org/projects/make-it-code-it/graphical-dice/",
   "license": "CC BY-SA 4.0",
-  "code": {
-    "makecode_ts": [
-      {
-        "program_index": 0,
+  "programs": [
+    {
+      "task": "",
+      "makecode_ts": {
         "pub_id": "_Em9XRuEpaERr",
         "source": "let number = 0\ninput.onGesture(Gesture.Shake, function () {\n    basic.clearScreen()\n    number = Math.randomRange(1, 6)\n    if (number == 1) {\n        basic.showLeds(`\n            . . . . .\n            . . . . .\n            . . # . .\n            . . . . .\n            . . . . .\n            `)\n    } else if (number == 2) {\n        basic.showLeds(`\n            . . . . .\n            . . . . .\n            # . . . #\n            . . . . .\n            . . . . .\n            `)\n    } else if (number == 3) {\n        basic.showLeds(`\n            . . . . #\n            . . . . .\n            . . # . .\n            . . . . .\n            # . . . .\n            `)\n    } else if (number == 4) {\n        basic.showLeds(`\n            # . . . #\n            . . . . .\n            . . . . .\n            . . . . .\n            # . . . #\n            `)\n    } else if (number == 5) {\n        basic.showLeds(`\n            # . . . #\n            . . . . .\n            . . # . .\n            . . . . .\n            # . . . #\n            `)\n    } else {\n        basic.showLeds(`\n            # . . . #\n            . . . . .\n            # . . . #\n            . . . . .\n            # . . . #\n            `)\n    }\n})\n",
         "dependencies": {
           "core": "*",
           "radio": "*"
         }
-      }
-    ],
-    "micropython": [
-      {
-        "program_index": 0,
+      },
+      "micropython": {
         "source": "from microbit import *\nimport random\n\nwhile True:\n    if accelerometer.was_gesture('shake'):\n        number = random.randint(1, 6)\n        if number == 1:\n            display.show(Image(\n            \"00000:\"\n            \"00000:\"\n            \"00900:\"\n            \"00000:\"\n            \"00000\"))\n        elif number == 2:\n            display.show(Image(\n            \"00000:\"\n            \"00000:\"\n            \"90009:\"\n            \"00000:\"\n            \"00000\"))\n        elif number == 3:\n            display.show(Image(\n            \"00009:\"\n            \"00000:\"\n            \"00900:\"\n            \"00000:\"\n            \"90000\"))\n        elif number == 4:\n            display.show(Image(\n            \"90009:\"\n            \"00000:\"\n            \"00000:\"\n            \"00000:\"\n            \"90009\"))\n        elif number == 5:\n            display.show(Image(\n            \"90009:\"\n            \"00000:\"\n            \"00900:\"\n            \"00000:\"\n            \"90009\"))\n        else:\n            display.show(Image(\n            \"90009:\"\n            \"00000:\"\n            \"90009:\"\n            \"00000:\"\n            \"90009\"))"
       }
-    ]
-  }
+    }
+  ]
 }
